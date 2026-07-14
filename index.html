@@ -10,8 +10,11 @@
 @font-face{font-family:"Antique Handmade";src:url("antique-handmade.otf")format("opentype")}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:#f8f6f3;color:#2d2a24;line-height:1.5;-webkit-font-smoothing:antialiased}
-.banner{background:#fcf9f4;color:#2d2a24;padding:32px 20px;text-align:left}
+.banner{background:#fcf9f4;color:#2d2a24;padding:32px 20px;text-align:left;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .banner .inner{display:flex;align-items:center;gap:20px;max-width:600px;margin:0}
+.reviews-section{padding:20px 0;text-align:center}
+.reviews-imgs{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.reviews-imgs img{height:200px;width:auto;border-radius:8px;object-fit:contain;border:1px solid #d4c9bc;box-shadow:0 2px 8px rgba(0,0,0,.08);cursor:pointer;transition:box-shadow .2s;display:block}
 .banner-logo{max-height:100px;width:auto}
 .banner h1{font-family:'Antique Handmade',cursive;font-size:48px;font-weight:400;letter-spacing:0;margin-bottom:0;color:#1a1a2e;line-height:1.1}
 .banner .badge{display:inline-block;background:#e94560;color:#fff;font-size:12px;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:14px}
@@ -181,6 +184,14 @@ tbody td{padding:10px;vertical-align:middle;color:#3d3832}
   </div>
 </div>
 
+<div class="reviews-section">
+  <h3 style="margin:0 0 12px 0;font-size:15px;font-weight:700;color:#1a1a2e">Customer Reviews</h3>
+  <div class="reviews-imgs">
+    <img src="reviews/review1.jpeg" alt="Customer review" id="review1">
+    <img src="reviews/review2.jpeg" alt="Customer review" id="review2">
+  </div>
+</div>
+
 </div>
 
 <script>
@@ -215,6 +226,16 @@ document.querySelectorAll('[data-img]').forEach(function(el){
   },{passive:true});
   window.addEventListener('resize',function(){if(c.style.display!=='none'){copyWidths();upd()}},{passive:true});
 })();
+document.querySelectorAll('.reviews-imgs img').forEach(function(img){
+  img.addEventListener('click',function(){
+    document.querySelectorAll('.reviews-imgs img').forEach(function(o){
+      o.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'
+    });
+    this.style.boxShadow='0 4px 16px rgba(0,0,0,.18)';
+    this.style.transform='scale(1.02)';
+    setTimeout(function(){img.style.transform=''},200);
+  });
+});
 </script>
 </body>
 </html>
