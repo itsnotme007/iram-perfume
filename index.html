@@ -45,8 +45,8 @@ tbody td{padding:10px;vertical-align:middle;color:#3d3832}
 .links-cell{white-space:nowrap}
 .links-cell a{color:#0f3460;text-decoration:none;font-size:12px;font-weight:500;position:relative}
 .links-cell a:hover{color:#e94560;text-decoration:underline}
-.links-cell a:hover::after, .preview-trigger:hover::after{content:'';position:absolute;bottom:calc(100%+6px);left:50%;transform:translateX(-50%);width:160px;height:213px;background:#1a1a2e;background-size:contain;background-position:center;background-repeat:no-repeat;border-radius:8px;z-index:10;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,.35);border:2px solid #fff}
-.links-cell a[data-img]:hover::after, .preview-trigger[data-img]:hover::after{background-image:var(--bg)}
+.preview-trigger:hover::after{content:'';position:absolute;bottom:calc(100%+6px);left:50%;transform:translateX(-50%);width:160px;height:213px;background:#1a1a2e;background-size:contain;background-position:center;background-repeat:no-repeat;border-radius:8px;z-index:10;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,.35);border:2px solid #fff}
+.preview-trigger[data-img]:hover::after{background-image:var(--bg)}
 .links-cell .preview-trigger{color:#7a7168;font-size:11px;font-style:italic;cursor:default;position:relative}
 .links-cell .sep{color:#d4c9bc;margin:0 4px}
 .contact-card{background:#fff;border:1px solid #e8e2d9;border-radius:12px;padding:16px 20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
