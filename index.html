@@ -44,6 +44,7 @@ tbody td{padding:10px;vertical-align:middle;color:#3d3832}
 .tag-men{background:#e3f2fd;color:#1565c0}
 .tag-unisex{background:#f3e5f5;color:#7b1fa2}
 .tag-women{background:#fce4ec;color:#c62828}
+.tag-new{background:#ff6f00;color:#fff}
 
 .size-cell{text-align:center;font-weight:600;font-size:13px;white-space:nowrap;color:#2d2a24}
 .inspired-cell{color:#7a7168;font-size:12px;font-style:italic}
@@ -229,9 +230,9 @@ tbody td{padding:10px;vertical-align:middle;color:#3d3832}
 </div>
 
 <script>
+(function(){var DAY=864e5;document.querySelectorAll('.frag-cell[data-added]').forEach(function(c){var added=new Date(c.getAttribute('data-added')),now=new Date();if(now-added<7*DAY&&!c.querySelector('.tag-new')){var t=document.createElement('span');t.className='tag tag-new';t.textContent='NEW';c.appendChild(t)}else if(now-added>=7*DAY){c.removeAttribute('data-added')}})})();
 
-  el.addEventListener('mouseleave',function(){this.style.removeProperty('--bg')});
-});
+
 
 document.querySelectorAll('.table-wrap').forEach(function(w){
   var t=w.querySelector('table'),th=t&&t.querySelector('thead');
