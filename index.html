@@ -294,13 +294,27 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 .cart-totals{margin-bottom:12px}
 .cart-total-row{display:flex;justify-content:space-between;padding:6px 0;font-size:14px;color:#2d2a24}
 .cart-grand-total{font-weight:700;font-size:16px;color:#1a1a2e;border-top:1px solid #e8e2d9;padding-top:8px;margin-top:4px}
-.cart-free-ship{font-size:12px;color:#2e7d32;font-weight:500;margin-bottom:12px;text-align:center;padding:6px;background:#e8f5e9;border-radius:8px}
 .cart-actions{display:flex;gap:8px}
 .cart-action-btn{flex:1;padding:10px;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit}
 .cart-copy-btn{background:#1a1a2e;color:#fff}
 .cart-copy-btn:hover{background:#0f3460}
 .cart-whatsapp-btn{background:#25D366;color:#fff}
 .cart-whatsapp-btn:hover{background:#1da851}
+.ship-progress{padding:12px 0;border-bottom:1px solid #e8e2d9;margin-bottom:12px}
+.ship-progress-title{font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:8px;text-align:center}
+.ship-progress-bar{height:8px;background:#e8e2d9;border-radius:4px;overflow:hidden;margin-bottom:6px}
+.ship-progress-fill{height:100%;background:linear-gradient(90deg,#2e7d32,#4caf50);border-radius:4px;transition:width .5s ease;width:0}
+.ship-progress-fill.done{background:linear-gradient(90deg,#4caf50,#2e7d32)}
+.ship-progress-text{font-size:12px;color:#7a7168;text-align:center}
+.ship-progress-text strong{color:#2d2a24}
+.cart-stats{display:flex;justify-content:space-around;padding:10px 0;border-bottom:1px solid #e8e2d9;margin-bottom:8px}
+.cart-stat{text-align:center;flex:1}
+.cart-stat-val{font-size:16px;font-weight:700;color:#1a1a2e}
+.cart-stat-label{font-size:10px;color:#7a7168;text-transform:uppercase;letter-spacing:.3px}
+.cart-clear-btn{background:0 0;border:1px solid #e94560;color:#e94560;border-radius:6px;padding:4px 12px;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit}
+.cart-clear-btn:hover{background:#e94560;color:#fff}
+@keyframes badgePulse{0%{transform:scale(1)}50%{transform:scale(1.35)}100%{transform:scale(1)}}
+.cart-float-count.pulse{animation:badgePulse .3s ease}
 @media(max-width:768px){
   .cart-float{bottom:140px;right:16px;width:52px;height:52px}
   .cart-drawer{width:100%;border-radius:0}
@@ -309,6 +323,47 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
   .ss-popup{min-width:calc(100vw - 32px);max-width:calc(100vw - 32px)}
   .cart-btn{font-size:10px;padding:3px 8px}
 }
+[data-theme="dark"] .cart-drawer{background:#161b22}
+[data-theme="dark"] .cart-drawer-header{background:#1c2128;border-color:#30363d}
+[data-theme="dark"] .cart-drawer-header h3{color:#e6edf3}
+[data-theme="dark"] .cart-close-btn{background:#21262d;border-color:#30363d;color:#c9d1d9}
+[data-theme="dark"] .cart-close-btn:hover{background:#30363d}
+[data-theme="dark"] .cart-drawer-body{background:#161b22}
+[data-theme="dark"] .cart-item{border-color:#21262d}
+[data-theme="dark"] .cart-item-brand{color:#8b949e}
+[data-theme="dark"] .cart-item-name{color:#e6edf3}
+[data-theme="dark"] .cart-item-size{color:#8b949e}
+[data-theme="dark"] .cart-qty-btn{background:#21262d;border-color:#30363d;color:#c9d1d9}
+[data-theme="dark"] .cart-qty-btn:hover{background:#30363d}
+[data-theme="dark"] .cart-qty-val{color:#e6edf3}
+[data-theme="dark"] .cart-remove-btn{border-color:#30363d;color:#f85149}
+[data-theme="dark"] .cart-remove-btn:hover{background:rgba(248,81,73,.15)}
+[data-theme="dark"] .cart-empty{color:#8b949e}
+[data-theme="dark"] .cart-drawer-footer{background:#1c2128;border-color:#30363d}
+[data-theme="dark"] .cart-totals{border-color:#30363d}
+[data-theme="dark"] .cart-total-row{color:#c9d1d9}
+[data-theme="dark"] .cart-grand-total{color:#e6edf3;border-color:#30363d}
+[data-theme="dark"] .cart-copy-btn{background:#58a6ff;color:#0d1117}
+[data-theme="dark"] .cart-copy-btn:hover{background:#79c0ff}
+[data-theme="dark"] .ship-progress{border-color:#30363d}
+[data-theme="dark"] .ship-progress-title{color:#e6edf3}
+[data-theme="dark"] .ship-progress-bar{background:#21262d}
+[data-theme="dark"] .ship-progress-text{color:#8b949e}
+[data-theme="dark"] .ship-progress-text strong{color:#c9d1d9}
+[data-theme="dark"] .cart-stats{border-color:#30363d}
+[data-theme="dark"] .cart-stat-val{color:#e6edf3}
+[data-theme="dark"] .cart-stat-label{color:#8b949e}
+[data-theme="dark"] .cart-clear-btn{border-color:#f85149;color:#f85149}
+[data-theme="dark"] .cart-clear-btn:hover{background:rgba(248,81,73,.15);color:#f85149}
+[data-theme="dark"] .ss-popup{background:#161b22}
+[data-theme="dark"] .ss-title{color:#e6edf3}
+[data-theme="dark"] .ss-subtitle{color:#8b949e}
+[data-theme="dark"] .ss-option{border-color:#30363d}
+[data-theme="dark"] .ss-option:hover{border-color:#58a6ff;background:#21262d}
+[data-theme="dark"] .ss-option input[type="radio"]{accent-color:#58a6ff}
+[data-theme="dark"] .ss-option span:first-of-type{color:#e6edf3}
+[data-theme="dark"] .ss-price{color:#c9d1d9}
+[data-theme="dark"] .cart-float{box-shadow:0 4px 16px rgba(0,0,0,.5)}
 </style>
 <script type="application/ld+json">
 {
@@ -784,17 +839,29 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 <div class="cart-overlay" id="cartDrawerOverlay"></div>
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-drawer-header">
-    <h3>Your Cart</h3>
-    <button class="cart-close-btn" id="cartCloseDrawer">&times;</button>
+    <h3>Your Cart <span id="cartHeaderCount" style="font-weight:400;font-size:14px;color:#7a7168"></span></h3>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="cart-clear-btn" id="cartClearBtn">Clear</button>
+      <button class="cart-close-btn" id="cartCloseDrawer">&times;</button>
+    </div>
   </div>
   <div class="cart-drawer-body" id="cartDrawerBody"><div class="cart-empty">Your cart is empty</div></div>
   <div class="cart-drawer-footer">
+    <div class="ship-progress" id="shipProgress" style="display:none">
+      <div class="ship-progress-title" id="shipProgressTitle">&#128666; Free Shipping Progress</div>
+      <div class="ship-progress-bar"><div class="ship-progress-fill" id="shipProgressFill"></div></div>
+      <div class="ship-progress-text" id="shipProgressText"></div>
+    </div>
+    <div class="cart-stats" id="cartStats" style="display:none">
+      <div class="cart-stat"><div class="cart-stat-val" id="cartStatItems">0</div><div class="cart-stat-label">Items</div></div>
+      <div class="cart-stat"><div class="cart-stat-val" id="cartStatFrags">0</div><div class="cart-stat-label">Fragrances</div></div>
+      <div class="cart-stat"><div class="cart-stat-val" id="cartStatDecants">0</div><div class="cart-stat-label">Est. Decants</div></div>
+    </div>
     <div class="cart-totals">
       <div class="cart-total-row"><span>Subtotal</span><span id="cartSubtotal">&#8377;0</span></div>
       <div class="cart-total-row"><span>Shipping</span><span id="cartShipping">&#8377;100</span></div>
       <div class="cart-total-row cart-grand-total"><span>Grand Total</span><span id="cartTotal">&#8377;0</span></div>
     </div>
-    <div class="cart-free-ship" id="cartFreeShipNote">Add &#8377;999 more for free shipping!</div>
     <div class="cart-actions">
       <button class="cart-action-btn cart-copy-btn" id="cartCopyOrder">Copy Order</button>
       <button class="cart-action-btn cart-whatsapp-btn" id="cartWhatsApp">Order on WhatsApp</button>
@@ -1021,11 +1088,20 @@ try{(function(){
   var subtotalEl=document.getElementById('cartSubtotal');
   var shippingEl=document.getElementById('cartShipping');
   var totalEl=document.getElementById('cartTotal');
-  var freeShipNote=document.getElementById('cartFreeShipNote');
   var copyBtn=document.getElementById('cartCopyOrder');
   var whatsappBtn=document.getElementById('cartWhatsApp');
   var ssPopup=document.getElementById('sizeSelector');
   var ssOverlay=document.getElementById('sizeSelectorOverlay');
+  var shipProgress=document.getElementById('shipProgress');
+  var shipProgressFill=document.getElementById('shipProgressFill');
+  var shipProgressText=document.getElementById('shipProgressText');
+  var shipProgressTitle=document.getElementById('shipProgressTitle');
+  var cartStats=document.getElementById('cartStats');
+  var cartStatItems=document.getElementById('cartStatItems');
+  var cartStatFrags=document.getElementById('cartStatFrags');
+  var cartStatDecants=document.getElementById('cartStatDecants');
+  var headerCount=document.getElementById('cartHeaderCount');
+  var clearBtn=document.getElementById('cartClearBtn');
 
   function save(){localStorage.setItem('iram_cart',JSON.stringify(cart))}
   function parsePrice(c){return parseInt(c.textContent.trim().replace(/[^0-9]/g,''),10)||0}
@@ -1053,9 +1129,29 @@ try{(function(){
 
   function renderCart(){
     var n=totalItems();
+    var sub=subtotal();
+    var ship=shipping(sub);
+    var tot=sub+ship;
+    var uniqueFrags=0;
+    var fragSet={};
+    var decantEst=0;
+    for(var i=0;i<cart.length;i++){
+      var it=cart[i];
+      var fk=it.brand+'|'+it.frag;
+      if(!fragSet[fk]){fragSet[fk]=1;uniqueFrags++}
+      decantEst+=it.qty;
+    }
     floatCount.textContent=n;
+    floatCount.classList.remove('pulse');
+    void floatCount.offsetWidth;
+    if(n>0)floatCount.classList.add('pulse');
     floatBtn.classList.toggle('visible',n>0);
-    if(!cart.length){drawerBody.innerHTML='<div class="cart-empty">Your cart is empty</div>';}
+    headerCount.textContent=n>0?'('+n+')':'';
+    if(!cart.length){
+      drawerBody.innerHTML='<div class="cart-empty">Your cart is empty</div>';
+      shipProgress.style.display='none';
+      cartStats.style.display='none';
+    }
     else{
       var h='';
       for(var i=0;i<cart.length;i++){
@@ -1063,12 +1159,27 @@ try{(function(){
         h+='<div class="cart-item"><div class="cart-item-info"><div class="cart-item-brand">'+esc(it.brand)+'</div><div class="cart-item-name">'+esc(it.frag)+'</div><div class="cart-item-size">'+it.size+' \u2014 '+fmt(it.price)+'</div></div><div class="cart-item-actions"><button class="cart-qty-btn" data-action="minus" data-key="'+esc(it.key)+'">\u2212</button><span class="cart-qty-val">'+it.qty+'</span><button class="cart-qty-btn" data-action="plus" data-key="'+esc(it.key)+'">+</button><button class="cart-remove-btn" data-action="remove" data-key="'+esc(it.key)+'">\u2715</button></div></div>';
       }
       drawerBody.innerHTML=h;
+      shipProgress.style.display='';
+      cartStats.style.display='';
+      var pct=Math.min(Math.round(sub/999*100),100);
+      shipProgressFill.style.width=pct+'%';
+      shipProgressFill.classList.toggle('done',pct>=100);
+      if(pct>=100){
+        shipProgressTitle.innerHTML='&#10003; Free Shipping Progress';
+        shipProgressText.innerHTML='<span style="color:#2e7d32;font-weight:600">&#10003; Congratulations! You unlocked FREE SHIPPING!</span>';
+      }
+      else{
+        shipProgressTitle.innerHTML='&#128666; Free Shipping Progress';
+        shipProgressText.innerHTML='<strong>'+pct+'%</strong> \u2014 '+fmt(sub)+' / '+fmt(999)+'<br>Only '+fmt(999-sub)+' more for <strong>FREE SHIPPING!</strong>';
+      }
+      cartStatItems.textContent=n;
+      cartStatFrags.textContent=uniqueFrags;
+      cartStatDecants.textContent=decantEst;
     }
-    var sub=subtotal(),ship=shipping(sub),tot=sub+ship;
     subtotalEl.textContent=fmt(sub);
     shippingEl.textContent=ship===0?'FREE':fmt(ship);
     totalEl.textContent=fmt(tot);
-    freeShipNote.style.display=ship===0?'none':'';
+    clearBtn.style.display=cart.length?'':'none';
   }
 
   function bounceFloat(){floatBtn.classList.add('cart-bounce');setTimeout(function(){floatBtn.classList.remove('cart-bounce')},400)}
@@ -1121,17 +1232,24 @@ try{(function(){
   });
 
   function genOrderText(){
-    var lines=['IRAM Perfume Order',''];
+    var lines=['\u{1F31F} IRAM Perfume Order',''];
+    var totalQty=0;
     for(var i=0;i<cart.length;i++){
       var it=cart[i];
-      lines.push(it.qty+' \u00D7 '+it.frag+' ('+it.size+') '+fmt(it.price*it.qty));
+      totalQty+=it.qty;
+      lines.push(it.qty+' \u00D7 '+it.frag+' ('+it.size+') \u2014 '+fmt(it.price*it.qty));
     }
     lines.push('');
+    lines.push('\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500');
+    lines.push('Items: '+totalQty);
     var sub=subtotal(),ship=shipping(sub),tot=sub+ship;
-    lines.push('Subtotal '+fmt(sub));
-    lines.push('Shipping '+(ship===0?'FREE':fmt(ship)));
-    lines.push('Grand Total '+fmt(tot));
-    if(sub<999){lines.push('');lines.push('Add '+fmt(999-sub)+' more for free shipping!')}
+    lines.push('Subtotal: '+fmt(sub));
+    lines.push('Shipping: '+(ship===0?'FREE':fmt(ship)));
+    lines.push('Grand Total: '+fmt(tot));
+    lines.push('');
+    lines.push('Customer Name: ');
+    lines.push('Address: ');
+    lines.push('Payment Method: ');
     return lines.join('\n');
   }
 
@@ -1142,6 +1260,11 @@ try{(function(){
   });
 
   whatsappBtn.addEventListener('click',function(){window.open('https://wa.me/919355533509?text='+encodeURIComponent(genOrderText()),'_blank')});
+
+  clearBtn.addEventListener('click',function(){
+    if(!cart.length)return;
+    cart=[];save();renderCart();
+  });
 
   renderCart();
 })();}catch(e){console.warn('Cart init failed:',e)}
