@@ -27,7 +27,7 @@ body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:#f8f6f3;c
 .section-heading{font-size:22px;font-weight:700;color:#1a1a2e;margin:24px 0 12px 0;padding-bottom:8px;border-bottom:3px solid #d4a373;font-family:'Georgia',serif}
 .table-wrap{border-radius:12px;border:1px solid #e8e2d9;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06)}
 table{width:100%;border-collapse:collapse;font-size:13px;min-width:720px}
-thead{position:sticky;top:0;z-index:2;background:linear-gradient(135deg,#1a1a2e,#16213e);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+thead{background:linear-gradient(135deg,#1a1a2e,#16213e)}
 thead th{background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;padding:12px 10px;text-align:left;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap}
 thead th:first-child{border-radius:12px 0 0 0}
 thead th:last-child{border-radius:0 12px 0 0}
@@ -448,32 +448,6 @@ tbody td{padding:10px;vertical-align:middle;color:#3d3832}
   });
 })();
 
-document.querySelectorAll('.table-wrap').forEach(function(w){
-  var t=w.querySelector('.frag-table'),th=t&&t.querySelector('thead');
-  if(!th)return;
-  var c=document.createElement('table');
-  c.style.cssText='position:fixed;top:0;z-index:999;background:linear-gradient(135deg,#1a1a2e,#16213e);box-shadow:0 2px 8px rgba(0,0,0,.15);display:none;table-layout:fixed';
-  c.appendChild(th.cloneNode(true));
-  document.body.appendChild(c);
-  function copyWidths(){
-    var o=th.querySelectorAll('th'),n=c.querySelectorAll('th');
-    for(var i=0;i<o.length;i++){n[i].style.width=o[i].offsetWidth+'px'}
-  }
-  function upd(){
-    var r=w.getBoundingClientRect();
-    if(r.top<0&&r.bottom>60){
-      if(c.style.display==='none'){c.style.width=t.offsetWidth+'px';copyWidths()}
-      c.style.display='';
-      c.style.left=r.left+'px';
-      c.style.transform='translateX('+(-w.scrollLeft)+'px)';
-    }else{c.style.display='none'}
-  }
-  window.addEventListener('scroll',upd,{passive:true});
-  w.addEventListener('scroll',function(){
-    if(c.style.display!=='none'){c.style.transform='translateX('+(-w.scrollLeft)+'px)'}
-  },{passive:true});
-  window.addEventListener('resize',function(){if(c.style.display!=='none'){copyWidths();upd()}},{passive:true});
-});
 document.querySelectorAll('.reviews-imgs img').forEach(function(img){
   img.addEventListener('click',function(){
     document.querySelectorAll('.reviews-imgs img').forEach(function(o){
