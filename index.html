@@ -34,93 +34,126 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:"Antique Handmade";src:url("antique-handmade.otf")format("opentype")}
+:root{
+  --bg-page:#f8f6f3;--bg-banner:#fcf9f4;--bg-surface:#fff;--bg-surface-alt:#fcfaf8;--bg-elevated:#f8f6f3;
+  --bg-hover:#faf6f0;--bg-callout:#fff8e7;--bg-diff:#fff8e1;--bg-overlay:rgba(0,0,0,.6);
+  --text-heading:#1a1a2e;--text-primary:#2d2a24;--text-body:#3d3832;--text-muted:#7a7168;
+  --text-placeholder:#9a8f82;--text-on-dark:#fff;--text-callout:#5c4a32;--text-callout-strong:#8b5e34;
+  --border-default:#e8e2d9;--border-light:#f0ebe5;--border-accent:#d4a373;--border-strong:#d4c9bc;
+  --accent-primary:#1a1a2e;--accent-secondary:#0f3460;--accent-brand:#d4a373;
+  --accent-danger:#e94560;--accent-success:#2e7d32;--accent-link:#0f3460;
+  --tag-men-bg:#e3f2fd;--tag-men-text:#1565c0;
+  --tag-women-bg:#fce4ec;--tag-women-text:#c62828;
+  --tag-unisex-bg:#f3e5f5;--tag-unisex-text:#7b1fa2;
+  --tag-new-bg:#ff6f00;--tag-new-text:#fff;
+  --shadow-sm:0 2px 8px rgba(0,0,0,.04);--shadow-md:0 2px 12px rgba(0,0,0,.06);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.12);--shadow-xl:0 16px 64px rgba(0,0,0,.25);
+  --highlight-bg:#fff3b0;--gradient-primary:linear-gradient(135deg,#1a1a2e,#16213e);
+  --bottle-label-bg:rgba(26,26,46,.85);--card-shadow:0 2px 8px rgba(0,0,0,.06);
+  --focus-ring:#0f3460;
+}
+[data-theme="dark"]{
+  --bg-page:#0d1117;--bg-banner:#161b22;--bg-surface:#161b22;--bg-surface-alt:#1c2128;--bg-elevated:#21262d;
+  --bg-hover:#21262d;--bg-callout:#1c2128;--bg-diff:rgba(212,163,115,.1);--bg-overlay:rgba(0,0,0,.7);
+  --text-heading:#e6edf3;--text-primary:#c9d1d9;--text-body:#c9d1d9;--text-muted:#8b949e;
+  --text-placeholder:#6e7681;--text-on-dark:#e6edf3;--text-callout:#c9d1d9;--text-callout-strong:#d4a373;
+  --border-default:#30363d;--border-light:#21262d;--border-accent:#d4a373;--border-strong:#30363d;
+  --accent-primary:#58a6ff;--accent-secondary:#58a6ff;--accent-brand:#d4a373;
+  --accent-danger:#f85149;--accent-success:#3fb950;--accent-link:#58a6ff;
+  --tag-men-bg:rgba(56,139,253,.15);--tag-men-text:#79c0ff;
+  --tag-women-bg:rgba(248,81,73,.15);--tag-women-text:#ffa198;
+  --tag-unisex-bg:rgba(188,140,255,.15);--tag-unisex-text:#d2a8ff;
+  --tag-new-bg:#d29922;--tag-new-text:#fff;
+  --shadow-sm:0 2px 8px rgba(0,0,0,.2);--shadow-md:0 2px 12px rgba(0,0,0,.3);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.4);--shadow-xl:0 16px 64px rgba(0,0,0,.5);
+  --highlight-bg:rgba(210,153,34,.25);--gradient-primary:linear-gradient(135deg,#161b22,#0d1117);
+  --bottle-label-bg:rgba(13,17,23,.9);--card-shadow:0 2px 8px rgba(0,0,0,.2);
+  --focus-ring:#58a6ff;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:#f8f6f3;color:#2d2a24;line-height:1.5;-webkit-font-smoothing:antialiased}
-.banner{background:#fcf9f4;color:#2d2a24;padding:32px 20px;text-align:left;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+.banner{background:var(--bg-banner);color:var(--text-primary);padding:32px 20px;text-align:left;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;transition:background .3s,color .3s}
 .banner .inner{display:flex;align-items:center;gap:20px;max-width:600px;margin:0}
-.sold-stamp{display:inline-block;font-size:9px;padding:2px 6px;font-weight:800;color:#e94560;border:2px solid #e94560;border-radius:3px;transform:rotate(-15deg);margin-left:6px;letter-spacing:.5px;line-height:1.3;vertical-align:middle}
+.sold-stamp{display:inline-block;font-size:9px;padding:2px 6px;font-weight:800;color:var(--accent-danger);border:2px solid var(--accent-danger);border-radius:3px;transform:rotate(-15deg);margin-left:6px;letter-spacing:.5px;line-height:1.3;vertical-align:middle}
 .reviews-section{padding:20px 0;text-align:center}
 .reviews-imgs{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
-.reviews-imgs img{height:200px;width:auto;border-radius:8px;object-fit:contain;border:1px solid #d4c9bc;box-shadow:0 2px 8px rgba(0,0,0,.08);cursor:pointer;transition:box-shadow .2s;display:block}
+.reviews-imgs img{height:200px;width:auto;border-radius:8px;object-fit:contain;border:1px solid var(--border-strong);box-shadow:var(--shadow-sm);cursor:pointer;transition:box-shadow .2s;display:block}
 .banner-logo{max-height:100px;width:auto}
-.banner h1{font-family:'Antique Handmade',cursive;font-size:48px;font-weight:400;letter-spacing:0;margin-bottom:0;color:#1a1a2e;line-height:1.1}
-.banner .badge{display:inline-block;background:#e94560;color:#fff;font-size:12px;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:14px}
+.banner h1{font-family:'Antique Handmade',cursive;font-size:48px;font-weight:400;letter-spacing:0;margin-bottom:0;color:var(--text-heading);line-height:1.1}
+.banner .badge{display:inline-block;background:var(--accent-danger);color:var(--text-on-dark);font-size:12px;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:14px}
 .container{max-width:1200px;margin:0 auto;padding:20px 16px}
-.callout{background:#fff8e7;border-left:4px solid #d4a373;padding:16px 20px;border-radius:0 8px 8px 0;margin-bottom:24px;font-size:14px;color:#5c4a32}
-.callout strong{color:#8b5e34}.callout p{margin:4px 0}
-.callout a{color:#0f3460;text-decoration:underline;font-weight:500}
-.callout a:hover{color:#e94560}
-.section-heading{font-size:22px;font-weight:700;color:#1a1a2e;margin:24px 0 12px 0;padding-bottom:8px;border-bottom:3px solid #d4a373;font-family:'Georgia',serif}
-.table-wrap{border-radius:12px;border:1px solid #e8e2d9;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.callout{background:var(--bg-callout);border-left:4px solid var(--accent-brand);padding:16px 20px;border-radius:0 8px 8px 0;margin-bottom:24px;font-size:14px;color:var(--text-callout)}
+.callout strong{color:var(--text-callout-strong)}.callout p{margin:4px 0}
+.callout a{color:var(--accent-link);text-decoration:underline;font-weight:500}
+.callout a:hover{color:var(--accent-danger)}
+.section-heading{font-size:22px;font-weight:700;color:var(--text-heading);margin:24px 0 12px 0;padding-bottom:8px;border-bottom:3px solid var(--accent-brand);font-family:'Georgia',serif}
+.table-wrap{border-radius:12px;border:1px solid var(--border-default);background:var(--bg-surface);box-shadow:var(--shadow-md);transition:background .3s,border-color .3s}
 table{width:100%;border-collapse:collapse;font-size:13px;min-width:720px}
-thead{background:linear-gradient(135deg,#1a1a2e,#16213e)}
-thead th{background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;padding:12px 10px;text-align:left;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap}
+thead{background:var(--gradient-primary)}
+thead th{background:var(--gradient-primary);color:var(--text-on-dark);padding:12px 10px;text-align:left;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
 thead th:first-child{border-radius:12px 0 0 0}
 thead th:last-child{border-radius:0 12px 0 0}
-tbody tr{border-bottom:1px solid #f0ebe5;transition:background .15s}
-tbody tr:hover{background:#faf6f0}
-tbody tr:nth-child(even){background:#fcfaf8}
-tbody tr:nth-child(even):hover{background:#faf6f0}
-tbody td{padding:10px;vertical-align:middle;color:#3d3832}
-.brand-cell{font-weight:700;color:#1a1a2e;font-size:13px;white-space:nowrap;vertical-align:middle;text-align:center;background:#f8f6f3;border-right:2px solid #e8e2d9;width:140px}
+tbody tr{border-bottom:1px solid var(--border-light);transition:background .15s}
+tbody tr:hover{background:var(--bg-hover)}
+tbody tr:nth-child(even){background:var(--bg-surface-alt)}
+tbody tr:nth-child(even):hover{background:var(--bg-hover)}
+tbody td{padding:10px;vertical-align:middle;color:var(--text-body)}
+.brand-cell{font-weight:700;color:var(--text-heading);font-size:13px;white-space:nowrap;vertical-align:middle;text-align:center;background:var(--bg-elevated);border-right:2px solid var(--border-default);width:140px}
 .brand-cell img{display:block;max-width:100px;max-height:40px;margin:0 auto 6px auto;object-fit:contain}
-.brand-sep{border-top:3px solid #d4a373!important}
-.frag-cell{font-weight:500;color:#2d2a24}
+.brand-sep{border-top:3px solid var(--accent-brand)!important}
+.frag-cell{font-weight:500;color:var(--text-primary)}
 .tag{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:4px;font-weight:700;line-height:1.5;vertical-align:middle;letter-spacing:.3px}
-.tag-men{background:#e3f2fd;color:#1565c0}
-.tag-unisex{background:#f3e5f5;color:#7b1fa2}
-.tag-women{background:#fce4ec;color:#c62828}
-.tag-new{background:#ff6f00;color:#fff}
-
-.size-cell{text-align:center;font-weight:600;font-size:13px;white-space:nowrap;color:#2d2a24}
-.inspired-cell{color:#7a7168;font-size:12px;font-style:italic}
+.tag-men{background:var(--tag-men-bg);color:var(--tag-men-text)}
+.tag-unisex{background:var(--tag-unisex-bg);color:var(--tag-unisex-text)}
+.tag-women{background:var(--tag-women-bg);color:var(--tag-women-text)}
+.tag-new{background:var(--tag-new-bg);color:var(--tag-new-text)}
+.size-cell{text-align:center;font-weight:600;font-size:13px;white-space:nowrap;color:var(--text-primary)}
+.inspired-cell{color:var(--text-muted);font-size:12px;font-style:italic}
 .links-cell{white-space:nowrap}
-.links-cell a{color:#0f3460;text-decoration:none;font-size:12px;font-weight:500;position:relative}
-.links-cell a:hover{color:#e94560;text-decoration:underline}
-
-
-.links-cell .preview-trigger{color:#7a7168;font-size:11px;font-style:italic;cursor:default;position:relative}
-.filter-bar{border:1px solid #e8e2d9;border-radius:12px;padding:6px 14px;margin-bottom:16px;background:#fcfaf8;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.links-cell a{color:var(--accent-link);text-decoration:none;font-size:12px;font-weight:500;position:relative}
+.links-cell a:hover{color:var(--accent-danger);text-decoration:underline}
+.links-cell .preview-trigger{color:var(--text-muted);font-size:11px;font-style:italic;cursor:default;position:relative}
+.filter-bar{border:1px solid var(--border-default);border-radius:12px;padding:6px 14px;margin-bottom:16px;background:var(--bg-surface-alt);box-shadow:var(--shadow-md)}
 .filter-table{width:100%;border-collapse:collapse}
 .filter-table td{padding:6px 4px;vertical-align:top}
-.filter-label{font-size:12px;font-weight:600;color:#7a7168;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;width:1%;padding-right:16px!important}
+.filter-label{font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;width:1%;padding-right:16px!important}
 .filter-buttons{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
-.filter-btn{padding:4px 12px;font-size:12px;border:1px solid #d4c9bc;border-radius:20px;background:#fff;color:#2d2a24;cursor:pointer;font-weight:500;transition:all .15s}
-.filter-btn:hover{border-color:#0f3460;color:#0f3460}
-.filter-btn.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
-.filter-btn.active:hover{background:#0f3460}
+.filter-btn{padding:4px 12px;font-size:12px;border:1px solid var(--border-strong);border-radius:20px;background:var(--bg-surface);color:var(--text-primary);cursor:pointer;font-weight:500;transition:all .15s}
+.filter-btn:hover{border-color:var(--accent-secondary);color:var(--accent-secondary)}
+.filter-btn.active{background:var(--accent-primary);color:var(--text-on-dark);border-color:var(--accent-primary)}
+.filter-btn.active:hover{opacity:.85}
 .filter-hidden{display:none!important}
-#filterResults{background:#fff;border:1px solid #e8e2d9;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:16px;overflow-x:auto}
+#filterResults{background:var(--bg-surface);border:1px solid var(--border-default);border-radius:12px;box-shadow:var(--shadow-md);margin-bottom:16px;overflow-x:auto}
 #filterResults table{margin-top:0}
-.links-cell .sep{color:#d4c9bc;margin:0 4px}
-.contact-card{background:#fff;border:1px solid #e8e2d9;border-radius:12px;padding:16px 20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.links-cell .sep{color:var(--border-accent);margin:0 4px}
+.contact-card{background:var(--bg-surface);border:1px solid var(--border-default);border-radius:12px;padding:16px 20px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
 .contact-item{display:flex;align-items:center;gap:10px;padding:8px 0}
-.contact-item+.contact-item{border-top:1px solid #f0ebe5}
-.contact-item a{color:#2d2a24;text-decoration:none;font-size:14px}
-.contact-item a:hover{color:#0f3460}
-.bottle-info{position:relative;margin:0 auto 24px;border-radius:12px;overflow:hidden;border:1px solid #e8e2d9;background:#fff;max-width:500px}
+.contact-item+.contact-item{border-top:1px solid var(--border-light)}
+.contact-item a{color:var(--text-primary);text-decoration:none;font-size:14px}
+.contact-item a:hover{color:var(--accent-secondary)}
+.bottle-info{position:relative;margin:0 auto 24px;border-radius:12px;overflow:hidden;border:1px solid var(--border-default);background:var(--bg-surface);max-width:500px}
 .bottle-info img{display:block;width:100%;height:auto}
 .bottle-labels{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
-.bottle-labels span{position:absolute;background:rgba(26,26,46,.85);color:#fff;padding:6px 12px;border-radius:6px;font-size:13px;line-height:1.4;text-align:center}
+.bottle-labels span{position:absolute;background:var(--bottle-label-bg);color:var(--text-on-dark);padding:6px 12px;border-radius:6px;font-size:13px;line-height:1.4;text-align:center}
 .label-30{top:50%;left:5%;transform:translateY(-50%)}
 .label-8{top:50%;right:5%;transform:translateY(-50%)}
 .frag-cards{display:none}
-.frag-card{background:#fff;border:1px solid #e8e2d9;border-radius:12px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);animation:cardIn .3s ease both}
+.frag-card{background:var(--bg-surface);border:1px solid var(--border-default);border-radius:12px;padding:14px;box-shadow:var(--card-shadow);animation:cardIn .3s ease both}
 @keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
 .card-brand-logo{max-width:32px;max-height:24px;object-fit:contain;border-radius:4px}
-.card-brand-name{font-weight:700;font-size:13px;color:#1a1a2e}
-.card-frag-name{font-size:15px;font-weight:600;color:#2d2a24;margin-bottom:8px}
+.card-brand-name{font-weight:700;font-size:13px;color:var(--text-heading)}
+.card-frag-name{font-size:15px;font-weight:600;color:var(--text-primary);margin-bottom:8px}
 .card-prices{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
-.card-price{background:#f8f6f3;border:1px solid #e8e2d9;border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;color:#2d2a24;display:inline-flex;align-items:center;gap:4px}
-.card-price small{font-weight:400;color:#7a7168;font-size:10px}
-.card-price strong{color:#1a1a2e}
+.card-price{background:var(--bg-elevated);border:1px solid var(--border-default);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;color:var(--text-primary);display:inline-flex;align-items:center;gap:4px}
+.card-price small{font-weight:400;color:var(--text-muted);font-size:10px}
+.card-price strong{color:var(--text-heading)}
 .card-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px}
-.card-inspired{font-size:11px;color:#7a7168;font-style:italic}
+.card-inspired{font-size:11px;color:var(--text-muted);font-style:italic}
 .card-links{font-size:11px}
-.card-links a{color:#0f3460;text-decoration:none;font-weight:500}
-.card-links a:hover{color:#e94560;text-decoration:underline}
-.card-links .sep{color:#d4c9bc;margin:0 3px}
+.card-links a{color:var(--accent-link);text-decoration:none;font-weight:500}
+.card-links a:hover{color:var(--accent-danger);text-decoration:underline}
+.card-links .sep{color:var(--border-accent);margin:0 3px}
 @media(max-width:600px){
   .bottle-labels span{font-size:11px;padding:4px 8px}
   .label-30{left:3%}.label-8{right:3%}
@@ -139,31 +172,31 @@ tbody td{padding:10px;vertical-align:middle;color:#3d3832}
   body{padding-bottom:64px}
 }
 .search-wrap{position:relative;margin-bottom:16px}
-.search-bar{width:100%;padding:10px 40px 10px 14px;font-size:14px;font-weight:500;border:1px solid #e8e2d9;border-radius:12px;background:#fff;color:#2d2a24;outline:none;transition:border-color .15s,box-shadow .15s;box-shadow:0 2px 12px rgba(0,0,0,.06);font-family:inherit}
-.search-bar::placeholder{color:#9a8f82}
-.search-bar:focus{border-color:#0f3460;box-shadow:0 2px 12px rgba(0,0,0,.1)}
-.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:24px;height:24px;border:none;background:0 0;color:#7a7168;font-size:18px;cursor:pointer;display:none;align-items:center;justify-content:center;border-radius:50%;line-height:1}
+.search-bar{width:100%;padding:10px 40px 10px 14px;font-size:14px;font-weight:500;border:1px solid var(--border-default);border-radius:12px;background:var(--bg-surface);color:var(--text-primary);outline:none;transition:border-color .15s,box-shadow .15s,background .3s,color .3s;box-shadow:var(--shadow-md);font-family:inherit}
+.search-bar::placeholder{color:var(--text-placeholder)}
+.search-bar:focus{border-color:var(--focus-ring);box-shadow:var(--shadow-md)}
+.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:24px;height:24px;border:none;background:0 0;color:var(--text-muted);font-size:18px;cursor:pointer;display:none;align-items:center;justify-content:center;border-radius:50%;line-height:1}
 .search-clear.visible{display:flex}
-.search-clear:hover{background:rgba(0,0,0,.06);color:#2d2a24}
-.search-shortcut{position:absolute;right:38px;top:50%;transform:translateY(-50%);pointer-events:none;font-size:11px;color:#9a8f82;border:1px solid #e8e2d9;border-radius:4px;padding:1px 6px;font-family:inherit}
-.search-results{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1px solid #e8e2d9;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.12);max-height:420px;overflow-y:auto;z-index:100;display:none}
+.search-clear:hover{background:var(--bg-hover);color:var(--text-primary)}
+.search-shortcut{position:absolute;right:38px;top:50%;transform:translateY(-50%);pointer-events:none;font-size:11px;color:var(--text-placeholder);border:1px solid var(--border-default);border-radius:4px;padding:1px 6px;font-family:inherit}
+.search-results{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--bg-surface);border:1px solid var(--border-default);border-radius:12px;box-shadow:var(--shadow-lg);max-height:420px;overflow-y:auto;z-index:100;display:none}
 .search-results.open{display:block}
-.search-result-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid #f0ebe5;transition:background .1s}
+.search-result-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border-light);transition:background .1s}
 .search-result-item:last-child{border-bottom:none}
-.search-result-item:hover{background:#faf6f0}
-.search-result-brand{font-weight:700;font-size:12px;color:#1a1a2e;min-width:80px;white-space:nowrap}
-.search-result-name{font-weight:500;font-size:13px;color:#2d2a24;flex:1}
-.search-result-meta{font-size:11px;color:#7a7168;white-space:nowrap}
+.search-result-item:hover{background:var(--bg-hover)}
+.search-result-brand{font-weight:700;font-size:12px;color:var(--text-heading);min-width:80px;white-space:nowrap}
+.search-result-name{font-weight:500;font-size:13px;color:var(--text-primary);flex:1}
+.search-result-meta{font-size:11px;color:var(--text-muted);white-space:nowrap}
 .search-result-tags{display:flex;gap:4px;flex-shrink:0}
 .search-result-tags .tag{margin:0;font-size:8px;padding:0 4px}
-mark.highlight{background:#fff3b0;color:inherit;padding:0 1px;border-radius:2px}
-.search-no-results{padding:16px 14px;color:#7a7168;font-size:13px;text-align:center}
-.search-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;padding:16px;align-items:flex-start;justify-content:center}
+mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border-radius:2px}
+.search-no-results{padding:16px 14px;color:var(--text-muted);font-size:13px;text-align:center}
+.search-overlay{display:none;position:fixed;inset:0;background:var(--bg-overlay);z-index:999;padding:16px;align-items:flex-start;justify-content:center}
 .search-overlay.open{display:flex}
-.search-overlay .search-wrap{max-width:480px;width:100%;margin:0;background:#fff;border-radius:12px;padding:12px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.search-overlay .search-wrap{max-width:480px;width:100%;margin:0;background:var(--bg-surface);border-radius:12px;padding:12px;box-shadow:var(--shadow-lg)}
 .search-overlay .search-results{position:relative;top:auto;left:auto;right:auto;box-shadow:none;border:none;max-height:calc(100vh - 140px)}
 .search-overlay .search-bar{border:none;box-shadow:none;padding:12px 40px 12px 14px;font-size:16px}
-.mobile-search-trigger{display:none;position:fixed;bottom:80px;right:16px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;border:none;font-size:20px;cursor:pointer;z-index:998;box-shadow:0 4px 16px rgba(0,0,0,.25);align-items:center;justify-content:center}
+.mobile-search-trigger{display:none;position:fixed;bottom:80px;right:16px;width:48px;height:48px;border-radius:50%;background:var(--gradient-primary);color:var(--text-on-dark);border:none;font-size:20px;cursor:pointer;z-index:998;box-shadow:0 4px 16px rgba(0,0,0,.25);align-items:center;justify-content:center}
 @media(max-width:768px){
   .search-shortcut{display:none}
   .search-bar{font-size:16px}
@@ -171,11 +204,43 @@ mark.highlight{background:#fff3b0;color:inherit;padding:0 1px;border-radius:2px}
   .search-wrap.desktop-only{display:none}
   .search-overlay .search-bar{font-size:16px}
 }
-.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#1a1a2e,#16213e);border-top:1px solid rgba(255,255,255,.1);z-index:1000;padding:6px 0 env(safe-area-inset-bottom,8px);transform:translateY(0);transition:transform .3s ease}
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--gradient-primary);border-top:1px solid rgba(255,255,255,.1);z-index:1000;padding:6px 0 env(safe-area-inset-bottom,8px);transform:translateY(0);transition:transform .3s ease}
 .mobile-nav.hidden{transform:translateY(100%)}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;color:#d4c9bc;text-decoration:none;font-size:10px;font-weight:500;flex:1;padding:4px 0;-webkit-tap-highlight-color:transparent;transition:color .15s}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--border-strong);text-decoration:none;font-size:10px;font-weight:500;flex:1;padding:4px 0;-webkit-tap-highlight-color:transparent;transition:color .15s}
 .nav-item svg{width:20px;height:20px;fill:currentColor}
-.nav-item:hover,.nav-item:active{color:#fff}
+.nav-item:hover,.nav-item:active{color:var(--text-on-dark)}
+#themeToggle{position:fixed;top:16px;right:16px;z-index:999;background:var(--accent-primary);color:var(--text-on-dark);border:2px solid var(--accent-primary);border-radius:50%;width:40px;height:40px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:var(--shadow-md)}
+#themeToggle:hover{opacity:.85}
+.stats-dashboard{margin:20px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.stat-card{background:var(--bg-surface);border:1px solid var(--border-default);border-radius:12px;padding:16px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .15s,box-shadow .15s,background .3s,border-color .3s}
+.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.stat-value{font-size:28px;font-weight:700;color:var(--text-heading);line-height:1.2}
+.stat-label{font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-top:4px;font-weight:500}
+.stat-card.highlight{background:var(--gradient-primary);border-color:transparent}
+.stat-card.highlight .stat-value{color:var(--accent-brand)}
+.stat-card.highlight .stat-label{color:var(--border-strong)}
+.stat-card.accent{background:var(--bg-surface);border-color:var(--accent-brand)}
+.stat-card.accent .stat-value{color:var(--accent-danger)}
+.stats-subgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:12px}
+.stat-sub{background:var(--bg-elevated);border:1px solid var(--border-default);border-radius:8px;padding:10px;text-align:center}
+.stat-sub .stat-value{font-size:18px;font-weight:700;color:var(--text-heading)}
+.stat-sub .stat-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;margin-top:2px}
+.stat-card.wide{grid-column:span 2}
+@media(max-width:768px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .stat-card{padding:12px 8px}
+  .stat-value{font-size:22px}
+  .stat-label{font-size:10px}
+  .stat-card.wide{grid-column:span 2}
+  .stats-subgrid{grid-template-columns:repeat(3,1fr);gap:6px}
+  .stat-sub{padding:8px 4px}
+  .stat-sub .stat-value{font-size:15px}
+}
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .stat-card.wide{grid-column:span 2}
+}
 .cart-btn{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;font-size:11px;font-weight:600;border:1px solid #2e7d32;border-radius:6px;background:#2e7d32;color:#fff;cursor:pointer;transition:all .15s;font-family:inherit;white-space:nowrap}
 .cart-btn:hover{background:#1b5e20;border-color:#1b5e20}
 .cart-btn:disabled{opacity:.4;cursor:not-allowed;background:#999;border-color:#999}
@@ -434,6 +499,7 @@ mark.highlight{background:#fff3b0;color:inherit;padding:0 1px;border-radius:2px}
     <img src="logo.png" alt="IRAM Perfume" class="banner-logo">
     <h1>IRAM Perfume</h1>
   </div>
+  <button id="themeToggle" aria-label="Toggle dark mode">&#9789;</button>
 </div>
 
 <div class="container">
@@ -444,8 +510,8 @@ mark.highlight{background:#fff3b0;color:inherit;padding:0 1px;border-radius:2px}
 </div>
 
 <div class="contact-card">
-  <h3 style="margin:0;font-size:16px;font-weight:700;color:#1a1a2e">Contact Us</h3>
-  <p style="margin:0 0 8px 0;font-size:12px;color:#7a7168">(For placing order)</p>
+  <h3 style="margin:0;font-size:16px;font-weight:700;color:var(--text-heading)">Contact Us</h3>
+  <p style="margin:0 0 8px 0;font-size:12px;color:var(--text-muted)">(For placing order)</p>
   <div class="contact-item"><svg viewBox="0 0 24 24" width="18" height="18" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><a href="tel:+919355533509">+91 93555 33509</a></div>
   <div class="contact-item"><svg viewBox="0 0 24 24" width="18" height="18" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><a href="https://chat.whatsapp.com/JSWEIoCsFd96wzlRAeaewe">Our WhatsApp Community</a></div>
   <div class="contact-item"><svg viewBox="0 0 24 24" width="18" height="18" fill="#EA4335"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><a href="mailto:perfumeiram@gmail.com">perfumeiram@gmail.com</a></div>
@@ -547,6 +613,7 @@ mark.highlight{background:#fff3b0;color:inherit;padding:0 1px;border-radius:2px}
 <tr class="brand-sep"><td class="brand-cell" rowspan="1"><img src="logos/davidoff.png" alt="Davidoff">Davidoff</td><td class="frag-cell" data-scent="aquatic,fresh" data-season="summer" data-occasion="daily" data-time="day" data-weather="hot,rain" data-mood="fresh,clean" data-family="fresh,aquatic">Cool Water EDT<span class="tag tag-men">Men</span></td><td class="size-cell">89</td><td class="size-cell">129</td><td class="size-cell">195</td><td class="size-cell">429</td><td class="size-cell"><strong>599</strong></td><td class="inspired-cell">Original</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Davidoff/Cool-Water-507.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Davidoff/Cool_Water_Eau_de_Toilette'>Parfumo</a></td></tr>
 <tr class="brand-sep"><td class="brand-cell" rowspan="2"><img src="logos/mancera.png" alt="Mancera">Mancera</td><td class="frag-cell" data-scent="citrus,fresh" data-season="summer" data-occasion="daily" data-time="day" data-weather="hot" data-mood="fresh,elegant" data-family="citrus,woody">Cedrat Boise<span class="tag tag-men">Men</span><span class="tag" style="background:#2e7d32;color:#fff;margin-left:6px">COMING SOON</span></td><td class="size-cell"><span style="color:#999">219</span></td><td class="size-cell"><span style="color:#999">349</span></td><td class="size-cell"><span style="color:#999">539</span></td><td class="size-cell"><span style="color:#999">1,299</span></td><td class="size-cell"><strong><span style="color:#999">1,899</span></strong></td><td class="inspired-cell">Original</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Mancera/Cedrat-Boise-15211.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Mancera/Cedrat_Boise'>Parfumo</a></td></tr>
 <tr><td class="frag-cell" data-scent="fresh,floral,aquatic" data-season="summer" data-occasion="daily,date-night" data-time="day,evening" data-weather="hot,rain" data-mood="fresh,elegant" data-family="floral,fresh,aquatic">French Riviera<span class="tag tag-unisex">Unisex</span></td><td class="size-cell">229</td><td class="size-cell">365</td><td class="size-cell">569</td><td class="size-cell">1,365</td><td class="size-cell"><strong>1,999</strong></td><td class="inspired-cell">Original</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Mancera/French-Riviera-74636.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Mancera/french-riviera'>Parfumo</a></td></tr>
+<tr class="brand-sep"><td class="brand-cell" rowspan="1"><img src="logos/jaguar.png" alt="Jaguar">Jaguar</td><td class="frag-cell" data-scent="spicy,woody" data-season="fall,winter" data-occasion="daily,office" data-time="evening" data-weather="cold" data-mood="elegant,bold" data-family="woody,spicy">Classic Black<span class="tag tag-men">Men</span></td><td class="size-cell">89</td><td class="size-cell">129</td><td class="size-cell">195</td><td class="size-cell">429</td><td class="size-cell"><strong>599</strong></td><td class="inspired-cell">Original</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Jaguar/Jaguar-Classic-Black-11793.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Jaguar/classic-black-eau-de-toilette'>Parfumo</a></td></tr>
 </tbody>
 </table>
 </div>
@@ -594,7 +661,6 @@ mark.highlight{background:#fff3b0;color:inherit;padding:0 1px;border-radius:2px}
 <tr><td class="frag-cell" data-scent="spicy,woody" data-season="winter" data-occasion="date-night,party" data-time="evening,night" data-weather="cold" data-mood="bold,sexy" data-family="leather,tobacco">Brazilian Tobacco<span class="tag tag-men">Men</span></td><td class="size-cell">139</td><td class="size-cell">215</td><td class="size-cell"><s style="color:#999">319</s></td><td class="size-cell"><s style="color:#999">745</s></td><td class="size-cell"><strong><s style="color:#999">1069</s></strong></td><td class="inspired-cell">Haltane</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Ibraheem-AlQurashi/Brazilian-Tobacco-100562.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/ibraheem-al-qurashi/brazilian-tobacco'>Parfumo</a></td></tr>
 <tr><td class="frag-cell" data-scent="sweet,fruity" data-season="spring,summer" data-occasion="daily,date-night" data-time="day,evening" data-weather="mild" data-mood="elegant,relaxing" data-family="floral,gourmand">Marj<span class="tag tag-unisex">Unisex</span></td><td class="size-cell">209</td><td class="size-cell"><s style="color:#999">365</s></td><td class="size-cell"><s style="color:#999">569</s></td><td class="size-cell"><s style="color:#999">1365</s></td><td class="size-cell"><strong><s style="color:#999">1999</s></strong></td><td class="inspired-cell">Original</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Marj-104339.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/marj-eau-de-parfum'>Parfumo</a></td></tr>
 <tr><td class="frag-cell" data-scent="sweet,spicy" data-season="winter" data-occasion="date-night" data-time="evening,night" data-weather="cold" data-mood="bold,cozy" data-family="tobacco,vanilla">Spanish Tobacco<span class="tag tag-men">Men</span></td><td class="size-cell">139</td><td class="size-cell">215</td><td class="size-cell">319</td><td class="size-cell">745</td><td class="size-cell"><strong>1069</strong></td><td class="inspired-cell">Megamre</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Ibraheem-AlQurashi/Spanish-Tobacco-100551.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/ibraheem-al-qurashi/spanish-tobacco'>Parfumo</a></td></tr>
-<tr class="brand-sep"><td class="brand-cell" rowspan="1"><img src="logos/jaguar.png" alt="Jaguar">Jaguar</td><td class="frag-cell" data-scent="spicy,woody" data-season="fall,winter" data-occasion="daily,office" data-time="evening" data-weather="cold" data-mood="elegant,bold" data-family="woody,spicy">Classic Black<span class="tag tag-men">Men</span></td><td class="size-cell">89</td><td class="size-cell">129</td><td class="size-cell">195</td><td class="size-cell">429</td><td class="size-cell"><strong>599</strong></td><td class="inspired-cell">Original</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Jaguar/Jaguar-Classic-Black-11793.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Jaguar/classic-black-eau-de-toilette'>Parfumo</a></td></tr>
 <tr class="brand-sep"><td class="brand-cell" rowspan="9"><img src="logos/lattafa.png" alt="Lattafa">Lattafa</td><td class="frag-cell" data-scent="aquatic,fresh" data-season="summer" data-occasion="daily" data-time="day" data-weather="hot,rain" data-mood="fresh" data-family="fresh,aquatic">Ana Abiyed Coral<span class="tag tag-unisex">Unisex</span></td><td class="size-cell">95</td><td class="size-cell">139</td><td class="size-cell">209</td><td class="size-cell">465</td><td class="size-cell"><strong>649</strong></td><td class="inspired-cell">Wavechild Room 1015</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Lattafa-Perfumes/Ana-Abiyedh-Coral-103256.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Lattafa/ana-abiyedh-coral'>Parfumo</a></td></tr>
 <tr><td class="frag-cell" data-scent="spicy,woody" data-season="fall,winter" data-occasion="daily,date-night" data-time="evening" data-weather="cold" data-mood="bold" data-family="spicy,amber">ASAD<span class="tag tag-men">Men</span></td><td class="size-cell">95</td><td class="size-cell">139</td><td class="size-cell">209</td><td class="size-cell">465</td><td class="size-cell"><strong>649</strong></td><td class="inspired-cell">Dior Sauvage Elixir</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Lattafa-Perfumes/Asad-72821.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Lattafa/asad-1'>Parfumo</a></td></tr>
 <tr><td class="frag-cell" data-scent="spicy,woody" data-season="fall,winter" data-occasion="date-night,party" data-time="evening,night" data-weather="cold" data-mood="elegant,bold" data-family="spicy,woody">ASAD Elixir<span class="tag tag-men">Men</span></td><td class="size-cell">95</td><td class="size-cell">139</td><td class="size-cell">209</td><td class="size-cell">465</td><td class="size-cell"><strong>649</strong></td><td class="inspired-cell">Bottled Absolute</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Lattafa-Perfumes/Asad-Elixir-117616.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Lattafa/asad-elixir-elixir'>Parfumo</a></td></tr>
@@ -637,8 +703,34 @@ mark.highlight{background:#fff3b0;color:inherit;padding:0 1px;border-radius:2px}
   </div>
 </div>
 
+<div class="stats-dashboard" id="statsDashboard">
+<h3 style="margin:0 0 12px 0;font-size:15px;font-weight:700;color:var(--text-heading)">Collection Statistics</h3>
+<div class="stats-grid" id="statsGrid">
+  <div class="stat-card highlight"><div class="stat-value" id="statTotal">—</div><div class="stat-label">Total Fragrances</div></div>
+  <div class="stat-card highlight"><div class="stat-value" id="statBrands">—</div><div class="stat-label">Total Brands</div></div>
+  <div class="stat-card"><div class="stat-value" id="statDesigner">—</div><div class="stat-label">Designer</div></div>
+  <div class="stat-card"><div class="stat-value" id="statMiddleEastern">—</div><div class="stat-label">Middle Eastern</div></div>
+  <div class="stat-card"><div class="stat-value" id="statMen">—</div><div class="stat-label">Men's</div></div>
+  <div class="stat-card"><div class="stat-value" id="statWomen">—</div><div class="stat-label">Women's</div></div>
+  <div class="stat-card"><div class="stat-value" id="statUnisex">—</div><div class="stat-label">Unisex</div></div>
+  <div class="stat-card accent"><div class="stat-value" id="statComingSoon">—</div><div class="stat-label">Coming Soon</div></div>
+  <div class="stat-card wide"><div class="stat-value" id="statCheapest">—</div><div class="stat-label">Cheapest (30ml)</div></div>
+  <div class="stat-card wide"><div class="stat-value" id="statExpensive">—</div><div class="stat-label">Most Expensive (30ml)</div></div>
+</div>
+<div class="stats-subgrid" id="statsSubGrid">
+  <div class="stat-sub"><div class="stat-value" id="statAvg3ml">—</div><div class="stat-label">Avg 3ml</div></div>
+  <div class="stat-sub"><div class="stat-value" id="statAvg5ml">—</div><div class="stat-label">Avg 5ml</div></div>
+  <div class="stat-sub"><div class="stat-value" id="statAvg7ml">—</div><div class="stat-label">Avg 7.5ml</div></div>
+  <div class="stat-sub"><div class="stat-value" id="statAvg20ml">—</div><div class="stat-label">Avg 20ml</div></div>
+  <div class="stat-sub"><div class="stat-value" id="statAvg30ml">—</div><div class="stat-label">Avg 30ml</div></div>
+  <div class="stat-sub"><div class="stat-value" id="statFresh">—</div><div class="stat-label">Fresh</div></div>
+  <div class="stat-sub"><div class="stat-value" id="statWoody">—</div><div class="stat-label">Woody</div></div>
+  <div class="stat-sub"><div class="stat-value" id="statSweet">—</div><div class="stat-label">Sweet</div></div>
+</div>
+</div>
+
 <div class="reviews-section">
-  <h3 style="margin:0 0 12px 0;font-size:15px;font-weight:700;color:#1a1a2e">Customer Reviews</h3>
+  <h3 style="margin:0 0 12px 0;font-size:15px;font-weight:700;color:var(--text-heading)">Customer Reviews</h3>
   <div class="reviews-imgs">
     <img src="reviews/review1.jpeg" alt="Customer review" id="review1">
     <img src="reviews/review2.jpeg" alt="Customer review" id="review2">
@@ -696,7 +788,7 @@ mark.highlight{background:#fff3b0;color:inherit;padding:0 1px;border-radius:2px}
   <div class="cart-drawer-footer">
     <div class="cart-totals">
       <div class="cart-total-row"><span>Subtotal</span><span id="cartSubtotal">&#8377;0</span></div>
-      <div class="cart-total-row"><span>Shipping</span><span id="cartShipping">&#8377;50</span></div>
+      <div class="cart-total-row"><span>Shipping</span><span id="cartShipping">&#8377;100</span></div>
       <div class="cart-total-row cart-grand-total"><span>Grand Total</span><span id="cartTotal">&#8377;0</span></div>
     </div>
     <div class="cart-free-ship" id="cartFreeShipNote">Add &#8377;999 more for free shipping!</div>
@@ -708,9 +800,9 @@ mark.highlight{background:#fff3b0;color:inherit;padding:0 1px;border-radius:2px}
 </div>
 
 <script>
-(function(){var DAY=864e5;document.querySelectorAll('.frag-cell[data-added]').forEach(function(c){var added=new Date(c.getAttribute('data-added')),now=new Date();if(now-added<7*DAY&&!c.querySelector('.tag-new')){var t=document.createElement('span');t.className='tag tag-new';t.textContent='NEW';c.appendChild(t)}else if(now-added>=7*DAY){c.removeAttribute('data-added')}})})();
+try{(function(){var DAY=864e5;document.querySelectorAll('.frag-cell[data-added]').forEach(function(c){var added=new Date(c.getAttribute('data-added')),now=new Date();if(now-added<7*DAY&&!c.querySelector('.tag-new')){var t=document.createElement('span');t.className='tag tag-new';t.textContent='NEW';c.appendChild(t)}else if(now-added>=7*DAY){c.removeAttribute('data-added')}})})();}catch(e){console.warn('NEW tag init failed:',e)}
 
-(function(){
+try{(function(){
   var cats=['scent','season','occasion','time','weather','mood','family'];
   var f={};cats.forEach(function(c){f[c]='all'});
   var resultsDiv=document.createElement('div');
@@ -782,9 +874,9 @@ mark.highlight{background:#fff3b0;color:inherit;padding:0 1px;border-radius:2px}
       resultsDiv.style.display=isMobile?'none':'';
     }
   }
-})();
+})();}catch(e){console.warn('Filters init failed:',e)}
 
-(function(){
+try{(function(){
   var sizes=['3ml','5ml','7.5ml','20ml','30ml'];
   document.querySelectorAll('.table-wrap').forEach(function(wrap){
     var table=wrap.querySelector('.frag-table');
@@ -829,8 +921,9 @@ mark.highlight{background:#fff3b0;color:inherit;padding:0 1px;border-radius:2px}
     });
     wrap.appendChild(cc);
   });
-})();
-document.querySelectorAll('.reviews-imgs img').forEach(function(img){
+})();}catch(e){console.warn('Mobile cards init failed:',e)}
+
+try{document.querySelectorAll('.reviews-imgs img').forEach(function(img){
   img.addEventListener('click',function(){
     document.querySelectorAll('.reviews-imgs img').forEach(function(o){
       o.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'
@@ -839,9 +932,9 @@ document.querySelectorAll('.reviews-imgs img').forEach(function(img){
     this.style.transform='scale(1.02)';
     setTimeout(function(){img.style.transform=''},200);
   });
-});
+});}catch(e){console.warn('Reviews init failed:',e)}
 
-(function(){
+try{(function(){
   var sizes=['3ml','5ml','7.5ml','20ml','30ml'];
   var attrs=['scent','season','occasion','time','weather','mood','family'];
 
@@ -939,7 +1032,7 @@ document.querySelectorAll('.reviews-imgs img').forEach(function(img){
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
   function totalItems(){var n=0;for(var i=0;i<cart.length;i++)n+=cart[i].qty;return n}
   function subtotal(){var t=0;for(var i=0;i<cart.length;i++)t+=cart[i].price*cart[i].qty;return t}
-  function shipping(s){return s>=999?0:50}
+  function shipping(s){return s>=999?0:100}
 
   function addToCart(brand,frag,size,price){
     var key=brand+'|'+frag+'|'+size;
@@ -1049,21 +1142,23 @@ document.querySelectorAll('.reviews-imgs img').forEach(function(img){
   whatsappBtn.addEventListener('click',function(){window.open('https://wa.me/919355533509?text='+encodeURIComponent(genOrderText()),'_blank')});
 
   renderCart();
-})();
-(function(){
+})();}catch(e){console.warn('Cart init failed:',e)}
+
+try{(function(){
   var root=document.documentElement;
   var btn=document.getElementById('themeToggle');
   var stored=localStorage.getItem('theme');
   var prefersDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;
-  function setIcon(dark){btn.innerHTML=dark?'&#9788;':'&#9789;'}
+  function setIcon(dark){if(btn)btn.innerHTML=dark?'&#9788;':'&#9789;'}
   if(stored==='dark'||(!stored&&prefersDark)){root.setAttribute('data-theme','dark');setIcon(true)}
-  btn.addEventListener('click',function(){
+  if(btn){btn.addEventListener('click',function(){
     var isDark=root.getAttribute('data-theme')==='dark';
     if(isDark){root.removeAttribute('data-theme');localStorage.setItem('theme','light');setIcon(false)}
     else{root.setAttribute('data-theme','dark');localStorage.setItem('theme','dark');setIcon(true)}
-  });
-})();
-(function(){
+  })}
+})();}catch(e){console.warn('Theme toggle init failed:',e)}
+
+try{(function(){
   var index=[];
   document.querySelectorAll('.frag-table').forEach(function(table){
     var curBrand='';
@@ -1176,7 +1271,7 @@ document.querySelectorAll('.reviews-imgs img').forEach(function(img){
     if(!item)return;
     item.el.scrollIntoView({behavior:'smooth',block:'center'});
     item.fragEl.style.transition='background .2s';
-    item.fragEl.style.background='#fff3b0';
+    item.fragEl.style.background=getComputedStyle(document.documentElement).getPropertyValue('--highlight-bg');
     setTimeout(function(){item.fragEl.style.background=''},1500);
   }
 
@@ -1184,6 +1279,7 @@ document.querySelectorAll('.reviews-imgs img').forEach(function(img){
     var input=document.getElementById('searchInput');
     var results=document.getElementById('searchResults');
     var clear=document.getElementById('searchClear');
+    if(!input||!results||!clear)return;
     input.addEventListener('input',function(){doSearch(input,results)});
     input.addEventListener('focus',function(){if(input.value.trim())doSearch(input,results)});
     clear.addEventListener('click',function(){input.value='';results.classList.remove('open');clear.classList.remove('visible');input.focus()});
@@ -1217,6 +1313,7 @@ document.querySelectorAll('.reviews-imgs img').forEach(function(img){
     var input=document.getElementById('mobileSearchInput');
     var results=document.getElementById('mobileSearchResults');
     var clear=document.getElementById('mobileSearchClear');
+    if(!btn||!overlay||!input||!results||!clear)return;
     function closeOverlay(){overlay.classList.remove('open');input.value='';results.classList.remove('open');document.body.style.overflow=''}
     btn.addEventListener('click',function(){
       overlay.classList.add('open');
@@ -1237,8 +1334,9 @@ document.querySelectorAll('.reviews-imgs img').forEach(function(img){
 
   setupDesktop();
   setupMobile();
-})();
-(function(){
+})();}catch(e){console.warn('Search init failed:',e)}
+
+try{(function(){
   var nav=document.getElementById('mobileNav');
   if(!nav)return;
   var lastY=0,ticking=false;
@@ -1253,16 +1351,97 @@ document.querySelectorAll('.reviews-imgs img').forEach(function(img){
       ticking=true;
     }
   },{passive:true});
-  document.getElementById('navHome').addEventListener('click',function(e){
+  var navHome=document.getElementById('navHome');
+  var navSearch=document.getElementById('navSearch');
+  if(navHome)navHome.addEventListener('click',function(e){
     e.preventDefault();
     window.scrollTo({top:0,behavior:'smooth'});
   });
-  document.getElementById('navSearch').addEventListener('click',function(e){
+  if(navSearch)navSearch.addEventListener('click',function(e){
     e.preventDefault();
     var bar=document.getElementById('filterBar');
     if(bar)bar.scrollIntoView({behavior:'smooth',block:'start'});
   });
-})();
+})();}catch(e){console.warn('Mobile nav init failed:',e)}
+
+try{(function(){
+  function parsePrice(s){
+    if(!s)return null;
+    var t=s.replace(/<[^>]+>/g,'').replace(/[^\d]/g,'');
+    return t?parseInt(t,10):null;
+  }
+  function set(id,val){var el=document.getElementById(id);if(el)el.textContent=val}
+  function computeStats(){
+    var allFc=document.querySelectorAll('.frag-cell');
+    var totalFragrances=allFc.length;
+    var brands=new Set();
+    var designerCount=0,meCount=0;
+    var menCount=0,womenCount=0,unisexCount=0;
+    var freshCount=0,woodyCount=0,sweetCount=0;
+    var comingSoon=0;
+    var prices={3:[],5:[],7:[],20:[],30:[]};
+    var cheapest={price:Infinity,name:'',brand:''};
+    var expensive={price:0,name:'',brand:''};
+    var sizeKeys=['3','5','7','20','30'];
+    document.querySelectorAll('.frag-table').forEach(function(table){
+      var section=table.closest('.table-wrap');
+      var heading=section?section.previousElementSibling:null;
+      var isDesigner=heading&&heading.textContent.trim()==='Designer';
+      table.querySelectorAll('tbody tr').forEach(function(row){
+        var bc=row.querySelector('.brand-cell');
+        if(bc)brands.add(bc.textContent.trim());
+        var fc=row.querySelector('.frag-cell');
+        if(!fc)return;
+        if(isDesigner)designerCount++;else meCount++;
+        if(fc.querySelector('.tag-men'))menCount++;
+        else if(fc.querySelector('.tag-women'))womenCount++;
+        else if(fc.querySelector('.tag-unisex'))unisexCount++;
+        var scent=(fc.getAttribute('data-scent')||'').toLowerCase();
+        var family=(fc.getAttribute('data-family')||'').toLowerCase();
+        var combined=scent+','+family;
+        if(combined.indexOf('fresh')!==-1||combined.indexOf('aquatic')!==-1||combined.indexOf('citrus')!==-1)freshCount++;
+        if(combined.indexOf('woody')!==-1||combined.indexOf('amber')!==-1)woodyCount++;
+        if(combined.indexOf('sweet')!==-1||combined.indexOf('vanilla')!==-1||combined.indexOf('gourmand')!==-1)sweetCount++;
+        if(fc.textContent.indexOf('COMING SOON')!==-1)comingSoon++;
+        var cells=row.querySelectorAll('.size-cell');
+        cells.forEach(function(c,i){
+          if(i<sizeKeys.length){
+            var p=parsePrice(c.textContent);
+            if(p!==null)prices[sizeKeys[i]].push(p);
+          }
+        });
+        var fragName='';
+        fc.childNodes.forEach(function(n){if(n.nodeType===3)fragName+=n.textContent});
+        fragName=fragName.trim();
+        var brandName=bc?bc.textContent.trim():'';
+        var p30=parsePrice(cells[4]?cells[4].textContent:'');
+        if(p30!==null&&p30<cheapest.price){cheapest={price:p30,name:fragName,brand:brandName}}
+        if(p30!==null&&p30>expensive.price){expensive={price:p30,name:fragName,brand:brandName}}
+      });
+    });
+    function avg(arr){if(!arr.length)return 0;return Math.round(arr.reduce(function(a,b){return a+b},0)/arr.length)}
+    function fmt(n){return n===Infinity||n===0?'—':'₹'+n}
+    set('statTotal',totalFragrances);
+    set('statBrands',brands.size);
+    set('statDesigner',designerCount);
+    set('statMiddleEastern',meCount);
+    set('statMen',menCount);
+    set('statWomen',womenCount);
+    set('statUnisex',unisexCount);
+    set('statComingSoon',comingSoon);
+    set('statCheapest',cheapest.price===Infinity?'—':fmt(cheapest.price)+' ('+cheapest.brand+' '+cheapest.name+')');
+    set('statExpensive',expensive.price===0?'—':fmt(expensive.price)+' ('+expensive.brand+' '+expensive.name+')');
+    set('statAvg3ml','₹'+avg(prices['3']));
+    set('statAvg5ml','₹'+avg(prices['5']));
+    set('statAvg7ml','₹'+avg(prices['7']));
+    set('statAvg20ml','₹'+avg(prices['20']));
+    set('statAvg30ml','₹'+avg(prices['30']));
+    set('statFresh',freshCount);
+    set('statWoody',woodyCount);
+    set('statSweet',sweetCount);
+  }
+  computeStats();
+})();}catch(e){console.warn('Stats init failed:',e)}
 </script>
 </body>
 </html>
