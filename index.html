@@ -166,12 +166,19 @@ tbody td{padding:10px;vertical-align:middle;color:var(--text-body)}
   .banner .badge{font-size:11px}
   .banner .inner{gap:12px}
   .banner-logo{max-height:70px}
-  .container{padding:12px 8px}
+  .container{padding:12px 8px;overflow-x:hidden}
   .frag-table{display:none!important}
   .table-wrap{border:none!important;box-shadow:none!important;background:none!important;border-radius:0!important;overflow:visible!important}
   .frag-cards{display:grid;grid-template-columns:1fr;gap:12px}
   .mobile-nav{display:flex}
-  body{padding-bottom:64px}
+  body{padding-bottom:64px;overflow-x:hidden}
+  .filter-bar{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:6px 8px;max-width:100vw}
+  .filter-bar::-webkit-scrollbar{display:none}
+  .filter-table{min-width:auto}
+  .filter-table td{display:block;width:100%!important;padding:4px 0}
+  .filter-label{font-size:11px;padding-right:0!important;padding-bottom:2px!important}
+  .filter-buttons{flex-wrap:wrap;gap:4px}
+  .filter-btn{font-size:11px;padding:3px 8px}
 }
 .search-wrap{position:relative;margin-bottom:16px}
 .search-bar{width:100%;padding:10px 40px 10px 14px;font-size:14px;font-weight:500;border:1px solid var(--border-default);border-radius:12px;background:var(--bg-surface);color:var(--text-primary);outline:none;transition:border-color .15s,box-shadow .15s,background .3s,color .3s;box-shadow:var(--shadow-md);font-family:inherit}
