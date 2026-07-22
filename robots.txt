@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://itsnotme007.github.io/iram-perfume/sitemap.xml
