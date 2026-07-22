@@ -78,6 +78,23 @@ tbody td{padding:10px;vertical-align:middle;color:#3d3832}
 .bottle-labels span{position:absolute;background:rgba(26,26,46,.85);color:#fff;padding:6px 12px;border-radius:6px;font-size:13px;line-height:1.4;text-align:center}
 .label-30{top:50%;left:5%;transform:translateY(-50%)}
 .label-8{top:50%;right:5%;transform:translateY(-50%)}
+.frag-cards{display:none}
+.frag-card{background:#fff;border:1px solid #e8e2d9;border-radius:12px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);animation:cardIn .3s ease both}
+@keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.card-brand-logo{max-width:32px;max-height:24px;object-fit:contain;border-radius:4px}
+.card-brand-name{font-weight:700;font-size:13px;color:#1a1a2e}
+.card-frag-name{font-size:15px;font-weight:600;color:#2d2a24;margin-bottom:8px}
+.card-prices{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.card-price{background:#f8f6f3;border:1px solid #e8e2d9;border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;color:#2d2a24;display:inline-flex;align-items:center;gap:4px}
+.card-price small{font-weight:400;color:#7a7168;font-size:10px}
+.card-price strong{color:#1a1a2e}
+.card-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px}
+.card-inspired{font-size:11px;color:#7a7168;font-style:italic}
+.card-links{font-size:11px}
+.card-links a{color:#0f3460;text-decoration:none;font-weight:500}
+.card-links a:hover{color:#e94560;text-decoration:underline}
+.card-links .sep{color:#d4c9bc;margin:0 3px}
 @media(max-width:600px){
   .bottle-labels span{font-size:11px;padding:4px 8px}
   .label-30{left:3%}.label-8{right:3%}
@@ -89,10 +106,9 @@ tbody td{padding:10px;vertical-align:middle;color:#3d3832}
   .banner .inner{gap:12px}
   .banner-logo{max-height:70px}
   .container{padding:12px 8px}
-  thead th{padding:10px 6px;font-size:11px}
-  tbody td{padding:8px 6px;font-size:12px}
-  .table-wrap{overflow-x:auto;border-radius:8px}
-  .brand-cell img{max-width:70px;max-height:30px}
+  .frag-table{display:none!important}
+  .table-wrap{border:none!important;box-shadow:none!important;background:none!important;border-radius:0!important;overflow:visible!important}
+  .frag-cards{display:grid;grid-template-columns:1fr;gap:12px}
 }
 </style>
 </head>
@@ -235,7 +251,7 @@ tbody td{padding:10px;vertical-align:middle;color:#3d3832}
 <tr><td class="frag-cell" data-scent="woody,fresh" data-season="spring,summer" data-occasion="daily,office" data-time="day" data-weather="hot,mild" data-mood="fresh,bold" data-family="fresh,woody">SNOI (Supremacy Not Only Intense)<span class="tag tag-men">Men</span></td><td class="size-cell">105</td><td class="size-cell">155</td><td class="size-cell">235</td><td class="size-cell">529</td><td class="size-cell"><strong>749</strong></td><td class="inspired-cell">Blend inspired by Aventus and Hacivat</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Afnan/Supremacy-Not-Only-Intense-68271.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Afnan_Perfumes/supremacy-not-only-intense'>Parfumo</a></td></tr>
 <tr><td class="frag-cell" data-scent="woody,fresh" data-season="spring" data-occasion="daily,office" data-time="day,evening" data-weather="mild" data-mood="elegant,bold" data-family="woody,fresh">Supremacy Collector's Edition<span class="tag tag-men">Men</span></td><td class="size-cell">149</td><td class="size-cell">229</td><td class="size-cell">355</td><td class="size-cell">829</td><td class="size-cell"><strong>1,199</strong></td><td class="inspired-cell">Aventus Absolu</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Afnan/Supremacy-Collector-s-Edition-Pour-Homme-98689.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Afnan_Perfumes/supremacy-collector-s-edition'>Parfumo</a></td></tr>
 <tr><td class="frag-cell" data-scent="spicy,woody" data-season="fall,winter" data-occasion="date-night" data-time="evening,night" data-weather="cold" data-mood="bold" data-family="leather,spicy">Supremacy Incense<span class="tag tag-men">Men</span></td><td class="size-cell">119</td><td class="size-cell">179</td><td class="size-cell"><s style="color:#999">279</s></td><td class="size-cell"><s style="color:#999">649</s></td><td class="size-cell"><strong><s style="color:#999">929</s></strong></td><td class="inspired-cell">Interlude Man</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Afnan/Supremacy-Incense-64372.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Afnan_Perfumes/supremacy-incense'>Parfumo</a></td></tr>
-<tr><td class="frag-cell" data-scent="citrus,fresh" data-season="summer" data-occasion="daily,office" data-time="day" data-weather="hot" data-mood="fresh,elegant" data-family="citrus,fresh">Turathi Blue<span class="tag tag-men">Men</span></td><td class="size-cell">115</td><td class="size-cell">175</td><td class="size-cell">259</td><td class="size-cell">599</td><td class="size-cell"><strong>849</strong></td><td class="inspired-cell">Tygar</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Afnan/Turathi-Blue-70839.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Afnan_Perfumes/turathi-blue'>Parfumo</a></td></tr>
+<tr><td class="frag-cell" data-scent="citrus,fresh" data-season="summer" data-occasion="daily,office" data-time="day" data-weather="hot" data-mood="fresh,elegant" data-family="citrus,fresh">Turathi Blue<span class="tag tag-men">Men</span><span class="tag" style="background:#2e7d32;color:#fff;margin-left:6px">COMING SOON</span></td><td class="size-cell"><span style="color:#999">115</span></td><td class="size-cell"><span style="color:#999">175</span></td><td class="size-cell"><span style="color:#999">259</span></td><td class="size-cell"><span style="color:#999">599</span></td><td class="size-cell"><strong><span style="color:#999">849</span></strong></td><td class="inspired-cell">Tygar</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Afnan/Turathi-Blue-70839.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Afnan_Perfumes/turathi-blue'>Parfumo</a></td></tr>
 <tr class="brand-sep"><td class="brand-cell" rowspan="8"><img src="logos/ahmed-al-maghribi.png" alt="Ahmed Al Maghribi">Ahmed Al Maghribi</td><td class="frag-cell" data-scent="spicy,woody" data-season="winter" data-occasion="date-night,party" data-time="night" data-weather="cold" data-mood="bold,sexy" data-family="leather,tobacco">Black Fume<span class="tag tag-men">Men</span></td><td class="size-cell">99</td><td class="size-cell">149</td><td class="size-cell">219</td><td class="size-cell">499</td><td class="size-cell"><strong>699</strong></td><td class="inspired-cell">Terroni</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Black-Fume-132261.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/black-fume'>Parfumo</a></td></tr>
 <tr><td class="frag-cell" data-scent="woody,spicy" data-season="fall,winter" data-occasion="daily,date-night" data-time="evening,night" data-weather="cold,mild" data-mood="bold,sexy" data-family="leather,woody">Blu Oud<span class="tag tag-men">Men</span></td><td class="size-cell">95</td><td class="size-cell">139</td><td class="size-cell">209</td><td class="size-cell">465</td><td class="size-cell"><strong>649</strong></td><td class="inspired-cell">Ombre Leather / Imperial Valley</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Blu-Oud-107869.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/blu-oud'>Parfumo</a></td></tr>
 <tr><td class="frag-cell" data-scent="fresh,woody,aromatic" data-season="spring,summer" data-occasion="daily,office" data-time="day" data-weather="hot,mild" data-mood="fresh,elegant" data-family="fresh,woody">Blue<span class="tag tag-men">Men</span></td><td class="size-cell">89</td><td class="size-cell">129</td><td class="size-cell">195</td><td class="size-cell">429</td><td class="size-cell"><strong>599</strong></td><td class="inspired-cell">Bleu de Chanel</td><td class="links-cell"><a href='https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Blue-by-Ahmed-104882.html'>Fragrantica</a><span class='sep'>·</span><a href='https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/blue'>Parfumo</a></td></tr>
@@ -339,15 +355,27 @@ tbody td{padding:10px;vertical-align:middle;color:#3d3832}
   });
   function applyFilter(){
     var showAll=true;
+    var isMobile=window.innerWidth<=768;
     for(var i=0;i<cats.length;i++){if(f[cats[i]]!=='all'){showAll=false;break}}
     var tbody=resultsDiv.querySelector('tbody');
     if(showAll){
       document.querySelectorAll('.table-wrap>.frag-table').forEach(function(t){t.style.display=''});
       document.querySelectorAll('.section-heading').forEach(function(s){s.style.display=''});
       resultsDiv.style.display='none';
+      document.querySelectorAll('.frag-card').forEach(function(c){c.style.display=''});
     }else{
       document.querySelectorAll('.table-wrap>.frag-table').forEach(function(t){t.style.display='none'});
       document.querySelectorAll('.section-heading').forEach(function(s){s.style.display='none'});
+      document.querySelectorAll('.frag-card').forEach(function(card){
+        var match=true;
+        for(var i=0;i<cats.length;i++){
+          var cat=cats[i];
+          if(f[cat]==='all')continue;
+          var vals=card.dataset[cat]?card.dataset[cat].split(','):[];
+          if(vals.indexOf(f[cat])===-1){match=false;break}
+        }
+        card.style.display=match?'':'none';
+      });
       tbody.innerHTML='';
       document.querySelectorAll('.frag-cell').forEach(function(cell){
         for(var i=0;i<cats.length;i++){
@@ -370,9 +398,54 @@ tbody td{padding:10px;vertical-align:middle;color:#3d3832}
         });
         tbody.appendChild(nr);
       });
-      resultsDiv.style.display='';
+      resultsDiv.style.display=isMobile?'none':'';
     }
   }
+})();
+
+(function(){
+  var sizes=['3ml','5ml','7.5ml','20ml','30ml'];
+  document.querySelectorAll('.table-wrap').forEach(function(wrap){
+    var table=wrap.querySelector('.frag-table');
+    if(!table)return;
+    var cc=document.createElement('div');
+    cc.className='frag-cards';
+    var bName='',bSrc='';
+    table.querySelectorAll('tbody tr').forEach(function(row){
+      var bc=row.querySelector('.brand-cell');
+      if(bc){
+        bName=bc.textContent.trim();
+        var img=bc.querySelector('img');
+        bSrc=img?img.getAttribute('src'):'';
+      }
+      var fc=row.querySelector('.frag-cell');
+      if(!fc)return;
+      var fName='';
+      fc.childNodes.forEach(function(n){if(n.nodeType===3)fName+=n.textContent});
+      fName=fName.trim();
+      var gTag='',sTags='';
+      fc.querySelectorAll('.tag').forEach(function(t){
+        if(t.classList.contains('tag-men')||t.classList.contains('tag-unisex')||t.classList.contains('tag-women')){gTag=t.outerHTML}
+        else{sTags+=t.outerHTML}
+      });
+      var pHtml='';
+      var cells=row.querySelectorAll('.size-cell');
+      for(var i=0;i<cells.length;i++){pHtml+='<span class="card-price"><small>'+sizes[i]+'</small> '+cells[i].innerHTML+'</span>'}
+      var ic=row.querySelector('.inspired-cell');
+      var iText=ic?ic.textContent:'';
+      var lc=row.querySelector('.links-cell');
+      var lHtml=lc?lc.innerHTML:'';
+      var card=document.createElement('div');
+      card.className='frag-card';
+      for(var i=0;i<fc.attributes.length;i++){
+        var a=fc.attributes[i];
+        if(a.name.indexOf('data-')===0)card.setAttribute(a.name,a.value);
+      }
+      card.innerHTML='<div class="card-top">'+(bSrc?'<img src="'+bSrc+'" alt="" class="card-brand-logo" loading="lazy">':'')+'<span class="card-brand-name">'+bName+'</span>'+gTag+sTags+'</div>'+'<div class="card-frag-name">'+fName+'</div>'+'<div class="card-prices">'+pHtml+'</div>'+'<div class="card-bottom">'+'<span class="card-inspired">'+iText+'</span>'+'<span class="card-links">'+lHtml+'</span>'+'</div>';
+      cc.appendChild(card);
+    });
+    wrap.appendChild(cc);
+  });
 })();
 
 document.querySelectorAll('.table-wrap').forEach(function(w){
