@@ -190,7 +190,7 @@ tbody td{padding:10px;vertical-align:middle;color:var(--text-body)}
 .search-shortcut{position:absolute;right:38px;top:50%;transform:translateY(-50%);pointer-events:none;font-size:11px;color:var(--text-placeholder);border:1px solid var(--border-default);border-radius:4px;padding:1px 6px;font-family:inherit}
 .search-results{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--bg-surface);border:1px solid var(--border-default);border-radius:12px;box-shadow:var(--shadow-lg);max-height:420px;overflow-y:auto;z-index:100;display:none}
 .search-results.open{display:block}
-.search-result-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border-light);transition:background .1s}
+.search-result-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border-light);transition:background .1s;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .search-result-item:last-child{border-bottom:none}
 .search-result-item:hover{background:var(--bg-hover)}
 .search-result-brand{font-weight:700;font-size:12px;color:var(--text-heading);min-width:80px;white-space:nowrap}
@@ -1298,6 +1298,13 @@ try{(function(){
 
 try{(function(){
   var index=[];
+  function productSlug(brand,name){return(brand+'-'+name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+  var cardsMap={};
+  document.querySelectorAll('.frag-card').forEach(function(card){
+    var bn=card.querySelector('.card-brand-name');
+    var fn=card.querySelector('.card-frag-name');
+    if(bn&&fn)cardsMap[bn.textContent.trim().toLowerCase()+'|'+fn.textContent.trim().toLowerCase()]=card;
+  });
   document.querySelectorAll('.frag-table').forEach(function(table){
     var curBrand='';
     table.querySelectorAll('tbody tr').forEach(function(row){
@@ -1308,6 +1315,7 @@ try{(function(){
       var fragName='';
       fc.childNodes.forEach(function(n){if(n.nodeType===3)fragName+=n.textContent});
       fragName=fragName.trim();
+      var slug=productSlug(curBrand,fragName);
       var inspired=fc.parentElement?fc.parentElement.querySelector('.inspired-cell'):null;
       var inspiredText=inspired?inspired.textContent.trim():'';
       var tags=[];
@@ -1317,6 +1325,9 @@ try{(function(){
         var v=fc.getAttribute('data-'+a);
         if(v)attrs[a]=v;
       });
+      row.setAttribute('data-product',slug);
+      var card=cardsMap[curBrand.toLowerCase()+'|'+fragName.toLowerCase()];
+      if(card)card.setAttribute('data-product',slug);
       index.push({
         brand:curBrand,
         frag:fragName,
@@ -1324,7 +1335,8 @@ try{(function(){
         tags:tags.join(' '),
         attrs:attrs,
         el:row,
-        fragEl:fc
+        fragEl:fc,
+        product:slug
       });
     });
   });
@@ -1374,7 +1386,7 @@ try{(function(){
       var item=results[i];
       var div=document.createElement('div');
       div.className='search-result-item';
-      div.setAttribute('data-index',index.indexOf(item));
+      div.setAttribute('data-product',item.product);
       var genderTag='';
       item.fragEl.querySelectorAll('.tag').forEach(function(t){
         if(t.classList.contains('tag-men')||t.classList.contains('tag-unisex')||t.classList.contains('tag-women')){
@@ -1404,13 +1416,21 @@ try{(function(){
     renderResults(resultsEl,results,q,inputEl);
   }
 
-  function scrollToResult(idx){
-    var item=index[idx];
-    if(!item)return;
-    item.el.scrollIntoView({behavior:'smooth',block:'center'});
-    item.fragEl.style.transition='background .2s';
-    item.fragEl.style.background=getComputedStyle(document.documentElement).getPropertyValue('--highlight-bg');
-    setTimeout(function(){item.fragEl.style.background=''},1500);
+  function navigateToProduct(productId){
+    if(!productId)return;
+    var candidates=document.querySelectorAll('[data-product="'+productId+'"]');
+    var target=null;
+    for(var i=0;i<candidates.length;i++){
+      if(candidates[i].offsetHeight>0){target=candidates[i];break}
+    }
+    if(!target)return;
+    var rect=target.getBoundingClientRect();
+    var scrollTop=window.pageYOffset||document.documentElement.scrollTop;
+    window.scrollTo({top:scrollTop+rect.top-80,behavior:'smooth'});
+    var highlightEl=target.classList.contains('frag-card')?target.querySelector('.card-body')||target:target;
+    highlightEl.style.transition='background .3s';
+    highlightEl.style.background=getComputedStyle(document.documentElement).getPropertyValue('--highlight-bg')||'#FFF5CC';
+    setTimeout(function(){highlightEl.style.background=''},2000);
   }
 
   function setupDesktop(){
@@ -1424,10 +1444,11 @@ try{(function(){
     results.addEventListener('click',function(e){
       var item=e.target.closest('.search-result-item');
       if(!item)return;
-      scrollToResult(parseInt(item.getAttribute('data-index')));
+      var productId=item.getAttribute('data-product');
       results.classList.remove('open');
       input.value='';
       clear.classList.remove('visible');
+      navigateToProduct(productId);
     });
     document.addEventListener('click',function(e){
       if(!e.target.closest('.search-wrap'))results.classList.remove('open');
@@ -1452,22 +1473,25 @@ try{(function(){
     var results=document.getElementById('mobileSearchResults');
     var clear=document.getElementById('mobileSearchClear');
     if(!btn||!overlay||!input||!results||!clear)return;
-    function closeOverlay(){overlay.classList.remove('open');input.value='';results.classList.remove('open');document.body.style.overflow=''}
+    function closeOverlay(){overlay.classList.remove('open');results.classList.remove('open');document.body.style.overflow=''}
+    function pickResult(el){
+      var item=el.closest?el.closest('.search-result-item'):null;
+      if(!item)return;
+      var productId=item.getAttribute('data-product');
+      closeOverlay();
+      navigateToProduct(productId);
+    }
     btn.addEventListener('click',function(){
       overlay.classList.add('open');
       document.body.style.overflow='hidden';
-      setTimeout(function(){input.focus()},100);
+      setTimeout(function(){input.focus();if(input.value.trim())doSearch(input,results)},100);
     });
-    overlay.addEventListener('click',function(e){if(e.target===overlay)closeOverlay()});
+    overlay.addEventListener('click',function(e){
+      if(e.target===overlay)closeOverlay();
+    });
     input.addEventListener('input',function(){doSearch(input,results)});
     clear.addEventListener('click',function(){input.value='';results.classList.remove('open');clear.classList.remove('visible');input.focus()});
-    results.addEventListener('click',function(e){
-      var item=e.target.closest('.search-result-item');
-      if(!item)return;
-      var idx=parseInt(item.getAttribute('data-index'));
-      closeOverlay();
-      setTimeout(function(){scrollToResult(idx)},300);
-    });
+    results.addEventListener('click',function(e){pickResult(e.target)});
   }
 
   setupDesktop();
