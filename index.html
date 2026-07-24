@@ -371,6 +371,15 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 [data-theme="dark"] .ss-option span:first-of-type{color:#e6edf3}
 [data-theme="dark"] .ss-price{color:#c9d1d9}
 [data-theme="dark"] .cart-float{box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.brand-nav{display:none}
+@media(max-width:768px){
+  .brand-nav{display:block;overflow-x:auto;white-space:nowrap;padding:4px 0 8px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .brand-nav::-webkit-scrollbar{display:none}
+  .brand-nav-inner{display:inline-flex;gap:6px;padding:0 8px}
+  .brand-pill{display:inline-flex;align-items:center;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border-default);background:var(--bg-surface);color:var(--text-primary);cursor:pointer;white-space:nowrap;transition:all .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;flex-shrink:0;box-shadow:var(--shadow-sm)}
+  .brand-pill:active{transform:scale(.95)}
+  .brand-pill.active{background:var(--accent-primary);color:var(--text-on-dark);border-color:var(--accent-primary);box-shadow:var(--shadow-md)}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1604,6 +1613,93 @@ try{(function(){
   }
   computeStats();
 })();}catch(e){console.warn('Stats init failed:',e)}
+
+try{(function(){
+  if(window.innerWidth>768)return;
+  var brands=[];
+  var seen={};
+  document.querySelectorAll('.brand-cell').forEach(function(bc){
+    var name=bc.textContent.trim();
+    if(!name||seen[name])return;
+    seen[name]=true;
+    brands.push(name);
+  });
+  if(!brands.length)return;
+  var nav=document.createElement('div');
+  nav.className='brand-nav';
+  var inner=document.createElement('div');
+  inner.className='brand-nav-inner';
+  var allPill=document.createElement('button');
+  allPill.className='brand-pill active';
+  allPill.textContent='All';
+  inner.appendChild(allPill);
+  var pills={};
+  brands.forEach(function(brand){
+    var pill=document.createElement('button');
+    pill.className='brand-pill';
+    pill.textContent=brand;
+    pill.setAttribute('data-brand',brand);
+    pills[brand]=pill;
+    inner.appendChild(pill);
+  });
+  nav.appendChild(inner);
+  var filterBar=document.getElementById('filterBar');
+  if(filterBar&&filterBar.parentNode){
+    filterBar.parentNode.insertBefore(nav,filterBar.nextSibling);
+  }
+  function setActive(brand){
+    inner.querySelectorAll('.brand-pill').forEach(function(p){p.classList.remove('active')});
+    if(brand&&pills[brand]){pills[brand].classList.add('active')}
+    else{allPill.classList.add('active')}
+  }
+  function scrollToBrand(brand){
+    var cards=document.querySelectorAll('.frag-card');
+    for(var i=0;i<cards.length;i++){
+      var bn=cards[i].querySelector('.card-brand-name');
+      if(bn&&bn.textContent.trim()===brand){
+        var rect=cards[i].getBoundingClientRect();
+        var scrollTop=window.pageYOffset||document.documentElement.scrollTop;
+        window.scrollTo({top:scrollTop+rect.top-10,behavior:'smooth'});
+        setActive(brand);
+        return;
+      }
+    }
+  }
+  allPill.addEventListener('click',function(){
+    setActive(null);
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+  brands.forEach(function(brand){
+    pills[brand].addEventListener('click',function(){scrollToBrand(brand)});
+  });
+  var brandFirstCard={};
+  brands.forEach(function(brand){
+    var cards=document.querySelectorAll('.frag-card');
+    for(var i=0;i<cards.length;i++){
+      var bn=cards[i].querySelector('.card-brand-name');
+      if(bn&&bn.textContent.trim()===brand){
+        brandFirstCard[brand]=cards[i];
+        break;
+      }
+    }
+  });
+  var brandVisible={};
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var brand=entry.target.getAttribute('data-brand');
+      if(brand)brandVisible[brand]=entry.isIntersecting;
+    });
+    var active=null;
+    for(var i=0;i<brands.length;i++){
+      if(brandVisible[brands[i]]){active=brands[i];break}
+    }
+    setActive(active);
+  },{rootMargin:'-20% 0px -70% 0px',threshold:0});
+  Object.keys(brandFirstCard).forEach(function(brand){
+    brandFirstCard[brand].setAttribute('data-brand',brand);
+    observer.observe(brandFirstCard[brand]);
+  });
+})();}catch(e){console.warn('Brand nav init failed:',e)}
 </script>
 </body>
 </html>
