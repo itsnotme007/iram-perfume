@@ -371,6 +371,48 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 [data-theme="dark"] .ss-option span:first-of-type{color:#e6edf3}
 [data-theme="dark"] .ss-price{color:#c9d1d9}
 [data-theme="dark"] .cart-float{box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.brand-capsule{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:999;width:36px;height:36px;display:none;align-items:center;justify-content:center;cursor:pointer;background:rgba(255,255,255,.4);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.25);border-radius:50%;box-shadow:0 2px 12px rgba(0,0,0,.06),0 0 8px rgba(255,255,255,.08);box-sizing:border-box;transition:width .4s cubic-bezier(.4,0,.2,1),height .4s cubic-bezier(.4,0,.2,1),border-radius .35s,background .35s,border-color .35s,box-shadow .35s;padding:0;overflow:hidden;-webkit-tap-highlight-color:transparent;touch-action:none;will-change:transform;flex-direction:column;gap:4px}
+.brand-capsule:focus-visible{outline:2px solid var(--accent-primary);outline-offset:4px}
+.brand-capsule.expanded{width:44px;height:180px;border-radius:22px;background:rgba(255,255,255,.58);border-color:rgba(255,255,255,.35);box-shadow:0 8px 32px rgba(0,0,0,.1),0 2px 8px rgba(0,0,0,.04);padding:14px 0;gap:6px}
+[data-theme="dark"] .brand-capsule{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.08);box-shadow:0 0 12px rgba(255,255,255,.04),0 4px 16px rgba(0,0,0,.2)}
+[data-theme="dark"] .brand-capsule.expanded{background:rgba(22,27,34,.65);border-color:rgba(255,255,255,.12);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.brand-capsule-progress{position:absolute;left:6px;top:14px;bottom:14px;width:2px;border-radius:1px;background:var(--accent-primary);opacity:0;transition:opacity .25s,transform .3s cubic-bezier(.4,0,.2,1);transform-origin:top}
+.brand-capsule.expanded .brand-capsule-progress{opacity:.5}
+.brand-capsule-logo{width:22px;height:22px;border-radius:50%;object-fit:contain;flex-shrink:0;opacity:1;transition:opacity .3s,transform .3s cubic-bezier(.4,0,.2,1);position:relative;z-index:1}
+.brand-capsule.expanded .brand-capsule-logo{width:24px;height:24px}
+.brand-capsule-fallback{width:22px;height:22px;border-radius:50%;background:var(--accent-primary);color:var(--text-on-dark);display:none;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;opacity:1;transition:opacity .3s;position:relative;z-index:1}
+.brand-capsule.expanded .brand-capsule-fallback{width:24px;height:24px;font-size:11px}
+.brand-capsule-name{font-size:10px;font-weight:700;color:var(--text-primary);letter-spacing:.8px;text-transform:uppercase;opacity:0;transition:opacity .3s,transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;writing-mode:vertical-rl;text-orientation:mixed;max-height:110px;overflow:hidden;text-overflow:ellipsis;line-height:1}
+.brand-capsule.expanded .brand-capsule-name{opacity:.85}
+.brand-capsule-morph-out .brand-capsule-logo,.brand-capsule-morph-out .brand-capsule-fallback{opacity:0!important;transform:scale(.7) rotate(90deg)}
+.brand-capsule-morph-out .brand-capsule-name{opacity:0!important;transform:translateX(6px)}
+.brand-capsule-morph-in .brand-capsule-logo,.brand-capsule-morph-in .brand-capsule-fallback{opacity:0!important;transform:scale(.7) rotate(-90deg)}
+.brand-capsule-morph-in .brand-capsule-name{opacity:0!important;transform:translateX(-6px)}
+.brand-capsule-preview{position:fixed;right:64px;top:50%;z-index:999;display:none;padding:5px 12px;font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text-muted);background:rgba(255,255,255,.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.25);border-radius:10px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;transform:translateY(-50%)}
+.brand-capsule-preview.visible{opacity:1}
+[data-theme="dark"] .brand-capsule-preview{background:rgba(22,27,34,.6);border-color:rgba(255,255,255,.08)}
+.brand-capsule-menu{position:fixed;right:64px;top:50%;z-index:1000;display:flex;flex-direction:column;gap:4px;padding:8px;background:rgba(255,255,255,.6);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.3);border-radius:20px;box-shadow:0 12px 48px rgba(0,0,0,.12);max-height:360px;overflow-y:auto;scrollbar-width:none;opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.4,0,.2,1);transform:translateY(-50%) scale(.92);transform-origin:right center}
+.brand-capsule-menu::-webkit-scrollbar{display:none}
+.brand-capsule-menu.open{opacity:1;pointer-events:auto;transform:translateY(-50%) scale(1)}
+[data-theme="dark"] .brand-capsule-menu{background:rgba(22,27,34,.7);border-color:rgba(255,255,255,.1)}
+.brand-capsule-menu-item{flex-shrink:0;display:flex;align-items:center;gap:7px;padding:8px 12px;min-height:40px;border-radius:14px;background:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.15);cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;outline:none}
+.brand-capsule-menu-item:focus-visible{outline:2px solid var(--accent-primary);outline-offset:2px}
+.brand-capsule-menu-item:active{transform:scale(.94)}
+.brand-capsule-menu-item.active{background:var(--accent-primary);color:var(--text-on-dark);border-color:var(--accent-primary)}
+.brand-capsule-menu-item img{width:20px;height:20px;border-radius:50%;object-fit:contain}
+.brand-capsule-menu-item span{font-size:11px;font-weight:600}
+.brand-capsule-menu-fallback{width:20px;height:20px;border-radius:50%;background:var(--accent-primary);color:var(--text-on-dark);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0}
+[data-theme="dark"] .brand-capsule-menu-item:not(.active){background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.08)}
+.brand-capsule-backdrop{position:fixed;inset:0;z-index:998;background:rgba(0,0,0,.12);opacity:0;pointer-events:none;transition:opacity .3s}
+.brand-capsule-backdrop.open{opacity:1;pointer-events:auto}
+@keyframes hapticBounce{0%{transform:translateY(-50%) scale(.88)}35%{transform:translateY(-50%) scale(1.1)}100%{transform:translateY(-50%) scale(1)}}
+.brand-capsule.haptic{animation:hapticBounce .35s cubic-bezier(.4,0,.2,1)}
+@keyframes peekPulse{0%,100%{transform:translateY(-50%) scale(1)}50%{transform:translateY(-50%) scale(1.18)}}
+.brand-capsule.peek{animation:peekPulse .6s cubic-bezier(.4,0,.2,1)}
+@media(max-width:768px){.brand-capsule,.brand-capsule-preview,.brand-capsule-menu{display:flex}}
+@media(prefers-reduced-motion:reduce){
+  .brand-capsule,.brand-capsule-logo,.brand-capsule-fallback,.brand-capsule-name,.brand-capsule-menu,.brand-capsule-menu-item,.brand-capsule-backdrop,.brand-capsule-progress,.brand-capsule-preview{transition-duration:0s!important;animation-duration:0s!important}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1604,6 +1646,347 @@ try{(function(){
   }
   computeStats();
 })();}catch(e){console.warn('Stats init failed:',e)}
+
+try{(function(){
+  if(window.innerWidth>768)return;
+  var brandData=[];
+  var seen={};
+  var designerBrands={};
+  document.querySelectorAll('.table-wrap').forEach(function(tw){
+    var heading=tw.previousElementSibling;
+    var division=heading?heading.textContent.trim():'';
+    tw.querySelectorAll('.brand-cell').forEach(function(bc){
+      var name=bc.textContent.trim();
+      if(name)designerBrands[name]=division;
+    });
+  });
+  document.querySelectorAll('.brand-cell').forEach(function(bc){
+    var name=bc.textContent.trim();
+    if(!name||seen[name])return;
+    seen[name]=true;
+    var img=bc.querySelector('img');
+    var logo=img?img.getAttribute('src'):'';
+    var row=bc.closest('tr');
+    brandData.push({name:name,logo:logo,row:row});
+  });
+  if(!brandData.length)return;
+  var capsule=document.createElement('div');
+  capsule.className='brand-capsule';
+  capsule.setAttribute('role','button');
+  capsule.setAttribute('tabindex','0');
+  capsule.setAttribute('aria-label','Brand navigator');
+  var progressEl=document.createElement('div');
+  progressEl.className='brand-capsule-progress';
+  var logoEl=document.createElement('img');
+  logoEl.className='brand-capsule-logo';
+  logoEl.alt='';
+  var fallbackEl=document.createElement('div');
+  fallbackEl.className='brand-capsule-fallback';
+  var nameEl=document.createElement('span');
+  nameEl.className='brand-capsule-name';
+  capsule.appendChild(progressEl);
+  capsule.appendChild(logoEl);
+  capsule.appendChild(fallbackEl);
+  capsule.appendChild(nameEl);
+  document.body.appendChild(capsule);
+  var previewEl=document.createElement('div');
+  previewEl.className='brand-capsule-preview';
+  document.body.appendChild(previewEl);
+  var menu=document.createElement('div');
+  menu.className='brand-capsule-menu';
+  menu.setAttribute('role','menu');
+  brandData.forEach(function(b){
+    var item=document.createElement('div');
+    item.className='brand-capsule-menu-item';
+    item.setAttribute('data-brand',b.name);
+    item.setAttribute('role','menuitem');
+    item.setAttribute('tabindex','0');
+    item.setAttribute('aria-label',b.name+(designerBrands[b.name]?' - '+designerBrands[b.name]:''));
+    if(b.logo){
+      var img=document.createElement('img');
+      img.src=b.logo;
+      img.alt='';
+      item.appendChild(img);
+    }else{
+      var fb=document.createElement('div');
+      fb.className='brand-capsule-menu-fallback';
+      fb.textContent=b.name.charAt(0);
+      item.appendChild(fb);
+    }
+    var span=document.createElement('span');
+    span.textContent=b.name;
+    item.appendChild(span);
+    menu.appendChild(item);
+  });
+  document.body.appendChild(menu);
+  var backdrop=document.createElement('div');
+  backdrop.className='brand-capsule-backdrop';
+  document.body.appendChild(backdrop);
+  var currentBrand=null;
+  var menuOpen=false;
+  var peeked=false;
+  var scrollDist=0;
+  var morphing=false;
+  var collapseTimer=null;
+  var expandTimer=null;
+  function haptic(el){
+    el.classList.remove('haptic');
+    void el.offsetWidth;
+    el.classList.add('haptic');
+    setTimeout(function(){el.classList.remove('haptic')},350);
+  }
+  function getBrandData(brand){
+    for(var i=0;i<brandData.length;i++){
+      if(brandData[i].name===brand)return brandData[i];
+    }
+    return null;
+  }
+  function setLogo(brand,data){
+    if(data.logo){
+      logoEl.src=data.logo;
+      logoEl.style.display='';
+      fallbackEl.style.display='none';
+    }else{
+      logoEl.style.display='none';
+      fallbackEl.style.display='flex';
+      fallbackEl.textContent=brand.charAt(0);
+    }
+  }
+  function updateCapsule(brand,animate){
+    if(brand===currentBrand)return;
+    var data=getBrandData(brand);
+    if(!data)return;
+    var prev=currentBrand;
+    currentBrand=brand;
+    if(animate&&!morphing&&prev){
+      morphing=true;
+      capsule.classList.add('brand-capsule-morph-out');
+      setTimeout(function(){
+        setLogo(brand,data);
+        nameEl.textContent=brand;
+        capsule.classList.remove('brand-capsule-morph-out');
+        capsule.classList.add('brand-capsule-morph-in');
+        void capsule.offsetWidth;
+        requestAnimationFrame(function(){
+          capsule.classList.remove('brand-capsule-morph-in');
+          morphing=false;
+        });
+      },250);
+    }else{
+      setLogo(brand,data);
+      nameEl.textContent=brand;
+    }
+    menu.querySelectorAll('.brand-capsule-menu-item').forEach(function(item){
+      item.classList.toggle('active',item.getAttribute('data-brand')===brand);
+    });
+  }
+  function updateProgress(){
+    var idx=-1;
+    for(var i=0;i<brandData.length;i++){
+      if(brandData[i].name===currentBrand){idx=i;break}
+    }
+    if(idx<0)return;
+    var pct=brandNames.length>1?(idx/(brandNames.length-1)):0;
+    progressEl.style.transform='scaleY('+(pct||0.02)+')';
+  }
+  function showPreview(brand){
+    var div=designerBrands[brand];
+    if(!div){previewEl.classList.remove('visible');return}
+    previewEl.textContent=div;
+    previewEl.classList.add('visible');
+  }
+  function hidePreview(){previewEl.classList.remove('visible')}
+  function scrollToBrand(brand,smooth){
+    for(var i=0;i<brandData.length;i++){
+      if(brandData[i].name===brand&&brandData[i].row&&brandData[i].row.offsetHeight>0){
+        highlightEl(brandData[i].row);
+        brandData[i].row.scrollIntoView({behavior:smooth!==false?'smooth':'instant',block:'start'});
+        return;
+      }
+    }
+    var cards=document.querySelectorAll('.frag-card');
+    for(var i=0;i<cards.length;i++){
+      var bn=cards[i].querySelector('.card-brand-name');
+      if(bn&&bn.textContent.trim()===brand){
+        highlightEl(cards[i]);
+        cards[i].scrollIntoView({behavior:smooth!==false?'smooth':'instant',block:'start'});
+        return;
+      }
+    }
+  }
+  function highlightEl(el){
+    el.style.outline='2px solid var(--accent-primary)';
+    el.style.outlineOffset='-2px';
+    el.style.transition='outline .3s';
+    setTimeout(function(){
+      el.style.outline='none';
+      setTimeout(function(){el.style.transition=''},300);
+    },1200);
+  }
+  function expand(){
+    clearTimeout(collapseTimer);
+    clearTimeout(expandTimer);
+    if(capsule.classList.contains('expanded'))return;
+    capsule.classList.add('expanded');
+    haptic(capsule);
+  }
+  function collapse(){
+    clearTimeout(collapseTimer);
+    capsule.classList.remove('expanded');
+  }
+  function collapseAfter(ms){
+    clearTimeout(collapseTimer);
+    collapseTimer=setTimeout(collapse,ms||1500);
+  }
+  function openMenu(){
+    if(menuOpen)return;
+    menuOpen=true;
+    menu.classList.add('open');
+    backdrop.classList.add('open');
+    showPreview(currentBrand);
+  }
+  function closeMenu(){
+    if(!menuOpen)return;
+    menuOpen=false;
+    menu.classList.remove('open');
+    backdrop.classList.remove('open');
+    hidePreview();
+    collapseAfter(1500);
+  }
+  var touchStartY=0;
+  var dragStarted=false;
+  var dragThreshold=12;
+  function yToBrand(y){
+    var rect=capsule.getBoundingClientRect();
+    var relativeY=y-rect.top;
+    var pct=Math.max(0,Math.min(1,relativeY/rect.height));
+    var idx=Math.round(pct*(brandNames.length-1));
+    return brandNames[idx];
+  }
+  capsule.addEventListener('touchstart',function(e){
+    clearTimeout(collapseTimer);
+    clearTimeout(expandTimer);
+    touchStartY=e.touches[0].clientY;
+    dragStarted=false;
+    expand();
+  },{passive:true});
+  capsule.addEventListener('touchmove',function(e){
+    e.preventDefault();
+    var y=e.touches[0].clientY;
+    var dy=Math.abs(y-touchStartY);
+    if(!dragStarted&&dy>dragThreshold){
+      dragStarted=true;
+    }
+    if(dragStarted){
+      var brand=yToBrand(y);
+      if(brand&&brand!==currentBrand){
+        updateCapsule(brand,true);
+        scrollToBrand(brand,false);
+        haptic(capsule);
+        showPreview(brand);
+      }
+    }
+  },{passive:false});
+  capsule.addEventListener('touchend',function(){
+    if(!dragStarted){
+      expandTimer=setTimeout(function(){
+        openMenu();
+      },200);
+    }
+    hidePreview();
+    collapseAfter(2000);
+  });
+  capsule.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(menuOpen){closeMenu();return}
+    expand();
+    openMenu();
+  });
+  capsule.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===' '){
+      e.preventDefault();
+      if(menuOpen){closeMenu();return}
+      expand();
+      openMenu();
+    }
+    if(e.key==='Escape'&&menuOpen)closeMenu();
+  });
+  backdrop.addEventListener('click',closeMenu);
+  menu.querySelectorAll('.brand-capsule-menu-item').forEach(function(item){
+    item.addEventListener('click',function(e){
+      e.stopPropagation();
+      var brand=item.getAttribute('data-brand');
+      closeMenu();
+      updateCapsule(brand,true);
+      haptic(capsule);
+      scrollToBrand(brand);
+    });
+    item.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){
+        e.preventDefault();
+        var brand=item.getAttribute('data-brand');
+        closeMenu();
+        updateCapsule(brand,true);
+        haptic(capsule);
+        scrollToBrand(brand);
+      }
+    });
+    item.addEventListener('mouseenter',function(){
+      showPreview(item.getAttribute('data-brand'));
+    });
+    item.addEventListener('touchstart',function(){
+      showPreview(item.getAttribute('data-brand'));
+    },{passive:true});
+  });
+  var brandVisible={};
+  var brandNames=brandData.map(function(b){return b.name});
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var brand=entry.target.getAttribute('data-brand');
+      if(brand)brandVisible[brand]=entry.isIntersecting;
+    });
+    var active=null;
+    for(var i=0;i<brandNames.length;i++){
+      if(brandVisible[brandNames[i]]){active=brandNames[i];break}
+    }
+    if(active){
+      var changed=active!==currentBrand;
+      updateCapsule(active,changed);
+      updateProgress();
+      if(changed)haptic(capsule);
+    }
+  },{rootMargin:'-15% 0px -75% 0px',threshold:0});
+  brandData.forEach(function(b){
+    if(b.row){
+      b.row.setAttribute('data-brand',b.name);
+      observer.observe(b.row);
+    }
+  });
+  var cards=document.querySelectorAll('.frag-card');
+  var seenCards={};
+  cards.forEach(function(card){
+    var bn=card.querySelector('.card-brand-name');
+    if(!bn)return;
+    var brand=bn.textContent.trim();
+    if(seenCards[brand])return;
+    seenCards[brand]=true;
+    card.setAttribute('data-brand',brand);
+    observer.observe(card);
+  });
+  window.addEventListener('scroll',function(){
+    var y=window.pageYOffset;
+    scrollDist+=Math.abs((window._lastScrollY||0)-y);
+    window._lastScrollY=y;
+    if(!peeked&&scrollDist>300){
+      peeked=true;
+      capsule.classList.add('peek');
+      setTimeout(function(){capsule.classList.remove('peek')},600);
+    }
+  },{passive:true});
+  window._lastScrollY=window.pageYOffset;
+  updateCapsule(brandNames[0],false);
+  updateProgress();
+})();}catch(e){console.warn('Brand capsule init failed:',e)}
 </script>
 </body>
 </html>
