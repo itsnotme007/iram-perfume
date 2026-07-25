@@ -371,19 +371,21 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 [data-theme="dark"] .ss-option span:first-of-type{color:#e6edf3}
 [data-theme="dark"] .ss-price{color:#c9d1d9}
 [data-theme="dark"] .cart-float{box-shadow:0 4px 16px rgba(0,0,0,.5)}
-.brand-capsule{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:999;width:36px;height:36px;display:none;align-items:center;justify-content:center;cursor:pointer;background:rgba(255,255,255,.4);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.25);border-radius:50%;box-shadow:0 2px 12px rgba(0,0,0,.06),0 0 8px rgba(255,255,255,.08);box-sizing:border-box;transition:width .4s cubic-bezier(.4,0,.2,1),height .4s cubic-bezier(.4,0,.2,1),border-radius .35s,background .35s,border-color .35s,box-shadow .35s;padding:0;overflow:hidden;-webkit-tap-highlight-color:transparent;touch-action:none;will-change:transform;flex-direction:column;gap:4px}
+.brand-capsule-track{position:fixed;right:15px;top:50%;transform:translateY(-50%);width:3px;height:140px;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:2px;z-index:998;display:none}
+[data-theme="dark"] .brand-capsule-track{background:rgba(255,255,255,.06)}
+.brand-capsule{position:fixed;right:2px;z-index:999;width:28px;height:28px;display:none;align-items:center;justify-content:center;cursor:pointer;background:rgba(255,255,255,.45);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.3);border-radius:50%;box-shadow:0 2px 12px rgba(0,0,0,.06),0 0 8px rgba(255,255,255,.08);box-sizing:border-box;transition:width .4s cubic-bezier(.4,0,.2,1),height .4s cubic-bezier(.4,0,.2,1),border-radius .35s,background .35s,border-color .35s,box-shadow .35s,top .4s cubic-bezier(.4,0,.2,1);padding:0;overflow:hidden;-webkit-tap-highlight-color:transparent;touch-action:none;flex-direction:column;gap:0}
 .brand-capsule:focus-visible{outline:2px solid var(--accent-primary);outline-offset:4px}
 .brand-capsule.expanded{width:44px;height:180px;border-radius:22px;background:rgba(255,255,255,.58);border-color:rgba(255,255,255,.35);box-shadow:0 8px 32px rgba(0,0,0,.1),0 2px 8px rgba(0,0,0,.04);padding:14px 0;gap:6px}
 [data-theme="dark"] .brand-capsule{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.08);box-shadow:0 0 12px rgba(255,255,255,.04),0 4px 16px rgba(0,0,0,.2)}
 [data-theme="dark"] .brand-capsule.expanded{background:rgba(22,27,34,.65);border-color:rgba(255,255,255,.12);box-shadow:0 8px 32px rgba(0,0,0,.3)}
 .brand-capsule-progress{position:absolute;left:6px;top:14px;bottom:14px;width:2px;border-radius:1px;background:var(--accent-primary);opacity:0;transition:opacity .25s,transform .3s cubic-bezier(.4,0,.2,1);transform-origin:top}
 .brand-capsule.expanded .brand-capsule-progress{opacity:.5}
-.brand-capsule-logo{width:22px;height:22px;border-radius:50%;object-fit:contain;flex-shrink:0;opacity:1;transition:opacity .3s,transform .3s cubic-bezier(.4,0,.2,1);position:relative;z-index:1}
+.brand-capsule-logo{width:18px;height:18px;border-radius:50%;object-fit:contain;flex-shrink:0;opacity:1;transition:opacity .3s,transform .3s cubic-bezier(.4,0,.2,1);position:relative;z-index:1}
 .brand-capsule.expanded .brand-capsule-logo{width:24px;height:24px}
-.brand-capsule-fallback{width:22px;height:22px;border-radius:50%;background:var(--accent-primary);color:var(--text-on-dark);display:none;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;opacity:1;transition:opacity .3s;position:relative;z-index:1}
+.brand-capsule-fallback{width:18px;height:18px;border-radius:50%;background:var(--accent-primary);color:var(--text-on-dark);display:none;align-items:center;justify-content:center;font-size:8px;font-weight:700;flex-shrink:0;opacity:1;transition:opacity .3s;position:relative;z-index:1}
 .brand-capsule.expanded .brand-capsule-fallback{width:24px;height:24px;font-size:11px}
-.brand-capsule-name{font-size:10px;font-weight:700;color:var(--text-primary);letter-spacing:.8px;text-transform:uppercase;opacity:0;transition:opacity .3s,transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;writing-mode:vertical-rl;text-orientation:mixed;max-height:110px;overflow:hidden;text-overflow:ellipsis;line-height:1}
-.brand-capsule.expanded .brand-capsule-name{opacity:.85}
+.brand-capsule-name{font-size:10px;font-weight:700;color:var(--text-primary);letter-spacing:.8px;text-transform:uppercase;opacity:0;transition:opacity .3s,transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;writing-mode:vertical-rl;text-orientation:mixed;max-height:0;overflow:hidden;text-overflow:ellipsis;line-height:1}
+.brand-capsule.expanded .brand-capsule-name{opacity:.85;max-height:120px}
 .brand-capsule-morph-out .brand-capsule-logo,.brand-capsule-morph-out .brand-capsule-fallback{opacity:0!important;transform:scale(.7) rotate(90deg)}
 .brand-capsule-morph-out .brand-capsule-name{opacity:0!important;transform:translateX(6px)}
 .brand-capsule-morph-in .brand-capsule-logo,.brand-capsule-morph-in .brand-capsule-fallback{opacity:0!important;transform:scale(.7) rotate(-90deg)}
@@ -405,11 +407,11 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 [data-theme="dark"] .brand-capsule-menu-item:not(.active){background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.08)}
 .brand-capsule-backdrop{position:fixed;inset:0;z-index:998;background:rgba(0,0,0,.12);opacity:0;pointer-events:none;transition:opacity .3s}
 .brand-capsule-backdrop.open{opacity:1;pointer-events:auto}
-@keyframes hapticBounce{0%{transform:translateY(-50%) scale(.88)}35%{transform:translateY(-50%) scale(1.1)}100%{transform:translateY(-50%) scale(1)}}
+@keyframes hapticBounce{0%{transform:scale(.88)}35%{transform:scale(1.1)}100%{transform:scale(1)}}
 .brand-capsule.haptic{animation:hapticBounce .35s cubic-bezier(.4,0,.2,1)}
-@keyframes peekPulse{0%,100%{transform:translateY(-50%) scale(1)}50%{transform:translateY(-50%) scale(1.18)}}
+@keyframes peekPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
 .brand-capsule.peek{animation:peekPulse .6s cubic-bezier(.4,0,.2,1)}
-@media(max-width:768px){.brand-capsule,.brand-capsule-preview,.brand-capsule-menu{display:flex}}
+@media(max-width:768px){.brand-capsule-track,.brand-capsule,.brand-capsule-preview,.brand-capsule-menu{display:flex}}
 @media(prefers-reduced-motion:reduce){
   .brand-capsule,.brand-capsule-logo,.brand-capsule-fallback,.brand-capsule-name,.brand-capsule-menu,.brand-capsule-menu-item,.brand-capsule-backdrop,.brand-capsule-progress,.brand-capsule-preview{transition-duration:0s!important;animation-duration:0s!important}
 }
@@ -1670,6 +1672,9 @@ try{(function(){
     brandData.push({name:name,logo:logo,row:row});
   });
   if(!brandData.length)return;
+  var track=document.createElement('div');
+  track.className='brand-capsule-track';
+  document.body.appendChild(track);
   var capsule=document.createElement('div');
   capsule.className='brand-capsule';
   capsule.setAttribute('role','button');
@@ -1788,6 +1793,15 @@ try{(function(){
     if(idx<0)return;
     var pct=brandNames.length>1?(idx/(brandNames.length-1)):0;
     progressEl.style.transform='scaleY('+(pct||0.02)+')';
+  }
+  function updateThumbPosition(){
+    var idx=-1;
+    for(var i=0;i<brandData.length;i++){
+      if(brandData[i].name===currentBrand){idx=i;break}
+    }
+    if(idx<0)return;
+    var pct=brandNames.length>1?(idx/(brandNames.length-1)):0;
+    capsule.style.top='calc(50% - 70px + '+(pct*112)+'px)';
   }
   function showPreview(brand){
     var div=designerBrands[brand];
@@ -1953,6 +1967,7 @@ try{(function(){
       var changed=active!==currentBrand;
       updateCapsule(active,changed);
       updateProgress();
+      updateThumbPosition();
       if(changed)haptic(capsule);
     }
   },{rootMargin:'-15% 0px -75% 0px',threshold:0});
@@ -1986,6 +2001,7 @@ try{(function(){
   window._lastScrollY=window.pageYOffset;
   updateCapsule(brandNames[0],false);
   updateProgress();
+  updateThumbPosition();
 })();}catch(e){console.warn('Brand capsule init failed:',e)}
 </script>
 </body>
