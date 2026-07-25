@@ -386,6 +386,15 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 .brand-capsule.expanded .brand-capsule-fallback{width:24px;height:24px;font-size:11px}
 .brand-capsule-name{font-size:10px;font-weight:700;color:var(--text-primary);letter-spacing:.8px;text-transform:uppercase;opacity:0;transition:opacity .3s,transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap;writing-mode:vertical-rl;text-orientation:mixed;max-height:0;overflow:hidden;text-overflow:ellipsis;line-height:1}
 .brand-capsule.expanded .brand-capsule-name{opacity:.85;max-height:120px}
+.brand-capsule-scroll{display:none;flex-direction:column;gap:2px;overflow-y:auto;scroll-snap-type:y proximity;scrollbar-width:none;flex:1;min-height:0;padding:2px 0}
+.brand-capsule-scroll::-webkit-scrollbar{display:none}
+.brand-capsule.expanded .brand-capsule-progress,.brand-capsule.expanded .brand-capsule-logo,.brand-capsule.expanded .brand-capsule-fallback,.brand-capsule.expanded .brand-capsule-name{display:none!important}
+.brand-capsule.expanded .brand-capsule-scroll{display:flex}
+.brand-capsule-scroll-item{display:flex;align-items:center;justify-content:center;padding:3px;cursor:pointer;border-radius:50%;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.brand-capsule-scroll-item.active{background:rgba(212,175,55,.2);box-shadow:0 0 0 1.5px var(--accent-primary)}
+.brand-capsule-scroll-item img{width:20px;height:20px;border-radius:50%;object-fit:contain}
+.brand-capsule-scroll-fallback{width:20px;height:20px;border-radius:50%;background:var(--accent-primary);color:var(--text-on-dark);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700}
+[data-theme="dark"] .brand-capsule-scroll-item.active{background:rgba(212,175,55,.12)}
 .brand-capsule-morph-out .brand-capsule-logo,.brand-capsule-morph-out .brand-capsule-fallback{opacity:0!important;transform:scale(.7) rotate(90deg)}
 .brand-capsule-morph-out .brand-capsule-name{opacity:0!important;transform:translateX(6px)}
 .brand-capsule-morph-in .brand-capsule-logo,.brand-capsule-morph-in .brand-capsule-fallback{opacity:0!important;transform:scale(.7) rotate(-90deg)}
@@ -413,7 +422,8 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 .brand-capsule.peek{animation:peekPulse .6s cubic-bezier(.4,0,.2,1)}
 @media(max-width:768px){.brand-capsule-track,.brand-capsule,.brand-capsule-preview,.brand-capsule-menu{display:flex}}
 @media(prefers-reduced-motion:reduce){
-  .brand-capsule,.brand-capsule-logo,.brand-capsule-fallback,.brand-capsule-name,.brand-capsule-menu,.brand-capsule-menu-item,.brand-capsule-backdrop,.brand-capsule-progress,.brand-capsule-preview{transition-duration:0s!important;animation-duration:0s!important}
+  .brand-capsule,.brand-capsule-logo,.brand-capsule-fallback,.brand-capsule-name,.brand-capsule-menu,.brand-capsule-menu-item,.brand-capsule-backdrop,.brand-capsule-progress,.brand-capsule-preview,.brand-capsule-scroll-item{transition-duration:0s!important;animation-duration:0s!important}
+  .brand-capsule-scroll{scroll-snap-type:none!important}
 }
 </style>
 <script type="application/ld+json">
@@ -1693,6 +1703,33 @@ try{(function(){
   capsule.appendChild(logoEl);
   capsule.appendChild(fallbackEl);
   capsule.appendChild(nameEl);
+  var scrollEl=document.createElement('div');
+  scrollEl.className='brand-capsule-scroll';
+  brandData.forEach(function(b){
+    var item=document.createElement('div');
+    item.className='brand-capsule-scroll-item';
+    item.setAttribute('data-brand',b.name);
+    if(b.logo){
+      var img=document.createElement('img');
+      img.src=b.logo;
+      img.alt=b.name;
+      item.appendChild(img);
+    }else{
+      var fb=document.createElement('div');
+      fb.className='brand-capsule-scroll-fallback';
+      fb.textContent=b.name.charAt(0);
+      item.appendChild(fb);
+    }
+    item.addEventListener('click',function(e){
+      e.stopPropagation();
+      updateCapsule(b.name,true);
+      updateThumbPosition();
+      updateProgress();
+      collapse();
+    });
+    scrollEl.appendChild(item);
+  });
+  capsule.appendChild(scrollEl);
   document.body.appendChild(capsule);
   var previewEl=document.createElement('div');
   previewEl.className='brand-capsule-preview';
@@ -1784,6 +1821,9 @@ try{(function(){
     menu.querySelectorAll('.brand-capsule-menu-item').forEach(function(item){
       item.classList.toggle('active',item.getAttribute('data-brand')===brand);
     });
+    scrollEl.querySelectorAll('.brand-capsule-scroll-item').forEach(function(item){
+      item.classList.toggle('active',item.getAttribute('data-brand')===brand);
+    });
   }
   function updateProgress(){
     var idx=-1;
@@ -1795,12 +1835,10 @@ try{(function(){
     progressEl.style.transform='scaleY('+(pct||0.02)+')';
   }
   function updateThumbPosition(){
-    var idx=-1;
-    for(var i=0;i<brandData.length;i++){
-      if(brandData[i].name===currentBrand){idx=i;break}
-    }
-    if(idx<0)return;
-    var pct=brandNames.length>1?(idx/(brandNames.length-1)):0;
+    var scrollTop=window.pageYOffset||document.documentElement.scrollTop;
+    var docHeight=document.documentElement.scrollHeight-window.innerHeight;
+    var pct=docHeight>0?scrollTop/docHeight:0;
+    pct=Math.max(0,Math.min(1,pct));
     capsule.style.top='calc(50% - 70px + '+(pct*112)+'px)';
   }
   function showPreview(brand){
@@ -1843,6 +1881,10 @@ try{(function(){
     if(capsule.classList.contains('expanded'))return;
     capsule.classList.add('expanded');
     haptic(capsule);
+    var activeItem=scrollEl.querySelector('[data-brand="'+currentBrand+'"]');
+    if(activeItem)setTimeout(function(){
+      activeItem.scrollIntoView({block:'center',behavior:'instant'});
+    },50);
   }
   function collapse(){
     clearTimeout(collapseTimer);
@@ -1867,48 +1909,85 @@ try{(function(){
     hidePreview();
     collapseAfter(1500);
   }
-  var touchStartY=0;
-  var dragStarted=false;
-  var dragThreshold=12;
-  function yToBrand(y){
-    var rect=capsule.getBoundingClientRect();
-    var relativeY=y-rect.top;
-    var pct=Math.max(0,Math.min(1,relativeY/rect.height));
-    var idx=Math.round(pct*(brandNames.length-1));
-    return brandNames[idx];
+  var dragStartY=0;
+  var dragMoved=false;
+  var dragging=false;
+  var dragRaf=null;
+  function onDragMove(clientY){
+    if(!dragging)return;
+    if(Math.abs(clientY-dragStartY)>5)dragMoved=true;
+    var trackRect=track.getBoundingClientRect();
+    var trackHeight=trackRect.height;
+    if(trackHeight<=0)return;
+    var progress=(clientY-trackRect.top)/trackHeight;
+    progress=Math.max(0,Math.min(1,progress));
+    var docHeight=document.documentElement.scrollHeight-window.innerHeight;
+    if(docHeight<=0)return;
+    window.scrollTo({top:progress*docHeight,behavior:'instant'});
+    updateThumbPosition();
+  }
+  function snapToNearestBrand(){
+    var closest=null;
+    var closestDist=Infinity;
+    brandData.forEach(function(b){
+      if(b.row&&b.row.offsetHeight>0){
+        var rect=b.row.getBoundingClientRect();
+        var dist=Math.abs(rect.top-window.innerHeight*0.3);
+        if(dist<closestDist){closestDist=dist;closest=b}
+      }
+    });
+    if(closest&&closestDist<80){
+      closest.row.scrollIntoView({behavior:'smooth',block:'start'});
+    }
   }
   capsule.addEventListener('touchstart',function(e){
     clearTimeout(collapseTimer);
     clearTimeout(expandTimer);
-    touchStartY=e.touches[0].clientY;
-    dragStarted=false;
+    dragging=true;
+    dragMoved=false;
+    dragStartY=e.touches[0].clientY;
     expand();
-  },{passive:true});
+    e.preventDefault();
+  },{passive:false});
   capsule.addEventListener('touchmove',function(e){
     e.preventDefault();
-    var y=e.touches[0].clientY;
-    var dy=Math.abs(y-touchStartY);
-    if(!dragStarted&&dy>dragThreshold){
-      dragStarted=true;
-    }
-    if(dragStarted){
-      var brand=yToBrand(y);
-      if(brand&&brand!==currentBrand){
-        updateCapsule(brand,true);
-        scrollToBrand(brand,false);
-        haptic(capsule);
-        showPreview(brand);
-      }
-    }
+    if(dragRaf)cancelAnimationFrame(dragRaf);
+    var touchY=e.touches[0].clientY;
+    dragRaf=requestAnimationFrame(function(){
+      onDragMove(touchY);
+    });
   },{passive:false});
   capsule.addEventListener('touchend',function(){
-    if(!dragStarted){
+    dragging=false;
+    if(dragRaf){cancelAnimationFrame(dragRaf);dragRaf=null}
+    if(!dragMoved){
       expandTimer=setTimeout(function(){
         openMenu();
       },200);
     }
     hidePreview();
+    snapToNearestBrand();
     collapseAfter(2000);
+  });
+  scrollEl.addEventListener('scroll',function(){
+    var items=scrollEl.querySelectorAll('.brand-capsule-scroll-item');
+    var scrollRect=scrollEl.getBoundingClientRect();
+    var scrollCenter=scrollRect.top+scrollRect.height/2;
+    var closest=null;var closestDist=Infinity;
+    items.forEach(function(item){
+      var rect=item.getBoundingClientRect();
+      var itemCenter=rect.top+rect.height/2;
+      var dist=Math.abs(itemCenter-scrollCenter);
+      if(dist<closestDist){closestDist=dist;closest=item}
+    });
+    if(closest){
+      var brand=closest.getAttribute('data-brand');
+      if(brand&&brand!==currentBrand){
+        updateCapsule(brand,false);
+        updateThumbPosition();
+        updateProgress();
+      }
+    }
   });
   capsule.addEventListener('click',function(e){
     e.stopPropagation();
@@ -1988,6 +2067,7 @@ try{(function(){
     card.setAttribute('data-brand',brand);
     observer.observe(card);
   });
+  var thumbRaf=null;
   window.addEventListener('scroll',function(){
     var y=window.pageYOffset;
     scrollDist+=Math.abs((window._lastScrollY||0)-y);
@@ -1996,6 +2076,12 @@ try{(function(){
       peeked=true;
       capsule.classList.add('peek');
       setTimeout(function(){capsule.classList.remove('peek')},600);
+    }
+    if(!thumbRaf){
+      thumbRaf=requestAnimationFrame(function(){
+        updateThumbPosition();
+        thumbRaf=null;
+      });
     }
   },{passive:true});
   window._lastScrollY=window.pageYOffset;
