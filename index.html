@@ -77,9 +77,6 @@ body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--bg-
 .banner{background:var(--bg-banner);color:var(--text-primary);padding:32px 20px;text-align:left;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;transition:background .3s,color .3s}
 .banner .inner{display:flex;align-items:center;gap:20px;max-width:600px;margin:0}
 .sold-stamp{display:inline-block;font-size:9px;padding:2px 6px;font-weight:800;color:var(--accent-danger);border:2px solid var(--accent-danger);border-radius:3px;transform:rotate(-15deg);margin-left:6px;letter-spacing:.5px;line-height:1.3;vertical-align:middle}
-.reviews-section{padding:20px 0;text-align:center}
-.reviews-imgs{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
-.reviews-imgs img{height:200px;width:auto;border-radius:8px;object-fit:contain;border:1px solid var(--border-strong);box-shadow:var(--shadow-sm);cursor:pointer;transition:box-shadow .2s;display:block}
 .banner-logo{max-height:100px;width:auto}
 .banner h1{font-family:'Antique Handmade',cursive;font-size:48px;font-weight:400;letter-spacing:0;margin-bottom:0;color:var(--text-heading);line-height:1.1}
 .banner .badge{display:inline-block;background:var(--accent-danger);color:var(--text-on-dark);font-size:12px;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:14px}
@@ -412,6 +409,29 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 @media(prefers-reduced-motion:reduce){
   .brand-capsule,.brand-capsule-logo,.brand-capsule-fallback,.brand-capsule-name,.brand-capsule-menu,.brand-capsule-menu-item,.brand-capsule-backdrop,.brand-capsule-progress,.brand-capsule-preview,.brand-capsule-tooltip{transition-duration:0s!important;animation-duration:0s!important}
 }
+.reviews-section{margin:32px auto;text-align:center;max-width:900px}
+.reviews-header{margin-bottom:20px}
+.reviews-stars{font-size:22px;letter-spacing:3px;margin-bottom:6px}
+.reviews-title{font-size:18px;font-weight:700;color:var(--text-heading);margin:0 0 4px}
+.reviews-subtitle{font-size:12px;color:var(--text-muted);margin:0}
+.reviews-grid{column-count:2;column-gap:12px}
+@media(min-width:600px){.reviews-grid{column-count:3}}
+@media(min-width:900px){.reviews-grid{column-count:4}}
+.review-item{break-inside:avoid;margin-bottom:12px;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.08);cursor:pointer;opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.review-item.visible{opacity:1;transform:translateY(0)}
+.review-item:hover{box-shadow:0 8px 28px rgba(0,0,0,.14);transform:translateY(-2px)!important}
+.review-item img{width:100%;display:block;object-fit:cover;border-radius:12px}
+.review-lightbox{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);opacity:0;transition:opacity .3s ease}
+.review-lightbox.open{display:flex;opacity:1}
+.review-lightbox img{max-width:92vw;max-height:85vh;object-fit:contain;border-radius:8px;user-select:none;-webkit-user-drag:none}
+.review-lightbox-close{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .2s}
+.review-lightbox-close:hover,.review-lightbox-close:focus-visible{background:rgba(255,255,255,.25)}
+.review-lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.review-lightbox-nav:hover,.review-lightbox-nav:focus-visible{background:rgba(255,255,255,.25)}
+.review-lightbox-prev{left:12px}
+.review-lightbox-next{right:12px}
+@media(max-width:600px){.review-lightbox-nav{width:36px;height:36px;font-size:18px}}
+@media(prefers-reduced-motion:reduce){.review-item{transition:none!important;opacity:1;transform:none}.review-lightbox{transition:none!important}}
 </style>
 <script type="application/ld+json">
 {
@@ -840,12 +860,24 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 </div>
 
 <div class="reviews-section">
-  <h3 style="margin:0 0 12px 0;font-size:15px;font-weight:700;color:var(--text-heading)">Customer Reviews</h3>
-  <div class="reviews-imgs">
-    <img src="reviews/review1.jpeg" alt="Customer review" id="review1">
-    <img src="reviews/review2.jpeg" alt="Customer review" id="review2">
-    <img src="reviews/review3.jpeg" alt="Customer review" id="review3">
+  <div class="reviews-header">
+    <div class="reviews-stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+    <h2 class="reviews-title">Trusted by Perfume Enthusiasts</h2>
+    <p class="reviews-subtitle">Real customer reviews from our WhatsApp &amp; Instagram community.</p>
   </div>
+  <div class="reviews-grid" id="reviewsGrid">
+    <div class="review-item"><img data-src="reviews/review1.jpeg" alt="Customer review" loading="lazy"></div>
+    <div class="review-item"><img data-src="reviews/review2.jpeg" alt="Customer review" loading="lazy"></div>
+    <div class="review-item"><img data-src="reviews/review3.jpeg" alt="Customer review" loading="lazy"></div>
+    <div class="review-item"><img data-src="reviews/review4.jpeg" alt="Customer review" loading="lazy"></div>
+    <div class="review-item"><img data-src="reviews/review5.jpeg" alt="Customer review" loading="lazy"></div>
+  </div>
+</div>
+<div class="review-lightbox" id="reviewLightbox">
+  <button class="review-lightbox-close" id="lightboxClose">&times;</button>
+  <button class="review-lightbox-nav review-lightbox-prev" id="lightboxPrev">&#8249;</button>
+  <button class="review-lightbox-nav review-lightbox-next" id="lightboxNext">&#8250;</button>
+  <img id="lightboxImg" src="" alt="Customer review">
 </div>
 
 </div>
@@ -1046,17 +1078,6 @@ try{(function(){
     wrap.appendChild(cc);
   });
 })();}catch(e){console.warn('Mobile cards init failed:',e)}
-
-try{document.querySelectorAll('.reviews-imgs img').forEach(function(img){
-  img.addEventListener('click',function(){
-    document.querySelectorAll('.reviews-imgs img').forEach(function(o){
-      o.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'
-    });
-    this.style.boxShadow='0 4px 16px rgba(0,0,0,.18)';
-    this.style.transform='scale(1.02)';
-    setTimeout(function(){img.style.transform=''},200);
-  });
-});}catch(e){console.warn('Reviews init failed:',e)}
 
 try{(function(){
   var sizes=['3ml','5ml','7.5ml','20ml','30ml'];
@@ -2009,6 +2030,50 @@ try{(function(){
   updateProgress();
   updateThumbPosition();
 })();}catch(e){console.warn('Brand capsule init failed:',e)}
+(function(){
+  var items=document.querySelectorAll('.review-item');
+  var lightbox=document.getElementById('reviewLightbox');
+  var lbImg=document.getElementById('lightboxImg');
+  var lbClose=document.getElementById('lightboxClose');
+  var lbPrev=document.getElementById('lightboxPrev');
+  var lbNext=document.getElementById('lightboxNext');
+  var idx=0;
+  var imgs=[];
+  var tx=0;
+  var ty=0;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var img=e.target.querySelector('img');
+        if(img&&img.dataset.src){img.src=img.dataset.src;img.removeAttribute('data-src')}
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  },{rootMargin:'100px'});
+  items.forEach(function(item){io.observe(item);imgs.push(item.querySelector('img'))});
+  function open(i){idx=i;lbImg.src=imgs[idx].src;lightbox.classList.add('open');document.body.style.overflow='hidden'}
+  function close(){lightbox.classList.remove('open');document.body.style.overflow='';lbImg.src=''}
+  function prev(){idx=(idx-1+imgs.length)%imgs.length;lbImg.src=imgs[idx].src}
+  function next(){idx=(idx+1)%imgs.length;lbImg.src=imgs[idx].src}
+  items.forEach(function(item,i){item.addEventListener('click',function(){open(i)})});
+  lbClose.addEventListener('click',close);
+  lbPrev.addEventListener('click',prev);
+  lbNext.addEventListener('click',next);
+  lightbox.addEventListener('click',function(e){if(e.target===lightbox)close()});
+  document.addEventListener('keydown',function(e){
+    if(!lightbox.classList.contains('open'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowLeft')prev();
+    if(e.key==='ArrowRight')next();
+  });
+  lightbox.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+  lightbox.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-tx;
+    var dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){dx<0?next():prev()}
+  },{passive:true});
+})();
 </script>
 </body>
 </html>
