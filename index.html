@@ -1143,7 +1143,7 @@ try{(function(){
         var match=true;
         for(var j=0;j<card.attributes.length;j++){
           var a=card.attributes[j];
-          if(a.name.indexOf('data-')===0&&allFc[i].getAttribute(a.name)!==a.value){match=false;break}
+          if(a.name.indexOf('data-')===0&&a.name!=='data-product'&&allFc[i].getAttribute(a.name)!==a.value){match=false;break}
         }
         if(match)return allFc[i];
       }
