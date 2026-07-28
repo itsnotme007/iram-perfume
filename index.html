@@ -653,6 +653,12 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 
 <div class="filter-bar" id="filterBar">
 <table class="filter-table">
+<tr><td class="filter-label">Gender:</td><td class="filter-buttons">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-gender="Men">Men</button>
+  <button class="filter-btn" data-gender="Unisex">Unisex</button>
+  <button class="filter-btn" data-gender="Women">Women</button>
+</td></tr>
 <tr><td class="filter-label">Scent:</td><td class="filter-buttons">
   <button class="filter-btn active" data-filter="all">All</button>
   <button class="filter-btn" data-scent="fresh">Fresh</button>
@@ -962,7 +968,7 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 try{(function(){var DAY=864e5;document.querySelectorAll('.frag-cell[data-added]').forEach(function(c){var added=new Date(c.getAttribute('data-added')),now=new Date();if(now-added<7*DAY&&!c.querySelector('.tag-new')){var t=document.createElement('span');t.className='tag tag-new';t.textContent='NEW';c.appendChild(t)}else if(now-added>=7*DAY){c.removeAttribute('data-added')}})})();}catch(e){console.warn('NEW tag init failed:',e)}
 
 try{(function(){
-  var cats=['scent','season','occasion','time','weather','mood','family'];
+  var cats=['gender','scent','season','occasion','time','weather','mood','family'];
   var f={};cats.forEach(function(c){f[c]='all'});
   var resultsDiv=document.createElement('div');
   resultsDiv.id='filterResults';
@@ -1134,6 +1140,7 @@ try{(function(){
       attrs.forEach(function(a){var v=fc.getAttribute('data-'+a);if(v)data.attrs[a]=v.split(',')});
       fc._cartData=data;
       fc.setAttribute('data-pid',pid);
+      if(gender)fc.setAttribute('data-gender',gender);
       _products[pid]=data;
       if(isSoldOut||isComingSoon){cartBtn.disabled=true}
     });
