@@ -3,3 +3,5 @@
 Selling & Expense.xlsx
 # Excel temp files
 ~$*.xlsx
+# Orders app (offline, not pushed)
+orders-app/
