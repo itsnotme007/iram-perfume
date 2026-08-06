@@ -153,9 +153,20 @@ tbody td{padding:10px;vertical-align:middle;color:var(--text-body)}
 .card-links a{color:var(--accent-link);text-decoration:none;font-weight:500}
 .card-links a:hover{color:var(--accent-danger);text-decoration:underline}
 .card-links .sep{color:var(--border-accent);margin:0 3px}
+.bottle-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.bottle-grid-item:first-child{flex:0 0 100%}
+.bottle-grid-item:not(:first-child){flex:1 1 calc(33.333% - 8px)}
+.bottle-grid-item{text-align:center}
+.bottle-grid-item img{width:100%;max-height:220px;border-radius:8px;border:1px solid var(--border-default);object-fit:contain}
+.bottle-grid-item .bottle-caption{font-size:12px;color:var(--text-muted);margin-top:4px;font-weight:600}
 @media(max-width:600px){
   .bottle-labels span{font-size:11px;padding:4px 8px}
   .label-30{left:3%}.label-8{right:3%}
+  .bottle-grid{display:flex;flex-wrap:wrap;gap:8px}
+  .bottle-grid-item:first-child{flex:0 0 100%}
+  .bottle-grid-item:not(:first-child){flex:0 0 calc(50% - 4px)}
+  .bottle-grid-item img{max-height:none;height:auto}
+  .bottle-grid-item .bottle-caption{font-size:10px}
 }
 @media(max-width:768px){
   .banner h1{font-size:36px}
@@ -858,12 +869,12 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 </table>
 </div>
 
-<div class="bottle-info">
-  <img src="bottles.jpg" alt="Bottle sizes">
-  <div class="bottle-labels">
-    <span class="label-30"><strong>30ml bottle</strong><br>20ml also comes in this bottle</span>
-    <span class="label-8"><strong>7.5ml bottle</strong><br>3ml &amp; 5ml also come in this bottle</span>
-  </div>
+<div class="section-heading">Bottle Options</div>
+<div class="bottle-grid">
+  <div class="bottle-grid-item"><img src="bottles/30ml and 7.5ml with lable.jpg" alt="30ml and 7.5ml bottles"></div>
+  <div class="bottle-grid-item"><img src="bottles/30ml-bottle-option.jpeg" alt="30ml bottle option 1"><div class="bottle-caption">30ml Bottle</div></div>
+  <div class="bottle-grid-item"><img src="bottles/30ml-bottle-option2.jpeg" alt="30ml bottle option 2"><div class="bottle-caption">30ml Bottle</div></div>
+  <div class="bottle-grid-item"><img src="bottles/50ml-bottle-on-demand.jpeg" alt="50ml bottle on demand"><div class="bottle-caption">50ml (On Demand)</div></div>
 </div>
 
 <div class="stats-dashboard" id="statsDashboard">
