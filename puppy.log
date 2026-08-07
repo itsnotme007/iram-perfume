@@ -1,0 +1,6 @@
+2026-08-06 02:37:59,105 INFO Bot polling started (opencode server on http://127.0.0.1:4096).
+2026-08-06 02:37:59,815 INFO HTTP Request: POST https://api.telegram.org/bot7687314727:AAGh4aySYNOfr19EGX6Z7E41CyKFyU1Op48/getMe "HTTP/1.1 200 OK"
+2026-08-06 02:38:00,045 INFO HTTP Request: POST https://api.telegram.org/bot7687314727:AAGh4aySYNOfr19EGX6Z7E41CyKFyU1Op48/deleteWebhook "HTTP/1.1 200 OK"
+2026-08-06 02:38:00,047 INFO Application started
+2026-08-06 02:38:10,692 INFO HTTP Request: POST https://api.telegram.org/bot7687314727:AAGh4aySYNOfr19EGX6Z7E41CyKFyU1Op48/getUpdates "HTTP/1.1 200 OK"
+2026-08-06 02:38:20,864 INFO HTTP Request: POST https://api.telegram.org/bot7687314727:AAGh4aySYNOfr19EGX6Z7E41CyKFyU1Op48/getUpdates "HTTP/1.1 200 OK"
