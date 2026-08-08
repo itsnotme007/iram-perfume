@@ -5,3 +5,5 @@ Selling & Expense.xlsx
 ~$*.xlsx
 # Orders app (offline, not pushed)
 orders-app/
+# Puppy bot (local, contains .env token + sessions.json)
+Puppy_tg_bot/
