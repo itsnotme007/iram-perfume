@@ -1186,9 +1186,11 @@ try{(function(){
       var lHtml=lc?lc.innerHTML:'';
       var card=document.createElement('div');
       card.className='frag-card';
+      var cardGender=gTag.indexOf('tag-men')>-1?'Men':gTag.indexOf('tag-women')>-1?'Women':gTag.indexOf('tag-unisex')>-1?'Unisex':'';
+      if(cardGender)card.setAttribute('data-gender',cardGender);
       for(var i=0;i<fc.attributes.length;i++){
         var a=fc.attributes[i];
-        if(a.name.indexOf('data-')===0)card.setAttribute(a.name,a.value);
+        if(a.name.indexOf('data-')===0&&a.name!=='data-gender')card.setAttribute(a.name,a.value);
       }
       card.innerHTML='<div class="card-top">'+(bSrc?'<img src="'+bSrc+'" alt="" class="card-brand-logo" loading="lazy">':'')+'<span class="card-brand-name">'+bName+'</span>'+gTag+sTags+'</div>'+'<div class="card-frag-name">'+fName+'</div>'+'<div class="card-prices">'+pHtml+'</div>'+'<div class="card-bottom">'+'<span class="card-inspired">'+iText+'</span>'+'<span class="card-links">'+lHtml+'</span>'+'</div>'+'<button class="cart-btn" style="margin-top:8px"'+(isSO||isCS?' disabled':'')+'>\uD83D\uDED2 Add to Cart</button>'+'</div>';
       cc.appendChild(card);
