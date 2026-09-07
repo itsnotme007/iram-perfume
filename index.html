@@ -1421,7 +1421,7 @@ try{(function(){
   var resultsDiv=document.createElement('div');
   resultsDiv.id='filterResults';
   resultsDiv.style.display='none';
-  resultsDiv.innerHTML='<table><thead><tr><th>Fragrance</th><th>3ml</th><th>5ml</th><th>7.5ml</th><th>20ml</th><th>30ml</th></tr></thead><tbody></tbody></table>';
+  resultsDiv.innerHTML='<table><thead><tr><th>Fragrance</th><th>3ml</th><th>5ml</th><th>7.5ml</th><th>20ml</th><th>30ml</th><th>Reminds Me Of</th><th>Links</th></tr></thead><tbody></tbody></table>';
   var container=document.querySelector('.container');
   container.insertBefore(resultsDiv,container.querySelector('.section-heading'));
   document.querySelectorAll('.filter-btn').forEach(function(b){
@@ -1488,6 +1488,10 @@ try{(function(){
           td.innerHTML=pc.innerHTML;
           nr.appendChild(td);
         });
+        var ic=row.querySelector('.inspired-cell');
+        if(ic){var itd=document.createElement('td');itd.className='inspired-cell';itd.innerHTML=ic.innerHTML;nr.appendChild(itd)}
+        var lc=row.querySelector('.links-cell');
+        if(lc){var ltd=document.createElement('td');ltd.className='links-cell';ltd.innerHTML=lc.innerHTML;nr.appendChild(ltd)}
         tbody.appendChild(nr);
       });
       resultsDiv.style.display=isMobile?'none':'';
