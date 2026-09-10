@@ -3972,9 +3972,8 @@ try{(function(){
       }
       var fc=row.querySelector('.frag-cell');
       if(!fc)return;
-      var fName='';
-      fc.childNodes.forEach(function(n){if(n.nodeType===3)fName+=n.textContent});
-      fName=fName.trim();
+      var nameLink=fc.querySelector('a');
+      var fName=nameLink?nameLink.textContent.replace(/\s+/g,' ').trim():'';
       var gTag='',sTags='',isSO=false,isCS=false;
       fc.querySelectorAll('.tag').forEach(function(t){
         var st=t.textContent.trim();
@@ -4021,9 +4020,8 @@ try{(function(){
       cartBtn.className='cart-btn';
       cartBtn.innerHTML='\uD83D\uDED2 Add to Cart';
       fc.appendChild(cartBtn);
-      var fragName='';
-      fc.childNodes.forEach(function(n){if(n.nodeType===3)fragName+=n.textContent});
-      fragName=fragName.trim();
+      var nameLink=fc.querySelector('a');
+      var fragName=nameLink?nameLink.textContent.replace(/\s+/g,' ').trim():'';
       var gender='';
       var badges='';
       var isSoldOut=false;
@@ -4320,9 +4318,8 @@ try{(function(){
       if(bc)curBrand=bc.textContent.trim();
       var fc=row.querySelector('.frag-cell');
       if(!fc)return;
-      var fragName='';
-      fc.childNodes.forEach(function(n){if(n.nodeType===3)fragName+=n.textContent});
-      fragName=fragName.trim();
+      var nameLink=fc.querySelector('a');
+      var fragName=nameLink?nameLink.textContent.replace(/\s+/g,' ').trim():'';
       var slug=productSlug(curBrand,fragName);
       var inspired=fc.parentElement?fc.parentElement.querySelector('.inspired-cell'):null;
       var inspiredText=inspired?inspired.textContent.trim():'';
@@ -4580,9 +4577,8 @@ try{(function(){
             if(p!==null)prices[sizeKeys[i]].push(p);
           }
         });
-        var fragName='';
-        fc.childNodes.forEach(function(n){if(n.nodeType===3)fragName+=n.textContent});
-        fragName=fragName.trim();
+        var nameLink=fc.querySelector('a');
+        var fragName=nameLink?nameLink.textContent.replace(/\s+/g,' ').trim():'';
         var brandName=bc?bc.textContent.trim():'';
         var p30=parsePrice(cells[4]?cells[4].textContent:'');
         if(p30!==null&&p30<cheapest.price){cheapest={price:p30,name:fragName,brand:brandName}}
