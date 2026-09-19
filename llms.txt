@@ -46,6 +46,7 @@
 - 9 PM Elixir (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹269 | 20ml ₹619 | 30ml ₹879
 - 9 PM OG (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹269 | 20ml ₹619 | 30ml ₹879
 - 9 PM Rebel (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹269 | 20ml ₹619 | 30ml ₹879
+- Turathi Brown (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹265 | 20ml ₹609 | 30ml ₹869
 
 ### Ahmed Al Maghribi
 - Black Fume (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
@@ -65,6 +66,9 @@
 - L'Nuit (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹649 | 30ml ₹929
 - Y EDP (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹649 | 30ml ₹929
 - Gentlemen Reserve Privée (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹649 | 30ml ₹929
+
+### Ajmal
+- Wave (fragrance): 3ml ₹59 | 5ml ₹79 | 7.5ml ₹115 | 20ml ₹229 | 30ml ₹299
 
 ### Arabiyat Prestige
 - Midnight (Oud al Layl) (fragrance): 3ml ₹69 | 5ml ₹99 | 7.5ml ₹139 | 20ml ₹299 | 30ml ₹399
@@ -133,6 +137,8 @@
 - Jasoor (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹245 | 20ml ₹565 | 30ml ₹799
 - Raghba (fragrance): 3ml ₹85 | 5ml ₹125 | 7.5ml ₹179 | 20ml ₹399 | 30ml ₹549
 - Al Nashama Caprice (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹245 | 20ml ₹565 | 30ml ₹799
+- Badee Al Oud Amethyst (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹565 | 30ml ₹799
+- Badee Al Oud Amethyst Fusion (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹565 | 30ml ₹799
 
 ### Laverne
 - Blue Laverne Sport (fragrance): 3ml ₹99 | 5ml ₹155 | 7.5ml ₹229 | 20ml ₹519 | 30ml ₹729
