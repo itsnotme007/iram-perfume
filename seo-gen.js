@@ -536,8 +536,9 @@ function editHomepage(products, faqHtml, articlesHtml) {
   out = out.slice(0, ob.index) + itemListJson + out.slice(ob.index + ob[0].length);
 
   // 4) FAQPage schema + visible FAQ + articles strip (idempotent markers)
-  const tagOpen = '<script type="application/ld+json">\n<!--FAQ_SCHEMA-->\n';
-  const tagClose = '\n<!--EOF-->\n</script>\n';
+  // JSON-LD must contain JSON only; HTML comments make the structured data invalid.
+  const tagOpen = '<script type="application/ld+json">\n';
+  const tagClose = '\n</script>\n';
   out = out.replace(/<!--FAQ_SCHEMA-->[\s\S]*?<!--EOF-->/g, '');
   out = out.replace(/<script type="application\/ld\+json">\s*<\/script>/g, '');
   const faqSchema = {
