@@ -4129,7 +4129,7 @@ body.pc-lock{overflow:hidden}
 </div>
 
 <script>
-try{(function(){var DAY=864e5;document.querySelectorAll('.frag-cell[data-added]').forEach(function(c){var added=new Date(c.getAttribute('data-added')),now=new Date();if(now-added<90*DAY&&!c.querySelector('.tag-new')){var t=document.createElement('span');t.className='tag tag-new';t.textContent='NEW';c.appendChild(t)}else if(now-added>=90*DAY){c.removeAttribute('data-added')}})})();}catch(e){console.warn('NEW tag init failed:',e)}
+try{(function(){var DAY=864e5;document.querySelectorAll('.frag-cell[data-added]').forEach(function(c){var added=new Date(c.getAttribute('data-added')),now=new Date();if(now-added<2*DAY&&!c.querySelector('.tag-new')){var t=document.createElement('span');t.className='tag tag-new';t.textContent='NEW';c.appendChild(t)}else if(now-added>=2*DAY){c.removeAttribute('data-added')}})})();}catch(e){console.warn('NEW tag init failed:',e)}
 
 try{(function(){
   var cats=['added','gender','scent','season','occasion','time','weather','mood','family'];
@@ -5009,8 +5009,13 @@ try{(function(){
   });
   if(navSearch)navSearch.addEventListener('click',function(e){
     e.preventDefault();
-    var bar=document.getElementById('filterBar');
-    if(bar)bar.scrollIntoView({behavior:'smooth',block:'start'});
+    if(window.innerWidth<=1023){
+      var btn=document.getElementById('pcFilterBtn');
+      if(btn)btn.click();
+    }else{
+      var bar=document.getElementById('filterBar');
+      if(bar)bar.scrollIntoView({behavior:'smooth',block:'start'});
+    }
   });
 })();}catch(e){console.warn('Mobile nav init failed:',e)}
 
