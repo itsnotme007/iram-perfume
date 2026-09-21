@@ -516,13 +516,17 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 @media(max-width:600px){.review-lightbox-nav{width:36px;height:36px;font-size:18px}.reviews-grid{column-count:2;column-gap:8px}}
 @media(prefers-reduced-motion:reduce){.review-item{transition:none!important;opacity:1;transform:none}.review-lightbox{transition:none!important}}
 /* ================= PHASE 1: MOBILE SHOPPING OVERHAUL ================= */
-.frag-card{display:grid;grid-template-columns:minmax(0,152px) minmax(0,1fr);grid-template-rows:auto auto auto auto auto;column-gap:10px;row-gap:4px;padding:10px;align-items:start;min-width:0}
+.frag-card{display:grid;grid-template-columns:minmax(0,152px) minmax(0,1fr);grid-template-rows:auto auto auto auto auto auto;column-gap:10px;row-gap:4px;padding:10px;align-items:start;min-width:0}
 .frag-card .pc-media{grid-column:1/2;grid-row:1/-1;align-self:stretch}
 .frag-card .card-top{grid-column:2/3;grid-row:1/2;display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0}
 .frag-card .card-frag-name,.frag-card .pc-name{grid-column:2/3;grid-row:2/3}
 .frag-card .card-inspired{grid-column:2/3;grid-row:3/4;justify-self:start;align-self:center;margin:0}
 .frag-card .pc-price-line{grid-column:2/3;grid-row:4/5;width:100%;display:flex;align-items:center;justify-content:space-between;gap:6px;margin:0}
-.frag-card .pc-add{grid-column:2/3;grid-row:5/6;width:100%}
+.frag-card .card-links{grid-column:2/3;grid-row:5/6;font-size:11px}
+.frag-card .card-links a{color:var(--accent-link);text-decoration:none;font-weight:500}
+.frag-card .card-links a:hover{color:var(--accent-danger);text-decoration:underline}
+.frag-card .card-links .sep{color:var(--border-accent);margin:0 3px}
+.frag-card .pc-add{grid-column:2/3;grid-row:6/6;width:100%}
 .frag-card .card-top{align-items:center;gap:6px;margin:0;flex-wrap:nowrap;min-width:0}
 .card-brand-logo{max-width:22px;max-height:18px}
 .pc-name{display:block;width:100%;border:none;background:none;padding:0;margin:0;font:inherit;text-align:left;cursor:pointer;color:inherit;overflow-wrap:anywhere;word-break:break-word}
@@ -610,8 +614,6 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 .pc-sheet-filter .filter-label{font-size:10px;width:auto;display:inline-block;padding:0!important;margin-bottom:6px}
 .pc-sheet-filter .filter-buttons{flex-wrap:wrap;overflow:visible;justify-content:flex-start}
 .pc-sheet-filter .filter-btn{min-height:36px;padding:6px 13px;font-size:12px;white-space:nowrap}
-.mwa-cta{display:none;position:fixed;left:14px;z-index:940;align-items:center;justify-content:center;gap:8px;min-width:210px;height:48px;padding:0 18px;border-radius:26px;background:#25D366;color:#fff;font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 6px 20px rgba(37,211,102,.4);cursor:pointer;bottom:calc(env(safe-area-inset-bottom,0px) + 16px)}
-.mwa-cta:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 body.pc-lock{overflow:hidden}
 @media(max-width:1023px){
   .frag-table{display:none!important}
@@ -620,7 +622,6 @@ body.pc-lock{overflow:hidden}
   .container .filter-bar{display:none!important}
   #pcFilterSheet{max-height:92vh}
   .pc-toolbar{display:flex}
-  .mwa-cta{display:flex}
   .section-heading{font-size:17px;margin:18px 0 6px}
 }
 @media(min-width:769px) and (max-width:1023px){
@@ -628,7 +629,6 @@ body.pc-lock{overflow:hidden}
 }
 @media(max-width:768px){
   body{padding-bottom:118px}
-  .mwa-cta{bottom:calc(env(safe-area-inset-bottom,0px) + 76px)}
   .mobile-nav{display:flex}
 }
 @media(max-width:480px){
@@ -4108,7 +4108,7 @@ body.pc-lock{overflow:hidden}
   </div>
 </div>
 
-<a class="mwa-cta" id="mwaCta" href="https://chat.whatsapp.com/JSWEIoCsFd96wzlRAeaewe" target="_blank" rel="noopener" aria-label="Order on WhatsApp">&#128172; Order on WhatsApp</a>
+
 
 <div class="pc-overlay" id="pcFilterOverlay"></div>
 <div class="pc-sheet pc-sheet-filter" id="pcFilterSheet" role="dialog" aria-modal="true" aria-label="Filter fragrances">
@@ -4129,7 +4129,7 @@ body.pc-lock{overflow:hidden}
 </div>
 
 <script>
-try{(function(){var DAY=864e5;document.querySelectorAll('.frag-cell[data-added]').forEach(function(c){var added=new Date(c.getAttribute('data-added')),now=new Date();if(now-added<7*DAY&&!c.querySelector('.tag-new')){var t=document.createElement('span');t.className='tag tag-new';t.textContent='NEW';c.appendChild(t)}else if(now-added>=7*DAY){c.removeAttribute('data-added')}})})();}catch(e){console.warn('NEW tag init failed:',e)}
+try{(function(){var DAY=864e5;document.querySelectorAll('.frag-cell[data-added]').forEach(function(c){var added=new Date(c.getAttribute('data-added')),now=new Date();if(now-added<90*DAY&&!c.querySelector('.tag-new')){var t=document.createElement('span');t.className='tag tag-new';t.textContent='NEW';c.appendChild(t)}else if(now-added>=90*DAY){c.removeAttribute('data-added')}})})();}catch(e){console.warn('NEW tag init failed:',e)}
 
 try{(function(){
   var cats=['added','gender','scent','season','occasion','time','weather','mood','family'];
@@ -4259,6 +4259,8 @@ try{(function(){
       });
       var ic=row.querySelector('.inspired-cell');
       var iText=ic?ic.textContent.replace(/\s+/g,' ').trim():'';
+      var lc=row.querySelector('.links-cell');
+      var linksHtml=lc?lc.innerHTML:'';
       var pid=bName+'|'+fName;
       var slug=nameA?nameA.getAttribute('href').replace(/^fragrance\//,'').replace(/\.html$/,''):slugify(bName,fName);
       var minAvail=null;
@@ -4291,6 +4293,7 @@ try{(function(){
         +'<span class="pc-from">from <b>'+fmt(minAvail)+'</b></span>'
         +(available[4]?'<span class="pc-30">30ml '+fmt(prices[4])+'</span>':'')
         +'</div>'
+        +(linksHtml?'<div class="card-links">'+linksHtml+'</div>':'')
         +'<button type="button" class="pc-add'+(isSO?' pc-add-so':isCS?' pc-add-cs':'')+'" data-open '+(isSO||isCS?'disabled':'')+'>'+(isSO?'SOLD OUT':isCS?'COMING SOON':'Add')+'</button>';
       cc.appendChild(card);
     });
