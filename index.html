@@ -516,17 +516,23 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 @media(max-width:600px){.review-lightbox-nav{width:36px;height:36px;font-size:18px}.reviews-grid{column-count:2;column-gap:8px}}
 @media(prefers-reduced-motion:reduce){.review-item{transition:none!important;opacity:1;transform:none}.review-lightbox{transition:none!important}}
 /* ================= PHASE 1: MOBILE SHOPPING OVERHAUL ================= */
-.frag-card{display:flex;flex-direction:column;gap:7px;padding:10px;min-width:0}
+.frag-card{display:grid;grid-template-columns:minmax(0,152px) minmax(0,1fr);grid-template-rows:auto auto auto auto auto;column-gap:10px;row-gap:4px;padding:10px;align-items:start;min-width:0}
+.frag-card .pc-media{grid-column:1/2;grid-row:1/-1;align-self:stretch}
+.frag-card .card-top{grid-column:2/3;grid-row:1/2;display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0}
+.frag-card .card-frag-name,.frag-card .pc-name{grid-column:2/3;grid-row:2/3}
+.frag-card .card-inspired{grid-column:2/3;grid-row:3/4;justify-self:start;align-self:center;margin:0}
+.frag-card .pc-price-line{grid-column:2/3;grid-row:4/5;width:100%;display:flex;align-items:center;justify-content:space-between;gap:6px;margin:0}
+.frag-card .pc-add{grid-column:2/3;grid-row:5/6;width:100%}
 .frag-card .card-top{align-items:center;gap:6px;margin:0;flex-wrap:nowrap;min-width:0}
 .card-brand-logo{max-width:22px;max-height:18px}
-.pc-name{display:block;width:100%;border:none;background:none;padding:0;margin:0;font:inherit;text-align:left;cursor:pointer;color:inherit}
-.card-frag-name{font-size:13.5px;font-weight:650;line-height:1.3;color:var(--text-primary);margin:0}
+.pc-name{display:block;width:100%;border:none;background:none;padding:0;margin:0;font:inherit;text-align:left;cursor:pointer;color:inherit;overflow-wrap:anywhere;word-break:break-word}
+.card-frag-name{font-size:13.5px;font-weight:650;line-height:1.35;color:var(--text-primary);margin:0;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
 .pc-media{position:relative;display:block;width:100%;padding:0;border:none;background:var(--bg-surface);border-radius:10px;overflow:hidden;cursor:pointer;aspect-ratio:1/1;flex-shrink:0;-webkit-tap-highlight-color:transparent}
 .pc-ph{position:absolute;inset:0;background:linear-gradient(135deg,#efe9df,#e6ddd0);pointer-events:none}
 [data-theme="dark"] .pc-ph{background:linear-gradient(135deg,#262c33,#181d24)}
 .pc-ph::before{content:'';position:absolute;left:50%;bottom:20%;width:36%;height:46%;transform:translateX(-50%);background:var(--accent-brand);opacity:.22;border-radius:6px 6px 12px 12px}
 .pc-ph::after{content:'';position:absolute;left:50%;bottom:calc(20% + 44%);width:14%;height:22%;transform:translateX(-50%);background:var(--accent-brand);opacity:.22;border-radius:4px 4px 0 0}
-.pc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8px;opacity:0;transition:opacity .25s}
+.pc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;padding:0;border-radius:12px;opacity:0;transition:opacity .25s}
 .pc-img.loaded{opacity:1}
 .pc-img.pc-img-err{opacity:0}
 .pc-badge{position:absolute;top:7px;left:7px;font-size:8.5px;font-weight:800;letter-spacing:.4px;padding:3px 7px;border-radius:4px;color:#fff;pointer-events:none;line-height:1.2}
@@ -572,9 +578,9 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 .pc-hero-ph::after{content:'';position:absolute;left:50%;bottom:calc(16% + 50%);width:16%;height:24%;transform:translateX(-50%);background:var(--accent-brand);opacity:.25;border-radius:5px 5px 0 0}
 .pc-hero-title{flex:1;min-width:0;padding-top:2px}
 .pc-hero-brand{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted)}
-.pc-hero-name{font-size:17px;font-weight:700;color:var(--text-heading);line-height:1.25;margin:2px 0 6px}
+.pc-hero-name{font-size:17px;font-weight:700;color:var(--text-heading);line-height:1.25;margin:2px 0 6px;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
 .pc-hero-title .pc-gender{position:static}
-.pc-attr-grid{display:grid;gap:8px;padding:12px 0;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);max-height:180px;overflow-y:auto}
+.pc-attr-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px 0;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);max-height:180px;overflow-y:auto}
 .pc-attr-chip{display:flex;gap:8px;align-items:flex-start}
 .pc-attr-chip small{width:74px;flex-shrink:0;font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--text-muted);padding-top:3px}
 .pc-attr-chip span{font-size:11px;color:var(--text-body);border:1px solid var(--border-default);background:var(--bg-elevated);border-radius:12px;padding:3px 9px}
