@@ -131,7 +131,7 @@ for (const reg of REGIONS) {
     const links = (() => {
       const m = /<td class="links-cell">([\s\S]*?)<\/td>/.exec(tr);
       if (!m) return '';
-      return m[1].replace(/<span class="preview-trigger">[\s\S]*?<\/span>/g, '');
+      return m[1].replace(/<span class="preview-trigger">[\s\S]*?<\/span>/g, '').replace(/<\/a><a /g, '</a> <a ');
     })();
 
     const cat = sectionAt(reg.start) || '';
@@ -312,8 +312,13 @@ function fragPage(pr) {
     const rm = minMax(r);
     return '<a class="rel" href="../fragrance/' + r.slug + '.html"><b>' + r.name + '</b><span class="muted">by ' + r.brand + '</span><small>from ' + rupees(rm.min) + '</small></a>';
   }).join('');
+  let bottleImg = '';
+  const bottleDir = path.join(ROOT, 'images', 'bottles');
+  if (fs.existsSync(path.join(bottleDir, pr.slug + '.jpg'))) bottleImg = '../images/bottles/' + pr.slug + '.jpg';
+  else if (fs.existsSync(path.join(bottleDir, pr.slug + '.png'))) bottleImg = '../images/bottles/' + pr.slug + '.png';
   const body = ''
     + '<div class="top"><div><div class="brand-chip">' + esc(pr.brand.toUpperCase()) + '</div><h1>' + esc(pr.name) + ' \u2014 Decant Price in India</h1></div><a href="../index.html">\u2190 Full collection</a></div>'
+    + (bottleImg ? '<img src="' + bottleImg + '" alt="' + esc(pr.name) + ' bottle" style="max-width:220px;border-radius:12px;margin:16px 0;display:block">' : '')
     + '<p class="lead">' + esc(pr.name) + ' by ' + esc(pr.brand) + ' as an authentic decant \u2014 a ' + esc(scentLine(pr)) + '. ' + esc(inspiredLine(pr)) + '. Ships across India with free delivery on orders above \u20b9999.</p>'
     + '<div class="pills">' + pills.join('') + '</div>'
     + '<div class="card"><h2 style="margin-top:0">Prices (per ml gets cheaper as size grows)</h2><table><thead><tr><th>Size</th><th>Price</th></tr></thead><tbody>' + priceRows + '</tbody></table><p class="muted" style="margin-top:10px">' + esc(probeAvailability) + '</p></div>'
