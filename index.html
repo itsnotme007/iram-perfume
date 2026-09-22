@@ -515,7 +515,7 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 @media(prefers-reduced-motion:reduce){.review-item{transition:none!important;opacity:1;transform:none}.review-lightbox{transition:none!important}}
 /* ================= PHASE 1: MOBILE SHOPPING OVERHAUL ================= */
 .frag-card{display:grid;grid-template-columns:minmax(0,152px) minmax(0,1fr);grid-template-rows:auto auto auto auto auto auto;column-gap:10px;row-gap:4px;padding:10px;align-items:start;min-width:0}
-.frag-card .pc-media{grid-column:1/2;grid-row:1/-1;align-self:stretch}
+.frag-card .pc-media{grid-column:1/2;grid-row:1/-1;align-self:start;aspect-ratio:1/1;width:152px}
 .frag-card .card-top{grid-column:2/3;grid-row:1/2;display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0}
 .frag-card .card-frag-name,.frag-card .pc-name{grid-column:2/3;grid-row:2/3}
 .frag-card .card-inspired{grid-column:2/3;grid-row:3/4;justify-self:start;align-self:center;margin:0}
@@ -524,7 +524,7 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 .frag-card .card-links a{color:var(--accent-link);text-decoration:none;font-weight:500}
 .frag-card .card-links a:hover{color:var(--accent-danger);text-decoration:underline}
 .frag-card .pc-add{grid-column:2/3;grid-row:6/6;width:100%}
-.frag-card .card-top{align-items:center;gap:6px;margin:0;flex-wrap:nowrap;min-width:0}
+.frag-card .card-top{align-items:center;gap:6px;margin:0;flex-wrap:wrap;min-width:0}
 .card-brand-logo{max-width:22px;max-height:18px}
 .pc-name{display:block;width:100%;border:none;background:none;padding:0;margin:0;font:inherit;text-align:left;cursor:pointer;color:inherit;overflow-wrap:anywhere;word-break:break-word}
 .card-frag-name{font-size:13.5px;font-weight:650;line-height:1.35;color:var(--text-primary);margin:0;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
@@ -615,11 +615,11 @@ body.pc-lock{overflow:hidden}
 @media(max-width:1023px){
   .frag-table{display:none!important}
   .table-wrap{border:none!important;box-shadow:none!important;background:none!important;border-radius:0!important;overflow:visible!important}
-  .frag-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:100vw}
   .container .filter-bar{display:none!important}
   #pcFilterSheet{max-height:92vh}
   .pc-toolbar{display:flex}
   .section-heading{font-size:17px;margin:18px 0 6px}
+  .frag-cards{display:grid;grid-template-columns:1fr;gap:10px;max-width:100vw}
 }
 @media(min-width:769px) and (max-width:1023px){
   body{padding-bottom:76px}
