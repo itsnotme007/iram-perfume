@@ -15,201 +15,201 @@
 ## Fragrance catalogue (India decant prices)
 
 ### Bvlgari
-- Man in Black Parfum (fragrance): 3ml ₹249 | 5ml ₹399 | 7.5ml ₹619 | 20ml ₹1499 | 30ml ₹2199
+- Man in Black Parfum (fragrance): 3ml ₹249 | 5ml ₹399 | 7.5ml ₹619 | 20ml ₹1509 | 30ml ₹2199
 
 ### Davidoff
-- Cool Water EDT (fragrance): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 20ml ₹429 | 30ml ₹599
+- Cool Water EDT (fragrance): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 20ml ₹439 | 30ml ₹599
 
 ### Jaguar
-- Classic Black (fragrance): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 20ml ₹429 | 30ml ₹599
+- Classic Black (fragrance): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 20ml ₹439 | 30ml ₹599
 
 ### Mancera
-- Cedrat Boise (fragrance): 3ml ₹219 | 5ml ₹349 | 7.5ml ₹539 | 20ml ₹1299 | 30ml ₹1899
-- Cosmic Pepper (fragrance): 3ml ₹239 | 5ml ₹379 | 7.5ml ₹595 | 20ml ₹1429 | 30ml ₹2099
-- French Riviera (fragrance): 3ml ₹229 | 5ml ₹365 | 7.5ml ₹569 | 20ml ₹1365 | 30ml ₹1999
-- Instant Crush (fragrance): 3ml ₹229 | 5ml ₹365 | 7.5ml ₹569 | 20ml ₹1365 | 30ml ₹1999
-- Gold Intensive Aoud (fragrance): 3ml ₹239 | 5ml ₹379 | 7.5ml ₹595 | 20ml ₹1429 | 30ml ₹2099
+- Cedrat Boise (fragrance): 3ml ₹219 | 5ml ₹349 | 7.5ml ₹539 | 20ml ₹1309 | 30ml ₹1899
+- Cosmic Pepper (fragrance): 3ml ₹239 | 5ml ₹379 | 7.5ml ₹595 | 20ml ₹1439 | 30ml ₹2099
+- French Riviera (fragrance): 3ml ₹229 | 5ml ₹365 | 7.5ml ₹569 | 20ml ₹1375 | 30ml ₹1999
+- Instant Crush (fragrance): 3ml ₹229 | 5ml ₹365 | 7.5ml ₹569 | 20ml ₹1375 | 30ml ₹1999
+- Gold Intensive Aoud (fragrance): 3ml ₹239 | 5ml ₹379 | 7.5ml ₹595 | 20ml ₹1439 | 30ml ₹2099
 
 ### Versace
-- The Dreamer (fragrance): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 20ml ₹699 | 30ml ₹999
+- The Dreamer (fragrance): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 20ml ₹709 | 30ml ₹999
 
 ### Afnan
-- 9 PM Night Out (fragrance): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹305 | 20ml ₹765 | 30ml ₹1099
-- Lynked Forever (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 20ml ₹599 | 30ml ₹849
-- Lynked Freedom (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 20ml ₹599 | 30ml ₹849
-- Modest Une Pour Homme (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹229 | 20ml ₹565 | 30ml ₹799
-- Rare Reef (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹629 | 30ml ₹899
-- SNOI (Supremacy Not Only Intense) (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹565 | 30ml ₹799
-- Supremacy Collector's Edition (fragrance): 3ml ₹149 | 5ml ₹229 | 7.5ml ₹355 | 20ml ₹829 | 30ml ₹1199
-- Supremacy Incense (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹649 | 30ml ₹929
-- Turathi Blue (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹255 | 20ml ₹629 | 30ml ₹899
-- 9 PM Elixir (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹269 | 20ml ₹619 | 30ml ₹879
-- 9 PM OG (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹269 | 20ml ₹619 | 30ml ₹879
-- 9 PM Rebel (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹269 | 20ml ₹619 | 30ml ₹879
-- Turathi Brown (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹265 | 20ml ₹609 | 30ml ₹869
+- 9 PM Night Out (fragrance): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹305 | 20ml ₹775 | 30ml ₹1099
+- Lynked Forever (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 20ml ₹609 | 30ml ₹849
+- Lynked Freedom (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 20ml ₹609 | 30ml ₹849
+- Modest Une Pour Homme (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹229 | 20ml ₹575 | 30ml ₹799
+- Rare Reef (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
+- SNOI (Supremacy Not Only Intense) (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
+- Supremacy Collector's Edition (fragrance): 3ml ₹149 | 5ml ₹229 | 7.5ml ₹355 | 20ml ₹839 | 30ml ₹1199
+- Supremacy Incense (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹659 | 30ml ₹929
+- Turathi Blue (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹255 | 20ml ₹639 | 30ml ₹899
+- 9 PM Elixir (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹269 | 20ml ₹629 | 30ml ₹879
+- 9 PM OG (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹269 | 20ml ₹629 | 30ml ₹879
+- 9 PM Rebel (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹269 | 20ml ₹629 | 30ml ₹879
+- Turathi Brown (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹265 | 20ml ₹619 | 30ml ₹869
 
 ### Ahmed Al Maghribi
-- Black Fume (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Blu Oud (fragrance): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 20ml ₹465 | 30ml ₹649
-- Blue by Ahmed (fragrance): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 20ml ₹429 | 30ml ₹599
-- Kaaf (fragrance): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 20ml ₹485 | 30ml ₹679
-- Kaaf Noir (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹629 | 30ml ₹899
-- Leather (fragrance): 3ml ₹149 | 5ml ₹229 | 7.5ml ₹355 | 20ml ₹829 | 30ml ₹1199
-- Muzn (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹565 | 30ml ₹799
-- Zeleny (fragrance): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 20ml ₹429 | 30ml ₹599
-- Laathani (fragrance): 3ml ₹215 | 5ml ₹345 | 7.5ml ₹535 | 20ml ₹1285 | 30ml ₹1879
-- Marj (fragrance): 3ml ₹229 | 5ml ₹365 | 7.5ml ₹569 | 20ml ₹1365 | 30ml ₹1999
-- Rose Noir (fragrance): 3ml ₹169 | 5ml ₹265 | 7.5ml ₹409 | 20ml ₹965 | 30ml ₹1279
+- Black Fume (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Blu Oud (fragrance): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 20ml ₹475 | 30ml ₹649
+- Blue by Ahmed (fragrance): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 20ml ₹439 | 30ml ₹599
+- Kaaf (fragrance): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 20ml ₹495 | 30ml ₹679
+- Kaaf Noir (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
+- Leather (fragrance): 3ml ₹149 | 5ml ₹229 | 7.5ml ₹355 | 20ml ₹839 | 30ml ₹1199
+- Muzn (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
+- Zeleny (fragrance): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 20ml ₹439 | 30ml ₹599
+- Laathani (fragrance): 3ml ₹215 | 5ml ₹345 | 7.5ml ₹535 | 20ml ₹1295 | 30ml ₹1879
+- Marj (fragrance): 3ml ₹229 | 5ml ₹365 | 7.5ml ₹569 | 20ml ₹1375 | 30ml ₹1999
+- Rose Noir (fragrance): 3ml ₹169 | 5ml ₹265 | 7.5ml ₹409 | 20ml ₹895 | 30ml ₹1279
 
 ### Al Majed
-- Oud Boisee (fragrance): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 20ml ₹699 | 30ml ₹999
+- Oud Boisee (fragrance): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 20ml ₹709 | 30ml ₹999
 
 ### Albait Aldimashqi
-- L'Nuit (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹649 | 30ml ₹929
-- Y EDP (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹649 | 30ml ₹929
-- Gentlemen Reserve PrivÃ©e (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹649 | 30ml ₹929
+- L'Nuit (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹659 | 30ml ₹929
+- Y EDP (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹659 | 30ml ₹929
+- Gentlemen Reserve PrivÃ©e (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹659 | 30ml ₹929
 
 ### Ajmal
-- Wave (fragrance): 3ml ₹59 | 5ml ₹79 | 7.5ml ₹115 | 20ml ₹229 | 30ml ₹299
+- Wave (fragrance): 3ml ₹59 | 5ml ₹79 | 7.5ml ₹115 | 20ml ₹239 | 30ml ₹299
 
 ### Arabiyat Prestige
-- Midnight (Oud al Layl) (fragrance): 3ml ₹69 | 5ml ₹99 | 7.5ml ₹139 | 20ml ₹299 | 30ml ₹399
-- Oud Al Layal (fragrance): 3ml ₹69 | 5ml ₹99 | 7.5ml ₹139 | 20ml ₹299 | 30ml ₹399
-- Oud Al Layal Aswad (fragrance): 3ml ₹69 | 5ml ₹99 | 7.5ml ₹139 | 20ml ₹299 | 30ml ₹399
-- Raees (fragrance): 3ml ₹85 | 5ml ₹125 | 7.5ml ₹179 | 20ml ₹399 | 30ml ₹549
-- Marwa (fragrance): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 20ml ₹745 | 30ml ₹1069
-- Marwa Extrait (fragrance): 3ml ₹209 | 5ml ₹329 | 7.5ml ₹515 | 20ml ₹1229 | 30ml ₹1799
-- Aariz L'Absolu (fragrance): 3ml ₹115 | 5ml ₹169 | 7.5ml ₹259 | 20ml ₹589 | 30ml ₹839
-- Mahd Al Dhahab (fragrance): 3ml ₹125 | 5ml ₹195 | 7.5ml ₹295 | 20ml ₹679 | 30ml ₹969
-- Kohl Opulence (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹269 | 20ml ₹619 | 30ml ₹879
-- La Di Da For Him (fragrance): 3ml ₹125 | 5ml ₹195 | 7.5ml ₹295 | 20ml ₹679 | 30ml ₹969
+- Midnight (Oud al Layl) (fragrance): 3ml ₹69 | 5ml ₹99 | 7.5ml ₹139 | 20ml ₹309 | 30ml ₹399
+- Oud Al Layal (fragrance): 3ml ₹69 | 5ml ₹99 | 7.5ml ₹139 | 20ml ₹309 | 30ml ₹399
+- Oud Al Layal Aswad (fragrance): 3ml ₹69 | 5ml ₹99 | 7.5ml ₹139 | 20ml ₹309 | 30ml ₹399
+- Raees (fragrance): 3ml ₹85 | 5ml ₹125 | 7.5ml ₹179 | 20ml ₹409 | 30ml ₹549
+- Marwa (fragrance): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 20ml ₹755 | 30ml ₹1069
+- Marwa Extrait (fragrance): 3ml ₹209 | 5ml ₹329 | 7.5ml ₹515 | 20ml ₹1239 | 30ml ₹1799
+- Aariz L'Absolu (fragrance): 3ml ₹115 | 5ml ₹169 | 7.5ml ₹259 | 20ml ₹599 | 30ml ₹839
+- Mahd Al Dhahab (fragrance): 3ml ₹125 | 5ml ₹195 | 7.5ml ₹295 | 20ml ₹689 | 30ml ₹969
+- Kohl Opulence (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹269 | 20ml ₹629 | 30ml ₹879
+- La Di Da For Him (fragrance): 3ml ₹125 | 5ml ₹195 | 7.5ml ₹295 | 20ml ₹689 | 30ml ₹969
 
 ### Armaf
-- CDNIM PP (Club de Nuit Intense Man Pure Parfum) (fragrance): 3ml ₹109 | 5ml ₹169 | 7.5ml ₹255 | 20ml ₹585 | 30ml ₹829
-- Dunescape (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 20ml ₹599 | 30ml ₹849
-- Odyssey Mandarin Sky Elixir (fragrance): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 20ml ₹485 | 30ml ₹679
-- Overdose (fragrance): 3ml ₹149 | 5ml ₹229 | 7.5ml ₹355 | 20ml ₹829 | 30ml ₹1199
-- Odyssey Mega (fragrance): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 20ml ₹485 | 30ml ₹679
+- CDNIM PP (Club de Nuit Intense Man Pure Parfum) (fragrance): 3ml ₹109 | 5ml ₹169 | 7.5ml ₹255 | 20ml ₹595 | 30ml ₹829
+- Dunescape (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 20ml ₹609 | 30ml ₹849
+- Odyssey Mandarin Sky Elixir (fragrance): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 20ml ₹495 | 30ml ₹679
+- Overdose (fragrance): 3ml ₹149 | 5ml ₹229 | 7.5ml ₹355 | 20ml ₹839 | 30ml ₹1199
+- Odyssey Mega (fragrance): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 20ml ₹495 | 30ml ₹679
 
 ### Assaf
-- Tobacco Jam 50 (fragrance): 3ml ₹179 | 5ml ₹279 | 7.5ml ₹435 | 20ml ₹1029 | 30ml ₹1499
+- Tobacco Jam 50 (fragrance): 3ml ₹179 | 5ml ₹279 | 7.5ml ₹435 | 20ml ₹1039 | 30ml ₹1499
 
 ### French Avenue
-- Aether Extrait (fragrance): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 20ml ₹699 | 30ml ₹999
-- Liquid Brun (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹629 | 30ml ₹899
-- Spectre Ghost (fragrance): 3ml ₹145 | 5ml ₹225 | 7.5ml ₹339 | 20ml ₹799 | 30ml ₹1149
-- Vulcan Feu (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹649 | 30ml ₹929
-- Vulcan Sable (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹649 | 30ml ₹929
-- Aromatix Teas Me (fragrance): 3ml ₹169 | 5ml ₹265 | 7.5ml ₹409 | 20ml ₹965 | 30ml ₹1399
-- Zenith Santal (fragrance): 3ml ₹145 | 5ml ₹225 | 7.5ml ₹349 | 20ml ₹809 | 30ml ₹999
+- Aether Extrait (fragrance): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 20ml ₹709 | 30ml ₹999
+- Liquid Brun (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
+- Spectre Ghost (fragrance): 3ml ₹145 | 5ml ₹225 | 7.5ml ₹339 | 20ml ₹809 | 30ml ₹1149
+- Vulcan Feu (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹659 | 30ml ₹929
+- Vulcan Sable (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹659 | 30ml ₹929
+- Aromatix Teas Me (fragrance): 3ml ₹169 | 5ml ₹265 | 7.5ml ₹409 | 20ml ₹975 | 30ml ₹1399
+- Zenith Santal (fragrance): 3ml ₹145 | 5ml ₹225 | 7.5ml ₹349 | 20ml ₹709 | 30ml ₹999
 
 ### Fragrance World
-- Kohl (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹565 | 30ml ₹799
+- Kohl (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
 
 ### Ibraq
-- Blue Diamond Aqua (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹565 | 30ml ₹799
-- Blue Oud (fragrance): 3ml ₹159 | 5ml ₹249 | 7.5ml ₹385 | 20ml ₹909 | 30ml ₹1319
-- Blueberry Musk (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 20ml ₹599 | 30ml ₹849
-- Brazilian Tobacco (fragrance): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 20ml ₹745 | 30ml ₹1069
-- Sandalwood (fragrance): 3ml ₹145 | 5ml ₹225 | 7.5ml ₹345 | 20ml ₹809 | 30ml ₹1169
-- Spanish Tobacco (fragrance): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 20ml ₹745 | 30ml ₹1069
+- Blue Diamond Aqua (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
+- Blue Oud (fragrance): 3ml ₹159 | 5ml ₹249 | 7.5ml ₹385 | 20ml ₹919 | 30ml ₹1319
+- Blueberry Musk (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 20ml ₹609 | 30ml ₹849
+- Brazilian Tobacco (fragrance): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 20ml ₹755 | 30ml ₹1069
+- Sandalwood (fragrance): 3ml ₹145 | 5ml ₹225 | 7.5ml ₹345 | 20ml ₹819 | 30ml ₹1169
+- Spanish Tobacco (fragrance): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 20ml ₹755 | 30ml ₹1069
 
 ### Khadlaj
-- Mocha Latte (fragrance): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 20ml ₹469 | 30ml ₹659
-- Shiyaaka Snow (fragrance): 3ml ₹105 | 5ml ₹159 | 7.5ml ₹239 | 20ml ₹549 | 30ml ₹779
-- Shiyaaka Shadow (fragrance): 3ml ₹105 | 5ml ₹159 | 7.5ml ₹239 | 20ml ₹549 | 30ml ₹779
-- Island (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
+- Mocha Latte (fragrance): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 20ml ₹479 | 30ml ₹659
+- Shiyaaka Snow (fragrance): 3ml ₹105 | 5ml ₹159 | 7.5ml ₹239 | 20ml ₹559 | 30ml ₹779
+- Shiyaaka Shadow (fragrance): 3ml ₹105 | 5ml ₹159 | 7.5ml ₹239 | 20ml ₹559 | 30ml ₹779
+- Island (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
 
 ### Lattafa
-- Ana Abiyed Coral (fragrance): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 20ml ₹465 | 30ml ₹649
-- ASAD (fragrance): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 20ml ₹465 | 30ml ₹649
-- ASAD Elixir (fragrance): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 20ml ₹465 | 30ml ₹649
-- Habik (fragrance): 3ml ₹109 | 5ml ₹169 | 7.5ml ₹255 | 20ml ₹585 | 30ml ₹829
-- Khamrah (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹629 | 30ml ₹899
-- Khamrah Dukhan (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹629 | 30ml ₹899
-- Khamrah Qahwa (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹629 | 30ml ₹899
-- Kingdom (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 20ml ₹599 | 30ml ₹849
-- Maahir Gold (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Maahir Legacy (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Qaed Al Fursan (fragrance): 3ml ₹85 | 5ml ₹125 | 7.5ml ₹179 | 20ml ₹399 | 30ml ₹549
-- Raghba wood intense (fragrance): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 20ml ₹429 | 30ml ₹599
-- Rave Now Rouge (fragrance): 3ml ₹79 | 5ml ₹115 | 7.5ml ₹169 | 20ml ₹365 | 30ml ₹499
-- Sehr (fragrance): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 20ml ₹765 | 30ml ₹1099
-- Sherif (fragrance): 3ml ₹115 | 5ml ₹169 | 7.5ml ₹259 | 20ml ₹589 | 30ml ₹839
-- Teriaq Intense (fragrance): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 20ml ₹745 | 30ml ₹1069
-- Jasoor (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹565 | 30ml ₹799
-- Raghba (fragrance): 3ml ₹85 | 5ml ₹125 | 7.5ml ₹179 | 20ml ₹399 | 30ml ₹549
-- Al Nashama Caprice (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹565 | 30ml ₹799
-- Badee Al Oud Amethyst (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹565 | 30ml ₹799
-- Badee Al Oud Amethyst Fusion (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹565 | 30ml ₹799
+- Ana Abiyed Coral (fragrance): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 20ml ₹475 | 30ml ₹649
+- ASAD (fragrance): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 20ml ₹475 | 30ml ₹649
+- ASAD Elixir (fragrance): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 20ml ₹475 | 30ml ₹649
+- Habik (fragrance): 3ml ₹109 | 5ml ₹169 | 7.5ml ₹255 | 20ml ₹595 | 30ml ₹829
+- Khamrah (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
+- Khamrah Dukhan (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
+- Khamrah Qahwa (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
+- Kingdom (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 20ml ₹609 | 30ml ₹849
+- Maahir Gold (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Maahir Legacy (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Qaed Al Fursan (fragrance): 3ml ₹85 | 5ml ₹125 | 7.5ml ₹179 | 20ml ₹409 | 30ml ₹549
+- Raghba wood intense (fragrance): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 20ml ₹439 | 30ml ₹599
+- Rave Now Rouge (fragrance): 3ml ₹79 | 5ml ₹115 | 7.5ml ₹169 | 20ml ₹375 | 30ml ₹499
+- Sehr (fragrance): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 20ml ₹775 | 30ml ₹1099
+- Sherif (fragrance): 3ml ₹115 | 5ml ₹169 | 7.5ml ₹259 | 20ml ₹599 | 30ml ₹839
+- Teriaq Intense (fragrance): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 20ml ₹755 | 30ml ₹1069
+- Jasoor (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
+- Raghba (fragrance): 3ml ₹85 | 5ml ₹125 | 7.5ml ₹179 | 20ml ₹409 | 30ml ₹549
+- Al Nashama Caprice (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
+- Badee Al Oud Amethyst (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
+- Badee Al Oud Amethyst Fusion (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
 
 ### Laverne
-- Blue Laverne Sport (fragrance): 3ml ₹99 | 5ml ₹155 | 7.5ml ₹229 | 20ml ₹519 | 30ml ₹729
+- Blue Laverne Sport (fragrance): 3ml ₹99 | 5ml ₹155 | 7.5ml ₹229 | 20ml ₹529 | 30ml ₹729
 
 ### Mykonos
-- Glitch (fragrance): 3ml ₹145 | 5ml ₹225 | 7.5ml ₹349 | 20ml ₹809 | 30ml ₹899
-- Reflection (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹279 | 20ml ₹649 | 30ml ₹1099
+- Glitch (fragrance): 3ml ₹145 | 5ml ₹225 | 7.5ml ₹349 | 20ml ₹639 | 30ml ₹899
+- Reflection (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹279 | 20ml ₹775 | 30ml ₹1099
 
 ### Nusuk
-- Al Mukhtalif Silver (fragrance): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹235 | 20ml ₹529 | 30ml ₹749
-- Al Mukhtalif Signature (fragrance): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹235 | 20ml ₹529 | 30ml ₹749
+- Al Mukhtalif Silver (fragrance): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹235 | 20ml ₹539 | 30ml ₹749
+- Al Mukhtalif Signature (fragrance): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹235 | 20ml ₹539 | 30ml ₹749
 
 ### Paris Corner
-- Rifaqaat (fragrance): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹235 | 20ml ₹529 | 30ml ₹749
-- Rifaqaat Adorn (fragrance): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 20ml ₹485 | 30ml ₹679
-- Mawj Moscow Mule (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹565 | 30ml ₹799
-- Confidential (fragrance): 3ml ₹105 | 5ml ₹165 | 7.5ml ₹255 | 20ml ₹585 | 30ml ₹699
+- Rifaqaat (fragrance): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹235 | 20ml ₹539 | 30ml ₹749
+- Rifaqaat Adorn (fragrance): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 20ml ₹495 | 30ml ₹679
+- Mawj Moscow Mule (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
+- Confidential (fragrance): 3ml ₹105 | 5ml ₹165 | 7.5ml ₹255 | 20ml ₹509 | 30ml ₹699
 
 ### Pendora Scents
-- Vanilla Tobacco (fragrance): 3ml ₹79 | 5ml ₹115 | 7.5ml ₹169 | 20ml ₹365 | 30ml ₹499
+- Vanilla Tobacco (fragrance): 3ml ₹79 | 5ml ₹115 | 7.5ml ₹169 | 20ml ₹375 | 30ml ₹499
 
 ### Rasasi
-- Daarej Pour Homme (fragrance): 3ml ₹79 | 5ml ₹115 | 7.5ml ₹169 | 20ml ₹365 | 30ml ₹499
-- Fattan (fragrance): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹305 | 20ml ₹705 | 30ml ₹1009
-- Hawas Black (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹629 | 30ml ₹899
-- Hawas Fire (fragrance): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 20ml ₹765 | 30ml ₹1099
-- Hawas Ice (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹629 | 30ml ₹899
-- Hawas Kobra (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹265 | 20ml ₹609 | 30ml ₹869
-- Hawas OG (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹565 | 30ml ₹799
-- Hawas Venom (fragrance): 3ml ₹159 | 5ml ₹249 | 7.5ml ₹385 | 20ml ₹909 | 30ml ₹1099
-- Hawas Sapphire (fragrance): 3ml ₹159 | 5ml ₹249 | 7.5ml ₹385 | 20ml ₹909 | 30ml ₹1099
+- Daarej Pour Homme (fragrance): 3ml ₹79 | 5ml ₹115 | 7.5ml ₹169 | 20ml ₹375 | 30ml ₹499
+- Fattan (fragrance): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹305 | 20ml ₹715 | 30ml ₹1009
+- Hawas Black (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
+- Hawas Fire (fragrance): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 20ml ₹775 | 30ml ₹1099
+- Hawas Ice (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
+- Hawas Kobra (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹265 | 20ml ₹619 | 30ml ₹869
+- Hawas OG (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
+- Hawas Venom (fragrance): 3ml ₹159 | 5ml ₹249 | 7.5ml ₹385 | 20ml ₹775 | 30ml ₹1099
+- Hawas Sapphire (fragrance): 3ml ₹159 | 5ml ₹249 | 7.5ml ₹385 | 20ml ₹775 | 30ml ₹1099
 
 ### Rayhaan
-- Aquatica (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Crimson (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Elixir (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Jungle Vibe (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Nocturno (fragrance): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹235 | 20ml ₹529 | 30ml ₹750
-- Nocturno Elixir (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Obsidian (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Pacific (fragrance): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 20ml ₹429 | 30ml ₹599
-- Terra (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Valhalla (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Wolf (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Lion (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Pacific Aura (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹499 | 30ml ₹699
-- Italia (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹269 | 20ml ₹619 | 30ml ₹699
+- Aquatica (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Crimson (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Elixir (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Jungle Vibe (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Nocturno (fragrance): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹235 | 20ml ₹539 | 30ml ₹750
+- Nocturno Elixir (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Obsidian (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Pacific (fragrance): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 20ml ₹439 | 30ml ₹599
+- Terra (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Valhalla (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Wolf (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Lion (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Pacific Aura (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
+- Italia (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹269 | 20ml ₹509 | 30ml ₹699
 
 ### Reef
-- Reef 33 (fragrance): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 20ml ₹699 | 30ml ₹999
+- Reef 33 (fragrance): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 20ml ₹709 | 30ml ₹999
 
 ### Riiffs
-- Season Rise (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹269 | 20ml ₹619 | 30ml ₹789
-- Costa de Amalfi (fragrance): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 20ml ₹479 | 30ml ₹669
-- Fareed (fragrance): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹229 | 20ml ₹525 | 30ml ₹739
-- Freeze (fragrance): 3ml ₹125 | 5ml ₹189 | 7.5ml ₹289 | 20ml ₹669 | 30ml ₹959
-- Momento (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹629 | 30ml ₹899
-- Season Drift (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹245 | 20ml ₹559 | 30ml ₹789
-- Freeze in Flames (fragrance): 3ml ₹125 | 5ml ₹189 | 7.5ml ₹289 | 20ml ₹669 | 30ml ₹959
-- PrivÃ¨ Platinum Silver (fragrance): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 20ml ₹465 | 30ml ₹649
+- Season Rise (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹269 | 20ml ₹569 | 30ml ₹789
+- Costa de Amalfi (fragrance): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 20ml ₹489 | 30ml ₹669
+- Fareed (fragrance): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹229 | 20ml ₹535 | 30ml ₹739
+- Freeze (fragrance): 3ml ₹125 | 5ml ₹189 | 7.5ml ₹289 | 20ml ₹679 | 30ml ₹959
+- Momento (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
+- Season Drift (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹245 | 20ml ₹569 | 30ml ₹789
+- Freeze in Flames (fragrance): 3ml ₹125 | 5ml ₹189 | 7.5ml ₹289 | 20ml ₹679 | 30ml ₹959
+- PrivÃ¨ Platinum Silver (fragrance): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 20ml ₹475 | 30ml ₹649
 
 ### Swiss Arabian
-- Enigma of Taif (fragrance): 3ml ₹189 | 5ml ₹299 | 7.5ml ₹459 | 20ml ₹1099 | 30ml ₹1599
-- Incense 01 (fragrance): 3ml ₹169 | 5ml ₹265 | 7.5ml ₹409 | 20ml ₹965 | 30ml ₹2599
-- Shaghaf Oud (fragrance): 3ml ₹149 | 5ml ₹235 | 7.5ml ₹359 | 20ml ₹849 | 30ml ₹1229
-- Shaghaf Oud Tonka (fragrance): 3ml ₹149 | 5ml ₹235 | 7.5ml ₹359 | 20ml ₹849 | 30ml ₹1229
-- Soul of Bali (fragrance): 3ml ₹189 | 5ml ₹299 | 7.5ml ₹459 | 20ml ₹1099 | 30ml ₹1599
-- Vanilla 01 (fragrance): 3ml ₹245 | 5ml ₹389 | 7.5ml ₹609 | 20ml ₹1465 | 30ml ₹2149
+- Enigma of Taif (fragrance): 3ml ₹189 | 5ml ₹299 | 7.5ml ₹459 | 20ml ₹1109 | 30ml ₹1599
+- Incense 01 (fragrance): 3ml ₹169 | 5ml ₹265 | 7.5ml ₹409 | 20ml ₹1775 | 30ml ₹2599
+- Shaghaf Oud (fragrance): 3ml ₹149 | 5ml ₹235 | 7.5ml ₹359 | 20ml ₹859 | 30ml ₹1229
+- Shaghaf Oud Tonka (fragrance): 3ml ₹149 | 5ml ₹235 | 7.5ml ₹359 | 20ml ₹859 | 30ml ₹1229
+- Soul of Bali (fragrance): 3ml ₹189 | 5ml ₹299 | 7.5ml ₹459 | 20ml ₹1109 | 30ml ₹1599
+- Vanilla 01 (fragrance): 3ml ₹245 | 5ml ₹389 | 7.5ml ₹609 | 20ml ₹1475 | 30ml ₹2149
 
 ### Zimaya
-- Mazaaj Rhythm (fragrance): 3ml ₹99 | 5ml ₹155 | 7.5ml ₹229 | 20ml ₹519 | 30ml ₹729
+- Mazaaj Rhythm (fragrance): 3ml ₹99 | 5ml ₹155 | 7.5ml ₹229 | 20ml ₹529 | 30ml ₹729

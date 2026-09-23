@@ -10,7 +10,7 @@
 3ml  = CEILING(3 × (30ml/30 + 9),  5); if result ends in 0 → -1
 5ml  = CEILING(5 × (30ml/30 + 6),  5); if result ends in 0 → -1
 8ml  = CEILING(8 × (30ml/30 + 4),  5); if result ends in 0 → -1
-20ml = CEILING(20 × (30ml/30 + 1.5),5); if result ends in 0 → -1
+20ml = CEILING(20 × (30ml/30 + 2),5); if result ends in 0 → -1
 30ml = base price
 ```
 
