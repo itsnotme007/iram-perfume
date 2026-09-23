@@ -314,8 +314,8 @@ function fragPage(pr) {
   }).join('');
   let bottleImg = '';
   const bottleDir = path.join(ROOT, 'images', 'bottles');
-  if (fs.existsSync(path.join(bottleDir, pr.slug + '.jpg'))) bottleImg = '../images/bottles/' + pr.slug + '.jpg';
-  else if (fs.existsSync(path.join(bottleDir, pr.slug + '.png'))) bottleImg = '../images/bottles/' + pr.slug + '.png';
+  if (fs.existsSync(path.join(bottleDir, pr.slug + '.png'))) bottleImg = '../images/bottles/' + pr.slug + '.png';
+  else if (fs.existsSync(path.join(bottleDir, pr.slug + '.jpg'))) bottleImg = '../images/bottles/' + pr.slug + '.jpg';
   const body = ''
     + '<div class="top"><div><div class="brand-chip">' + esc(pr.brand.toUpperCase()) + '</div><h1>' + esc(pr.name) + ' \u2014 Decant Price in India</h1></div><a href="../index.html">\u2190 Full collection</a></div>'
     + (bottleImg ? '<img src="' + bottleImg + '" alt="' + esc(pr.name) + ' bottle" style="max-width:220px;border-radius:12px;margin:16px 0;display:block">' : '')
