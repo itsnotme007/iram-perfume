@@ -126,7 +126,7 @@
 - ASAD Elixir (fragrance): 3ml ₹99 | 5ml ₹155 | 7.5ml ₹215 | 20ml ₹529 | 30ml ₹729
 - Habik (fragrance): 3ml ₹109 | 5ml ₹169 | 7.5ml ₹255 | 20ml ₹595 | 30ml ₹829
 - Khamrah (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
-- Khamrah Dukhan (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
+- Khamrah Dukhan (fragrance): 3ml ₹109 | 5ml ₹170 | 7.5ml ₹255 | 20ml ₹595 | 30ml ₹829
 - Khamrah Qahwa (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
 - Kingdom (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 20ml ₹609 | 30ml ₹849
 - Maahir Gold (fragrance): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 20ml ₹509 | 30ml ₹699
