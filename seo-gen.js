@@ -546,6 +546,13 @@ function editHomepage(products, faqHtml, articlesHtml) {
   const tagClose = '\n</script>\n';
   out = out.replace(/<!--FAQ_SCHEMA-->[\s\S]*?<!--EOF-->/g, '');
   out = out.replace(/<script type="application\/ld\+json">\s*<\/script>/g, '');
+  // drop any previously injected homepage FAQPage blocks (keep exactly one)
+  const faqBlocks = [...out.matchAll(/<script type="application\/ld\+json">[\s\S]*?<\/script>\n?/g)].filter((m) => {
+    try { const j = JSON.parse(m[0].replace(/^<script[^>]*>/, '').replace(/<\/script>\s*$/, '')); return j && j['@type'] === 'FAQPage'; } catch (e) { return false; }
+  });
+  for (let fi = faqBlocks.length - 1; fi >= 0; fi--) {
+    out = out.slice(0, faqBlocks[fi].index) + out.slice(faqBlocks[fi].index + faqBlocks[fi][0].length);
+  }
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
