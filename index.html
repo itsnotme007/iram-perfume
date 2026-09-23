@@ -533,9 +533,11 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 [data-theme="dark"] .pc-ph{background:linear-gradient(135deg,#262c33,#181d24)}
 .pc-ph::before{content:'';position:absolute;left:50%;bottom:20%;width:36%;height:46%;transform:translateX(-50%);background:var(--accent-brand);opacity:.22;border-radius:6px 6px 12px 12px}
 .pc-ph::after{content:'';position:absolute;left:50%;bottom:calc(20% + 44%);width:14%;height:22%;transform:translateX(-50%);background:var(--accent-brand);opacity:.22;border-radius:4px 4px 0 0}
-.pc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;padding:0;border-radius:12px;opacity:0;transition:opacity .25s}
+.pc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8px;border-radius:12px;opacity:0;transition:opacity .25s}
 .pc-img.loaded{opacity:1}
 .pc-img.pc-img-err{opacity:0}
+.pc-media:has(.pc-img.loaded) .pc-ph{display:none}
+.pc-media:has(.pc-img.loaded){background:transparent}
 .pc-badge{position:absolute;top:7px;left:7px;font-size:8.5px;font-weight:800;letter-spacing:.4px;padding:3px 7px;border-radius:4px;color:#fff;pointer-events:none;line-height:1.2}
 .pc-badge-so{background:#e94560}
 .pc-badge-cs{background:#2e7d32}
@@ -4592,7 +4594,7 @@ try{(function(){
     function loadNext(){
       if(!base||i>=exts.length)return;
       var im=new Image();
-      im.onload=function(){el.src=im.src;el.classList.remove('pc-img-err');el.classList.add('loaded')};
+      im.onload=function(){el.src=im.src;el.classList.remove('pc-img-err');el.classList.add('loaded');var ph=el.parentElement&&el.parentElement.querySelector('.pc-ph');if(ph)ph.style.display='none'};
       im.onerror=loadNext;
       im.src=base+exts[i++];
     }
@@ -4974,8 +4976,9 @@ try{(function(){
     }
     if(!attrHtml&&d.attrs){for(var i=0;i<chipDefs.length;i++){var k=chipDefs[i][0],lbl=chipDefs[i][1];if(d.attrs[k]&&d.attrs[k].length){attrHtml+='<div class="pc-attr-chip"><small>'+lbl+'</small><span>'+d.attrs[k].map(esc).join(' / ')+'</span></div>'}}}
     var img=card.querySelector('.pc-img');
+    var hasSrc=img&&img.getAttribute('src');
     var imgHtml='<div class="pc-hero-ph" aria-hidden="true"></div>';
-    if(img&&img.getAttribute('src'))imgHtml='<img src="'+esc(img.getAttribute('src'))+'" alt="'+esc(frag)+'" class="pc-hero-img'+(img.classList.contains('loaded')?'':' pc-hero-img-bg')+'" loading="lazy">';
+    if(hasSrc)imgHtml='<img src="'+esc(img.getAttribute('src'))+'" alt="'+esc(frag)+'" class="pc-hero-img" loading="lazy">';
     var hero='<div class="pc-hero">'+imgHtml
       +'<div class="pc-hero-title"><span class="pc-hero-brand">'+esc(brand)+'</span><h3 class="pc-hero-name">'+esc(frag)+'</h3>'
       +(d.gender?'<span class="pc-gender pc-gender-'+d.gender.toLowerCase()+'">'+d.gender+'</span>':'')
