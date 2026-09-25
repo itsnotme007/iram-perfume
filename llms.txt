@@ -47,6 +47,7 @@
 - 9 PM OG (fragrance): 3ml ₹125 | 5ml ₹189 | 7.5ml ₹269 | 20ml ₹675 | 30ml ₹949
 - 9 PM Rebel (fragrance): 3ml ₹125 | 5ml ₹189 | 7.5ml ₹269 | 20ml ₹675 | 30ml ₹949
 - Turathi Brown (fragrance): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹265 | 20ml ₹619 | 30ml ₹869
+- Historic Sahara (fragrance): 3ml ₹109 | 5ml ₹169 | 7.5ml ₹255 | 20ml ₹589 | 30ml ₹819
 
 ### Ahmed Al Maghribi
 - Black Fume (fragrance): 3ml ₹99 | 5ml ₹155 | 7.5ml ₹215 | 20ml ₹529 | 30ml ₹729
@@ -83,6 +84,7 @@
 - Mahd Al Dhahab (fragrance): 3ml ₹125 | 5ml ₹195 | 7.5ml ₹295 | 20ml ₹689 | 30ml ₹969
 - Kohl Opulence (fragrance): 3ml ₹115 | 5ml ₹179 | 7.5ml ₹269 | 20ml ₹629 | 30ml ₹879
 - La Di Da For Him (fragrance): 3ml ₹125 | 5ml ₹195 | 7.5ml ₹295 | 20ml ₹689 | 30ml ₹969
+- Aristo (fragrance): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 20ml ₹655 | 30ml ₹919
 
 ### Armaf
 - CDNIM PP (Club de Nuit Intense Man Pure Parfum) (fragrance): 3ml ₹109 | 5ml ₹169 | 7.5ml ₹255 | 20ml ₹595 | 30ml ₹829
@@ -90,6 +92,8 @@
 - Odyssey Mandarin Sky Elixir (fragrance): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 20ml ₹495 | 30ml ₹679
 - Overdose (fragrance): 3ml ₹149 | 5ml ₹229 | 7.5ml ₹355 | 20ml ₹839 | 30ml ₹1199
 - Odyssey Mega (fragrance): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 20ml ₹495 | 30ml ₹679
+- Club de Nuit Urban Man Elixir (fragrance): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 20ml ₹639 | 30ml ₹899
+- Club de Nuit Iconic (fragrance): 3ml ₹149 | 5ml ₹229 | 7.5ml ₹355 | 20ml ₹839 | 30ml ₹1199
 
 ### Assaf
 - Tobacco Jam 50 (fragrance): 3ml ₹179 | 5ml ₹279 | 7.5ml ₹435 | 20ml ₹1039 | 30ml ₹1499
@@ -136,12 +140,13 @@
 - Rave Now Rouge (fragrance): 3ml ₹79 | 5ml ₹115 | 7.5ml ₹169 | 20ml ₹375 | 30ml ₹499
 - Sehr (fragrance): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 20ml ₹775 | 30ml ₹1099
 - Sherif (fragrance): 3ml ₹115 | 5ml ₹169 | 7.5ml ₹259 | 20ml ₹599 | 30ml ₹839
-- Teriaq Intense (fragrance): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 20ml ₹755 | 30ml ₹1069
+- Teriaq Intense (fragrance): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 20ml ₹775 | 30ml ₹1099
 - Jasoor (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
 - Raghba (fragrance): 3ml ₹85 | 5ml ₹125 | 7.5ml ₹179 | 20ml ₹409 | 30ml ₹549
 - Al Nashama Caprice (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
 - Badee Al Oud Amethyst (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
 - Badee Al Oud Amethyst Fusion (fragrance): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 20ml ₹575 | 30ml ₹799
+- Fahad (fragrance): 3ml ₹125 | 5ml ₹195 | 7.5ml ₹295 | 20ml ₹689 | 30ml ₹969
 
 ### Laverne
 - Blue Laverne Sport (fragrance): 3ml ₹99 | 5ml ₹155 | 7.5ml ₹229 | 20ml ₹529 | 30ml ₹729

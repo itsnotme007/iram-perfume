@@ -117,7 +117,7 @@ for (const reg of REGIONS) {
     sizes.forEach((k, i) => {
       const inner = sizeCells[i];
       prices[k] = num(inner);
-      if (inner.includes('<s')) statusPerSize[k] = 'struck';
+      if (/<s[ >]/.test(inner)) statusPerSize[k] = 'struck';
       else if (inner.includes('u-price')) statusPerSize[k] = 'coming';
       else statusPerSize[k] = 'ok';
     });
