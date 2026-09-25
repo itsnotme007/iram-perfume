@@ -26,3 +26,9 @@
 - Filter bar: `.toolbar` div, `.filter-bar{position:sticky;top:80px;z-index:50}`
 - Cart uses `window._products` registry keyed by `brand|frag`
 - v2.0 design: #FAF9F7 light bg, #D4AF37 gold accent
+
+## Bottle Images
+- "images/bottles/<slug>.jpg" = source photo; "images/bottles/<slug>.png" = **transparent-background cutout (RGBA)** — always ship the PNG
+- Detail pages use <img src="../images/bottles/<slug>.png" alt="<name> bottle" style="max-width:220px;border-radius:12px;margin:16px 0;display:block">
+- node seo-gen.js prefers .png, falls back to .jpg (checks images/bottles/ at build time)
+- Cutout rules: bottle only (no box/packaging), tight crop, longest side 1024px, feathered alpha, no white fringe
