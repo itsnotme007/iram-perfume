@@ -112,16 +112,55 @@ tbody td{padding:10px;vertical-align:middle;color:var(--text-body)}
 .links-cell a{color:var(--accent-link);text-decoration:none;font-size:12px;font-weight:500;position:relative}
 .links-cell a:hover{color:var(--accent-danger);text-decoration:underline}
 .links-cell .preview-trigger{color:var(--text-muted);font-size:11px;font-style:italic;cursor:default;position:relative}
-.filter-bar{border:1px solid var(--border-default);border-radius:12px;padding:6px 14px;margin-bottom:16px;background:var(--bg-surface-alt);box-shadow:var(--shadow-md)}
-.filter-table{width:100%;border-collapse:collapse}
-.filter-table td{padding:6px 4px;vertical-align:top}
-.filter-label{font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;width:1%;padding-right:16px!important}
-.filter-buttons{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
-.filter-btn{padding:4px 12px;font-size:12px;border:1px solid var(--border-strong);border-radius:20px;background:var(--bg-surface);color:var(--text-primary);cursor:pointer;font-weight:500;transition:all .15s}
-.filter-btn:hover{border-color:var(--accent-secondary);color:var(--accent-secondary)}
-.filter-btn.active{background:var(--accent-primary);color:var(--text-on-dark);border-color:var(--accent-primary)}
-.filter-btn.active:hover{opacity:.85}
-.filter-hidden{display:none!important}
+.filter-bar{position:relative;margin-bottom:16px}
+.filter-bar-main{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 10px;border:1px solid var(--border-default);border-radius:14px;background:var(--bg-surface);box-shadow:var(--shadow-sm)}
+.filter-trigger{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid var(--border-strong);border-radius:10px;background:var(--bg-surface);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s,color .15s,background .15s}
+.filter-trigger:hover{border-color:var(--accent-brand);color:var(--accent-secondary)}
+.filter-trigger[aria-expanded="true"]{border-color:var(--accent-brand);background:var(--bg-hover);color:var(--text-heading)}
+.filter-trigger-n{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:var(--accent-brand);color:#3a2a12;font-size:10.5px;font-weight:800;line-height:1}
+.filter-trigger:focus-visible,.filter-chip:focus-visible,.filter-clear:focus-visible,.filter-apply:focus-visible,.filter-panel-x:focus-visible,.filter-sort:focus-visible,.filter-btn:focus-visible,.pc-sort:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+.filter-bar-end{margin-left:auto;display:flex;align-items:center;gap:10px}
+.filter-count{font-size:12.5px;font-weight:500;color:var(--text-muted);white-space:nowrap}
+.filter-count b{color:var(--text-heading);font-weight:700}
+.filter-sort{min-height:44px;padding:0 34px 0 12px;border:1px solid var(--border-strong);border-radius:10px;background:var(--bg-surface);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237a7168'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.filter-chips{display:flex;align-items:center;flex-wrap:wrap;gap:6px;flex:1 1 auto;min-width:0}
+.filter-chip{display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 7px 0 11px;border:1px solid var(--border-accent);border-radius:8px;background:var(--bg-surface);color:var(--text-body);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s,color .15s}
+.filter-chip:hover{border-color:var(--accent-danger);color:var(--accent-danger)}
+.filter-chip-x{font-size:15px;line-height:1;font-weight:400;opacity:.75}
+.filter-chip:hover .filter-chip-x{opacity:1}
+.filter-clear{padding:0 4px;border:none;background:none;color:var(--text-muted);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.filter-clear:hover{color:var(--accent-danger)}
+.filter-panel-host{position:relative}
+.filter-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:70;width:min(360px,calc(100vw - 32px));max-height:min(72vh,580px);display:flex;flex-direction:column;border:1px solid var(--border-default);border-radius:14px;background:var(--bg-surface);box-shadow:var(--shadow-lg);overflow:hidden}
+.filter-panel[hidden]{display:none}
+.filter-panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 12px 11px 16px;border-bottom:1px solid var(--border-light);flex-shrink:0}
+.filter-panel-title{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text-muted)}
+.filter-panel-x{width:36px;height:36px;border:none;border-radius:8px;background:var(--bg-elevated);color:var(--text-primary);font-family:inherit;font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.filter-panel-x:hover{background:var(--bg-hover);color:var(--accent-danger)}
+.filter-panel-chips{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:12px 16px;border-bottom:1px solid var(--border-light);flex-shrink:0}
+.filter-panel-chips[hidden]{display:none}
+.filter-panel-body{flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;padding:0 16px}
+.filter-group{padding:14px 0;border-bottom:1px solid var(--border-light)}
+.filter-group:last-child{border-bottom:0;padding-bottom:4px}
+.filter-group-h{margin-bottom:9px;font-size:10.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text-muted)}
+.filter-opts{display:grid;grid-template-columns:1fr;gap:6px}
+.filter-opts.wide{grid-template-columns:1fr 1fr}
+.filter-btn{display:flex;align-items:center;gap:10px;width:100%;min-height:42px;padding:8px 12px;border:1px solid var(--border-default);border-radius:10px;background:var(--bg-surface);color:var(--text-body);font-family:inherit;font-size:13.5px;font-weight:500;line-height:1.3;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s,color .15s,background .15s}
+.filter-btn:hover{border-color:var(--border-accent);background:var(--bg-hover)}
+.filter-dot{flex:0 0 16px;width:16px;height:16px;border:1.5px solid var(--border-strong);border-radius:50%;background:var(--bg-surface);position:relative;transition:border-color .15s}
+.filter-btn.active{border-color:var(--accent-brand);background:var(--bg-hover);color:var(--text-heading);font-weight:600}
+.filter-btn.active .filter-dot{border-color:var(--accent-brand)}
+.filter-btn.active .filter-dot::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--accent-brand)}
+.filter-panel-foot{display:flex;align-items:center;gap:10px;padding:12px 16px;border-top:1px solid var(--border-default);background:var(--bg-surface);flex-shrink:0}
+.filter-panel-foot .filter-clear{flex:0 0 auto;min-height:44px;padding:0 14px;border:1px solid var(--border-strong);border-radius:10px;text-decoration:none}
+.filter-apply{flex:1 1 auto;min-height:44px;border:none;border-radius:10px;background:var(--accent-primary);color:var(--text-on-dark);font-family:inherit;font-size:13.5px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.filter-apply:hover{opacity:.9}
+.filter-apply:disabled{opacity:.5;cursor:not-allowed}
+.filter-summary{flex:0 0 100%;display:flex;flex-direction:column;gap:8px;padding:2px 2px 0}
+.filter-summary[hidden]{display:none}
+.filter-summary-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.filter-summary-chips{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.filter-summary-chips[hidden]{display:none}
 #filterResults{background:var(--bg-surface);border:1px solid var(--border-default);border-radius:12px;box-shadow:var(--shadow-md);margin-bottom:16px;overflow-x:auto}
 #filterResults table{margin-top:0}
 .contact-card{background:var(--bg-surface);border:1px solid var(--border-default);border-radius:12px;padding:16px 20px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
@@ -178,14 +217,6 @@ tbody td{padding:10px;vertical-align:middle;color:var(--text-body)}
   .frag-cards{display:grid;grid-template-columns:1fr;gap:10px}
   .mobile-nav{display:flex}
   body{padding-bottom:64px;overflow-x:hidden}
-  .filter-bar{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:8px 10px;max-width:100vw;margin-bottom:12px}
-  .filter-bar::-webkit-scrollbar{display:none}
-  .filter-table{min-width:auto;border-collapse:separate;border-spacing:0 4px}
-  .filter-table td{display:table-cell;width:auto!important;padding:3px 0;vertical-align:middle}
-  .filter-label{font-size:10px;padding-right:10px!important;white-space:nowrap;font-weight:600;color:var(--text-muted)}
-  .filter-buttons{display:flex;flex-wrap:nowrap;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
-  .filter-buttons::-webkit-scrollbar{display:none}
-  .filter-btn{font-size:10px;padding:3px 8px;white-space:nowrap;flex-shrink:0}
   .callout{padding:12px 14px;font-size:12px;margin-bottom:16px}
   .contact-card{padding:12px 14px;margin-bottom:16px}
   .contact-card h3{font-size:14px!important}
@@ -224,10 +255,6 @@ tbody td{padding:10px;vertical-align:middle;color:var(--text-body)}
   .banner-logo{max-height:50px}
   .banner .badge{font-size:9px}
   .container{padding:8px 8px}
-  .filter-bar{padding:6px 8px}
-  .filter-table td{display:block;padding:2px 0}
-  .filter-label{display:inline-block;margin-right:6px;padding-bottom:0!important}
-  .filter-buttons{display:inline-flex;flex-wrap:nowrap}
   .frag-cards{gap:8px}
   .frag-card{padding:10px}
   .card-frag-name{font-size:13px}
@@ -558,10 +585,12 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 .pc-add-cs{background:transparent;border:1px solid var(--accent-success);color:var(--accent-success);cursor:not-allowed}
 .pc-add:focus-visible,.pc-name:focus-visible,.pc-media:focus-visible,.pc-size:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 .pc-toolbar{display:none;position:sticky;top:0;z-index:55;align-items:center;gap:8px;padding:8px 0;background:var(--bg-page);margin-bottom:2px}
-.pc-filter-pill{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 14px;border:1px solid var(--border-strong);border-radius:24px;background:var(--bg-surface);color:var(--text-primary);font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;box-shadow:var(--shadow-sm)}
-.pc-filter-pill.active{border-color:var(--accent-secondary);color:var(--accent-secondary)}
-.pc-filter-count{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#e94560;color:#fff;font-size:10px;font-weight:800}
-.pc-sort{flex:1;min-height:42px;padding:0 34px 0 14px;border:1px solid var(--border-strong);border-radius:24px;background:var(--bg-surface);color:var(--text-primary);font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237a7168'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.pc-filter-pill{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 16px;border:1px solid var(--border-strong);border-radius:10px;background:var(--bg-surface);color:var(--text-primary);font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;box-shadow:var(--shadow-sm);-webkit-tap-highlight-color:transparent;transition:border-color .15s,color .15s,background .15s}
+.pc-filter-pill:hover{border-color:var(--accent-brand)}
+.pc-filter-pill.active{border-color:var(--accent-brand);color:var(--text-heading);background:var(--bg-hover)}
+.pc-filter-pill:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+.pc-filter-count{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:var(--accent-brand);color:#3a2a12;font-size:10.5px;font-weight:800;line-height:1}
+.pc-sort{flex:1;min-height:44px;padding:0 34px 0 14px;border:1px solid var(--border-strong);border-radius:10px;background:var(--bg-surface);color:var(--text-primary);font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237a7168'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
 .pc-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1200}
 .pc-overlay.open{display:block}
 .pc-sheet{position:fixed;left:50%;bottom:0;width:100%;max-width:600px;max-height:88vh;background:var(--bg-surface);border-radius:18px 18px 0 0;z-index:1201;display:flex;flex-direction:column;transform:translateX(-50%) translateY(105%);transition:transform .28s ease;box-shadow:var(--shadow-xl)}
@@ -607,12 +636,11 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 .pc-btn-add:not(:disabled):hover{background:#1b5e20}
 .pc-btn-wa{background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px}
 .pc-btn-wa:hover{background:#1da851}
-.pc-sheet-filter .filter-bar{border:0;padding:0;margin:0;box-shadow:none;background:none}
-.pc-sheet-filter .filter-table{min-width:0;border-spacing:0;border-collapse:collapse}
-.pc-sheet-filter .filter-table td{padding:7px 0!important;vertical-align:top;display:block!important;width:100%!important}
-.pc-sheet-filter .filter-label{font-size:10px;width:auto;display:inline-block;padding:0!important;margin-bottom:6px}
-.pc-sheet-filter .filter-buttons{flex-wrap:wrap;overflow:visible;justify-content:flex-start}
-.pc-sheet-filter .filter-btn{min-height:36px;padding:6px 13px;font-size:12px;white-space:nowrap}
+.pc-sheet-filter .filter-panel{position:static;width:auto;max-height:none;display:block;overflow:visible;border:0;border-radius:0;box-shadow:none;background:none}
+.pc-sheet-filter .filter-panel-head{display:none}
+.pc-sheet-filter .filter-panel-body{overflow:visible;padding:0;max-height:none}
+.pc-sheet-filter .filter-panel-chips{padding:14px 0 0}
+.pc-sheet-filter .filter-panel-foot{position:sticky;bottom:0;margin:0 -18px;padding:12px 18px calc(14px + env(safe-area-inset-bottom,0px));z-index:2}
 body.pc-lock{overflow:hidden}
 @media(max-width:1023px){
   .frag-table{display:none!important}
@@ -632,6 +660,9 @@ body.pc-lock{overflow:hidden}
 }
 @media(max-width:480px){
   .frag-cards{gap:8px}
+  .filter-btn{min-height:40px;padding:8px 10px;font-size:12.5px;gap:8px}
+  .filter-dot{flex-basis:14px;width:14px;height:14px}
+  .filter-trigger,.pc-filter-pill{padding:0 13px}
   .pc-hero{flex-direction:column;gap:10px}
   .pc-hero-img{flex:0 0 auto;width:132px;align-self:center}
   .pc-size{grid-template-columns:1fr}
@@ -2830,8 +2861,8 @@ body.pc-lock{overflow:hidden}
       "url": "https://itsnotme007.github.io/iram-perfume/fragrance/lattafa-fahad.html",
       "offers": {
         "@type": "AggregateOffer",
-        "lowPrice": "125",
-        "highPrice": "969",
+        "lowPrice": "139",
+        "highPrice": "1099",
         "priceCurrency": "INR",
         "availability": "https://schema.org/InStock",
         "url": "https://itsnotme007.github.io/iram-perfume/fragrance/lattafa-fahad.html",
@@ -3944,6 +3975,13 @@ body.pc-lock{overflow:hidden}
 
 
 
+
+
+
+
+
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -4010,7 +4048,7 @@ body.pc-lock{overflow:hidden}
       "name": "What is your refund and returns policy?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Please record an unpacking video of your parcel. Any claim for a damaged or incorrect order must include that unpacking video — without it, refunds or replacements cannot be processed."
+        "text": "If anything is wrong with your order, message us on WhatsApp or by email with your order details and we will sort it out with a replacement or refund."
       }
     },
     {
@@ -4039,7 +4077,6 @@ body.pc-lock{overflow:hidden}
 
 <div class="callout">
   <p><strong>Free Shipping</strong> on orders over ₹999 (min 2 decants)</p>
-  <p style="margin-top:4px"><strong>Note:</strong> Record an unpacking video. No refund without video proof.</p>
 </div>
 
 <div class="contact-card">
@@ -4059,96 +4096,153 @@ body.pc-lock{overflow:hidden}
 </div>
 
 <div class="filter-bar" id="filterBar">
-<table class="filter-table">
-<tr><td class="filter-label">New:</td><td class="filter-buttons">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-added="true">New Arrivals</button>
-</td></tr>
-<tr><td class="filter-label">Gender:</td><td class="filter-buttons">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-gender="Men">Men</button>
-  <button class="filter-btn" data-gender="Unisex">Unisex</button>
-  <button class="filter-btn" data-gender="Women">Women</button>
-</td></tr>
-<tr><td class="filter-label">Scent:</td><td class="filter-buttons">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-scent="fresh">Fresh</button>
-  <button class="filter-btn" data-scent="aquatic">Aquatic</button>
-  <button class="filter-btn" data-scent="citrus">Citrus</button>
-  <button class="filter-btn" data-scent="woody">Woody</button>
-  <button class="filter-btn" data-scent="sweet">Sweet</button>
-  <button class="filter-btn" data-scent="spicy">Spicy</button>
-  <button class="filter-btn" data-scent="aromatic">Aromatic</button>
-  <button class="filter-btn" data-scent="oud">Oud</button>
-</td></tr>
-<tr><td class="filter-label">Season:</td><td class="filter-buttons">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-season="spring">Spring</button>
-  <button class="filter-btn" data-season="summer">Summer</button>
-  <button class="filter-btn" data-season="fall">Fall</button>
-  <button class="filter-btn" data-season="winter">Winter</button>
-</td></tr>
-<tr><td class="filter-label">Occasion:</td><td class="filter-buttons">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-occasion="daily">Daily</button>
-  <button class="filter-btn" data-occasion="office">Office</button>
-  <button class="filter-btn" data-occasion="date-night">Date Night</button>
-  <button class="filter-btn" data-occasion="party">Party</button>
-  <button class="filter-btn" data-occasion="special-occasion">Special Occasion</button>
-</td></tr>
-<tr><td class="filter-label">Time:</td><td class="filter-buttons">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-time="day">Day</button>
-  <button class="filter-btn" data-time="evening">Evening</button>
-  <button class="filter-btn" data-time="night">Night</button>
-</td></tr>
-<tr><td class="filter-label">Weather:</td><td class="filter-buttons">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-weather="hot">Hot</button>
-  <button class="filter-btn" data-weather="mild">Mild</button>
-   <button class="filter-btn" data-weather="cold">Cold</button>
-   <button class="filter-btn" data-weather="rain">Rain</button>
-</td></tr>
-<tr><td class="filter-label">Mood:</td><td class="filter-buttons">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-mood="fresh">Fresh</button>
-  <button class="filter-btn" data-mood="clean">Clean</button>
-  <button class="filter-btn" data-mood="cozy">Cozy</button>
-  <button class="filter-btn" data-mood="sexy">Sexy</button>
-  <button class="filter-btn" data-mood="elegant">Elegant</button>
-  <button class="filter-btn" data-mood="bold">Bold</button>
-  <button class="filter-btn" data-mood="relaxing">Relaxing</button>
-</td></tr>
-<tr><td class="filter-label">Family:</td><td class="filter-buttons">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-family="citrus">Citrus</button>
-  <button class="filter-btn" data-family="fresh">Fresh</button>
-  <button class="filter-btn" data-family="aquatic">Aquatic</button>
-  <button class="filter-btn" data-family="woody">Woody</button>
-  <button class="filter-btn" data-family="floral">Floral</button>
-  <button class="filter-btn" data-family="gourmand">Gourmand</button>
-  <button class="filter-btn" data-family="vanilla">Vanilla</button>
-  <button class="filter-btn" data-family="amber">Amber</button>
-  <button class="filter-btn" data-family="leather">Leather</button>
-  <button class="filter-btn" data-family="tobacco">Tobacco</button>
-  <button class="filter-btn" data-family="spicy">Spicy</button>
-  <button class="filter-btn" data-family="musky">Musky</button>
-  <button class="filter-btn" data-family="fruity">Fruity</button>
-</td></tr>
-</table>
+  <div class="filter-bar-main">
+    <button type="button" class="filter-trigger" id="filterTrigger" aria-haspopup="dialog" aria-expanded="false" aria-controls="filterPanel">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M3.2 5h17.6l-6.9 8.2V19l-3.8 2.1v-7.9L3.2 5z"/></svg>
+      Filter <span class="filter-trigger-n" id="filterTriggerN" hidden>0</span>
+    </button>
+    <div class="filter-chips" id="filterChips" hidden></div>
+    <div class="filter-bar-end">
+      <span class="filter-count" id="filterCount">147 fragrances</span>
+      <select id="filterSort" class="filter-sort" aria-label="Sort fragrances">
+        <option value="featured">Sort: Recommended</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+        <option value="name">Name: A to Z</option>
+        <option value="new">Newest First</option>
+      </select>
+    </div>
+  </div>
+  <div class="filter-panel-host" id="filterPanelHost">
+    <div class="filter-panel" id="filterPanel" role="dialog" aria-label="Filter fragrances" tabindex="-1" hidden>
+      <div class="filter-panel-head">
+        <span class="filter-panel-title">Filter</span>
+        <button type="button" class="filter-panel-x" id="filterPanelX" aria-label="Close filters">&times;</button>
+      </div>
+      <div class="filter-panel-chips" id="filterPanelChips" hidden></div>
+      <div class="filter-panel-body" id="filterPanelBody">
+        <div class="filter-group" role="radiogroup" aria-labelledby="fgGender">
+          <div class="filter-group-h" id="fgGender">Gender</div>
+          <div class="filter-opts">
+            <button type="button" class="filter-btn active" data-filter="all" role="radio" aria-checked="true"><i class="filter-dot" aria-hidden="true"></i>Any</button>
+            <button type="button" class="filter-btn" data-gender="Men" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Men</button>
+            <button type="button" class="filter-btn" data-gender="Unisex" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Unisex</button>
+            <button type="button" class="filter-btn" data-gender="Women" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Women</button>
+          </div>
+        </div>
+        <div class="filter-group" role="radiogroup" aria-labelledby="fgScent">
+          <div class="filter-group-h" id="fgScent">Scent</div>
+          <div class="filter-opts wide">
+            <button type="button" class="filter-btn active" data-filter="all" role="radio" aria-checked="true"><i class="filter-dot" aria-hidden="true"></i>Any</button>
+            <button type="button" class="filter-btn" data-scent="fresh" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Fresh</button>
+            <button type="button" class="filter-btn" data-scent="aquatic" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Aquatic</button>
+            <button type="button" class="filter-btn" data-scent="citrus" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Citrus</button>
+            <button type="button" class="filter-btn" data-scent="woody" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Woody</button>
+            <button type="button" class="filter-btn" data-scent="sweet" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Sweet</button>
+            <button type="button" class="filter-btn" data-scent="spicy" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Spicy</button>
+            <button type="button" class="filter-btn" data-scent="aromatic" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Aromatic</button>
+            <button type="button" class="filter-btn" data-scent="oud" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Oud</button>
+          </div>
+        </div>
+        <div class="filter-group" role="radiogroup" aria-labelledby="fgSeason">
+          <div class="filter-group-h" id="fgSeason">Season</div>
+          <div class="filter-opts">
+            <button type="button" class="filter-btn active" data-filter="all" role="radio" aria-checked="true"><i class="filter-dot" aria-hidden="true"></i>Any</button>
+            <button type="button" class="filter-btn" data-season="spring" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Spring</button>
+            <button type="button" class="filter-btn" data-season="summer" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Summer</button>
+            <button type="button" class="filter-btn" data-season="fall" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Fall</button>
+            <button type="button" class="filter-btn" data-season="winter" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Winter</button>
+          </div>
+        </div>
+        <div class="filter-group" role="radiogroup" aria-labelledby="fgOccasion">
+          <div class="filter-group-h" id="fgOccasion">Occasion</div>
+          <div class="filter-opts wide">
+            <button type="button" class="filter-btn active" data-filter="all" role="radio" aria-checked="true"><i class="filter-dot" aria-hidden="true"></i>Any</button>
+            <button type="button" class="filter-btn" data-occasion="daily" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Daily</button>
+            <button type="button" class="filter-btn" data-occasion="office" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Office</button>
+            <button type="button" class="filter-btn" data-occasion="date-night" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Date Night</button>
+            <button type="button" class="filter-btn" data-occasion="party" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Party</button>
+            <button type="button" class="filter-btn" data-occasion="special-occasion" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Special Occasion</button>
+          </div>
+        </div>
+        <div class="filter-group" role="radiogroup" aria-labelledby="fgTime">
+          <div class="filter-group-h" id="fgTime">Time</div>
+          <div class="filter-opts">
+            <button type="button" class="filter-btn active" data-filter="all" role="radio" aria-checked="true"><i class="filter-dot" aria-hidden="true"></i>Any</button>
+            <button type="button" class="filter-btn" data-time="day" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Day</button>
+            <button type="button" class="filter-btn" data-time="evening" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Evening</button>
+            <button type="button" class="filter-btn" data-time="night" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Night</button>
+          </div>
+        </div>
+        <div class="filter-group" role="radiogroup" aria-labelledby="fgWeather">
+          <div class="filter-group-h" id="fgWeather">Weather</div>
+          <div class="filter-opts">
+            <button type="button" class="filter-btn active" data-filter="all" role="radio" aria-checked="true"><i class="filter-dot" aria-hidden="true"></i>Any</button>
+            <button type="button" class="filter-btn" data-weather="hot" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Hot</button>
+            <button type="button" class="filter-btn" data-weather="mild" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Mild</button>
+            <button type="button" class="filter-btn" data-weather="cold" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Cold</button>
+            <button type="button" class="filter-btn" data-weather="rain" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Rain</button>
+          </div>
+        </div>
+        <div class="filter-group" role="radiogroup" aria-labelledby="fgMood">
+          <div class="filter-group-h" id="fgMood">Mood</div>
+          <div class="filter-opts wide">
+            <button type="button" class="filter-btn active" data-filter="all" role="radio" aria-checked="true"><i class="filter-dot" aria-hidden="true"></i>Any</button>
+            <button type="button" class="filter-btn" data-mood="fresh" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Fresh</button>
+            <button type="button" class="filter-btn" data-mood="clean" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Clean</button>
+            <button type="button" class="filter-btn" data-mood="cozy" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Cozy</button>
+            <button type="button" class="filter-btn" data-mood="sexy" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Sexy</button>
+            <button type="button" class="filter-btn" data-mood="elegant" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Elegant</button>
+            <button type="button" class="filter-btn" data-mood="bold" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Bold</button>
+            <button type="button" class="filter-btn" data-mood="relaxing" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Relaxing</button>
+          </div>
+        </div>
+        <div class="filter-group" role="radiogroup" aria-labelledby="fgFamily">
+          <div class="filter-group-h" id="fgFamily">Family</div>
+          <div class="filter-opts wide">
+            <button type="button" class="filter-btn active" data-filter="all" role="radio" aria-checked="true"><i class="filter-dot" aria-hidden="true"></i>Any</button>
+            <button type="button" class="filter-btn" data-family="citrus" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Citrus</button>
+            <button type="button" class="filter-btn" data-family="fresh" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Fresh</button>
+            <button type="button" class="filter-btn" data-family="aquatic" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Aquatic</button>
+            <button type="button" class="filter-btn" data-family="woody" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Woody</button>
+            <button type="button" class="filter-btn" data-family="floral" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Floral</button>
+            <button type="button" class="filter-btn" data-family="gourmand" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Gourmand</button>
+            <button type="button" class="filter-btn" data-family="vanilla" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Vanilla</button>
+            <button type="button" class="filter-btn" data-family="amber" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Amber</button>
+            <button type="button" class="filter-btn" data-family="leather" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Leather</button>
+            <button type="button" class="filter-btn" data-family="tobacco" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Tobacco</button>
+            <button type="button" class="filter-btn" data-family="spicy" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Spicy</button>
+            <button type="button" class="filter-btn" data-family="musky" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Musky</button>
+            <button type="button" class="filter-btn" data-family="fruity" role="radio" aria-checked="false"><i class="filter-dot" aria-hidden="true"></i>Fruity</button>
+          </div>
+        </div>
+      </div>
+      <div class="filter-panel-foot">
+        <button type="button" class="filter-clear" id="filterClear">Clear all</button>
+        <button type="button" class="filter-apply" id="filterApply">Show 147 fragrances</button>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="pc-toolbar" id="pcToolbar" role="toolbar" aria-label="Product toolbar">
-  <button type="button" class="pc-filter-pill" id="pcFilterBtn" aria-haspopup="dialog" aria-label="Open filters">
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M3 5h18v2H3V5zm0 6h12v2H3v-2zm0 6h18v2H3v-2zm15-7h2V6h-2V4h-2v2h-2v2h2v2h2v-2zm-4 7h6v-2h-6v2h2v2h2v-2"/></svg>
-    Filters <span class="pc-filter-count" id="pcFilterCount" hidden>0</span>
+  <button type="button" class="pc-filter-pill" id="pcFilterBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="filterPanel">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M3.2 5h17.6l-6.9 8.2V19l-3.8 2.1v-7.9L3.2 5z"/></svg>
+    Filter <span class="pc-filter-count" id="pcFilterCount" hidden>0</span>
   </button>
   <select id="pcSort" class="pc-sort" aria-label="Sort products">
-    <option value="featured">Sort: Featured</option>
+    <option value="featured">Sort: Recommended</option>
     <option value="low">Price: Low to High</option>
     <option value="high">Price: High to Low</option>
     <option value="name">Name: A to Z</option>
     <option value="new">Newest First</option>
   </select>
+  <div class="filter-summary" id="filterSummary">
+    <div class="filter-summary-top">
+      <span class="filter-count" id="filterCountMobile">147 fragrances</span>
+      <button type="button" class="filter-clear" id="filterClearMobile" hidden>Clear all</button>
+    </div>
+    <div class="filter-summary-chips" id="filterChipsMobile" hidden></div>
+  </div>
 </div>
 <div class="section-heading">Designer</div>
 <div class="table-wrap">
@@ -4282,7 +4376,7 @@ body.pc-lock{overflow:hidden}
 <tr><td class="frag-cell" data-scent="spicy,woody,sweet" data-season="fall,winter" data-occasion="date-night,party" data-time="evening,night" data-weather="cold,mild" data-mood="bold,sexy" data-family="spicy,woody"><a href="fragrance/lattafa-al-nashama-caprice.html" style="text-decoration:none;color:inherit">Al Nashama Caprice</a><span class="tag tag-men">Men</span></td><td class="size-cell">109</td><td class="size-cell">165</td><td class="size-cell">249</td><td class="size-cell">575</td><td class="size-cell"><strong>799</strong></td><td class="inspired-cell">YSL La Nuit de l'Homme Bleu Électrique</td><td class="links-cell"><a target="_blank" href='https://www.fragrantica.com/perfume/Lattafa-Perfumes/Al-Nashama-Caprice-89764.html'>Fragrantica</a> <a target="_blank" href='https://www.parfumo.com/Perfumes/Lattafa/al-nashama-caprice'>Parfumo</a></td></tr>
 <tr><td class="frag-cell" data-scent="rose,oud,amber,vanilla,spicy,floral" data-season="fall,winter" data-occasion="date-night,party" data-time="evening,night" data-weather="cold,mild" data-mood="bold,elegant" data-family="oriental,floral" data-added="2026-09-20"><a href="fragrance/lattafa-badee-al-oud-amethyst.html" style="text-decoration:none;color:inherit">Badee Al Oud Amethyst</a><span class="tag tag-unisex">Unisex</span></td><td class="size-cell">109</td><td class="size-cell">165</td><td class="size-cell">249</td><td class="size-cell">575</td><td class="size-cell"><strong>799</strong></td><td class="inspired-cell">Initio Atomic Rose</td><td class="links-cell"><a target="_blank" href='https://www.fragrantica.com/perfume/Lattafa-Perfumes/Bade-e-Al-Oud-Amethyst-68214.html'>Fragrantica</a> <a target="_blank" href='https://www.parfumo.com/Perfumes/Lattafa/badee-al-oud-amethyst'>Parfumo</a></td></tr>
 <tr><td class="frag-cell" data-scent="rum,amber,caramel,vanilla,amaretto,mandarin,benzoin" data-season="fall,winter" data-occasion="date-night,party" data-time="evening,night" data-weather="cold,mild" data-mood="cozy,rich" data-family="oriental,gourmand" data-added="2026-09-20"><a href="fragrance/lattafa-badee-al-oud-amethyst-fusion.html" style="text-decoration:none;color:inherit">Badee Al Oud Amethyst Fusion</a><span class="tag tag-unisex">Unisex</span></td><td class="size-cell">109</td><td class="size-cell">165</td><td class="size-cell">249</td><td class="size-cell">575</td><td class="size-cell"><strong>799</strong></td><td class="inspired-cell">Original</td><td class="links-cell"><a target="_blank" href='https://www.fragrantica.com/perfume/Lattafa-Perfumes/Bade-e-Al-Oud-Amethyst-Fusion-136797.html'>Fragrantica</a> <a target="_blank" href='https://www.parfumo.com/Perfumes/Lattafa/amethyst-fusion'>Parfumo</a></td></tr>
-<tr><td class="frag-cell" data-scent="citrus,fresh-spicy" data-season="fall,spring" data-occasion="daily,office" data-time="day,evening" data-weather="mild" data-mood="fresh,confident" data-family="aromatic,woody" data-added="2026-09-25"><a href="fragrance/lattafa-fahad.html" style="text-decoration:none;color:inherit">Fahad</a><span class="tag tag-men">Men</span></td><td class="size-cell">125</td><td class="size-cell">195</td><td class="size-cell">295</td><td class="size-cell">689</td><td class="size-cell"><strong>969</strong></td><td class="inspired-cell">Original</td><td class="links-cell"><a target="_blank" href='https://www.fragrantica.com/perfume/Lattafa-Perfumes/Fahad-136650.html'>Fragrantica</a> <a target="_blank" href='https://www.parfumo.com/Perfumes/Lattafa/fahad'>Parfumo</a></td></tr>
+<tr><td class="frag-cell" data-scent="citrus,fresh-spicy" data-season="fall,spring" data-occasion="daily,office" data-time="day,evening" data-weather="mild" data-mood="fresh,confident" data-family="aromatic,woody" data-added="2026-09-25"><a href="fragrance/lattafa-fahad.html" style="text-decoration:none;color:inherit">Fahad</a><span class="tag tag-men">Men</span></td><td class="size-cell">139</td><td class="size-cell">215</td><td class="size-cell">329</td><td class="size-cell">775</td><td class="size-cell"><strong>1099</strong></td><td class="inspired-cell">Original</td><td class="links-cell"><a target="_blank" href='https://www.fragrantica.com/perfume/Lattafa-Perfumes/Fahad-136650.html'>Fragrantica</a> <a target="_blank" href='https://www.parfumo.com/Perfumes/Lattafa/fahad'>Parfumo</a></td></tr>
 <tr class="brand-sep"><td class="brand-cell" rowspan="1"><img src="logos/laverne.png" alt="Laverne" style="background:#fff;padding:2px;border-radius:4px">Laverne</td><td class="frag-cell" data-scent="fresh,citrus,aromatic" data-season="spring,summer" data-occasion="daily" data-time="day" data-weather="hot,mild" data-mood="fresh,clean" data-family="citrus,fresh,aromatic"><a href="fragrance/laverne-blue-laverne-sport.html" style="text-decoration:none;color:inherit">Blue Laverne Sport</a><span class="tag tag-unisex">Unisex</span></td><td class="size-cell">99</td><td class="size-cell">155</td><td class="size-cell">229</td><td class="size-cell">529</td><td class="size-cell"><strong>729</strong></td><td class="inspired-cell">Hacivat Nishane</td><td class="links-cell"><a target="_blank" href='https://www.fragrantica.com/perfume/Laverne/Blue-Laverne-Sport-96071.html'>Fragrantica</a> <a target="_blank" href='https://www.parfumo.com/Perfumes/laverne/blue-laverne-sport'>Parfumo</a></td></tr>
 <tr class="brand-sep"><td class="brand-cell" rowspan="2">Mykonos</td><td class="frag-cell" data-scent="citrus,fruity,fresh,floral" data-season="spring,summer" data-occasion="daily,date-night" data-time="day,evening" data-weather="hot,mild" data-mood="fresh,energetic" data-family="fresh,aromatic" data-added="2026-09-20"><a href="fragrance/mykonos-glitch.html" style="text-decoration:none;color:inherit">Glitch</a><span class="tag tag-unisex">Unisex</span></td><td class="size-cell">145</td><td class="size-cell">225</td><td class="size-cell">349</td><td class="size-cell">639</td><td class="size-cell"><strong>899</strong></td><td class="inspired-cell">Bleu de Chanel</td><td class="links-cell"><a target="_blank" href="https://www.fragrantica.com/perfume/Mykonos/Glitch-121106.html">Fragrantica</a> <a target="_blank" href="https://www.parfumo.com/Perfumes/mykonos/glitch">Parfumo</a></td></tr>
 <tr><td class="frag-cell" data-scent="citrus,marine,floral,woody" data-season="spring,summer" data-occasion="daily,date-night" data-time="day,evening" data-weather="hot,mild" data-mood="fresh,elegant" data-family="fresh,woody" data-added="2026-09-20"><a href="fragrance/mykonos-reflection.html" style="text-decoration:none;color:inherit">Reflection</a><span class="tag tag-unisex">Unisex</span></td><td class="size-cell">115</td><td class="size-cell">179</td><td class="size-cell">279</td><td class="size-cell">775</td><td class="size-cell"><strong>1,099</strong></td><td class="inspired-cell">LV Symphony</td><td class="links-cell"><a target="_blank" href="https://www.fragrantica.com/perfume/Mykonos/Reflection-121124.html">Fragrantica</a> <a target="_blank" href="https://www.parfumo.com/Perfumes/mykonos/reflection">Parfumo</a></td></tr>
@@ -4409,13 +4503,21 @@ body.pc-lock{overflow:hidden}
 
 
 
+
+
+
+
+
+
+
+
 <!--ARTICLES-->
 <div class="section-heading">Decant Guides</div>
 <div class="guide-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:8px"><a class="rel" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text-primary);font-size:14px" href="articles/summer-decants-under-500.html"><b style="color:var(--accent-secondary)">Top 10 Summer Decants Under ₹500 in India (2026)</b><br><small style="color:var(--text-muted)">The best fresh, long-lasting summer perfume decants you can buy in India under ₹500 — perf</small></a><a class="rel" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text-primary);font-size:14px" href="articles/winter-date-night-decants-under-500.html"><b style="color:var(--accent-secondary)">10 Best Winter Date-Night Decants Under ₹500 in India</b><br><small style="color:var(--text-muted)">Warm, sweet and cozy winter evening perfumes at decant prices under ₹500 — perfect for dat</small></a><a class="rel" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text-primary);font-size:14px" href="articles/decant-vs-full-bottle.html"><b style="color:var(--accent-secondary)">Decant vs Full Bottle: What’s Smarter for Testing Perfumes in India?</b><br><small style="color:var(--text-muted)">Should you buy a decant or a full 100ml bottle? We break down the per-ml math with real ex</small></a><a class="rel" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text-primary);font-size:14px" href="articles/make-perfume-last-longer.html"><b style="color:var(--accent-secondary)">How to Make Perfume Last Longer (and Get More from a 30ml Decant)</b><br><small style="color:var(--text-muted)">Simple, proven tips to make your perfume last all day — from storage and pulse-point appli</small></a></div>
 <!--/ARTICLES-->
 <!--FAQ_BLOCK-->
 <div class="section-heading">Frequently Asked Questions</div>
-<details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">What sizes do you offer for perfume decants?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">IRAM Perfume offers decants in 3ml, 5ml, 7.5ml, 20ml and 30ml glass bottles for every fragrance in our catalogue. Pick the size from the price table — the price per ml drops as the bottle gets bigger, so 30ml decants are the best value.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">How is a decant different from buying a full perfume bottle?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">A decant is perfume poured from an original, genuine bottle into a smaller filled-at-cost glass vial. It lets you try an expensive designer or Middle Eastern perfume without paying for a 100ml bottle. You can test longevity, projection and how it sits on your skin before committing to a full bottle.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">Do you sell full perfume bottles too?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">Yes. We source genuine 30ml, 50ml and 100ml bottles for most fragrances in our catalogue on request. Full-bottle prices and availability are confirmed over WhatsApp before you pay.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">Do you provide free shipping on orders?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">Yes — shipping is free on all orders above ₹999 (minimum 2 decants). Orders below ₹999 are shipped at a flat ₹100.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">How do I place an order with IRAM Perfume?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">Pick your fragrances and sizes from the price list, then copy your cart or message us directly on WhatsApp at +91 93555 33509 or email perfumeiram@gmail.com. We confirm stock, payment and share the tracking number once dispatched.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">How long does delivery take across India?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">We ship all over India through a trackable courier. Most orders reach within 3–7 working days depending on the city. Orders above ₹999 ship free.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">How can I be sure the decants are authentic?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">Every decant is filled from an original, genuine perfume bottle we buy from trusted suppliers. We share photos, videos and opening proof of the source bottles on request before you order.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">What is your refund and returns policy?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">Please record an unpacking video of your parcel. Any claim for a damaged or incorrect order must include that unpacking video — without it, refunds or replacements cannot be processed.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">Do you issue an invoice for orders?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">Not yet — we are a small business and do not currently issue formal invoices. Your order is confirmed over WhatsApp and you receive the tracking number once dispatched. We plan to introduce invoices as we grow.</p></details>
+<details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">What sizes do you offer for perfume decants?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">IRAM Perfume offers decants in 3ml, 5ml, 7.5ml, 20ml and 30ml glass bottles for every fragrance in our catalogue. Pick the size from the price table — the price per ml drops as the bottle gets bigger, so 30ml decants are the best value.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">How is a decant different from buying a full perfume bottle?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">A decant is perfume poured from an original, genuine bottle into a smaller filled-at-cost glass vial. It lets you try an expensive designer or Middle Eastern perfume without paying for a 100ml bottle. You can test longevity, projection and how it sits on your skin before committing to a full bottle.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">Do you sell full perfume bottles too?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">Yes. We source genuine 30ml, 50ml and 100ml bottles for most fragrances in our catalogue on request. Full-bottle prices and availability are confirmed over WhatsApp before you pay.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">Do you provide free shipping on orders?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">Yes — shipping is free on all orders above ₹999 (minimum 2 decants). Orders below ₹999 are shipped at a flat ₹100.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">How do I place an order with IRAM Perfume?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">Pick your fragrances and sizes from the price list, then copy your cart or message us directly on WhatsApp at +91 93555 33509 or email perfumeiram@gmail.com. We confirm stock, payment and share the tracking number once dispatched.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">How long does delivery take across India?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">We ship all over India through a trackable courier. Most orders reach within 3–7 working days depending on the city. Orders above ₹999 ship free.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">How can I be sure the decants are authentic?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">Every decant is filled from an original, genuine perfume bottle we buy from trusted suppliers. We share photos, videos and opening proof of the source bottles on request before you order.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">What is your refund and returns policy?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">If anything is wrong with your order, message us on WhatsApp or by email with your order details and we will sort it out with a replacement or refund.</p></details><details class="qa" style="background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;padding:12px 14px;margin:10px 0"><summary style="cursor:pointer;font-weight:600;color:var(--text-heading)">Do you issue an invoice for orders?</summary><p style="margin-top:8px;font-size:14px;color:var(--text-body)">Not yet — we are a small business and do not currently issue formal invoices. Your order is confirmed over WhatsApp and you receive the tracking number once dispatched. We plan to introduce invoices as we grow.</p></details>
 <!--/FAQ_BLOCK-->
 <div class="reviews-section">
   <div class="reviews-header">
@@ -4517,7 +4619,7 @@ body.pc-lock{overflow:hidden}
 <div class="pc-overlay" id="pcFilterOverlay"></div>
 <div class="pc-sheet pc-sheet-filter" id="pcFilterSheet" role="dialog" aria-modal="true" aria-label="Filter fragrances">
   <div class="pc-sheet-head">
-    <strong>Filters</strong>
+    <strong>Filter</strong>
     <button type="button" class="pc-sheet-close" id="pcFilterClose" aria-label="Close filters">&times;</button>
   </div>
   <div class="pc-sheet-body" id="pcFilterBody"></div>
@@ -4536,7 +4638,7 @@ body.pc-lock{overflow:hidden}
 try{(function(){var DAY=864e5;document.querySelectorAll('.frag-cell[data-added]').forEach(function(c){var added=new Date(c.getAttribute('data-added')),now=new Date();if(now-added<10*DAY&&!c.querySelector('.tag-new')){var t=document.createElement('span');t.className='tag tag-new';t.textContent='NEW';c.appendChild(t)}else if(now-added>=10*DAY){c.removeAttribute('data-added')}})})();}catch(e){console.warn('NEW tag init failed:',e)}
 
 try{(function(){
-  var cats=['added','gender','scent','season','occasion','time','weather','mood','family'];
+  var cats=['gender','scent','season','occasion','time','weather','mood','family'];
   var f={};cats.forEach(function(c){f[c]='all'});
   window.__filterState=f;
   var resultsDiv=document.createElement('div');
@@ -4578,11 +4680,8 @@ try{(function(){
         for(var i=0;i<cats.length;i++){
           var cat=cats[i];
           if(f[cat]==='all')continue;
-          if(cat==='added'){if(!card.hasAttribute('data-added')){match=false;break}}
-          else{
-            var vals=card.dataset[cat]?card.dataset[cat].split(','):[];
-            if(vals.indexOf(f[cat])===-1){match=false;break}
-          }
+          var vals=card.dataset[cat]?card.dataset[cat].split(','):[];
+          if(vals.indexOf(f[cat])===-1){match=false;break}
         }
         card.style.display=match?'':'none';
       });
@@ -4591,11 +4690,8 @@ try{(function(){
         for(var i=0;i<cats.length;i++){
           var cat=cats[i];
           if(f[cat]==='all')continue;
-          if(cat==='added'){if(!cell.hasAttribute('data-added'))return}
-          else{
-            var vals=cell.dataset[cat]?cell.dataset[cat].split(','):[];
-            if(vals.indexOf(f[cat])===-1)return
-          }
+          var vals=cell.dataset[cat]?cell.dataset[cat].split(','):[];
+          if(vals.indexOf(f[cat])===-1)return
         }
         var row=cell.parentElement;
         var nr=document.createElement('tr');
@@ -4619,6 +4715,7 @@ try{(function(){
     }
     if(window.__onFilterChange)window.__onFilterChange();
   }
+  window.__applyFilter=applyFilter;
 })();}catch(e){console.warn('Filters init failed:',e)}
 
 try{(function(){
@@ -4722,54 +4819,251 @@ try{(function(){
 })();}catch(e){console.warn('Mobile cards init failed:',e)}
 
 try{(function(){
+  var CATS=['gender','scent','season','occasion','time','weather','mood','family'];
   var bar=document.getElementById('filterBar');
-  if(!bar)return;
-  var home=bar.parentElement;
-  var homeNext=bar.nextSibling;
+  var panel=document.getElementById('filterPanel');
+  if(!panel)return;
+  var body=document.getElementById('filterPanelBody');
+  var panelHome=panel.parentElement,panelNext=panel.nextSibling;
   var sheet=document.getElementById('pcFilterSheet');
   var fb=document.getElementById('pcFilterBody');
   var overlay=document.getElementById('pcFilterOverlay');
   var btn=document.getElementById('pcFilterBtn');
+  var trig=document.getElementById('filterTrigger');
   var closeBtn=document.getElementById('pcFilterClose');
+  var panelX=document.getElementById('filterPanelX');
   var countEl=document.getElementById('pcFilterCount');
-  function toSheet(){if(bar.parentElement!==fb)fb.appendChild(bar)}
-  function toHome(){if(bar.parentElement===fb&&home)home.insertBefore(bar,homeNext)}
-  function updateCount(){
-    var n=0;
-    if(window.__filterState){
-      ['added','gender','scent','season','occasion','time','weather','mood','family'].forEach(function(k){
-        if(window.__filterState[k]&&window.__filterState[k]!=='all')n++;
-      });
+  var trigN=document.getElementById('filterTriggerN');
+  var cntDesk=document.getElementById('filterCount');
+  var cntMob=document.getElementById('filterCountMobile');
+  var chipBoxDesk=document.getElementById('filterChips');
+  var chipBoxMob=document.getElementById('filterChipsMobile');
+  var chipBoxPanel=document.getElementById('filterPanelChips');
+  var clearDesk=document.getElementById('filterClear');
+  var clearMob=document.getElementById('filterClearMobile');
+  var applyBtn=document.getElementById('filterApply');
+  function isSheetOpen(){return sheet&&sheet.classList.contains('open')}
+  function activeList(){
+    var st=window.__filterState||{},out=[];
+    for(var i=0;i<CATS.length;i++){
+      var v=st[CATS[i]];
+      if(v&&v!=='all'){
+        var b=body.querySelector('.filter-btn[data-'+CATS[i]+'="'+v+'"]');
+        out.push({cat:CATS[i],val:v,btn:b,label:b?b.textContent.trim():v});
+      }
     }
-    if(countEl){countEl.textContent=n;countEl.hidden=!n}
-    if(btn)btn.classList.toggle('active',n>0);
+    return out;
   }
-  function openSheet(){toSheet();sheet.classList.add('open');overlay.classList.add('open');document.body.classList.add('pc-lock');if(closeBtn)closeBtn.focus()}
-  function closeSheet(){toHome();sheet.classList.remove('open');overlay.classList.remove('open');document.body.classList.remove('pc-lock')}
+  function resultCount(){
+    var act=activeList();
+    if(!act.length)return document.querySelectorAll('.table-wrap .frag-cell').length;
+    return document.querySelectorAll('#filterResults tbody tr').length;
+  }
+  function clearAll(){
+    for(var g=0;g<24;g++){
+      var a=activeList();
+      if(!a.length)return;
+      var any=a[0].btn.parentElement.querySelector('.filter-btn[data-filter="all"]');
+      if(!any)return;
+      any.click();
+    }
+  }
+  function chipHtml(a){
+    return '<button type="button" class="filter-chip" data-cat="'+a.cat+'" data-val="'+a.val+'" aria-label="Remove filter '+a.label+'" title="Remove '+a.label+'">'+a.label+'<span class="filter-chip-x" aria-hidden="true">&times;</span></button>';
+  }
+  function renderChips(list,box){
+    if(!box)return;
+    if(!list.length){box.innerHTML='';box.hidden=true;return}
+    box.innerHTML=list.map(chipHtml).join('');
+    box.hidden=false;
+  }
+  function setText(el,txt){if(el)el.textContent=txt}
+  function updateUI(){
+    var act=activeList();
+    var n=act.length;
+    var total=resultCount();
+    if(countEl){countEl.textContent=n;countEl.hidden=!n}
+    if(trigN){trigN.textContent=n;trigN.hidden=!n}
+    if(btn)btn.classList.toggle('active',n>0);
+    if(trig)trig.classList.toggle('active',n>0);
+    var label=n?(total===1?'1 fragrance found':total+' fragrances found'):(total===1?'1 fragrance':total+' fragrances');
+    setText(cntDesk,label);
+    setText(cntMob,label);
+    if(clearMob)clearMob.hidden=!n;
+    renderChips(act,chipBoxDesk);
+    renderChips(act,chipBoxMob);
+    renderChips(act,chipBoxPanel);
+    if(applyBtn){
+      applyBtn.textContent=n?(total===1?'Show 1 fragrance':'Show '+total+' fragrances'):'Show all fragrances';
+      applyBtn.disabled=!total;
+    }
+    var groups=body.querySelectorAll('.filter-opts');
+    for(var i=0;i<groups.length;i++){
+      var opts=groups[i].querySelectorAll('.filter-btn');
+      for(var j=0;j<opts.length;j++)opts[j].setAttribute('aria-checked',opts[j].classList.contains('active')?'true':'false');
+    }
+  }
+  function onChip(e){
+    var c=e.target.closest('.filter-chip');
+    if(!c)return;
+    var b=body.querySelector('.filter-btn[data-'+c.dataset.cat+'="'+c.dataset.val+'"]');
+    if(!b)return;
+    var any=b.parentElement.querySelector('.filter-btn[data-filter="all"]');
+    if(any)any.click();
+  }
+  [chipBoxDesk,chipBoxMob,chipBoxPanel].forEach(function(b){if(b)b.addEventListener('click',onChip)});
+  if(clearDesk)clearDesk.addEventListener('click',clearAll);
+  if(clearMob)clearMob.addEventListener('click',clearAll);
+  function setExpanded(v){
+    if(trig)trig.setAttribute('aria-expanded',v?'true':'false');
+    if(btn)btn.setAttribute('aria-expanded',v?'true':'false');
+  }
+  function toSheet(){if(panel.parentElement!==fb)fb.appendChild(panel)}
+  function toHome(){if(panel.parentElement===fb&&panelHome)panelHome.insertBefore(panel,panelNext)}
+  function openSheet(){
+    closePanel(false);
+    toSheet();
+    sheet.classList.add('open');
+    overlay.classList.add('open');
+    document.body.classList.add('pc-lock');
+    setExpanded(true);
+    if(closeBtn)closeBtn.focus();
+  }
+  function closeSheet(){
+    toHome();
+    sheet.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.classList.remove('pc-lock');
+    setExpanded(false);
+    if(btn)btn.focus();
+  }
+  function openPanel(){
+    if(isSheetOpen())return;
+    panel.hidden=false;
+    setExpanded(true);
+    panel.focus();
+  }
+  function closePanel(refocus){
+    if(panel.hidden)return;
+    panel.hidden=true;
+    setExpanded(false);
+    if(refocus&&trig)trig.focus();
+  }
   if(btn)btn.addEventListener('click',function(e){e.preventDefault();openSheet()});
+  if(trig)trig.addEventListener('click',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    if(panel.hidden)openPanel();else closePanel(true);
+  });
   if(closeBtn)closeBtn.addEventListener('click',closeSheet);
-  overlay.addEventListener('click',closeSheet);
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&sheet.classList.contains('open'))closeSheet()});
-  window.addEventListener('resize',function(){if(window.innerWidth>1023){if(sheet.classList.contains('open'))closeSheet();toHome()}});
-  window.__onFilterChange=updateCount;
-  updateCount();
+  if(panelX)panelX.addEventListener('click',function(){if(isSheetOpen())closeSheet();else closePanel(true)});
+  if(applyBtn)applyBtn.addEventListener('click',function(){if(isSheetOpen())closeSheet();else closePanel(true)});
+  if(overlay)overlay.addEventListener('click',closeSheet);
+  document.addEventListener('click',function(e){
+    if(panel.hidden||isSheetOpen())return;
+    if(!e.target||!e.target.isConnected)return;
+    if(bar.contains(e.target)||(trig&&trig.contains(e.target)))return;
+    closePanel(false);
+  });
+  function trapTab(e,box){
+    if(e.key!=='Tab')return;
+    var f=box.querySelectorAll('a[href],button:not([disabled]),select:not([disabled]),input,[tabindex]:not([tabindex="-1"])');
+    if(!f.length)return;
+    var first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      if(isSheetOpen()){closeSheet();return}
+      if(!panel.hidden){closePanel(true);return}
+    }
+    if(e.key==='Tab'){
+      if(isSheetOpen())trapTab(e,sheet);
+      else if(!panel.hidden)trapTab(e,panel);
+    }
+  });
+  window.addEventListener('resize',function(){
+    if(window.innerWidth>1023){
+      if(isSheetOpen())closeSheet();
+      toHome();
+      closePanel(false);
+    }else if(!isSheetOpen()&&!panel.hidden){
+      closePanel(false);
+    }
+  });
+  window.__onFilterChange=updateUI;
+  updateUI();
 })();}catch(e){console.warn('Filter sheet init failed:',e)}
 
 try{(function(){
   var sel=document.getElementById('pcSort');
   if(!sel)return;
-  sel.addEventListener('change',function(){
-    var mode=sel.value;
+  function pcCost(d){
+    var cost=null;
+    if(d&&d.prices){
+      for(var i=0;i<d.prices.length;i++){
+        if(d.available[i]&&(cost===null||d.prices[i]<cost))cost=d.prices[i];
+      }
+    }
+    return cost;
+  }
+  function pcCompare(mode){
+    return function(a,b){
+      if(mode==='low')return (a._pcCost===null?1e9:a._pcCost)-(b._pcCost===null?1e9:b._pcCost);
+      if(mode==='high')return (b._pcCost===null?-1:b._pcCost)-(a._pcCost===null?-1:a._pcCost);
+      if(mode==='name')return a._pcName<b._pcName?-1:a._pcName>b._pcName?1:0;
+      if(mode==='new')return b._pcAdded<a._pcAdded?-1:b._pcAdded>a._pcAdded?1:0;
+      return 0;
+    };
+  }
+  // desktop catalogue: reorder the product rows inside each brand block, so brand
+  // grouping and the .brand-sep top border stay intact
+  function sortTable(tbody,mode){
+    if(!tbody._pcOrig){
+      // snapshot the pristine row order and the brand-block boundaries once; the
+      // .brand-sep classes get moved around by sorting, so they can't be re-read later
+      var snap=Array.prototype.slice.call(tbody.children),blk=-1;
+      snap.forEach(function(r){
+        if(r.classList.contains('brand-sep')){blk++;r._pcBrand=r.querySelector('.brand-cell')}
+        else r._pcBrand=null;
+        r._pcBlk=blk;
+      });
+      tbody._pcOrig=snap;
+    }
+    var orig=tbody._pcOrig;
+    if(!orig.length)return;
+    var cmp=pcCompare(mode),blocks=[],cur=null;
+    orig.forEach(function(r){
+      if(!cur||r._pcBlk!==cur[0]._pcBlk){cur=[r];blocks.push(cur)}
+      else cur.push(r);
+    });
+    var ordered=[];
+    blocks.forEach(function(block){
+      var brandTd=block[0]._pcBrand;
+      if(brandTd&&brandTd.parentElement===block[0])block[0].removeChild(brandTd);
+      block.forEach(function(r){
+        var cell=r.querySelector('.frag-cell');
+        var d=cell?(window._products||{})[cell.getAttribute('data-pid')]:null;
+        r._pcCost=pcCost(d);
+        var a=cell?cell.querySelector('a[href*="fragrance/"]'):null;
+        r._pcName=a?a.textContent.trim().toLowerCase():'';
+        r._pcAdded=cell?(cell.getAttribute('data-added')||''):'';
+        r.classList.remove('brand-sep');
+      });
+      var out=mode==='featured'?block:block.slice().sort(cmp);
+      out[0].classList.add('brand-sep');
+      if(brandTd)out[0].insertBefore(brandTd,out[0].firstChild);
+      ordered=ordered.concat(out);
+    });
+    ordered.forEach(function(r){tbody.appendChild(r)});
+  }
+  function applySort(mode){
+    var cmp=pcCompare(mode);
     document.querySelectorAll('.frag-cards').forEach(function(grid){
       var cards=Array.prototype.slice.call(grid.querySelectorAll('.frag-card'));
       cards.forEach(function(c){
-        var d=c._cartData,cost=null;
-        if(d&&d.prices){
-          for(var i=0;i<d.prices.length;i++){
-            if(d.available[i]&&(cost===null||d.prices[i]<cost))cost=d.prices[i];
-          }
-        }
-        c._pcCost=cost;
+        c._pcCost=pcCost(c._cartData);
         var nm=c.querySelector('.card-frag-name');
         c._pcName=nm?nm.textContent.trim().toLowerCase():'';
         c._pcAdded=c.getAttribute('data-added')||'';
@@ -4777,17 +5071,25 @@ try{(function(){
       if(mode==='featured'){
         cards.forEach(function(c){c.style.order=''});
       }else{
-        cards.sort(function(a,b){
-          if(mode==='low')return (a._pcCost===null?1e9:a._pcCost)-(b._pcCost===null?1e9:b._pcCost);
-          if(mode==='high')return (b._pcCost===null?-1:b._pcCost)-(a._pcCost===null?-1:a._pcCost);
-          if(mode==='name')return a._pcName<b._pcName?-1:a._pcName>b._pcName?1:0;
-          if(mode==='new')return b._pcAdded<a._pcAdded?-1:b._pcAdded>a._pcAdded?1:0;
-          return 0;
-        });
+        cards.sort(cmp);
         cards.forEach(function(c,i){c.style.order=i});
       }
     });
-  });
+    if(window.innerWidth>1023){
+      document.querySelectorAll('.table-wrap>.frag-table>tbody').forEach(function(tb){sortTable(tb,mode)});
+      if(window.__applyFilter)window.__applyFilter();
+    }
+  }
+  window.__applySort=applySort;
+  function syncSort(v){
+    if(sel.value!==v)sel.value=v;
+    var b=document.getElementById('filterSort');
+    if(b&&b.value!==v)b.value=v;
+  }
+  window.__syncSort=syncSort;
+  sel.addEventListener('change',function(){applySort(sel.value);syncSort(sel.value)});
+  var bs=document.getElementById('filterSort');
+  if(bs)bs.addEventListener('change',function(){applySort(bs.value);syncSort(bs.value)});
 })();}catch(e){console.warn('Sort init failed:',e)}
 
 try{(function(){

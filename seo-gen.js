@@ -46,7 +46,7 @@ const HOME_FAQS = [
   ['How can I be sure the decants are authentic?',
    'Every decant is filled from an original, genuine perfume bottle we buy from trusted suppliers. We share photos, videos and opening proof of the source bottles on request before you order.'],
   ['What is your refund and returns policy?',
-   'Please record an unpacking video of your parcel. Any claim for a damaged or incorrect order must include that unpacking video \u2014 without it, refunds or replacements cannot be processed.'],
+   'If anything is wrong with your order, message us on WhatsApp or by email with your order details and we will sort it out with a replacement or refund.'],
   ['Do you issue an invoice for orders?',
    'Not yet — we are a small business and do not currently issue formal invoices. Your order is confirmed over WhatsApp and you receive the tracking number once dispatched. We plan to introduce invoices as we grow.']
 ];

@@ -1,7 +1,7 @@
 # IRAM Perfume Website
 
 **Repo:** https://github.com/itsnotme007/iram-perfume.git
-**File:** `C:\Users\Fateh\Downloads\models\index.html` (HTML/CSS/JS inline, ~1590 lines)
+**File:** `C:\Users\Fateh\Downloads\models\index.html` (HTML/CSS/JS inline, ~6200 lines)
 **Logos:** `C:\Users\Fateh\Downloads\models\logos/`
 **Reviews:** `C:\Users\Fateh\Downloads\models\reviews/`
 
@@ -23,8 +23,11 @@
 - SOLD OUT = red + strikethrough prices
 - COMING SOON = green + grey prices (prefixed with ₹)
 - Data attributes: scent, season, occasion, time, weather, mood, family
-- Filter bar: `.toolbar` div, `.filter-bar{position:sticky;top:80px;z-index:50}`
+- Filter UI: `#filterBar` (desktop popover) + `#pcToolbar`/sticky ≤1023px (mobile sheet); one reusable `#filterPanel` is moved between `#filterPanelHost` and `#pcFilterBody`
+- Filter options: 8 `role="radiogroup"` groups of `.filter-btn` (single-select per category, AND across); state lives in `window.__filterState`, applied by `applyFilter()`. There is deliberately **no "New Arrivals" filter** — `data-added` is kept only for the NEW badge and the Newest First sort.
+- Filter results/count read from `.table-wrap .frag-cell` (unfiltered) and `#filterResults tbody tr` (filtered); keep `#filterBar` id for navSearch + seo-gen
 - Cart uses `window._products` registry keyed by `brand|frag`
+- Sort: `#filterSort` (desktop) and `#pcSort` (mobile) are two selects over one `applySort()`; it reorders `.frag-cards` (mobile grids) and, above 1023px, the product rows inside each brand block of `.frag-table` (`.brand-sep` + `.brand-cell` move with the block, so keep block sizes intact)
 - v2.0 design: #FAF9F7 light bg, #D4AF37 gold accent
 
 ## Bottle Images
