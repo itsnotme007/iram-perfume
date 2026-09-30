@@ -628,14 +628,12 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 .pc-size-opt.pc-unavail b{text-decoration:line-through}
 .pc-size-opt:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 .pc-size-opt small.pc-unavail-t{font-size:9.5px;color:var(--accent-danger);text-transform:uppercase;letter-spacing:.3px}
-.pc-sheet-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.pc-btn-add,.pc-btn-wa{min-height:48px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
-.pc-btn-add:focus-visible,.pc-btn-wa:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+.pc-sheet-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
+.pc-btn-add{min-height:48px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.pc-btn-add:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 .pc-btn-add:disabled{opacity:.45;cursor:not-allowed}
 .pc-btn-add{background:#2e7d32;color:#fff}
 .pc-btn-add:not(:disabled):hover{background:#1b5e20}
-.pc-btn-wa{background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px}
-.pc-btn-wa:hover{background:#1da851}
 .pc-sheet-filter .filter-panel{position:static;width:auto;max-height:none;display:block;overflow:visible;border:0;border-radius:0;box-shadow:none;background:none}
 .pc-sheet-filter .filter-panel-head{display:none}
 .pc-sheet-filter .filter-panel-body{overflow:visible;padding:0;max-height:none}
@@ -5484,14 +5482,8 @@ try{(function(){
   var chipDefs=[['scent','Scent'],['season','Season'],['occasion','Occasion'],['time','Time'],['weather','Weather'],['mood','Mood'],['family','Family']];
   function current(){var ok=false,pr=0;if(_card&&_card._cartData){for(var i=0;i<sizes.length;i++){if(i===selSize&&_card._cartData.available[i]){ok=true;pr=_card._cartData.prices[i]||0}}}return{ok:ok,price:pr}}
   function sync(){
-    var c=current();var addBtn=document.getElementById('pcAddBtn');var wa=document.getElementById('pcWABtn');
+    var c=current();var addBtn=document.getElementById('pcAddBtn');
     if(addBtn){addBtn.disabled=!c.ok;addBtn.classList.toggle('disabled',!c.ok);addBtn.textContent=c.ok?'Add to Cart':'Unavailable'}
-    if(wa&&_card&&_card._cartData){
-      var brand=_card._cartData.brand,frag=_card._cartData.frag;
-      var line=c.ok?(brand+' \u2014 '+frag+' ('+sizes[selSize]+') \u2014 '+fmt(c.price)):brand+' \u2014 '+frag;
-      var msg='\uD83C\uDF19 IRAM Perfume Order\n\n1 \u00D7 '+line+'\n\nSubtotal: '+fmt(c.price)+'\n\nName:\nAddress:\nPhone:';
-      wa.setAttribute('href','https://wa.me/919355533509?text='+encodeURIComponent(msg));
-    }
   }
   function open(card){
     _card=card;
@@ -5535,7 +5527,6 @@ try{(function(){
       +'<div class="pc-size-label">Choose size</div>'+sizeWrap
       +'<div class="pc-sheet-actions">'
       +'<button type="button" class="pc-btn-add" id="pcAddBtn">Add to Cart</button>'
-      +'<a href="#" class="pc-btn-wa" id="pcWABtn" target="_blank" rel="noopener">WhatsApp Order</a>'
       +'</div></div>';
     sync();
     sheet.classList.add('open');
