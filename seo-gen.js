@@ -122,7 +122,7 @@ for (const reg of REGIONS) {
       else statusPerSize[k] = 'ok';
     });
 
-    const tagRe = /<span class="tag[^"]*">([A-Z ]+)<\/span>/g;
+    const tagRe = /<span class="tag[^"]*">([^<]+)<\/span>/g;
     const tags = [...cell.matchAll(tagRe)].map(m => m[1].trim());
     const status = tags.includes('SOLD OUT') ? 'soldout' : tags.includes('COMING SOON') ? 'coming' : 'instock';
     const gender = ['Men', 'Women', 'Unisex'].find(g => tags.includes(g)) || '';
@@ -208,7 +208,7 @@ function fragFAQ(pr) {
   const priceQ = 'How much does a decant of ' + pr.name + ' by ' + pr.brand + ' cost in India?';
   const priceA = 'IRAM Perfume sells authentic decants of ' + pr.name + ' by ' + pr.brand + ' at 3ml \u20b9' + (pr.prices['3'] ?? '—') + ', 5ml \u20b9' + (pr.prices['5'] ?? '—') + ', 7.5ml \u20b9' + (pr.prices['7.5'] ?? '—') + ', 20ml \u20b9' + (pr.prices['20'] ?? '—') + ' and 30ml \u20b9' + (pr.prices['30'] ?? '—') + '. Shipping is free on orders above \u20b9999. Full bottles are available on request.';
   const wearQ = 'When should I wear ' + pr.name + ' by ' + pr.brand + '?';
-  const wearA = pr.gender ? 'A ' + pr.gender.toLowerCase() + ' fragrance, ' : 'A fragrance, ';
+  const wearA = pr.gender ? 'A ' + ({ Men: 'men\'s', Women: 'women\'s', Unisex: 'unisex' }[pr.gender] || 'unisex') + ' fragrance, ' : 'A fragrance, ';
   const wearA2 = wearA + 'it works best during ' + bestForLine(pr) + '. It leans ' + (pr.mood || 'versatile') + ' in character with a ' + scentLine(pr) + ' profile.';
   return [
     [cloneQ, cloneA],
