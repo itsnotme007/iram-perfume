@@ -32,7 +32,7 @@ const slugify = s => String(s).toLowerCase()
 // ---------------------------------------------------------------- FAQ data
 const HOME_FAQS = [
   ['What sizes do you offer for perfume decants?',
-   'IRAM Perfume offers decants in 3ml, 5ml, 7.5ml, 20ml and 30ml glass bottles for every fragrance in our catalogue. Pick the size from the price table — the price per ml drops as the bottle gets bigger, so 30ml decants are the best value.'],
+   'IRAM Perfume offers decants in 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml glass bottles for every fragrance in our catalogue. Pick the size from the price table — the price per ml drops as the bottle gets bigger, so 30ml decants are the best value.'],
   ['How is a decant different from buying a full perfume bottle?',
    'A decant is perfume poured from an original, genuine bottle into a smaller filled-at-cost glass vial. It lets you try an expensive designer or Middle Eastern perfume without paying for a 100ml bottle. You can test longevity, projection and how it sits on your skin before committing to a full bottle.'],
   ['Do you sell full perfume bottles too?',
@@ -110,10 +110,10 @@ for (const reg of REGIONS) {
     if (!brandRow) throw new Error('row without brand for ' + name + ' — pass 1 needs brand-sep first');
 
     const sizeCells = [...tr.matchAll(/<td class="size-cell">([\s\S]*?)<\/td>/g)].map(m => m[1]);
-    if (sizeCells.length !== 5) throw new Error('expected 5 sizes for ' + name + ', got ' + sizeCells.length);
+    if (sizeCells.length !== 6) throw new Error('expected 6 sizes for ' + name + ', got ' + sizeCells.length);
     const prices = {};
     const statusPerSize = {};
-    const sizes = ['3', '5', '7.5', '20', '30'];
+    const sizes = ['3', '5', '7.5', '10', '20', '30'];
     sizes.forEach((k, i) => {
       const inner = sizeCells[i];
       prices[k] = num(inner);
@@ -193,11 +193,11 @@ function inspiredLine(pr) {
 const rupees = n => '\u20b9' + (n == null ? 'N/A' : n.toLocaleString('en-IN'));
 
 function minMax(pr) {
-  const vals = ['3', '5', '7.5', '20', '30'].map(k => pr.prices[k]).filter(x => x != null);
+  const vals = ['3', '5', '7.5', '10', '20', '30'].map(k => pr.prices[k]).filter(x => x != null);
   return { min: Math.min(...vals), max: Math.max(...vals) };
 }
 function priceString(pr) {
-  return ['3ml \u20b9' + (pr.prices['3'] ?? '—'), '5ml \u20b9' + (pr.prices['5'] ?? '—'), '7.5ml \u20b9' + (pr.prices['7.5'] ?? '—'), '20ml \u20b9' + (pr.prices['20'] ?? '—'), '30ml \u20b9' + (pr.prices['30'] ?? '—')].join(' | ');
+  return ['3ml \u20b9' + (pr.prices['3'] ?? '—'), '5ml \u20b9' + (pr.prices['5'] ?? '—'), '7.5ml \u20b9' + (pr.prices['7.5'] ?? '—'), '10ml \u20b9' + (pr.prices['10'] ?? '—'), '20ml \u20b9' + (pr.prices['20'] ?? '—'), '30ml \u20b9' + (pr.prices['30'] ?? '—')].join(' | ');
 }
 
 function fragFAQ(pr) {
@@ -206,7 +206,7 @@ function fragFAQ(pr) {
     ? 'It is a high-quality interpretation inspired by ' + pr.inspired + '. Perfume enthusiasts in India often pick it as an affordable alternative to that profile.'
     : 'It is an original fragrance in the ' + pr.brand + ' catalogue, so there is no clone comparison involved.';
   const priceQ = 'How much does a decant of ' + pr.name + ' by ' + pr.brand + ' cost in India?';
-  const priceA = 'IRAM Perfume sells authentic decants of ' + pr.name + ' by ' + pr.brand + ' at 3ml \u20b9' + (pr.prices['3'] ?? '—') + ', 5ml \u20b9' + (pr.prices['5'] ?? '—') + ', 7.5ml \u20b9' + (pr.prices['7.5'] ?? '—') + ', 20ml \u20b9' + (pr.prices['20'] ?? '—') + ' and 30ml \u20b9' + (pr.prices['30'] ?? '—') + '. Shipping is free on orders above \u20b9999. Full bottles are available on request.';
+  const priceA = 'IRAM Perfume sells authentic decants of ' + pr.name + ' by ' + pr.brand + ' at 3ml \u20b9' + (pr.prices['3'] ?? '—') + ', 5ml \u20b9' + (pr.prices['5'] ?? '—') + ', 7.5ml \u20b9' + (pr.prices['7.5'] ?? '—') + ', 10ml \u20b9' + (pr.prices['10'] ?? '—') + ', 20ml \u20b9' + (pr.prices['20'] ?? '—') + ' and 30ml \u20b9' + (pr.prices['30'] ?? '—') + '. Shipping is free on orders above \u20b9999. Full bottles are available on request.';
   const wearQ = 'When should I wear ' + pr.name + ' by ' + pr.brand + '?';
   const wearA = pr.gender ? 'A ' + ({ Men: 'men\'s', Women: 'women\'s', Unisex: 'unisex' }[pr.gender] || 'unisex') + ' fragrance, ' : 'A fragrance, ';
   const wearA2 = wearA + 'it works best during ' + bestForLine(pr) + '. It leans ' + (pr.mood || 'versatile') + ' in character with a ' + scentLine(pr) + ' profile.';
@@ -299,8 +299,8 @@ function fragPage(pr) {
       mainEntity: fragFAQ(pr).map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
     }
   ];
-  const priceRows = ['3ml', '5ml', '7.5ml', '20ml', '30ml'].map((k, i) => {
-    const sz = ['3', '5', '7.5', '20', '30'][i];
+  const priceRows = ['3ml', '5ml', '7.5ml', '10ml', '20ml', '30ml'].map((k, i) => {
+    const sz = ['3', '5', '7.5', '10', '20', '30'][i];
     const v = pr.prices[sz];
     const cls = pr.statusPerSize[sz] === 'struck' || pr.statusPerSize[sz] === 'coming' ? 'strike' : 'n';
     return '<tr><td>' + k + '</td><td class="' + cls + '">' + (v == null ? '\u2014' : rupees(v)) + '</td></tr>';
@@ -506,7 +506,7 @@ function editHomepage(products, faqHtml, articlesHtml) {
   out = out.replace(/<title>[\s\S]*?<\/title>/, '<title>IRAM Perfume \u2014 Designer &amp; Middle Eastern Fragrance Decants (3ml\u201330ml) &amp; Full Bottles | India</title>');
   out = out.replace(
     /<meta name="description" content="[^"]*"/,
-    '<meta name="description" content="Buy authentic designer and Middle Eastern perfume decants in India \u2014 3ml, 5ml, 7.5ml, 20ml & 30ml from Davidoff, Mancera, Afnan, Lattafa, Rasasi & 25+ brands. Full 30ml\u2013100ml bottles on request. Free shipping over \u20b9999."'
+    '<meta name="description" content="Buy authentic designer and Middle Eastern perfume decants in India \u2014 3ml, 5ml, 7.5ml, 10ml, 20ml & 30ml from Davidoff, Mancera, Afnan, Lattafa, Rasasi & 25+ brands. Full 30ml\u2013100ml bottles on request. Free shipping over \u20b9999."'
   );
 
   // 2) og:image -> og-image.jpg
@@ -518,7 +518,7 @@ function editHomepage(products, faqHtml, articlesHtml) {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'IRAM Perfume Fragrance Collection',
-    description: 'Premium designer and Middle Eastern fragrance decants available in 3ml, 5ml, 7.5ml, 20ml and 30ml sizes, plus full bottles on request.',
+    description: 'Premium designer and Middle Eastern fragrance decants available in 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml sizes, plus full bottles on request.',
     url: BASE + '/',
     numberOfItems: products.length,
     itemListElement: products.map((pr) => {
@@ -626,7 +626,7 @@ function buildSitemap(products, articles) {
 
 // ----------------------------------------------------------------------- llms.txt
 function buildLlmstxt() {
-  let t = '# IRAM Perfume\n\n> Authentic designer and Middle Eastern fragrance decants (3ml, 5ml, 7.5ml, 20ml, 30ml) and full bottles, shipped across India. Free shipping above \u20b9999.\n\n## Key facts\n- Decants filled from original genuine bottles, proof shared on request\n- Sizes: 3ml / 5ml / 7.5ml / 20ml / 30ml; full bottles on request\n- Order via WhatsApp ' + PHONE_DISPLAY + ' or email ' + EMAIL + '\n- Free shipping on orders above \u20b9999 (delivery 3\u20137 working days)\n\n## Link addresses\n- Homepage: ' + BASE + '/\n- Fragrance catalogue pages: ' + BASE + '/fragrance/\n\n## Fragrance catalogue (India decant prices)\n';
+  let t = '# IRAM Perfume\n\n> Authentic designer and Middle Eastern fragrance decants (3ml, 5ml, 7.5ml, 10ml, 20ml, 30ml) and full bottles, shipped across India. Free shipping above \u20b9999.\n\n## Key facts\n- Decants filled from original genuine bottles, proof shared on request\n- Sizes: 3ml / 5ml / 7.5ml / 20ml / 30ml; full bottles on request\n- Order via WhatsApp ' + PHONE_DISPLAY + ' or email ' + EMAIL + '\n- Free shipping on orders above \u20b9999 (delivery 3\u20137 working days)\n\n## Link addresses\n- Homepage: ' + BASE + '/\n- Fragrance catalogue pages: ' + BASE + '/fragrance/\n\n## Fragrance catalogue (India decant prices)\n';
   const byBrand = {};
   for (const pr of products) (byBrand[pr.brand] = byBrand[pr.brand] || []).push(pr);
   for (const b of Object.keys(byBrand)) {
