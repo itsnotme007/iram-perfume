@@ -316,7 +316,7 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 @media(max-width:768px){
   .search-shortcut{display:none}
   .search-bar{font-size:16px}
-  .mobile-search-trigger{display:flex}
+  .mobile-search-trigger{display:none}
   .search-wrap.desktop-only{display:none}
   .search-overlay .search-bar{font-size:16px}
 }
@@ -686,7 +686,7 @@ body.pc-lock{overflow:hidden}
   .mobile-menu.open .mobile-menu-panel{transform:translateX(0)}
   .mobile-menu-kicker{margin:0 0 18px;font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent-brand)}
   .mobile-menu a,.mobile-menu button{display:flex;align-items:center;width:100%;min-height:48px;padding:0;border:0;border-bottom:1px solid var(--border-light);background:transparent;text-align:left;font:600 15px/1.2 inherit;color:var(--text-primary);text-decoration:none;box-shadow:none}
-  .mobile-hero{display:grid;grid-template-columns:1fr 122px;gap:8px;min-height:204px;margin:2px 0 16px;padding:20px 18px;border-radius:14px;overflow:hidden;color:#fff;background:radial-gradient(circle at 78% 30%,rgba(189,135,48,.36),transparent 36%),linear-gradient(135deg,#070909,#282015)}
+  .mobile-hero{position:relative;display:grid;grid-template-columns:1fr 122px;gap:8px;min-height:204px;margin:2px 0 16px;padding:20px 18px;border-radius:14px;overflow:hidden;color:#fff;background:radial-gradient(circle at 78% 30%,rgba(189,135,48,.36),transparent 36%),linear-gradient(135deg,#070909,#282015)}
   .mobile-hero p{margin:0 0 7px;font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:#ddc37a}
   .mobile-hero h2{margin:0;max-width:210px;font:700 27px/1.04 Georgia,serif}
   .mobile-hero-copy{margin:9px 0 15px!important;font-size:12px!important;font-weight:400!important;letter-spacing:0!important;text-transform:none!important;color:rgba(255,255,255,.78)!important;line-height:1.4}
@@ -715,6 +715,9 @@ body.pc-lock{overflow:hidden}
   .pc-wish{width:29px;height:29px;font-size:18px}.pc-badge-new{right:42px}
   .mobile-cart-bar{position:fixed;right:10px;bottom:calc(64px + env(safe-area-inset-bottom,0px));left:10px;z-index:870;align-items:center;justify-content:space-between;min-height:48px;padding:0 14px;border-radius:12px;background:#211d19;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.22);transform:translateY(12px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
   .mobile-cart-bar.visible{display:flex;opacity:1;transform:translateY(0);pointer-events:auto}.mobile-cart-bar span{font-size:12px;font-weight:700}.mobile-cart-bar button{border:0;background:transparent;color:#e4c86e;font:800 12px inherit;cursor:pointer}
+  .mobile-nav{display:flex!important;min-height:62px;background:#0b0b0b;border-color:rgba(212,169,90,.22);padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px));transform:none!important}
+  .mobile-nav .nav-item{min-height:48px;color:#bdb7ad;font-size:9px;font-weight:600}.mobile-nav .nav-item.active{color:#d4a95a}.mobile-nav .nav-item svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8}.mobile-nav .nav-item:first-child svg{fill:currentColor;stroke:none}
+  .mobile-hero::after{content:'';position:absolute;width:36px;height:4px;bottom:12px;left:20px;border-radius:999px;background:#d4a95a;box-shadow:46px 0 0 rgba(255,255,255,.54),60px 0 0 rgba(255,255,255,.54)}
   .cart-float.visible{display:none}
   [data-theme="dark"] body{background:#0d1110}
   [data-theme="dark"] .mobile-store-header{background:rgba(6,8,8,.97);border-color:rgba(212,175,55,.2)}
@@ -4241,7 +4244,7 @@ body.pc-lock{overflow:hidden}
 <div class="container">
 
 <section class="mobile-hero" id="top" aria-label="Discover IRAM Perfume">
-  <div><p>Authentic fragrance decants</p><h2>Discover your signature scent.</h2><p class="mobile-hero-copy">Designer and Middle Eastern favourites, decanted with care.</p><a href="#filterBar" id="mobileExploreBtn">Explore fragrances</a></div>
+  <div><p>Authentic fragrance decants</p><h2>Discover Your Signature Scent</h2><p class="mobile-hero-copy">Authentic Middle Eastern &amp; designer fragrances, handpicked for you.</p><a href="#filterBar" id="mobileExploreBtn">Explore Fragrances&nbsp; →</a></div>
   <img src="images/bottles/lattafa-khamrah.png" alt="Lattafa Khamrah bottle">
 </section>
 <section class="mobile-brand-rail" aria-label="Browse brands"><div class="mobile-brand-rail-head"><span>Browse by brand</span><span aria-hidden="true">Scroll →</span></div><div class="mobile-brand-track" id="mobileBrandTrack"></div></section>
@@ -5928,6 +5931,11 @@ try{(function(){
 try{(function(){
   var nav=document.getElementById('mobileNav');
   if(!nav)return;
+  var navItems=nav.querySelectorAll('.nav-item');
+  var navLabels=['Home','Brands','Compare','Wishlist','Cart'];
+  navItems.forEach(function(item,i){var label=item.querySelector('span');if(label&&navLabels[i])label.textContent=navLabels[i];item.classList.toggle('active',i===0);if(i>0){item.setAttribute('href','#');item.removeAttribute('target')}});
+  function setActive(item){navItems.forEach(function(n){n.classList.toggle('active',n===item)})}
+  navItems.forEach(function(item){item.addEventListener('click',function(){setActive(item)})});
   var lastY=0,ticking=false;
   window.addEventListener('scroll',function(){
     if(!ticking){
@@ -5940,8 +5948,8 @@ try{(function(){
       ticking=true;
     }
   },{passive:true});
-  var navHome=document.getElementById('navHome');
-  var navSearch=document.getElementById('navSearch');
+  var navHome=navItems[0];
+  var navSearch=navItems[2];
   if(navHome)navHome.addEventListener('click',function(e){
     e.preventDefault();
     window.scrollTo({top:0,behavior:'smooth'});
@@ -5956,6 +5964,9 @@ try{(function(){
       if(bar)bar.scrollIntoView({behavior:'smooth',block:'start'});
     }
   });
+  if(navItems[1])navItems[1].addEventListener('click',function(e){e.preventDefault();var rail=document.querySelector('.mobile-brand-rail');if(rail)rail.scrollIntoView({behavior:'smooth',block:'start'})});
+  if(navItems[3])navItems[3].addEventListener('click',function(e){e.preventDefault();var first=document.querySelector('.pc-wish.active');if(first)first.closest('.frag-card').scrollIntoView({behavior:'smooth',block:'center'})});
+  if(navItems[4])navItems[4].addEventListener('click',function(e){e.preventDefault();var drawer=document.getElementById('cartDrawer'),overlay=document.getElementById('cartDrawerOverlay');if(drawer&&overlay){drawer.classList.add('open');overlay.classList.add('open')}});
 })();}catch(e){console.warn('Mobile nav init failed:',e)}
 
 try{(function(){
