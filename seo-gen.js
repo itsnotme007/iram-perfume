@@ -5,6 +5,7 @@
 //   sitemap.xml, llms.txt, robots.txt
 //   updates index.html: ItemList schema, FAQPage schema, visible FAQ block,
 //   articles strip, frag-name anchors -> per-fragrance pages, title/desc/og
+//   content-dates.json: lastmod / dateModified memory (commit it with the site)
 // Usage: node seo-gen.js
 'use strict';
 const fs = require('fs');
@@ -19,6 +20,26 @@ const WA = 'https://chat.whatsapp.com/JSWEIoCsFd96wzlRAeaewe';
 const IG = 'https://instagram.com/iram.perfume';
 const TODAY = new Date().toISOString().slice(0, 10);
 const waLink = t => 'https://wa.me/' + PHONE_TEL.replace('+', '') + '?text=' + encodeURIComponent(t);
+
+// ------------------------------------------------------------ content dates
+// datePublished / dateModified and sitemap <lastmod> must move only when the
+// content actually changes, not on every calendar day. Each generated page
+// gets a content signature (rendered output with the dates masked out) stored
+// in content-dates.json — that file must be committed, it is the memory.
+const crypto = require('crypto');
+const DATES_FILE = path.join(ROOT, 'content-dates.json');
+let DATES = {};
+try { DATES = JSON.parse(fs.readFileSync(DATES_FILE, 'utf8')); } catch (e) { DATES = {}; }
+let DATES_DIRTY = false;
+const contentSig = str => crypto.createHash('sha1').update(String(str), 'utf8').digest('hex').slice(0, 24);
+function dateFor(id, sig) {
+  const rec = DATES[id];
+  if (rec && rec.sig === sig) return rec.mod;
+  DATES[id] = { sig: sig, mod: TODAY };
+  DATES_DIRTY = true;
+  return TODAY;
+}
+const DATE_MASK = '0000-00-00';
 
 const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const num = s => {
@@ -362,8 +383,15 @@ function relatedFor(pr) {
 
 // ---------------------------------------------------------------- articles
 function articleShell(a, innerBody, faqs) {
+  // render once with the date masked to hash the *whole* page (so a change to
+  // the shared shell/CSS also bumps dateModified), then render for real.
+  const sig = contentSig(buildArticle(a, innerBody, faqs, a.pub, DATE_MASK));
+  const mod = dateFor('article:' + a.slug, sig);
+  return buildArticle(a, innerBody, faqs, a.pub, mod);
+}
+function buildArticle(a, innerBody, faqs, pub, mod) {
   const schema = [
-    { '@context': 'https://schema.org', '@type': 'Article', headline: a.title, description: a.desc, datePublished: TODAY, dateModified: TODAY, author: { '@type': 'Organization', name: 'IRAM Perfume' }, publisher: { '@type': 'Organization', name: 'IRAM Perfume', url: BASE + '/' }, mainEntityOfPage: a.url, url: a.url, image: BASE + '/logo.png' },
+    { '@context': 'https://schema.org', '@type': 'Article', headline: a.title, description: a.desc, datePublished: pub, dateModified: mod, author: { '@type': 'Organization', name: 'IRAM Perfume' }, publisher: { '@type': 'Organization', name: 'IRAM Perfume', url: BASE + '/' }, mainEntityOfPage: a.url, url: a.url, image: BASE + '/logo.png' },
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, x]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: x } })) }
   ];
   const body = '<div class="top"><div><div class="brand-chip">IRAM PERFUME \u00b7 GUIDES</div><h1>' + esc(a.title) + '</h1></div><a href="../index.html">\u2190 Full collection</a></div>'
@@ -384,10 +412,10 @@ function faqBox(faqs) {
 const hyp = parts => parts.filter(Boolean).join(' \u2014 ') + '.';
 
 const articlesMeta = [
-  { slug: 'summer-decants-under-500', title: 'Top 10 Summer Decants Under \u20b9500 in India (2026)', desc: 'The best fresh, long-lasting summer perfume decants you can buy in India under \u20b9500 \u2014 perfect for office, daily wear and hot weather.' },
-  { slug: 'winter-date-night-decants-under-500', title: '10 Best Winter Date-Night Decants Under \u20b9500 in India', desc: 'Warm, sweet and cozy winter evening perfumes at decant prices under \u20b9500 \u2014 perfect for dates, parties and cold nights across India.' },
-  { slug: 'decant-vs-full-bottle', title: 'Decant vs Full Bottle: What\u2019s Smarter for Testing Perfumes in India?', desc: 'Should you buy a decant or a full 100ml bottle? We break down the per-ml math with real examples so you decide before spending.' },
-  { slug: 'make-perfume-last-longer', title: 'How to Make Perfume Last Longer (and Get More from a 30ml Decant)', desc: 'Simple, proven tips to make your perfume last all day \u2014 from storage and pulse-point application to layering. Works for any 30ml decant.' }
+  { slug: 'summer-decants-under-500', pub: '2026-09-10', title: 'Top 10 Summer Decants Under \u20b9500 in India (2026)', desc: 'The best fresh, long-lasting summer perfume decants you can buy in India under \u20b9500 \u2014 perfect for office, daily wear and hot weather.' },
+  { slug: 'winter-date-night-decants-under-500', pub: '2026-09-10', title: '10 Best Winter Date-Night Decants Under \u20b9500 in India', desc: 'Warm, sweet and cozy winter evening perfumes at decant prices under \u20b9500 \u2014 perfect for dates, parties and cold nights across India.' },
+  { slug: 'decant-vs-full-bottle', pub: '2026-09-10', title: 'Decant vs Full Bottle: What\u2019s Smarter for Testing Perfumes in India?', desc: 'Should you buy a decant or a full 100ml bottle? We break down the per-ml math with real examples so you decide before spending.' },
+  { slug: 'make-perfume-last-longer', pub: '2026-09-10', title: 'How to Make Perfume Last Longer (and Get More from a 30ml Decant)', desc: 'Simple, proven tips to make your perfume last all day \u2014 from storage and pulse-point application to layering. Works for any 30ml decant.' }
 ];
 
 function buildArticles() {
@@ -538,7 +566,11 @@ function editHomepage(products, faqHtml, articlesHtml) {
   const itemListJson = '<script type="application/ld+json">\n' + JSON.stringify(itemListNew, null, 2) + '\n</script>\n';
   const ob = [...out.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].find(b => { try { return JSON.parse(b[1]).hasOwnProperty('itemListElement'); } catch (e) { return false; } });
   if (!ob) throw new Error('ItemList block not found');
-  out = out.slice(0, ob.index) + itemListJson + out.slice(ob.index + ob[0].length);
+  // consume the newline that follows the old block: itemListJson already ends with one,
+  // otherwise every run appends an extra blank line (non-idempotent output).
+  let obEnd = ob.index + ob[0].length;
+  if (out[obEnd] === '\n') obEnd += 1;
+  out = out.slice(0, ob.index) + itemListJson + out.slice(obEnd);
 
   // 4) FAQPage schema + visible FAQ + articles strip (idempotent markers)
   // JSON-LD must contain JSON only; HTML comments make the structured data invalid.
@@ -608,15 +640,20 @@ function stripMarks(str, open, close) {
   if (i < 0) return str;
   const j = str.indexOf(close, i);
   if (j < 0) return str.slice(0, i) + str.slice(i + open.length);
-  return str.slice(0, i) + str.slice(j + close.length);
+  let end = j + close.length;
+  // the injected blocks end with a newline; consume it too so removal exactly
+  // inverts insertion (otherwise each run leaves two stray blank lines behind).
+  if (str[end] === '\n') end += 1;
+  return str.slice(0, i) + str.slice(end);
 }
 
 // --------------------------------------------------------------------- sitemap
-function buildSitemap(products, articles) {
+function buildSitemap(products, articles, lm) {
+  lm = lm || {};
   const locs = [
-    { l: BASE + '/', lastmod: TODAY, pri: '1.0' },
-    ...articles.map(a => ({ l: a.url, lastmod: TODAY, pri: '0.9' })),
-    ...products.map(p => ({ l: p.url, lastmod: TODAY, pri: '0.8' }))
+    { l: BASE + '/', lastmod: lm.home || TODAY, pri: '1.0' },
+    ...articles.map(a => ({ l: a.url, lastmod: lm['article:' + a.slug] || TODAY, pri: '0.9' })),
+    ...products.map(p => ({ l: p.url, lastmod: lm['frag:' + p.slug] || TODAY, pri: '0.8' }))
   ];
   let x = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   for (const o of locs) x += '  <url>\n    <loc>' + o.l + '</loc>\n    <lastmod>' + o.lastmod + '</lastmod>\n    <priority>' + o.pri + '</priority>\n  </url>\n';
@@ -639,6 +676,21 @@ function buildLlmstxt() {
 }
 
 // ----------------------------------------------------------------------- main
+// Windows can transiently lock a file (AV/indexer) with a bare -4094 UNKNOWN
+// error; retry a few times instead of aborting the whole build.
+function sleepSync(ms) {
+  try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); }
+  catch (e) { const end = Date.now() + ms; while (Date.now() < end) {} }
+}
+function writeFileSafe(file, data) {
+  for (let attempt = 0; ; attempt++) {
+    try { fs.writeFileSync(file, data, 'utf8'); return; }
+    catch (e) {
+      if (attempt >= 10) throw e;
+      sleepSync(Math.min(800, 200 * (attempt + 1)));
+    }
+  }
+}
 function main() {
   console.log('parsed products:', products.length);
   const dup = products.length - new Set(products.map(p => p.key)).size;
@@ -647,9 +699,12 @@ function main() {
   // 1. fragrance pages
   const fragDir = path.join(ROOT, 'fragrance');
   fs.mkdirSync(fragDir, { recursive: true });
+  const lastmods = {};
   let n = 0;
   for (const pr of products) {
-    fs.writeFileSync(path.join(fragDir, pr.slug + '.html'), fragPage(pr), 'utf8');
+    const html = fragPage(pr);
+    lastmods['frag:' + pr.slug] = dateFor('frag:' + pr.slug, contentSig(html));
+    writeFileSafe(path.join(fragDir, pr.slug + '.html'), html);
     n++;
   }
   console.log('wrote fragrance pages:', n);
@@ -660,23 +715,27 @@ function main() {
   for (const m of articlesMeta) m.url = BASE + '/articles/' + m.slug + '.html';
   const artPages = buildArticles();
   artPages.forEach((html, i) => {
-    fs.writeFileSync(path.join(artDir, articlesMeta[i].slug + '.html'), html, 'utf8');
+    const slug = articlesMeta[i].slug;
+    lastmods['article:' + slug] = (DATES['article:' + slug] || {}).mod || TODAY;
+    writeFileSafe(path.join(artDir, slug + '.html'), html);
   });
   console.log('wrote articles:', articlesMeta.length);
 
   // 3. homepage edits
   const faqHtml = '', artsHtml = '';
   const newS = editHomepage(products, faqHtml, artsHtml);
-  fs.writeFileSync(IDX, newS, 'utf8');
+  lastmods.home = dateFor('home', contentSig(newS));
+  writeFileSafe(IDX, newS);
   const rowsNow = (newS.match(/class="frag-cell"/g) || []).length;
   console.log('index.html rewritten; frag rows still:', rowsNow);
 
   // 4. sitemap / robots / llms
-  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), buildSitemap(products, articlesMeta), 'utf8');
-  fs.writeFileSync(path.join(ROOT, 'llms.txt'), buildLlmstxt(), 'utf8');
+  writeFileSafe(path.join(ROOT, 'sitemap.xml'), buildSitemap(products, articlesMeta, lastmods));
+  writeFileSafe(path.join(ROOT, 'llms.txt'), buildLlmstxt());
   const robots = 'User-agent: *\nAllow: /\n\n# AI / answer-engine crawlers\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: ' + BASE + '/sitemap.xml\n';
-  fs.writeFileSync(path.join(ROOT, 'robots.txt'), robots, 'utf8');
-  console.log('sitemap.xml, robots.txt, llms.txt written');
+  writeFileSafe(path.join(ROOT, 'robots.txt'), robots);
+  if (DATES_DIRTY) writeFileSafe(DATES_FILE, JSON.stringify(DATES, null, 2) + '\n');
+  console.log('sitemap.xml, robots.txt, llms.txt written; content-dates.json', DATES_DIRTY ? 'updated' : 'unchanged');
 
   // sanity
   const ss = fs.readFileSync(IDX, 'utf8');

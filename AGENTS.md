@@ -57,6 +57,7 @@ Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`pric
 - Cart validator expects **6** prices per product (6 size columns); `sizes` arrays in cart code are also 6 entries.
 - `prodOf(id)` in the list-sheet IIFE handles both `brand|frag` pids and `data-product` slugs; `thumbOf` resolves via the `.frag-card[data-pid]` / `[data-product]` lookup and returns `''` if not found (never build a slug by hand — it 404s).
 - Desktop `.filter-panel` height is clamped on open by `fitPanel()` — if you change the announce bar or header, that still self-adjusts via `host.getBoundingClientRect()`.
+- `node seo-gen.js` is idempotent **and date-proof**: 3 consecutive runs are byte-identical across all 160 outputs, and a run with the clock moved to tomorrow produces byte-identical output too (verified with a preload that shifts `Date`). Dates come from `content-dates.json` (committed) — `datePublished` is fixed at `2026-09-10` per article, `dateModified` and sitemap `<lastmod>` bump only when a page's content signature changes. Never hand-strip blank lines after a run, and never delete `content-dates.json` — that re-stamps every page with today.
 
 ## Bottle Images
 - "images/bottles/<slug>.jpg" = source photo; "images/bottles/<slug>.png" = **transparent-background cutout (RGBA)** — always ship the PNG
