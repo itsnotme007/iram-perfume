@@ -73,7 +73,11 @@ const HOME_FAQS = [
 ];
 
 // ------------------------------------------------------------- catalog parse
-let s = fs.readFileSync(IDX, 'utf8');
+// git's core.autocrlf rewrites this file as CRLF on every checkout, which would
+// break the `=== '\n'` newline-consumption checks below (they'd see '\r') and
+// leak a blank line per injection point on the first run after a checkout.
+// Normalise on read so behaviour is independent of the worktree line endings.
+let s = fs.readFileSync(IDX, 'utf8').replace(/\r\n/g, '\n');
 const blocks = [...s.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
 const itemListBlock = blocks.find(b => { try { return JSON.parse(b[1]).hasOwnProperty('itemListElement'); } catch (e) { return false; } });
 
