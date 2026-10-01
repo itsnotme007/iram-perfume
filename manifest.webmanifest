@@ -1,0 +1,49 @@
+{
+  "name": "IRAM Perfume — Designer & Middle Eastern Fragrance Decants",
+  "short_name": "IRAM Perfume",
+  "description": "Buy authentic designer and Middle Eastern perfume decants in India — 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml. Free shipping over ₹999.",
+  "id": "/iram-perfume/",
+  "start_url": "/iram-perfume/",
+  "scope": "/iram-perfume/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf9f7",
+  "theme_color": "#1a1a2e",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["shopping", "lifestyle"],
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "All fragrances",
+      "short_name": "Shop",
+      "url": "/iram-perfume/#filterBar",
+      "icons": [{ "src": "logo.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Compare fragrances",
+      "short_name": "Compare",
+      "url": "/iram-perfume/#top",
+      "icons": [{ "src": "logo.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}
