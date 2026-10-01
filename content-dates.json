@@ -136,7 +136,7 @@
     "mod": "2026-10-01"
   },
   "frag:ahmed-al-maghribi-ignite-oud": {
-    "sig": "193759332ae4b08966aa5598",
+    "sig": "ed630304589d92134fc03017",
     "mod": "2026-10-01"
   },
   "frag:ahmed-al-maghribi-ghaf": {
@@ -148,7 +148,7 @@
     "mod": "2026-10-01"
   },
   "frag:albait-aldimashqi-l-nuit": {
-    "sig": "f05b407dea1d8cfd5d390929",
+    "sig": "93fb468df6fc8241a40fe084",
     "mod": "2026-10-01"
   },
   "frag:albait-aldimashqi-y-edp": {
@@ -156,11 +156,11 @@
     "mod": "2026-10-01"
   },
   "frag:albait-aldimashqi-gentlemen-reserve-priv-e": {
-    "sig": "adc389d271ddd44c53ba0336",
+    "sig": "a0ab62bb87e8581534631c75",
     "mod": "2026-10-01"
   },
   "frag:ajmal-wave": {
-    "sig": "3ab5f7af555c43391573f994",
+    "sig": "5038a31661d611adc0c6b9c0",
     "mod": "2026-10-01"
   },
   "frag:arabiyat-prestige-midnight-oud-al-layl": {
@@ -212,7 +212,7 @@
     "mod": "2026-10-01"
   },
   "frag:armaf-dunescape": {
-    "sig": "0a97252044b5eb39a2ca51ed",
+    "sig": "5b7f2fa5dbe133ba005fa4b1",
     "mod": "2026-10-01"
   },
   "frag:armaf-odyssey-mandarin-sky-elixir": {
@@ -232,7 +232,7 @@
     "mod": "2026-10-01"
   },
   "frag:armaf-club-de-nuit-iconic": {
-    "sig": "733f1f5b9fc280998a9c455c",
+    "sig": "d02b5eab8d81c8adecd19751",
     "mod": "2026-10-01"
   },
   "frag:assaf-tobacco-jam-50": {
@@ -268,7 +268,7 @@
     "mod": "2026-10-01"
   },
   "frag:french-avenue-ravine-ice": {
-    "sig": "0ae8910b5cacf08d8f16a1cc",
+    "sig": "bfeadc54825e979c131f01bd",
     "mod": "2026-10-01"
   },
   "frag:french-avenue-zenith-blue": {
@@ -292,7 +292,7 @@
     "mod": "2026-10-01"
   },
   "frag:ibraq-brazilian-tobacco": {
-    "sig": "98fecbe82e587233b121d594",
+    "sig": "0bd593f6153769ec567c132b",
     "mod": "2026-10-01"
   },
   "frag:ibraq-sandalwood": {
@@ -308,7 +308,7 @@
     "mod": "2026-10-01"
   },
   "frag:khadlaj-shiyaaka-snow": {
-    "sig": "a6561e11991fd83d835981ae",
+    "sig": "31844e7b46ab871d6c899098",
     "mod": "2026-10-01"
   },
   "frag:khadlaj-shiyaaka-shadow": {
@@ -316,7 +316,7 @@
     "mod": "2026-10-01"
   },
   "frag:khadlaj-island": {
-    "sig": "050557430e2e5956f6fda723",
+    "sig": "eac4b7ae7d5c04f94b07f221",
     "mod": "2026-10-01"
   },
   "frag:lattafa-ana-abiyed-coral": {
@@ -356,7 +356,7 @@
     "mod": "2026-10-01"
   },
   "frag:lattafa-maahir-legacy": {
-    "sig": "d1d4c6a06e908565a3bba66e",
+    "sig": "3e7aab4b58c2c97a6df91a11",
     "mod": "2026-10-01"
   },
   "frag:lattafa-qaed-al-fursan": {
@@ -408,7 +408,7 @@
     "mod": "2026-10-01"
   },
   "frag:laverne-blue-laverne-sport": {
-    "sig": "10eba8ffc03198e6512422eb",
+    "sig": "c540db56f3c427dead4a6601",
     "mod": "2026-10-01"
   },
   "frag:mykonos-glitch": {
@@ -436,7 +436,7 @@
     "mod": "2026-10-01"
   },
   "frag:paris-corner-mawj-moscow-mule": {
-    "sig": "73a41d93dfca1de3ccaa01bd",
+    "sig": "5e7ed41f5b2d3383f41db2a7",
     "mod": "2026-10-01"
   },
   "frag:paris-corner-confidential": {
@@ -592,7 +592,7 @@
     "mod": "2026-10-01"
   },
   "frag:swiss-arabian-soul-of-bali": {
-    "sig": "78dc882ffc5ea470d891b290",
+    "sig": "ea454141b65d774d16740b32",
     "mod": "2026-10-01"
   },
   "frag:swiss-arabian-vanilla-01": {
@@ -616,11 +616,23 @@
     "mod": "2026-10-01"
   },
   "article:make-perfume-last-longer": {
-    "sig": "260c0dfef4704e5928b2b6aa",
+    "sig": "a81946dea08153e3b9ffb23f",
     "mod": "2026-10-01"
   },
   "home": {
-    "sig": "12563132bab9cb37e27ee019",
+    "sig": "f310bb5b2c079c27c2c7a8a6",
+    "mod": "2026-10-01"
+  },
+  "frag:albait-aldimashqi-special-ombre-leather": {
+    "sig": "6ec4607b208a8efa9514bb95",
+    "mod": "2026-10-01"
+  },
+  "frag:khadlaj-shiyaaka-sky": {
+    "sig": "5f7eb92d5cacdf4e97928df6",
+    "mod": "2026-10-01"
+  },
+  "frag:khadlaj-karus-gold-absolu": {
+    "sig": "c1a72b03337ef92d18a7cc43",
     "mod": "2026-10-01"
   }
 }
