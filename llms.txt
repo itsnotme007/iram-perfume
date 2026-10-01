@@ -78,7 +78,7 @@
 ### Arabiyat Prestige
 - Midnight (Oud al Layl) (Unisex): 3ml ₹69 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹309 | 30ml ₹399
 - Oud Al Layal (Unisex): 3ml ₹69 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹309 | 30ml ₹399
-- Oud Al Layal Aswad (Men): 3ml ₹69 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹309 | 30ml ₹399
+- Oud Al Layal Aswad (Men, coming): 3ml ₹69 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹309 | 30ml ₹399
 - Raees (Men): 3ml ₹85 | 5ml ₹125 | 7.5ml ₹179 | 10ml ₹225 | 20ml ₹409 | 30ml ₹549
 - Marwa (Men): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 10ml ₹399 | 20ml ₹755 | 30ml ₹1069
 - Marwa Extrait (Men): 3ml ₹209 | 5ml ₹329 | 7.5ml ₹515 | 10ml ₹639 | 20ml ₹1239 | 30ml ₹1799
@@ -98,7 +98,7 @@
 - Club de Nuit Iconic (Men): 3ml ₹149 | 5ml ₹229 | 7.5ml ₹355 | 10ml ₹439 | 20ml ₹839 | 30ml ₹1199
 
 ### Assaf
-- Tobacco Jam 50 (Unisex): 3ml ₹179 | 5ml ₹279 | 7.5ml ₹435 | 10ml ₹539 | 20ml ₹1039 | 30ml ₹1499
+- Tobacco Jam 50 (Unisex, soldout): 3ml ₹179 | 5ml ₹279 | 7.5ml ₹435 | 10ml ₹539 | 20ml ₹1039 | 30ml ₹1499
 
 ### French Avenue
 - Aether Extrait (Men): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹709 | 30ml ₹999
@@ -118,7 +118,7 @@
 - Blue Diamond Aqua (Men): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹575 | 30ml ₹799
 - Blue Oud (Men): 3ml ₹159 | 5ml ₹249 | 7.5ml ₹385 | 10ml ₹479 | 20ml ₹919 | 30ml ₹1319
 - Blueberry Musk (Unisex): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 10ml ₹325 | 20ml ₹609 | 30ml ₹849
-- Brazilian Tobacco (Men): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 10ml ₹399 | 20ml ₹755 | 30ml ₹1069
+- Brazilian Tobacco (Men, soldout): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 10ml ₹399 | 20ml ₹755 | 30ml ₹1069
 - Sandalwood (Unisex): 3ml ₹145 | 5ml ₹225 | 7.5ml ₹345 | 10ml ₹429 | 20ml ₹819 | 30ml ₹1169
 - Spanish Tobacco (Men): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 10ml ₹399 | 20ml ₹755 | 30ml ₹1069
 
@@ -166,17 +166,17 @@
 ### Paris Corner
 - Rifaqaat (Unisex): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹235 | 10ml ₹289 | 20ml ₹539 | 30ml ₹749
 - Rifaqaat Adorn (Unisex): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 10ml ₹269 | 20ml ₹495 | 30ml ₹679
-- Mawj Moscow Mule (Unisex): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹575 | 30ml ₹799
+- Mawj Moscow Mule (Unisex, soldout): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹575 | 30ml ₹799
 - Confidential (Unisex): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 10ml ₹275 | 20ml ₹509 | 30ml ₹699
 
 ### Pendora Scents
-- Vanilla Tobacco (Unisex): 3ml ₹79 | 5ml ₹115 | 7.5ml ₹169 | 10ml ₹209 | 20ml ₹375 | 30ml ₹499
+- Vanilla Tobacco (Unisex, soldout): 3ml ₹79 | 5ml ₹115 | 7.5ml ₹169 | 10ml ₹209 | 20ml ₹375 | 30ml ₹499
 
 ### Rasasi
 - Daarej Pour Homme (Men): 3ml ₹79 | 5ml ₹115 | 7.5ml ₹169 | 10ml ₹209 | 20ml ₹375 | 30ml ₹499
-- Fattan (Men): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹305 | 10ml ₹379 | 20ml ₹715 | 30ml ₹1009
+- Fattan (Men, soldout): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹305 | 10ml ₹379 | 20ml ₹715 | 30ml ₹1009
 - Hawas Black (Men): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 10ml ₹339 | 20ml ₹639 | 30ml ₹899
-- Hawas Fire (Unisex): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹775 | 30ml ₹1099
+- Hawas Fire (Unisex, soldout): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹775 | 30ml ₹1099
 - Hawas Ice (Men): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 10ml ₹339 | 20ml ₹639 | 30ml ₹899
 - Hawas Kobra (Men): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹265 | 10ml ₹329 | 20ml ₹619 | 30ml ₹869
 - Hawas OG (Men): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹575 | 30ml ₹799
@@ -213,11 +213,11 @@
 - Privè Platinum Silver (Unisex): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 10ml ₹259 | 20ml ₹475 | 30ml ₹649
 
 ### Swiss Arabian
-- Enigma of Taif (Unisex): 3ml ₹189 | 5ml ₹299 | 7.5ml ₹459 | 10ml ₹575 | 20ml ₹1109 | 30ml ₹1599
+- Enigma of Taif (Unisex, soldout): 3ml ₹189 | 5ml ₹299 | 7.5ml ₹459 | 10ml ₹575 | 20ml ₹1109 | 30ml ₹1599
 - Incense 01 (Unisex): 3ml ₹289 | 5ml ₹465 | 7.5ml ₹729 | 10ml ₹909 | 20ml ₹1775 | 30ml ₹2599
 - Shaghaf Oud (Unisex): 3ml ₹149 | 5ml ₹235 | 7.5ml ₹359 | 10ml ₹449 | 20ml ₹859 | 30ml ₹1229
 - Shaghaf Oud Tonka (Unisex): 3ml ₹149 | 5ml ₹235 | 7.5ml ₹359 | 10ml ₹449 | 20ml ₹859 | 30ml ₹1229
-- Soul of Bali (Unisex): 3ml ₹189 | 5ml ₹299 | 7.5ml ₹459 | 10ml ₹575 | 20ml ₹1109 | 30ml ₹1599
+- Soul of Bali (Unisex, soldout): 3ml ₹189 | 5ml ₹299 | 7.5ml ₹459 | 10ml ₹575 | 20ml ₹1109 | 30ml ₹1599
 - Vanilla 01 (Women): 3ml ₹245 | 5ml ₹389 | 7.5ml ₹609 | 10ml ₹759 | 20ml ₹1475 | 30ml ₹2149
 
 ### Zimaya

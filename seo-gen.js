@@ -122,7 +122,7 @@ for (const reg of REGIONS) {
       else statusPerSize[k] = 'ok';
     });
 
-    const tagRe = /<span class="tag[^"]*">([^<]+)<\/span>/g;
+    const tagRe = /<span class="tag(?:\s[^"]*)?"[^>]*>([^<]+)<\/span>/g;
     const tags = [...cell.matchAll(tagRe)].map(m => m[1].trim());
     const status = tags.includes('SOLD OUT') ? 'soldout' : tags.includes('COMING SOON') ? 'coming' : 'instock';
     const gender = ['Men', 'Women', 'Unisex'].find(g => tags.includes(g)) || '';
