@@ -15,7 +15,7 @@
 ## Fragrance catalogue (India decant prices)
 
 ### Bvlgari
-- Man in Black Parfum (Men): 3ml ₹249 | 5ml ₹399 | 7.5ml ₹619 | 10ml ₹775 | 20ml ₹1509 | 30ml ₹2199
+- Man in Black Parfum (Men, soldout): 3ml ₹249 | 5ml ₹399 | 7.5ml ₹619 | 10ml ₹775 | 20ml ₹1509 | 30ml ₹2199
 
 ### Davidoff
 - Cool Water EDT (Men): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 10ml ₹239 | 20ml ₹439 | 30ml ₹599
