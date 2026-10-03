@@ -649,6 +649,15 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 .pc-add{min-height:40px;border:none;border-radius:8px;background:#2e7d32;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
 .pc-add:hover{background:#1b5e20}
 .pc-add-so{background:transparent;border:1px solid var(--accent-danger);color:var(--accent-danger);cursor:not-allowed}
+.pc-sold .pc-img,.pc-sold .pc-hero-img,.pc-sold .feat-media img,.pc-sold .lt-thumb img{filter:grayscale(1) opacity(.55)}
+.pc-sold .pc-ph{filter:grayscale(1)}
+.frag-card.pc-sold{background:var(--bg-hover)}
+[data-theme="dark"] .frag-card.pc-sold{background:#101413}
+.frag-card.pc-sold .card-top,.frag-card.pc-sold .card-frag-name,.frag-card.pc-sold .pc-name,.frag-card.pc-sold .card-inspired,.frag-card.pc-sold .pc-price-line,.frag-card.pc-sold .card-links,.frag-card.pc-sold .card-links a{color:var(--text-muted)}
+.feat-card.pc-sold{background:var(--bg-hover)}
+.feat-card.pc-sold .feat-brand,.feat-card.pc-sold .feat-name,.feat-card.pc-sold .feat-price{color:var(--text-muted)}
+.lt-row.pc-sold .lt-meta b{color:var(--text-muted)}
+tr.pc-sold td{color:var(--text-muted)}
 .pc-add-cs{background:transparent;border:1px solid var(--accent-success);color:var(--accent-success);cursor:not-allowed}
 .pc-add:focus-visible,.pc-name:focus-visible,.pc-media:focus-visible,.pc-size:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 .pc-toolbar{display:none;position:sticky;top:0;z-index:55;align-items:center;flex-wrap:wrap;gap:8px;padding:8px 0;background:var(--bg-page);margin-bottom:2px}
@@ -5355,7 +5364,7 @@ try{(function(){
       else if(isCS){badges+='<span class="pc-badge pc-badge-cs">COMING SOON</span>'}
       if(isNew){badges+='<span class="pc-badge pc-badge-new">NEW</span>'}
       var card=document.createElement('div');
-      card.className='frag-card';
+      card.className='frag-card'+(isSO?' pc-sold':'');
       card.setAttribute('data-pid',pid);
       card.setAttribute('data-product',slug);
       card.setAttribute('data-division',division);
@@ -5363,7 +5372,8 @@ try{(function(){
         var a=fc.attributes[i];
         if(a.name.indexOf('data-')===0&&!card.getAttribute(a.name))card.setAttribute(a.name,a.value);
       }
-      if(gTag)card.setAttribute('data-gender',gTag);
+        if(gTag)card.setAttribute('data-gender',gTag);
+      if(isSO)row.classList.add('pc-sold');
       if(fc.getAttribute('data-added'))card.setAttribute('data-added',fc.getAttribute('data-added'));
       card.innerHTML='<div class="pc-media" role="button" tabindex="0" data-open aria-label="View '+esc(bName)+' '+esc(fName)+' details">'
         +'<span class="pc-ph" aria-hidden="true"></span>'
@@ -5430,7 +5440,7 @@ try{(function(){
       var cost=fromEl?parseInt(fromEl.textContent.replace(/[^0-9]/g,''),10):NaN;
       if(isNaN(cost))return null;
       var base=media?media.getAttribute('data-img-base'):'';
-      return {card:card,i:i,name:nm?nm.textContent.trim():'',brand:bn?bn.textContent.trim():'',base:base,src:media?media.getAttribute('src'):'',added:card.getAttribute('data-added')||'',cost:cost};
+      return {card:card,i:i,name:nm?nm.textContent.trim():'',brand:bn?bn.textContent.trim():'',base:base,src:media?media.getAttribute('src'):'',added:card.getAttribute('data-added')||'',cost:cost,sold:card.classList.contains('pc-sold')};
     }).filter(Boolean);
     var featPicks=[];
     featList.filter(function(x){return x.added}).sort(function(a,b){return a.added<b.added?1:-1}).slice(0,4).forEach(function(x){featPicks.push(x)});
@@ -5441,7 +5451,7 @@ try{(function(){
       featTrack.innerHTML=featPicks.map(function(x){
         var src=x.base?x.base+'.png':x.src;
         var img=src?'<img src="'+esc(src)+'" alt="'+esc(x.name)+'" loading="lazy">':'';
-        return '<button type="button" class="feat-card" data-pid="'+esc(x.card.getAttribute('data-pid')||'')+'" aria-label="View '+esc(x.brand)+' '+esc(x.name)+' details">'
+        return '<button type="button" class="feat-card'+(x.sold?' pc-sold':'')+'" data-pid="'+esc(x.card.getAttribute('data-pid')||'')+'" aria-label="View '+esc(x.brand)+' '+esc(x.name)+' details">'
           +'<span class="feat-media">'+img+'</span>'
           +'<span class="feat-brand">'+esc(x.brand)+'</span>'
           +'<span class="feat-name">'+esc(x.name)+'</span>'
@@ -5540,7 +5550,7 @@ try{(function(){
       acts='<button type="button" class="lt-act" data-lt-add="'+esc(id)+'"'+(c?'':' disabled')+'>Add</button>'
         +'<button type="button" class="lt-act lt-ghost" data-lt-un="'+esc(id)+'" aria-label="Remove from compare">Remove</button>';
     }
-    return '<div class="lt-row" data-lt-id="'+esc(id)+'">'
+    return '<div class="lt-row'+(d.isSoldOut?' pc-sold':'')+'" data-lt-id="'+esc(id)+'">'
       +'<span class="lt-thumb">'+(img?'<img src="'+esc(img)+'" alt="" loading="lazy">':'')+'</span>'
       +'<span class="lt-meta"><b>'+esc(d.frag)+'</b><small>'+esc(d.brand)+(d.gender?' · '+esc(d.gender):'')+'</small><span class="lt-price">'+price+'</span></span>'
       +'<span class="lt-acts">'+acts+'</span></div>';
@@ -6346,6 +6356,7 @@ try{(function(){
     var d=card._cartData;
     if(!d)return;
     var brand=d.brand,frag=d.frag;
+    sheet.classList.toggle('pc-sold',!!d.isSoldOut);
     var attrHtml='';
     for(var i=0;i<chipDefs.length;i++){
       var k=chipDefs[i][0],lbl=chipDefs[i][1];
@@ -6405,6 +6416,7 @@ try{(function(){
   }
   function close(){
     sheet.classList.remove('open');
+    sheet.classList.remove('pc-sold');
     overlay.classList.remove('open');
     document.body.classList.remove('pc-lock');
     _card=null;

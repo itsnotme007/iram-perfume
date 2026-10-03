@@ -1,6 +1,6 @@
 {
   "frag:bvlgari-man-in-black-parfum": {
-    "sig": "47edcd78d4c0ac45d395b4f9",
+    "sig": "82ac5cd7f9200a86173db271",
     "mod": "2026-10-02"
   },
   "frag:davidoff-cool-water-edt": {
@@ -236,7 +236,7 @@
     "mod": "2026-10-01"
   },
   "frag:assaf-tobacco-jam-50": {
-    "sig": "4e9596000244e8769ad801cf",
+    "sig": "3e8960eb8be055505085ca04",
     "mod": "2026-10-02"
   },
   "frag:french-avenue-aether-extrait": {
@@ -292,8 +292,8 @@
     "mod": "2026-10-01"
   },
   "frag:ibraq-brazilian-tobacco": {
-    "sig": "0bd593f6153769ec567c132b",
-    "mod": "2026-10-01"
+    "sig": "7d1fc56873447b9443e2f00c",
+    "mod": "2026-10-02"
   },
   "frag:ibraq-sandalwood": {
     "sig": "9ff7eff26ba97708b10e8705",
@@ -436,32 +436,32 @@
     "mod": "2026-10-02"
   },
   "frag:paris-corner-mawj-moscow-mule": {
-    "sig": "5e7ed41f5b2d3383f41db2a7",
-    "mod": "2026-10-01"
+    "sig": "ab2609ae2b1a812556a8aea8",
+    "mod": "2026-10-02"
   },
   "frag:paris-corner-confidential": {
     "sig": "b2cdba9f6a6f6be7668365ba",
     "mod": "2026-10-02"
   },
   "frag:pendora-scents-vanilla-tobacco": {
-    "sig": "44ea4acba41afdbfdfbb6201",
-    "mod": "2026-10-01"
+    "sig": "dab270086f6fe0653d9fe35d",
+    "mod": "2026-10-02"
   },
   "frag:rasasi-daarej-pour-homme": {
     "sig": "5941f14e19fd280195f44ffc",
     "mod": "2026-10-01"
   },
   "frag:rasasi-fattan": {
-    "sig": "ca084b7358821cdab04a895f",
-    "mod": "2026-10-01"
+    "sig": "225fd50c4297eb6b65106dc0",
+    "mod": "2026-10-02"
   },
   "frag:rasasi-hawas-black": {
     "sig": "2043feda864936d974165237",
     "mod": "2026-10-01"
   },
   "frag:rasasi-hawas-fire": {
-    "sig": "2d7dc4a3ef07ab716b34208c",
-    "mod": "2026-10-01"
+    "sig": "1075c1208bd13cc6312a5db1",
+    "mod": "2026-10-02"
   },
   "frag:rasasi-hawas-ice": {
     "sig": "428ad850c26bd18cbc3b2876",
@@ -576,8 +576,8 @@
     "mod": "2026-10-02"
   },
   "frag:swiss-arabian-enigma-of-taif": {
-    "sig": "c906fe8340083fa7af67d5c9",
-    "mod": "2026-10-01"
+    "sig": "d84514031edcd6128341c181",
+    "mod": "2026-10-02"
   },
   "frag:swiss-arabian-incense-01": {
     "sig": "73a5bcfe4bd5f3c927b5ffbe",
@@ -592,8 +592,8 @@
     "mod": "2026-10-01"
   },
   "frag:swiss-arabian-soul-of-bali": {
-    "sig": "ea454141b65d774d16740b32",
-    "mod": "2026-10-01"
+    "sig": "084cb5c8f56e3222e5ac770d",
+    "mod": "2026-10-02"
   },
   "frag:swiss-arabian-vanilla-01": {
     "sig": "b2a7ac846a9ffebfe6f83f35",
@@ -620,7 +620,7 @@
     "mod": "2026-10-01"
   },
   "home": {
-    "sig": "54bcf084edaaee729a86b12d",
+    "sig": "d4caaa42cb0e7220b26af54b",
     "mod": "2026-10-02"
   },
   "frag:albait-aldimashqi-special-ombre-leather": {
