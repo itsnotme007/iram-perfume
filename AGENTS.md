@@ -17,9 +17,9 @@
 Column order in the table: `3ml, 5ml, 7.5ml, 10ml, 20ml, 30ml` (the 7.5ml column is priced with the 8× rule above).
 Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`prices[5]` for 30ml.
 
-## Brands (19)
-**Designer:** Davidoff, Mancera, Jaguar
-**Middle Eastern:** Afnan, Ahmed Al Maghribi, Arabiyat Prestige, Armaf, Assaf, French Avenue, Ibraq, Lattafa, Laverne, Nusuk, Paris Corner, Pendora Scents, Rasasi, Rayhaan, Riiffs, Swiss Arabian
+## Brands (29)
+**Designer (5):** Bvlgari, Davidoff, Jaguar, Mancera, Versace
+**Middle Eastern (24):** Afnan, Ahmed Al Maghribi, Ajmal, Al Majed, Albait Aldimashqi, Arabiyat Prestige, Armaf, Assaf, Fragrance World, French Avenue, Ibraq, Khadlaj, Lattafa, Laverne, Mykonos, Nusuk, Paris Corner, Pendora Scents, Rasasi, Rayhaan, Reef, Riiffs, Swiss Arabian, Zimaya
 
 ## Conventions
 - Gender tags: Men (blue), Unisex (purple), Women (pink)
