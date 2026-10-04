@@ -85,6 +85,18 @@ let s = fs.readFileSync(IDX, 'utf8').replace(/\r\n/g, '\n');
 const blocks = [...s.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
 const itemListBlock = blocks.find(b => { try { return JSON.parse(b[1]).hasOwnProperty('itemListElement'); } catch (e) { return false; } });
 
+// products.json is the source of truth (Phase 2 inversion). The table below is
+// only re-snapshotted when you pass --make-data (use it after hand-editing the
+// table instead of products.json).
+const DATA_FILE = path.join(ROOT, 'products.json');
+const makeData = process.argv.includes('--make-data');
+let products = [];
+if (!makeData) {
+  if (!fs.existsSync(DATA_FILE)) throw new Error('products.json missing — run: node seo-gen.js --make-data once');
+  products = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+}
+// catalogue tbody regions — also used by editHomepage (anchor wrapping),
+// so they are computed whether or not we re-snapshot products.json
 const catStart = s.indexOf('<div class="section-heading">Designer');
 const catEnd = s.indexOf('Bottle Options');
 const catRaw = s.slice(catStart, catEnd > -1 ? catEnd : catStart + 400000);
@@ -96,6 +108,7 @@ if (tbodyMarks.length !== 2 || tbodyEnds.length !== 2) throw new Error('Expected
   { start: tbodyMarks[1].start, end: tbodyEnds[1].end }
 ];
 
+if (makeData) {
 const sects = [];
 let p = s.indexOf('<div class="section-heading">');
 while (p > -1) {
@@ -109,7 +122,6 @@ const sectionAt = idx => {
   return cur;
 };
 
-let products = [];
 const tbodyNew = [];
 
 for (const reg of REGIONS) {
@@ -191,6 +203,9 @@ const avail = new Set(['instock']);
 for (const pr of products) {
   const a = pr.status === 'soldout' ? 'https://schema.org/OutOfStock' : pr.status === 'coming' ? 'https://schema.org/PreOrder' : 'https://schema.org/InStock';
   pr.availability = a;
+}
+fs.writeFileSync(DATA_FILE, JSON.stringify(products, null, 1) + '\n', 'utf8');
+console.log('wrote products.json:', products.length, '— sourced from the catalogue table');
 }
 
 // ------------------------------------------------------ description builders
