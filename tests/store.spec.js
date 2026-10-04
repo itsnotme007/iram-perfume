@@ -92,6 +92,36 @@ test('gender filter narrows results (desktop UI / mobile URL)', async ({ page },
   }
 });
 
+test('taxonomy filter options return matches (gym + new moods)', async ({ page }) => {
+  const cases = [
+    ['occasion', 'gym'],
+    ['mood', 'confident'],
+    ['mood', 'energetic'],
+    ['mood', 'mysterious'],
+    ['mood', 'romantic'],
+    ['mood', 'rich']
+  ];
+  for (const [k, v] of cases) {
+    await page.goto('/?' + k + '=' + v);
+    await page.waitForLoadState('load');
+    await page.waitForTimeout(250);
+    const r = await page.evaluate(([k, v]) => {
+      const cards = Array.from(document.querySelectorAll('.frag-card'));
+      const shown = cards.filter((c) => c.style.display !== 'none');
+      return {
+        total: cards.length,
+        shown: shown.length,
+        rows: document.querySelectorAll('#filterResults tbody tr').length,
+        allMatch: shown.every((c) => (c.getAttribute('data-' + k) || '').split(',').includes(v))
+      };
+    }, [k, v]);
+    expect(r.total).toBe(TOTAL);
+    expect(r.shown).toBeGreaterThan(0);
+    expect(r.rows).toBeGreaterThan(0);
+    expect(r.allMatch).toBe(true);
+  }
+});
+
 test('add to cart works from filtered desktop results', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'desktop table filter flow');
   await page.goto('/');
