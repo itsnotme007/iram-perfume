@@ -1,7 +1,7 @@
 # IRAM Perfume Website
 
 **Repo:** https://github.com/itsnotme007/iram-perfume.git
-**File:** `C:\Users\Fateh\Downloads\models\index.html` (HTML/CSS/JS inline, ~7300 lines)
+**File:** `C:\Users\Fateh\Downloads\models\index.html` (HTML/CSS/JS inline, ~7740 lines)
 **Logos:** `C:\Users\Fateh\Downloads\models\logos/`
 **Reviews:** `C:\Users\Fateh\Downloads\models\reviews/`
 
@@ -29,7 +29,7 @@ Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`pric
 - Filter UI: `#filterBar` (desktop popover) + `#pcToolbar`/sticky ≤1023px (mobile sheet); one reusable `#filterPanel` is moved between `#filterPanelHost` and `#pcFilterBody`
 - Filter options: 10 groups of `.filter-btn` inside `#filterPanelBody` — 9 `role="radiogroup"` (Brand, Gender, Scent, Season, Occasion, Time, Weather, Mood, Family) + a Price group whose `.filter-opts` is the radiogroup (single-select per category, AND across); state lives in `window.__filterState` (10 keys incl. `price`), applied by `applyFilter()`. There is deliberately **no "New Arrivals" filter** — `data-added` is kept only for the NEW badge and the Newest First sort.
 - Brand group is injected at runtime (`insertAdjacentHTML('afterbegin')`, id `filterBrandGroup`) from `brandCounts`; `#pcBrandBtn` in `#pcToolbar` opens the sheet/panel and scrolls to it.
-- Price filter: dual `#priceMin`/`#priceMax` range sliders (step 5, bounds auto-derived from `data-price` on `.frag-cell`), state `f.price = 'all' | '<min>-<max>'`, matched numerically via `window.__priceMatch` (not the comma-split path); label via `window.__priceLabel`. `data-price` = cheapest *available* size price, falling back to any size price (so all 154 cells carry it); `.frag-card` inherits it through the generic `data-*` copy loop.
+- Price filter: dual `#priceMin`/`#priceMax` range sliders (step 5, bounds auto-derived from `data-price` on `.frag-cell`), state `f.price = 'all' | '<min>-<max>'`, matched numerically via `window.__priceMatch` (not the comma-split path); label via `window.__priceLabel`. `data-price` = cheapest *available* size price, falling back to any size price (so all 155 cells carry it); `.frag-card` inherits it through the generic `data-*` copy loop.
 - URL sync: `window.__syncUrl` rewrites `?brand=…&price=…&sort=…` via `history.replaceState` on every `__onFilterChange` / sort `change`, and the URL-sync IIFE replays params on load (clicks filter buttons, `__setPriceRange`, `__applySort`).
 - Filter results/count read from `.table-wrap .frag-cell` (unfiltered) and `#filterResults tbody tr` (filtered); keep `#filterBar` id for navSearch + seo-gen
 - Cart uses `window._products` registry keyed by `brand|frag`
@@ -40,7 +40,7 @@ Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`pric
 
 ## Mobile Redesign (Phases 2/4/5/6)
 - **Hero carousel:** `.mobile-hero` wraps `#heroTrack` (flex `translateX`) + `#heroDots`; 3 `.hero-slide`, slides 2–3 are `aria-hidden="true"` `data-hero-jump`. 5s autoplay, pause on hover/focus/visibility, touch swipe, `prefers-reduced-motion` disables autoplay+transition. Mobile-only (`display:none` >768px).
-- **Featured scroller:** `#featuredRail`/`#featuredTrack` uses `.feat-card` (NOT `.frag-card` — tests count `.frag-card`=154). Picked from `.frag-card` (4 newest by `data-added` + cheapest fill, 12 total); click scrolls to card + opens product sheet. Hidden >768px.
+- **Featured scroller:** `#featuredRail`/`#featuredTrack` uses `.feat-card` (NOT `.frag-card` — tests count `.frag-card`=155). Picked from `.frag-card` (4 newest by `data-added` + cheapest fill, 12 total); click scrolls to card + opens product sheet. Hidden >768px.
 - **Bottom nav:** 6 items `#navHome #navSearch #navBrands #navCompare #navWishlist #navCart`. Real ids in markup (no JS relabel). `#navBrands` → `#brandSection`. `window.__setNavActive(id)` exists.
 - **Compare:** `data-cmp` button `.pc-cmp` (under `.pc-wish`), localStorage `iram_compare` (max 4, FIFO overflow), sheet `#pcCmpSheet` with `.lt-row` rows + spec table. `window.__openCompare`, `window.__syncCompare`.
 - **Wishlist:** localStorage `iram_wishlist` (array of `data-product` slugs), sheet `#pcWishSheet` with Move to cart / Remove. `window.__openWishlist`, `window.__syncWishlist`. Both sheets share `#pcListOverlay`.
@@ -55,6 +55,17 @@ Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`pric
 - **PWA:** `manifest.webmanifest` linked in head; `404.html` (styled, links to `/iram-perfume/`). `theme-color` already present.
 - **Hamburger sidebar** (`#mobileMenu` > `.mobile-menu-panel`) has **no brand kicker** — the `IRAM Perfume` `<p class="mobile-menu-kicker">` and its CSS were removed; links start at the panel's 24px padding.
 
+## Data Pipeline (Phase 2.1)
+- **`products.json` (155 products) is the source of truth.** `node seo-gen.js` reads it every run; the catalogue table in `index.html` is only re-snapshotted via `node seo-gen.js --make-data` (use after hand-editing the table instead of products.json). A `--make-data` re-run against an already-rendered table must leave products.json byte-stable (round-trip test).
+- Fields: `key` (`brand|name`), `prices`/`statusPerSize` (6 sizes 3/5/7.5/10/20/30 → ok|struck|coming), `links` (preview-stripped + separator-normalized) + `linksRaw` (verbatim links-cell HTML — the registry/`.card-links` use `linksRaw`; a preview-only cell yields `links=''`), `slug`/`url`, `added` (28 products; NEW badge + Newest First), `tags` always `[]`, `inspired` keeps raw entities.
+- **seo-gen renders FROM products.json into index.html every run:**
+  1. The two catalogue `<tbody>` regions (Designer 9 / Middle Eastern 146 rows), byte-parity with the historical hand-authored markup plus static `data-brand`, `data-price` (cheapest available else any), `data-pid`, `data-added` on fresh products. Attr order: scent…family, added, brand, price, pid.
+  2. The mobile `.frag-cards` grids at `<!--CARDS:Designer-->` / `<!--CARDS:Middle Eastern-->` markers (inserted right after each `</table>`; markers are `stripMarks`-style so reruns stay idempotent) — exact mirror of the runtime builder output, **no static NEW badge**.
+  3. `window.__PRODUCTS` (slim projection incl. `linksRaw` as `links`, `</` escaped) at `<!--PRODUCTS_JSON-->`, inserted immediately before the `<!--APP-->` anchor that precedes the giant inline `<script>`.
+- **Runtime consumes the static data:** filter brandCounts read `.frag-cell[data-brand]`; price slider bounds read `data-price`; the card builder has a `hasStatic` guard (`:scope>.frag-cards` — skips re-render but still marks sold-out rows `.pc-sold`); the cart registry (`window._products`) is built from `window.__PRODUCTS` (init throws if the payload is missing — never move/delete the `<!--PRODUCTS_JSON-->`/`<!--APP-->` anchors); NEW-init syncs `.frag-card[data-added]` badges (adds/removes `.pc-badge-new` before `.pc-wish`). `data-gender` on cells is still set at runtime by cart init.
+- **Verification:** `node tests/render-fidelity.js [ref]` (default HEAD) — strips the 3 static attrs, requires EXACT equality of both tbodies vs the ref; `node tests/parse-check.js`; `node tests/console-check.js` (boot + filter/sort/search/cart steps, fails on pageerror, console.error or cart/registry warnings); `npx playwright test` (baseline 22 passed / 10 skipped).
+- **Battery greps (case-sensitive across index.html + fragrance/ + articles/):** U+FFFD, `inspired by Original`, `A aromatic`, **`a aromatic`** (lowercase — `fragFAQ`'s `wearA2` used to hardcode `with a `, now `art(scentLine(pr))`; also sweep ` a <vowel>`), `147 fragrances`. `a useful` is correct — don't "fix" it.
+
 ## Gotchas
 - Cart validator expects **6** prices per product (6 size columns); `sizes` arrays in cart code are also 6 entries.
 - `prodOf(id)` in the list-sheet IIFE handles both `brand|frag` pids and `data-product` slugs; `thumbOf` resolves via the `.frag-card[data-pid]` / `[data-product]` lookup and returns `''` if not found (never build a slug by hand — it 404s).
@@ -65,5 +76,5 @@ Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`pric
 ## Bottle Images
 - "images/bottles/<slug>.jpg" = source photo; "images/bottles/<slug>.png" = **transparent-background cutout (RGBA)** — always ship the PNG
 - Detail pages use <img src="../images/bottles/<slug>.png" alt="<name> bottle" style="max-width:220px;border-radius:12px;margin:16px 0;display:block">
-- node seo-gen.js prefers .png, falls back to .jpg (checks images/bottles/ **at build time**) — so **add the images before running it**. A page generated while the image is absent omits the hero `<img>` and stays broken until you regenerate (`Select-String -Path 'fragrance\*.html' -Pattern 'images/bottles/'` must return 154 lines).
+- node seo-gen.js prefers .png, falls back to .jpg (checks images/bottles/ **at build time**) — so **add the images before running it**. A page generated while the image is absent omits the hero `<img>` and stays broken until you regenerate (`Select-String -Path 'fragrance\*.html' -Pattern 'images/bottles/'` must return 155 lines).
 - Cutout rules: bottle only (no box/packaging), tight crop, longest side 1024px, feathered alpha, no white fringe

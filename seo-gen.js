@@ -169,18 +169,17 @@ for (const reg of REGIONS) {
     const gender = ['Men', 'Women', 'Unisex'].find(g => tags.includes(g)) || '';
 
     const inspired = (() => { const m = /<td class="inspired-cell">([\s\S]*?)<\/td>/.exec(tr); return m ? m[1].replace(/<[^>]*>/g, '').trim() : ''; })();
-    const links = (() => {
-      const m = /<td class="links-cell">([\s\S]*?)<\/td>/.exec(tr);
-      if (!m) return '';
-      return m[1].replace(/<span class="preview-trigger">[\s\S]*?<\/span>/g, '').replace(/<\/a><a /g, '</a> <a ');
-    })();
+    const linksRaw = (() => { const m = /<td class="links-cell">([\s\S]*?)<\/td>/.exec(tr); return m ? m[1] : ''; })();
+    const links = linksRaw
+      .replace(/<span class="preview-trigger">[\s\S]*?<\/span>/g, '')
+      .replace(/<\/a><a /g, '</a> <a ');
 
     const cat = sectionAt(reg.start) || '';
     const key = (brand || 'x') + '|' + name;
     products.push({
       key, brand: brand || '', brandImg: brandRow.img || '', name, gender, status,
       tags: tags.filter(t => !['Men', 'Women', 'Unisex', 'SOLD OUT', 'COMING SOON', 'NEW'].includes(t)),
-      prices, statusPerSize, inspired, links, cat,
+      prices, statusPerSize, inspired, links, linksRaw, cat,
       scent: data.scent || '', season: data.season || '', occasion: data.occasion || '',
       time: data.time || '', weather: data.weather || '', mood: data.mood || '',
       family: data.family || '', added: data.added || ''
@@ -255,7 +254,7 @@ function fragFAQ(pr) {
   const priceA = 'IRAM Perfume sells authentic decants of ' + pr.name + ' by ' + pr.brand + ' at 3ml \u20b9' + (pr.prices['3'] ?? '—') + ', 5ml \u20b9' + (pr.prices['5'] ?? '—') + ', 7.5ml \u20b9' + (pr.prices['7.5'] ?? '—') + ', 10ml \u20b9' + (pr.prices['10'] ?? '—') + ', 20ml \u20b9' + (pr.prices['20'] ?? '—') + ' and 30ml \u20b9' + (pr.prices['30'] ?? '—') + '. Shipping is free on ' + FREE_SHIP_MIN_QTY + '-decant orders above \u20b9' + FREE_SHIP_MIN + '. Full bottles are available on request.';
   const wearQ = 'When should I wear ' + pr.name + ' by ' + pr.brand + '?';
   const wearA = pr.gender ? 'A ' + ({ Men: 'men\'s', Women: 'women\'s', Unisex: 'unisex' }[pr.gender] || 'unisex') + ' fragrance, ' : 'A fragrance, ';
-  const wearA2 = wearA + 'it works best during ' + bestForLine(pr) + '. It leans ' + (pr.mood || 'versatile') + ' in character with a ' + scentLine(pr) + ' profile.';
+  const wearA2 = wearA + 'it works best during ' + bestForLine(pr) + '. It leans ' + (pr.mood || 'versatile') + ' in character with ' + art(scentLine(pr)) + ' ' + scentLine(pr) + ' profile.';
   return [
     [cloneQ, cloneA],
     [priceQ, priceA],
@@ -551,6 +550,129 @@ function buildArticles() {
   return guides;
 }
 
+// ---------------------------------------------------- homepage table rendering
+// products.json is the source of truth (Phase 2): catalogue tbody rows and the
+// mobile .frag-cards grids are re-rendered from it on every run, so the DOM
+// cannot drift from products.json. Keep row/card markup byte-parity with the
+// historical hand-authored table — verify with `node tests/render-fidelity.js`.
+const SIZES6 = ['3', '5', '7.5', '10', '20', '30'];
+function rupeePlain(n) { return Number(n).toLocaleString('en-IN'); }
+function cardEsc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+// mirrors reading the cell with textContent (which decodes entities)
+function cardDec(s) { return String(s == null ? '' : s).replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&'); }
+// cheapest available size price, falling back to any size price — same rule as
+// the old runtime data-price scrape (filters derive their bounds from it)
+function cheapestPrice(pr) {
+  let cheapest = null, any = null;
+  for (const k of SIZES6) {
+    const p = pr.prices[k];
+    if (!p) continue;
+    if (any === null || p < any) any = p;
+    if (pr.statusPerSize[k] !== 'ok') continue;
+    if (cheapest === null || p < cheapest) cheapest = p;
+  }
+  return cheapest !== null ? cheapest : any;
+}
+function renderTbody(cat) {
+  const list = products.filter((p) => p.cat === cat);
+  if (!list.length) throw new Error('renderTbody: no products for ' + cat);
+  const blocks = [];
+  for (const pr of list) {
+    const last = blocks[blocks.length - 1];
+    if (last && last.brand === pr.brand && last.brandImg === pr.brandImg) last.items.push(pr);
+    else blocks.push({ brand: pr.brand, brandImg: pr.brandImg, items: [pr] });
+  }
+  const rows = [];
+  for (const b of blocks) {
+    b.items.forEach((pr, i) => {
+      let tr = '<tr' + (i === 0 ? ' class="brand-sep"' : '') + '>';
+      if (i === 0) {
+        tr += '<td class="brand-cell" rowspan="' + b.items.length + '">'
+          + (pr.brandImg ? '<img src="' + pr.brandImg + '" alt="' + b.brand + '" style="background:#fff;padding:2px;border-radius:4px">' : '')
+          + b.brand + '</td>';
+      }
+      const price = cheapestPrice(pr);
+      tr += '<td class="frag-cell" data-scent="' + pr.scent + '" data-season="' + pr.season
+        + '" data-occasion="' + pr.occasion + '" data-time="' + pr.time + '" data-weather="' + pr.weather
+        + '" data-mood="' + pr.mood + '" data-family="' + pr.family + '"'
+        + (pr.added ? ' data-added="' + pr.added + '"' : '')
+        + ' data-brand="' + pr.brand + '"'
+        + (price !== null ? ' data-price="' + price + '"' : '')
+        + ' data-pid="' + pr.key + '">'
+        + '<a href="fragrance/' + pr.slug + '.html" style="text-decoration:none;color:inherit">' + pr.name + '</a>';
+      if (pr.gender) tr += '<span class="tag tag-' + pr.gender.toLowerCase() + '">' + pr.gender + '</span>';
+      if (pr.status === 'soldout') tr += '<span class="tag" style="background:#e94560;color:#fff;margin-left:6px">SOLD OUT</span>';
+      else if (pr.status === 'coming') tr += '<span class="tag" style="background:#2e7d32;color:#fff;margin-left:6px">COMING SOON</span>';
+      tr += '</td>';
+      SIZES6.forEach((k, idx) => {
+        const st = pr.statusPerSize[k];
+        const body = st === 'struck' ? '<s class="u-price">' + rupeePlain(pr.prices[k]) + '</s>'
+          : st === 'coming' ? '<span class="u-price">' + rupeePlain(pr.prices[k]) + '</span>'
+          : String(rupeePlain(pr.prices[k]));
+        tr += '<td class="size-cell">' + (idx === 5 ? '<strong>' + body + '</strong>' : body) + '</td>';
+      });
+      tr += '<td class="inspired-cell">' + pr.inspired + '</td>';
+      tr += '<td class="links-cell">' + (pr.linksRaw || pr.links) + '</td>';
+      tr += '</tr>';
+      rows.push(tr);
+    });
+  }
+  if (rows.length !== list.length) throw new Error('renderTbody: row count drift for ' + cat);
+  return '<tbody>' + rows.join('\n') + '\n</tbody>';
+}
+// mirrors the runtime card builder (index.html .table-wrap IIFE) — the builder
+// skips its DOM construction when this static .frag-cards grid is present
+function renderCards(cat) {
+  return products.filter((p) => p.cat === cat).map((pr) => {
+    const isSO = pr.status === 'soldout';
+    const isCS = pr.status === 'coming';
+    const gTag = pr.gender || '';
+    const prices = SIZES6.map((k) => pr.prices[k] || 0);
+    const available = SIZES6.map((k) => pr.statusPerSize[k] === 'ok');
+    let minAvail = null;
+    for (let i = 0; i < prices.length; i++) if (available[i] && (minAvail === null || prices[i] < minAvail)) minAvail = prices[i];
+    const fmt = (n) => n ? ('\u20B9' + Number(n).toLocaleString('en-IN')) : '';
+    const iText = cardDec(pr.inspired).replace(/\s+/g, ' ').trim();
+    const famTxt = pr.family ? pr.family.split(',').slice(0, 2).join(' \u00b7 ') : '';
+    const showInsp = !!(iText && iText.length > 1 && iText !== 'Original');
+    const slotTxt = showInsp ? iText : famTxt;
+    const slotHtml = slotTxt ? '<span class="card-inspired pc-inspired"' + (showInsp ? ' title="Reminds me of: ' + cardEsc(iText) + '"' : '') + '>' + (showInsp ? '&#8618; ' : '') + cardEsc(slotTxt) + '</span>' : '';
+    let badges = '';
+    if (isSO) badges += '<span class="pc-badge pc-badge-so">SOLD OUT</span>';
+    else if (isCS) badges += '<span class="pc-badge pc-badge-cs">COMING SOON</span>';
+    const price = cheapestPrice(pr);
+    const attrs = ' data-pid="' + pr.key + '" data-product="' + pr.slug + '" data-division="' + cat + '"'
+      + ' data-scent="' + pr.scent + '" data-season="' + pr.season + '" data-occasion="' + pr.occasion
+      + '" data-time="' + pr.time + '" data-weather="' + pr.weather + '" data-mood="' + pr.mood
+      + '" data-family="' + pr.family + '"'
+      + (pr.added ? ' data-added="' + pr.added + '"' : '')
+      + ' data-brand="' + pr.brand + '"'
+      + (price !== null ? ' data-price="' + price + '"' : '')
+      + (gTag ? ' data-gender="' + gTag + '"' : '');
+    return '<div class="frag-card' + (isSO ? ' pc-sold' : '') + '"' + attrs + '>'
+      + '<div class="pc-media" role="button" tabindex="0" data-open aria-label="View ' + cardEsc(pr.brand) + ' ' + cardEsc(pr.name) + ' details">'
+      + '<span class="pc-ph" aria-hidden="true"></span>'
+      + '<img class="pc-img" alt="' + cardEsc(pr.name) + '" loading="lazy" data-img-base="images/bottles/' + pr.slug + '">'
+      + badges
+      + '<button type="button" class="pc-wish" aria-label="Save ' + cardEsc(pr.name) + '" data-wish></button>'
+      + (isSO || isCS ? '' : '<button type="button" class="pc-cmp" aria-label="Add ' + cardEsc(pr.name) + ' to compare" data-cmp aria-pressed="false"></button>')
+      + (gTag ? '<span class="pc-gender pc-gender-' + gTag.toLowerCase() + '">' + gTag + '</span>' : '')
+      + '</div>'
+      + '<div class="card-top">' + (pr.brandImg ? '<img src="' + cardEsc(pr.brandImg) + '" alt="" class="card-brand-logo" loading="lazy">' : '')
+      + '<span class="card-brand-name">' + cardEsc(pr.brand) + '</span></div>'
+      + '<button type="button" class="card-frag-name pc-name" data-open>' + cardEsc(pr.name) + '</button>'
+      + slotHtml
+      + '<div class="pc-price-line">'
+      + '<span class="pc-from">from <b>' + fmt(minAvail) + '</b></span>'
+      + (available[5] ? '<span class="pc-30">30ml ' + fmt(prices[5]) + '</span>' : '')
+      + '</div>'
+      + ((pr.linksRaw || pr.links) ? '<div class="card-links">' + (pr.linksRaw || pr.links) + '</div>' : '')
+      + '<button type="button" class="pc-add' + (isSO ? ' pc-add-so' : isCS ? ' pc-add-cs' : '') + '" data-open ' + (isSO || isCS ? 'disabled' : '') + '>'
+      + (isSO ? 'SOLD OUT' : isCS ? 'COMING SOON' : 'Add') + '</button>'
+      + '</div>';
+  }).join('\n');
+}
+
 // ------------------------------------------------------------ html homepage edits
 function editHomepage(products, faqHtml, articlesHtml) {
   let out = s;
@@ -656,6 +778,47 @@ function editHomepage(products, faqHtml, articlesHtml) {
     const wrapper = '<tbody>' + newTbody + '</tbody>';
     out = out.replace(raw, wrapper);
   }
+
+  // 7) re-render catalogue tbodies from products.json (rows keep byte-parity
+  //    with the historical markup, plus static data-brand/data-price/data-pid
+  //    so filters and the cart registry no longer scrape prices from the DOM)
+  const cats = ['Designer', 'Middle Eastern'];
+  cats.forEach((cat, ri) => {
+    const raw = s.slice(REGIONS[ri].start, REGIONS[ri].end);
+    const rendered = renderTbody(cat);
+    const at = out.indexOf(raw);
+    if (at < 0) throw new Error('catalogue tbody not found for ' + cat);
+    out = out.slice(0, at) + rendered + out.slice(at + raw.length);
+  });
+
+  // 8) pre-rendered mobile card grids — markers sit right after each table and
+  //    stripMarks removes exactly what insertion adds (idempotent)
+  for (const cat of cats) {
+    const open = '<!--CARDS:' + cat + '-->', close = '<!--/CARDS:' + cat + '-->';
+    out = stripMarks(out, open, close);
+    const hIdx = out.indexOf('<div class="section-heading">' + cat + '</div>');
+    if (hIdx < 0) throw new Error('section heading not found: ' + cat);
+    const tIdx = out.indexOf('</table>', hIdx);
+    if (tIdx < 0) throw new Error('</table> not found after heading: ' + cat);
+    const block = open + '\n<div class="frag-cards" aria-label="' + cat + '">' + renderCards(cat) + '</div>\n' + close + '\n';
+    out = out.slice(0, tIdx + '</table>'.length) + block + out.slice(tIdx + '</table>'.length);
+  }
+
+  // 9) inline the product registry data (window.__PRODUCTS) just before the
+  //    app bundle; "</" is escaped so no product link can close the script tag
+  out = stripMarks(out, '<!--PRODUCTS_JSON-->', '<!--/PRODUCTS_JSON-->');
+  const appIdx = out.indexOf('<!--APP-->');
+  if (appIdx < 0) throw new Error('<!--APP--> anchor not found');
+  const slim = products.map((p) => ({
+    key: p.key, brand: p.brand, name: p.name, gender: p.gender, status: p.status,
+    tags: p.tags, prices: p.prices, statusPerSize: p.statusPerSize,
+    inspired: p.inspired, links: p.linksRaw || p.links,
+    scent: p.scent, season: p.season, occasion: p.occasion, time: p.time,
+    weather: p.weather, mood: p.mood, family: p.family, added: p.added
+  }));
+  const pjson = JSON.stringify(slim).split('</').join('<\\/');
+  const pblock = '<!--PRODUCTS_JSON-->\n<script>window.__PRODUCTS=' + pjson + ';</script>\n<!--/PRODUCTS_JSON-->\n';
+  out = out.slice(0, appIdx) + pblock + out.slice(appIdx);
 
   return out;
 }
