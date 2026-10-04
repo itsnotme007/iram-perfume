@@ -260,8 +260,8 @@
     "mod": "2026-10-01"
   },
   "frag:french-avenue-aromatix-teas-me": {
-    "sig": "f7db7b9062f7236de78740c3",
-    "mod": "2026-10-01"
+    "sig": "0234a4ecd7b17ff2a0872751",
+    "mod": "2026-10-04"
   },
   "frag:french-avenue-zenith-santal": {
     "sig": "42411e7641784b409bf626eb",
@@ -312,8 +312,8 @@
     "mod": "2026-10-01"
   },
   "frag:khadlaj-shiyaaka-shadow": {
-    "sig": "4158e16bf6a692e4c680f791",
-    "mod": "2026-10-01"
+    "sig": "c38bd336d21182c6a7997fd4",
+    "mod": "2026-10-04"
   },
   "frag:khadlaj-island": {
     "sig": "eac4b7ae7d5c04f94b07f221",
@@ -608,8 +608,8 @@
     "mod": "2026-10-01"
   },
   "article:winter-date-night-decants-under-500": {
-    "sig": "8acdc0852ff00d3a058fe767",
-    "mod": "2026-10-01"
+    "sig": "61a8db02fcd608e07db71227",
+    "mod": "2026-10-04"
   },
   "article:decant-vs-full-bottle": {
     "sig": "715fae4f771f64b2b7b8bb0f",
@@ -620,8 +620,8 @@
     "mod": "2026-10-01"
   },
   "home": {
-    "sig": "d4caaa42cb0e7220b26af54b",
-    "mod": "2026-10-02"
+    "sig": "ff42e3cd69910065951f4952",
+    "mod": "2026-10-04"
   },
   "frag:albait-aldimashqi-special-ombre-leather": {
     "sig": "5893b4a10b5b397c6e26cedc",
@@ -634,5 +634,9 @@
   "frag:khadlaj-karus-gold-absolu": {
     "sig": "181faa156a216875c92184b5",
     "mod": "2026-10-01"
+  },
+  "frag:riiffs-portofino-noir": {
+    "sig": "6f4befaa23c7e7f76a5c7fed",
+    "mod": "2026-10-04"
   }
 }
