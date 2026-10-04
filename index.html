@@ -693,6 +693,9 @@ tr.pc-sold td{color:var(--text-muted)}
 .pc-attr-chip small{width:74px;flex-shrink:0;font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--text-muted);padding-top:3px}
 .pc-attr-chip span{font-size:11px;color:var(--text-body);border:1px solid var(--border-default);background:var(--bg-elevated);border-radius:12px;padding:3px 9px}
 .pc-inspired-lg{font-size:11.5px;color:var(--text-muted);font-style:italic;margin:10px 0 0}
+.pc-refs{font-size:11.5px;color:var(--text-muted);margin:6px 0 0}
+.pc-refs a{color:var(--accent-link);font-weight:600;text-decoration:none;margin-right:10px}
+.pc-refs a:hover{text-decoration:underline}
 .pc-size-label{font-size:13px;font-weight:700;color:var(--text-heading);margin:14px 0 8px}
 .pc-size{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .pc-size-opt{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-height:56px;padding:10px 12px;border:1.5px solid var(--border-strong);border-radius:10px;background:var(--bg-surface);font-size:12px;cursor:pointer;font-family:inherit;color:var(--text-primary);text-align:left;-webkit-tap-highlight-color:transparent}
@@ -814,7 +817,7 @@ body.pc-lock{overflow:hidden}
   .frag-card .card-top{order:1;min-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .frag-card .card-frag-name,.frag-card .pc-name{order:2;min-height:36px;font-size:12.5px;line-height:1.35}
   .frag-card .card-inspired{order:3;font-size:9px}
-  .frag-card .pc-price-line{order:4}.frag-card .card-links{display:none}.frag-card .pc-add{order:5;min-height:34px;font-size:12px;background:#d7a94e;color:#21190f;border-radius:8px}
+  .frag-card .pc-price-line{order:4}.frag-card .card-links{display:block;order:5;font-size:9.5px;line-height:1.4;margin:0}.frag-card .pc-add{order:6;min-height:34px;font-size:12px;background:#d7a94e;color:#21190f;border-radius:8px}
   .card-brand-name{font-size:10px}.card-brand-logo{max-width:19px;max-height:16px}.pc-from{font-size:10px}.pc-from b{font-size:13px}.pc-30{display:none}
   .pc-wish{width:29px;height:29px;font-size:18px}.pc-badge-new{right:42px}.pc-cmp{width:29px;height:29px;top:40px}
   .mobile-cart-bar{position:fixed;right:10px;bottom:calc(64px + env(safe-area-inset-bottom,0px));left:10px;z-index:870;align-items:center;justify-content:space-between;min-height:48px;padding:0 14px;border-radius:12px;background:#211d19;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.22);transform:translateY(12px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
@@ -5398,6 +5401,11 @@ try{(function(){
         if(gTag)card.setAttribute('data-gender',gTag);
       if(isSO)row.classList.add('pc-sold');
       if(fc.getAttribute('data-added'))card.setAttribute('data-added',fc.getAttribute('data-added'));
+      var famTxt=fc.getAttribute('data-family')?fc.getAttribute('data-family').split(',').slice(0,2).join(' · '):'';
+      var slotInsp=(iText||'').replace(/\s+/g,' ').trim();
+      var showInsp=!!(slotInsp&&slotInsp.length>1&&slotInsp!=='Original');
+      var slotTxt=showInsp?slotInsp:famTxt;
+      var slotHtml=slotTxt?'<span class="card-inspired pc-inspired"'+(showInsp?' title="Reminds me of: '+esc(slotInsp)+'"':'')+'>'+(showInsp?'&#8618; ':'')+esc(slotTxt)+'</span>':'';
       card.innerHTML='<div class="pc-media" role="button" tabindex="0" data-open aria-label="View '+esc(bName)+' '+esc(fName)+' details">'
         +'<span class="pc-ph" aria-hidden="true"></span>'
         +'<img class="pc-img" alt="'+esc(fName)+'" loading="lazy" data-img-base="images/bottles/'+slug+'">'
@@ -5408,7 +5416,7 @@ try{(function(){
         +'</div>'
         +'<div class="card-top">'+(bSrc?'<img src="'+esc(bSrc)+'" alt="" class="card-brand-logo" loading="lazy">':'')+'<span class="card-brand-name">'+esc(bName)+'</span></div>'
         +'<button type="button" class="card-frag-name pc-name" data-open>'+esc(fName)+'</button>'
-        +(fc.getAttribute('data-family')?'<span class="card-inspired pc-inspired">'+esc(fc.getAttribute('data-family').split(',').slice(0,2).join(' · '))+'</span>':(iText?'<span class="card-inspired pc-inspired">&#8618; '+esc(iText)+'</span>':''))
+        +slotHtml
         +'<div class="pc-price-line">'
         +'<span class="pc-from">from <b>'+fmt(minAvail)+'</b></span>'
         +(available[5]?'<span class="pc-30">30ml '+fmt(prices[5])+'</span>':'')
@@ -6412,10 +6420,12 @@ try{(function(){
         +'</button>';
     }
     sizeWrap+='</div>';
-    var insp=card.querySelector('.card-inspired');
-    var inspHtml=insp&&insp.textContent?'<p class="pc-inspired-lg">&#8618; '+esc(insp.textContent)+'</p>':'';
+    var inspTxt=(d.inspired||'').replace(/\s+/g,' ').trim();
+    if(inspTxt==='-')inspTxt='';
+    var inspHtml=inspTxt?'<p class="pc-inspired-lg"><strong>Reminds me of:</strong> '+esc(inspTxt)+'</p>':'';
+    var refsHtml=d.links?'<p class="pc-refs"><strong>References:</strong> '+d.links+'</p>':'';
     var dis=(card.getAttribute('data-division'))?'<div class="pc-attr-chip pc-dis"><small>Division</small><span>'+esc(card.getAttribute('data-division'))+'</span></div>':'';
-    body.innerHTML=hero+'<div class="pc-info">'+(dis+attrHtml?'<div class="pc-attr-grid">'+dis+attrHtml+'</div>':'')+inspHtml
+    body.innerHTML=hero+'<div class="pc-info">'+(dis+attrHtml?'<div class="pc-attr-grid">'+dis+attrHtml+'</div>':'')+inspHtml+refsHtml
       +'<div class="pc-size-label">Choose size</div>'+sizeWrap
       +'<div class="pc-sheet-actions">'
       +'<div class="pc-qty" role="group" aria-label="Quantity">'
