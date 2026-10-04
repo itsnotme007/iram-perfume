@@ -7,3 +7,9 @@ Selling & Expense.xlsx
 orders-app/
 # Puppy bot (local, contains .env token + sessions.json)
 Puppy_tg_bot/
+# Node tooling
+node_modules/
+# Test / audit artifacts
+test-results/
+playwright-report/
+tests/.lighthouse/

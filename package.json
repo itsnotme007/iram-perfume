@@ -1,0 +1,20 @@
+{
+  "name": "iram-perfume",
+  "version": "1.0.0",
+  "private": true,
+  "description": "IRAM Perfume static storefront - build, tests and audit tooling",
+  "scripts": {
+    "build": "node seo-gen.js",
+    "serve": "node tests/serve.js",
+    "test": "playwright test",
+    "lighthouse": "node tests/lighthouse.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "chrome-launcher": "^1.2.2",
+    "lighthouse": "^12.0.0"
+  },
+  "dependencies": {
+    "ws": "^8.21.3"
+  }
+}
