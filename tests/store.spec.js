@@ -24,7 +24,11 @@ test('catalogue renders 155 cards + rows with accurate counts', async ({ page },
   await expect(page.locator('.frag-card')).toHaveCount(TOTAL);
   await expect(page.locator('#filterCount')).toHaveText(/155 fragrances/);
   await expect(page.locator('#filterCountMobile')).toHaveText(/155 fragrances/);
-  await expect(page.locator('#filterApply')).toHaveText(/Show 155 fragrances/);
+  await expect(page.locator('#filterApply')).toHaveText(/Show all fragrances/);
+  // raw (pre-JS) markup must never claim the old count
+  const raw = await (await page.request.get('/')).text();
+  expect(raw).not.toMatch(/147 fragrances/);
+  expect(raw).toMatch(/Show 155 fragrances/);
   expect(errs).toEqual([]);
 });
 
@@ -37,7 +41,6 @@ test('head + body encoding and homepage FAQ JSON-LD are clean', async ({ page })
       .forEach((m) => { if ((m.content || '').includes('\uFFFD') || /\?999/.test(m.content || '')) hits.push(m.getAttribute('property') || m.name); });
     if ((document.body.innerText || '').includes('\uFFFD')) hits.push('body');
     const blocks = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
-    expect(blocks.length).toBeGreaterThanOrEqual(2);
     let parsed = 0;
     for (const s of blocks) {
       const j = JSON.parse(s.textContent); // throws -> test fails
@@ -47,7 +50,7 @@ test('head + body encoding and homepage FAQ JSON-LD are clean', async ({ page })
         if (text.includes('\uFFFD') || /\?999/.test(text)) hits.push('faq-jsonld');
       }
     }
-    if (parsed < 2) hits.push('too-few-blocks');
+    if (blocks.length < 2 || parsed < 2) hits.push('too-few-blocks');
     return hits;
   });
   expect(bad).toEqual([]);
@@ -77,6 +80,8 @@ test('gender filter narrows results (desktop UI / mobile URL)', async ({ page },
     await page.click('#filterApply');
     const rows = page.locator('#filterResults tbody tr');
     await expect(rows.first()).toBeVisible();
+    await expect(page.locator('#filterCount')).toHaveText(/\d+ fragrances? found/);
+    await expect(page.locator('#filterApply')).toHaveText(/^Show \d+ fragrances?$/);
     const n = await rows.count();
     expect(n).toBeGreaterThan(0);
     expect(n).toBeLessThan(TOTAL);
@@ -104,21 +109,31 @@ test('price sort is global across brand blocks (desktop)', async ({ page }, test
   test.skip(testInfo.project.name !== 'desktop', 'table sort is desktop-only');
   await page.goto('/');
   await page.selectOption('#filterSort', 'low');
-  const costs = await page.evaluate(() => {
+  // each catalogue table (Designer / Middle Eastern) must be sorted globally
+  // across its brand blocks — brand-separator rows move with their products
+  const runs = await page.evaluate(() => {
     const out = [];
-    document.querySelectorAll('.table-wrap>.frag-table>tbody').forEach((tb) => {
-      tb.querySelectorAll('tr').forEach((tr) => {
-        if (tr.querySelector('.frag-cell') && typeof tr._pcCost === 'number') out.push(tr._pcCost);
+    document.querySelectorAll('.table-wrap>.frag-table').forEach((tbl) => {
+      const costs = [];
+      tbl.querySelectorAll('tbody tr').forEach((tr) => {
+        if (tr.querySelector('.frag-cell') && typeof tr._pcCost === 'number') costs.push(tr._pcCost);
       });
+      if (costs.length) out.push(costs);
     });
     return out;
   });
-  expect(costs.length).toBeGreaterThan(100);
-  let sorted = true;
-  for (let i = 1; i < costs.length; i++) {
-    if (costs[i] < costs[i - 1]) { sorted = false; break; }
+  expect(runs.length).toBe(2);
+  let total = 0;
+  for (const costs of runs) {
+    expect(costs.length).toBeGreaterThan(0);
+    total += costs.length;
+    let sorted = true;
+    for (let i = 1; i < costs.length; i++) {
+      if (costs[i] < costs[i - 1]) { sorted = false; break; }
+    }
+    expect(sorted).toBe(true);
   }
-  expect(sorted).toBe(true);
+  expect(total).toBeGreaterThan(100); // every priced product row took part
 });
 
 // ---------------------------------------------------------------- desktop cart
@@ -141,9 +156,9 @@ test('table add-to-cart, drawer, clear (desktop)', async ({ page }, testInfo) =>
 test('shipping cost follows subtotal + qty constants', async ({ browser }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'shipping totals asserted on desktop');
   const cases = [
-    { name: 'qty 1 over 999 is NOT free', items: [{ brand: 'X', frag: 'Big Purchase', size: '30ml', price: 1239, qty: 1, key: 'X|Big Purchase|30ml' }], free: false },
-    { name: 'qty 2 under 999 is NOT free', items: [{ brand: 'X', frag: 'A', size: '3ml', price: 115, qty: 1, key: 'X|A|3ml' }, { brand: 'X', frag: 'B', size: '5ml', price: 175, qty: 1, key: 'X|B|5ml' }], free: false },
-    { name: 'qty 2 over 999 IS free', items: [{ brand: 'X', frag: 'A', size: '30ml', price: 1239, qty: 1, key: 'X|A|30ml' }, { brand: 'X', frag: 'B', size: '3ml', price: 115, qty: 1, key: 'X|B|3ml' }], free: true }
+    { name: 'qty 1 over 999 is NOT free', items: [{ brand: 'Mancera', frag: 'Cedrat Boise', size: '30ml', price: 1899, qty: 1, key: 'Mancera|Cedrat Boise|30ml' }], free: false },
+    { name: 'qty 2 under 999 is NOT free', items: [{ brand: 'Davidoff', frag: 'Cool Water EDT', size: '3ml', price: 89, qty: 1, key: 'Davidoff|Cool Water EDT|3ml' }, { brand: 'Jaguar', frag: 'Classic Black', size: '3ml', price: 89, qty: 1, key: 'Jaguar|Classic Black|3ml' }], free: false },
+    { name: 'qty 2 over 999 IS free', items: [{ brand: 'Mancera', frag: 'Cedrat Boise', size: '30ml', price: 1899, qty: 1, key: 'Mancera|Cedrat Boise|30ml' }, { brand: 'Davidoff', frag: 'Cool Water EDT', size: '3ml', price: 89, qty: 1, key: 'Davidoff|Cool Water EDT|3ml' }], free: true }
   ];
   for (const c of cases) {
     await test.step(c.name, async () => {
@@ -211,6 +226,7 @@ test('dark-mode unavailable price contrast is >= 3:1', async ({ page }, testInfo
   await page.goto('/');
   await page.click('#themeToggle');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await page.waitForTimeout(700); // let the 0.3s background transition settle
   const ratio = await page.evaluate(() => {
     const el = document.querySelector('.table-wrap .u-price') || document.querySelector('.table-wrap .size-cell s');
     if (!el || !el.offsetParent) return { missing: true };

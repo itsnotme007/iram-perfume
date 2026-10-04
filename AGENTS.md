@@ -33,7 +33,9 @@ Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`pric
 - URL sync: `window.__syncUrl` rewrites `?brand=…&price=…&sort=…` via `history.replaceState` on every `__onFilterChange` / sort `change`, and the URL-sync IIFE replays params on load (clicks filter buttons, `__setPriceRange`, `__applySort`).
 - Filter results/count read from `.table-wrap .frag-cell` (unfiltered) and `#filterResults tbody tr` (filtered); keep `#filterBar` id for navSearch + seo-gen
 - Cart uses `window._products` registry keyed by `brand|frag`
-- Sort: `#filterSort` (desktop) and `#pcSort` (mobile) are two selects over one `applySort()`; it reorders `.frag-cards` (mobile grids) and, above 1023px, the product rows inside each brand block of `.frag-table` (`.brand-sep` + `.brand-cell` move with the block, so keep block sizes intact)
+- Sort: `#filterSort` (desktop) and `#pcSort` (mobile) are two selects over one `applySort()`; it reorders `.frag-cards` (mobile grids) and, above 1023px, the product rows of each `.frag-table` **globally across brand blocks** (`sortTable(table, mode)` — pristine order snapshotted per table; non-default sorts hide `.brand-cell` labels + drop `.brand-sep` borders, restoring them for `featured`)
+- Shipping: `FREE_SHIP_MIN=999` + `FREE_SHIP_MIN_QTY=2` constants live in **both** `index.html` (`baseShipping`) and `seo-gen.js` (copy) — free only when `sub>=999 && totalItems()>=2`, else flat ₹100; keep every FAQ/meta mention in sync via those constants
+- NEW badge validity: `window.IRAM_NEW_DAYS_MS = 7d` set in the head script; the NEW-tag init and `expireNew` both read it (no more divergent 10d/7d)
 - v2.0 design: #FAF9F7 light bg, #D4AF37 gold accent
 
 ## Mobile Redesign (Phases 2/4/5/6)

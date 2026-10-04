@@ -18,6 +18,10 @@ const PHONE_TEL = '+919355533509';
 const EMAIL = 'perfumeiram@gmail.com';
 const WA = 'https://chat.whatsapp.com/JSWEIoCsFd96wzlRAeaewe';
 const IG = 'https://instagram.com/iram.perfume';
+// keep in sync with FREE_SHIP_MIN / FREE_SHIP_MIN_QTY in index.html
+const FREE_SHIP_MIN = 999;
+const FREE_SHIP_MIN_QTY = 2;
+const FREE_SHIP_ABOVE = 'free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants';
 const TODAY = new Date().toISOString().slice(0, 10);
 const waLink = t => 'https://wa.me/' + PHONE_TEL.replace('+', '') + '?text=' + encodeURIComponent(t);
 
@@ -59,11 +63,11 @@ const HOME_FAQS = [
   ['Do you sell full perfume bottles too?',
    'Yes. We source genuine 30ml, 50ml and 100ml bottles for most fragrances in our catalogue on request. Full-bottle prices and availability are confirmed over WhatsApp before you pay.'],
   ['Do you provide free shipping on orders?',
-   'Yes — shipping is free on all orders above \u20b9999 (minimum 2 decants). Orders below \u20b9999 are shipped at a flat \u20b9100.'],
+   'Yes — shipping is free on orders of ' + FREE_SHIP_MIN_QTY + '+ decants above \u20b9' + FREE_SHIP_MIN + '. Every other order ships at a flat \u20b9100.'],
   ['How do I place an order with IRAM Perfume?',
    'Pick your fragrances and sizes from the price list, then copy your cart or message us directly on WhatsApp at ' + PHONE_DISPLAY + ' or email ' + EMAIL + '. We confirm stock, payment and share the tracking number once dispatched.'],
   ['How long does delivery take across India?',
-   'We ship all over India through a trackable courier. Most orders reach within 3\u20137 working days depending on the city. Orders above \u20b9999 ship free.'],
+   'We ship all over India through a trackable courier. Most orders reach within 3\u20137 working days depending on the city. Orders of ' + FREE_SHIP_MIN_QTY + '+ decants above \u20b9' + FREE_SHIP_MIN + ' ship free.'],
   ['How can I be sure the decants are authentic?',
    'Every decant is filled from an original, genuine perfume bottle we buy from trusted suppliers. We share photos, videos and opening proof of the source bottles on request before you order.'],
   ['What is your refund and returns policy?',
@@ -212,9 +216,11 @@ function bestForLine(pr) {
 }
 function inspiredLine(pr) {
   const i = pr.inspired;
-  if (!i || i === '—' || !i.trim()) return 'an original creation';
+  if (!i || i === '—' || !i.trim() || i.trim().toLowerCase() === 'original') return 'an original creation';
   return 'inspired by ' + i;
 }
+// 'a' / 'an' before a scent line (e.g. "an aromatic,fresh; aromatic family")
+const art = s => /^[aeiou]/i.test(String(s || '').trim()) ? 'an' : 'a';
 const rupees = n => '\u20b9' + (n == null ? 'N/A' : n.toLocaleString('en-IN'));
 
 function minMax(pr) {
@@ -227,11 +233,11 @@ function priceString(pr) {
 
 function fragFAQ(pr) {
   const cloneQ = 'Is ' + pr.name + ' by ' + pr.brand + ' a clone or an original?';
-  const cloneA = pr.inspired && pr.inspired !== '—' && pr.inspired
+  const cloneA = pr.inspired && pr.inspired !== '—' && pr.inspired.trim().toLowerCase() !== 'original'
     ? 'It is a high-quality interpretation inspired by ' + pr.inspired + '. Perfume enthusiasts in India often pick it as an affordable alternative to that profile.'
     : 'It is an original fragrance in the ' + pr.brand + ' catalogue, so there is no clone comparison involved.';
   const priceQ = 'How much does a decant of ' + pr.name + ' by ' + pr.brand + ' cost in India?';
-  const priceA = 'IRAM Perfume sells authentic decants of ' + pr.name + ' by ' + pr.brand + ' at 3ml \u20b9' + (pr.prices['3'] ?? '—') + ', 5ml \u20b9' + (pr.prices['5'] ?? '—') + ', 7.5ml \u20b9' + (pr.prices['7.5'] ?? '—') + ', 10ml \u20b9' + (pr.prices['10'] ?? '—') + ', 20ml \u20b9' + (pr.prices['20'] ?? '—') + ' and 30ml \u20b9' + (pr.prices['30'] ?? '—') + '. Shipping is free on orders above \u20b9999. Full bottles are available on request.';
+  const priceA = 'IRAM Perfume sells authentic decants of ' + pr.name + ' by ' + pr.brand + ' at 3ml \u20b9' + (pr.prices['3'] ?? '—') + ', 5ml \u20b9' + (pr.prices['5'] ?? '—') + ', 7.5ml \u20b9' + (pr.prices['7.5'] ?? '—') + ', 10ml \u20b9' + (pr.prices['10'] ?? '—') + ', 20ml \u20b9' + (pr.prices['20'] ?? '—') + ' and 30ml \u20b9' + (pr.prices['30'] ?? '—') + '. Shipping is free on ' + FREE_SHIP_MIN_QTY + '-decant orders above \u20b9' + FREE_SHIP_MIN + '. Full bottles are available on request.';
   const wearQ = 'When should I wear ' + pr.name + ' by ' + pr.brand + '?';
   const wearA = pr.gender ? 'A ' + ({ Men: 'men\'s', Women: 'women\'s', Unisex: 'unisex' }[pr.gender] || 'unisex') + ' fragrance, ' : 'A fragrance, ';
   const wearA2 = wearA + 'it works best during ' + bestForLine(pr) + '. It leans ' + (pr.mood || 'versatile') + ' in character with a ' + scentLine(pr) + ' profile.';
@@ -304,7 +310,7 @@ function fragPage(pr) {
   const schema = [
     {
       '@context': 'https://schema.org', '@type': 'Product', name: pr.name + ' by ' + pr.brand,
-      description: 'Buy an authentic ' + pr.name + ' by ' + pr.brand + ' decant in India \u2014 ' + priceString(pr) + '. A ' + scentLine(pr) + ' fragrance, ' + inspiredLine(pr) + '. IRAM Perfume ships across India.',
+      description: 'Buy an authentic ' + pr.name + ' by ' + pr.brand + ' decant in India \u2014 ' + priceString(pr) + '. ' + art(scentLine(pr)) + ' ' + scentLine(pr) + ' fragrance, ' + inspiredLine(pr) + '. IRAM Perfume ships across India.',
       image: pr.brandImg ? BASE + '/' + pr.brandImg : BASE + '/logo.png',
       brand: { '@type': 'Brand', name: pr.brand },
       category: pr.cat || 'Fragrance', sku: pr.slug,
@@ -344,7 +350,7 @@ function fragPage(pr) {
   const body = ''
     + '<div class="top"><div><div class="brand-chip">' + esc(pr.brand.toUpperCase()) + '</div><h1>' + esc(pr.name) + ' \u2014 Decant Price in India</h1></div><a href="../index.html">\u2190 Full collection</a></div>'
     + (bottleImg ? '<img src="' + bottleImg + '" alt="' + esc(pr.name) + ' bottle" style="max-width:220px;border-radius:12px;margin:16px 0;display:block' + (pr.status === 'soldout' ? ';filter:grayscale(1);opacity:.55' : '') + '">' : '')
-    + '<p class="lead">' + esc(pr.name) + ' by ' + esc(pr.brand) + ' as an authentic decant \u2014 a ' + esc(scentLine(pr)) + '. ' + esc(inspiredLine(pr)) + '. Ships across India with free delivery on orders above \u20b9999.</p>'
+    + '<p class="lead">' + esc(pr.name) + ' by ' + esc(pr.brand) + ' as an authentic decant \u2014 ' + art(scentLine(pr)) + ' ' + esc(scentLine(pr)) + '. ' + esc(inspiredLine(pr)) + '. Ships across India with ' + FREE_SHIP_ABOVE + '.</p>'
     + '<div class="pills">' + pills.join('') + '</div>'
     + '<div class="card"><h2 style="margin-top:0">Prices (per ml gets cheaper as size grows)</h2><table><thead><tr><th>Size</th><th>Price</th></tr></thead><tbody>' + priceRows + '</tbody></table><p class="muted" style="margin-top:10px">' + esc(probeAvailability) + '</p></div>'
     + '<div class="cta"><h3>Order ' + esc(pr.name) + ' Today</h3><p>Copy your choice and message us on WhatsApp \u2014 we confirm stock and payment instantly.</p><a class="btn" href="' + waLink('Hi! I want to order a decant of ' + pr.name + ' by ' + pr.brand + ': 5ml \u20b9' + (pr.prices['5'] ?? '?') + ', 20ml \u20b9' + (pr.prices['20'] ?? '?') + ', 30ml \u20b9' + (pr.prices['30'] ?? '?')) + '">Order on WhatsApp</a><a class="btn ghost" href="tel:' + PHONE_TEL + '">Call ' + PHONE_DISPLAY + '</a></div>'
@@ -352,7 +358,7 @@ function fragPage(pr) {
     + '<div class="card"><p><strong>Notes / profile:</strong> ' + esc(scentLine(pr)) + '.</p>'
     + '<p style="margin-top:8px"><strong>Best for:</strong> ' + esc(bestForLine(pr)) + '.</p>'
     + (pr.mood ? '<p style="margin-top:8px"><strong>Mood:</strong> ' + esc(pr.mood) + '.</p>' : '')
-    + '<p style="margin-top:8px"><strong>Reminds me of:</strong> ' + esc(pr.inspired && pr.inspired !== '—' ? pr.inspired : 'Original / unique') + '.</p>'
+    + '<p style="margin-top:8px"><strong>Reminds me of:</strong> ' + esc(pr.inspired && pr.inspired !== '—' && pr.inspired.trim().toLowerCase() !== 'original' ? pr.inspired : 'Original / unique') + '.</p>'
     + (pr.links ? '<p style="margin-top:8px"><strong>References:</strong> ' + pr.links + '</p>' : '') + '</div>'
     + '<h2>Frequently Asked Questions</h2>'
     + fragFAQ(pr).map(([q, a]) => '<details class="qa"><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>').join('')
@@ -360,7 +366,7 @@ function fragPage(pr) {
     + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> \u00b7 <a href="' + WA + '">WhatsApp Community</a> \u00b7 <a href="../index.html">Back to all fragrances</a></div>';
   return pageShell({
     title: pr.name + ' by ' + pr.brand + ' \u2014 3ml\u201330ml Decant Price in India | IRAM Perfume',
-    desc: 'Buy ' + pr.name + ' by ' + pr.brand + ' decant in India. ' + priceString(pr) + '. ' + inspiredLine(pr) + '. Free shipping over \u20b9999. Order on WhatsApp ' + PHONE_DISPLAY + '.',
+    desc: 'Buy ' + pr.name + ' by ' + pr.brand + ' decant in India. ' + priceString(pr) + '. ' + inspiredLine(pr) + '. Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants. Order on WhatsApp ' + PHONE_DISPLAY + '.',
     canonical: pr.url, body, schema
   });
 }
@@ -400,7 +406,7 @@ function buildArticle(a, innerBody, faqs, pub, mod) {
   ];
   const body = '<div class="top"><div><div class="brand-chip">IRAM PERFUME \u00b7 GUIDES</div><h1>' + esc(a.title) + '</h1></div><a href="../index.html">\u2190 Full collection</a></div>'
     + '<p class="lead">' + esc(a.desc) + '</p>' + innerBody
-    + '<div class="cta"><h3>Shop the Selection</h3><p>Browse the full decant catalogue \u2014 free shipping on orders above \u20b9999.</p><a class="btn" href="../index.html">View All Fragrances</a><a class="btn ghost" href="https://wa.me/' + PHONE_TEL.replace('+', '') + '">WhatsApp Us</a></div>'
+    + '<div class="cta"><h3>Shop the Selection</h3><p>Browse the full decant catalogue \u2014 ' + FREE_SHIP_ABOVE + '.</p><a class="btn" href="../index.html">View All Fragrances</a><a class="btn ghost" href="https://wa.me/' + PHONE_TEL.replace('+', '') + '">WhatsApp Us</a></div>'
     + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a></div>';
   return pageShell({ title: a.title, desc: a.desc, canonical: a.url, body, schema, og: { iconPath: '../logo.png' } });
 }
@@ -438,7 +444,7 @@ function buildArticles() {
     const faqs = [
       ['Which is the best summer perfume under \u20b9500 in India?', 'There is no single best, but the strongest categories are fresh aquatic and citrus scents from our list above. Popular everyday picks include ' + (summer[0] ? summer[0].name + ' by ' + summer[0].brand : 'our fresh summer picks') + '.'],
       ['Do summer decants last less?', 'Fresh perfumes are lighter by nature, so they sit closer to skin. Buying 20\u201330ml decants and reapplying once mid-day is the standard routine.'],
-      ['Is shipping free for a single decant?', 'Shipping is free on orders above \u20b9999. A few decants together easily cross that, so bundle smarter.']
+      ['Is shipping free for a single decant?', 'No \u2014 shipping is free on orders of ' + FREE_SHIP_MIN_QTY + '+ decants above \u20b9' + FREE_SHIP_MIN + '. A single-decant order ships at a flat \u20b9100, so bundle two or more.']
     ];
     const inner = '<h2>Why buy summer perfumes as decants?</h2>'
       + '<div class="card"><p>' + hyp(['A 100ml fresh fragrance is a big commitment for only three hot months', 'decants let you rotate 5\u20136 summer scents for the price of one bottle']) + '</p></div>'
@@ -538,7 +544,7 @@ function editHomepage(products, faqHtml, articlesHtml) {
   out = out.replace(/<title>[\s\S]*?<\/title>/, '<title>IRAM Perfume \u2014 Designer &amp; Middle Eastern Fragrance Decants (3ml\u201330ml) &amp; Full Bottles | India</title>');
   out = out.replace(
     /<meta name="description" content="[^"]*"/,
-    '<meta name="description" content="Buy authentic designer and Middle Eastern perfume decants in India \u2014 3ml, 5ml, 7.5ml, 10ml, 20ml & 30ml from Davidoff, Mancera, Afnan, Lattafa, Rasasi & 25+ brands. Full 30ml\u2013100ml bottles on request. Free shipping over \u20b9999."'
+    '<meta name="description" content="Buy authentic designer and Middle Eastern perfume decants in India \u2014 3ml, 5ml, 7.5ml, 10ml, 20ml & 30ml from Davidoff, Mancera, Afnan, Lattafa, Rasasi & 25+ brands. Full 30ml\u2013100ml bottles on request. Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants."'
   );
 
   // 2) og:image -> og-image.jpg
@@ -559,7 +565,7 @@ function editHomepage(products, faqHtml, articlesHtml) {
         '@type': 'Product', position: products.indexOf(pr) + 1,
         name: pr.name + ' \u2014 ' + pr.brand,
         brand: { '@type': 'Brand', name: pr.brand },
-        description: pr.name + ' by ' + pr.brand + ' decant. A ' + scentLine(pr) + '. ' + inspiredLine(pr) + '.',
+        description: pr.name + ' by ' + pr.brand + ' decant. ' + art(scentLine(pr)) + ' ' + scentLine(pr) + '. ' + inspiredLine(pr) + '.',
         image: pr.brandImg ? BASE + '/' + pr.brandImg : BASE + '/logo.png',
         category: pr.cat || 'Fragrance',
         url: pr.url,
@@ -667,7 +673,7 @@ function buildSitemap(products, articles, lm) {
 
 // ----------------------------------------------------------------------- llms.txt
 function buildLlmstxt() {
-  let t = '# IRAM Perfume\n\n> Authentic designer and Middle Eastern fragrance decants (3ml, 5ml, 7.5ml, 10ml, 20ml, 30ml) and full bottles, shipped across India. Free shipping above \u20b9999.\n\n## Key facts\n- Decants filled from original genuine bottles, proof shared on request\n- Sizes: 3ml / 5ml / 7.5ml / 20ml / 30ml; full bottles on request\n- Order via WhatsApp ' + PHONE_DISPLAY + ' or email ' + EMAIL + '\n- Free shipping on orders above \u20b9999 (delivery 3\u20137 working days)\n\n## Link addresses\n- Homepage: ' + BASE + '/\n- Fragrance catalogue pages: ' + BASE + '/fragrance/\n\n## Fragrance catalogue (India decant prices)\n';
+  let t = '# IRAM Perfume\n\n> Authentic designer and Middle Eastern fragrance decants (3ml, 5ml, 7.5ml, 10ml, 20ml, 30ml) and full bottles, shipped across India. Free shipping above \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.\n\n## Key facts\n- Decants filled from original genuine bottles, proof shared on request\n- Sizes: 3ml / 5ml / 7.5ml / 20ml / 30ml; full bottles on request\n- Order via WhatsApp ' + PHONE_DISPLAY + ' or email ' + EMAIL + '\n- Free shipping on orders above \u20b9' + FREE_SHIP_MIN + ' for ' + FREE_SHIP_MIN_QTY + '+ decants (delivery 3\u20137 working days)\n\n## Link addresses\n- Homepage: ' + BASE + '/\n- Fragrance catalogue pages: ' + BASE + '/fragrance/\n\n## Fragrance catalogue (India decant prices)\n';
   const byBrand = {};
   for (const pr of products) (byBrand[pr.brand] = byBrand[pr.brand] || []).push(pr);
   for (const b of Object.keys(byBrand)) {
