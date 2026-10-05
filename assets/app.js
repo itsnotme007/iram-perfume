@@ -267,7 +267,7 @@ try{(function(){
       var showInsp=!!(slotInsp&&slotInsp.length>1&&slotInsp!=='Original');
       var slotTxt=showInsp?slotInsp:famTxt;
       var slotHtml=slotTxt?'<span class="card-inspired pc-inspired"'+(showInsp?' title="Reminds me of: '+esc(slotInsp)+'"':'')+'>'+(showInsp?'&#8618; ':'')+esc(slotTxt)+'</span>':'';
-      card.innerHTML='<div class="pc-media" role="button" tabindex="0" data-open aria-label="View '+esc(bName)+' '+esc(fName)+' details">'
+      card.innerHTML='<div class="pc-media" role="button" tabindex="0" data-open>'
         +'<span class="pc-ph" aria-hidden="true"></span>'
         +'<img class="pc-img" alt="'+esc(fName)+'" loading="lazy" data-img-base="images/bottles/'+slug+'">'
         +badges
@@ -2277,7 +2277,7 @@ try{(function(){
   function go(n,announce){
     idx=(n+slides.length)%slides.length;
     track.style.transform='translateX('+(-idx*100)+'%)';
-    slides.forEach(function(s,i){s.setAttribute('aria-hidden',i===idx?'false':'true')});
+    slides.forEach(function(s,i){s.setAttribute('aria-hidden',i===idx?'false':'true');s.inert=i!==idx});
     dots.forEach(function(d,i){
       d.classList.toggle('active',i===idx);
       d.setAttribute('aria-selected',i===idx?'true':'false');

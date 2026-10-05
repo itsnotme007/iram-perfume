@@ -697,7 +697,7 @@ function renderCards(cat) {
       + (price !== null ? ' data-price="' + price + '"' : '')
       + (gTag ? ' data-gender="' + gTag + '"' : '');
     return '<div class="frag-card' + (isSO ? ' pc-sold' : '') + '"' + attrs + '>'
-      + '<div class="pc-media" role="button" tabindex="0" data-open aria-label="View ' + cardEsc(pr.brand) + ' ' + cardEsc(pr.name) + ' details">'
+      + '<div class="pc-media" role="button" tabindex="0" data-open>'
       + '<span class="pc-ph" aria-hidden="true"></span>'
       + '<img class="pc-img" alt="' + cardEsc(pr.name) + '" loading="lazy"' + imgDims('images/bottles/' + pr.slug + '.png') + ' data-img-base="images/bottles/' + pr.slug + '">'
       + badges
