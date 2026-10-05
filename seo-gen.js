@@ -236,6 +236,30 @@ function inspiredLine(pr) {
 // 'a' / 'an' before a scent line (e.g. "an aromatic,fresh; aromatic family")
 const art = s => /^[aeiou]/i.test(String(s || '').trim()) ? 'an' : 'a';
 const capLine = s => { s = String(s || ''); return s.charAt(0).toUpperCase() + s.slice(1); };
+// intrinsic width/height attrs for a local PNG (keeps the unsized-images audit clean
+// without touching CSS sizing); returns '' for anything unreadable.
+function imgDims(rel) {
+  try {
+    const b = fs.readFileSync(path.join(ROOT, rel));
+    if (b.length >= 24 && b.toString('ascii', 1, 4) === 'PNG') return ' width="' + b.readUInt32BE(16) + '" height="' + b.readUInt32BE(20) + '"';
+    // some logos ship JPEG bytes with a .png extension (assaf, pendorascents)
+    if (b.length >= 4 && b[0] === 0xff && b[1] === 0xd8) {
+      let i = 2;
+      while (i + 9 < b.length) {
+        if (b[i] !== 0xff) { i++; continue; }
+        const m = b[i + 1];
+        if (m >= 0xc0 && m <= 0xc3) return ' width="' + b.readUInt16BE(i + 7) + '" height="' + b.readUInt16BE(i + 5) + '"';
+        if (m === 0xd8 || m === 0x01 || (m >= 0xd0 && m <= 0xd7)) { i += 2; continue; }
+        i += 2 + b.readUInt16BE(i + 2);
+      }
+    }
+  } catch (e) {}
+  return '';
+}
+function imgWebp(rel) {
+  const w = rel.replace(/\.(png|jpe?g)$/i, '.webp');
+  try { fs.accessSync(path.join(ROOT, w)); return w; } catch (e) { return rel; }
+}
 const rupees = n => '\u20b9' + (n == null ? 'N/A' : n.toLocaleString('en-IN'));
 
 function minMax(pr) {
@@ -276,7 +300,7 @@ function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en') {
     + '<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
     + '<title>' + esc(title) + '</title>\n<meta name="description" content="' + esc(desc) + '">\n'
     + '<meta name="robots" content="index, follow">\n<link rel="canonical" href="' + canonical + '">\n'
-    + '<link rel="icon" type="image/png" href="' + (og && og.iconPath || '../logo.png') + '">\n'
+    + '<link rel="icon" type="image/png" href="' + (og && og.iconPath || '../favicon.png') + '">\n'
     + '<meta property="og:type" content="' + ogType + '">\n<meta property="og:title" content="' + esc(title) + '">\n'
     + '<meta property="og:description" content="' + esc(desc) + '">\n<meta property="og:url" content="' + canonical + '">\n'
     + '<meta property="og:image" content="' + esc(ogImage) + '">\n'
@@ -368,13 +392,15 @@ function fragPage(pr) {
     const rm = minMax(r);
     return '<a class="rel" href="../fragrance/' + r.slug + '.html"><b>' + r.name + '</b><span class="muted">by ' + r.brand + '</span><small>from ' + rupees(rm.min) + '</small></a>';
   }).join('');
-  let bottleImg = '';
+  let bottleImg = '', ogPng = '';
   const bottleDir = path.join(ROOT, 'images', 'bottles');
-  if (fs.existsSync(path.join(bottleDir, pr.slug + '.png'))) bottleImg = '../images/bottles/' + pr.slug + '.png';
-  else if (fs.existsSync(path.join(bottleDir, pr.slug + '.jpg'))) bottleImg = '../images/bottles/' + pr.slug + '.jpg';
+  if (fs.existsSync(path.join(bottleDir, pr.slug + '.png'))) ogPng = pr.slug + '.png';
+  else if (fs.existsSync(path.join(bottleDir, pr.slug + '.jpg'))) ogPng = pr.slug + '.jpg';
+  if (ogPng && fs.existsSync(path.join(bottleDir, pr.slug + '.webp'))) bottleImg = '../images/bottles/' + pr.slug + '.webp';
+  else if (ogPng) bottleImg = '../images/bottles/' + ogPng;
   const body = ''
     + '<div class="top"><div><div class="brand-chip">' + esc(pr.brand.toUpperCase()) + '</div><h1>' + esc(pr.name) + ' \u2014 Decant Price in India</h1></div><a href="../index.html">\u2190 Full collection</a></div>'
-    + (bottleImg ? '<img src="' + bottleImg + '" alt="' + esc(pr.name) + ' bottle" style="max-width:220px;border-radius:12px;margin:16px 0;display:block' + (pr.status === 'soldout' ? ';filter:grayscale(1);opacity:.55' : '') + '">' : '')
+    + (bottleImg ? '<img src="' + bottleImg + '" alt="' + esc(pr.name) + ' bottle"' + (ogPng ? imgDims('images/bottles/' + ogPng) : '') + ' fetchpriority="high" decoding="async" style="max-width:220px;border-radius:12px;margin:16px 0;display:block' + (pr.status === 'soldout' ? ';filter:grayscale(1);opacity:.55' : '') + '">' : '')
     + '<p class="lead">' + esc(pr.name) + ' by ' + esc(pr.brand) + ' as an authentic decant \u2014 ' + art(scentLine(pr)) + ' ' + esc(scentLine(pr)) + '. ' + esc(inspiredLine(pr)) + '. Ships across India with ' + FREE_SHIP_ABOVE + '.</p>'
     + '<div class="pills">' + pills.join('') + '</div>'
     + '<div class="card"><h2 style="margin-top:0">Prices (per ml gets cheaper as size grows)</h2><table><thead><tr><th>Size</th><th>Price</th></tr></thead><tbody>' + priceRows + '</tbody></table><p class="muted" style="margin-top:10px">' + esc(probeAvailability) + '</p></div>'
@@ -389,7 +415,7 @@ function fragPage(pr) {
     + fragFAQ(pr).map(([q, a]) => '<details class="qa"><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>').join('')
     + '<h2>Similar Fragrances You May Like</h2><div class="grid">' + relLinks + '</div>'
     + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> \u00b7 <a href="' + WA + '">WhatsApp Community</a> \u00b7 <a href="../index.html">Back to all fragrances</a></div>';
-  const ogImg = bottleImg ? BASE + '/' + bottleImg.replace('../', '') : (pr.brandImg ? BASE + '/' + pr.brandImg : BASE + '/logo.png');
+  const ogImg = ogPng ? BASE + '/images/bottles/' + ogPng : (pr.brandImg ? BASE + '/' + pr.brandImg : BASE + '/logo.png');
   let ogDesc = 'Buy ' + pr.name + ' by ' + pr.brand + ' decant in India' + (pr.status === 'instock' ? ' \u2014 from ' + rupees(mm.min) + ' (3ml\u201330ml).' : ' (3ml\u201330ml).');
   const inspBit = capLine(inspiredLine(pr)) + '.';
   const shipBit = ' Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.';
@@ -443,7 +469,7 @@ function buildArticle(a, innerBody, faqs, pub, mod) {
     + '<p class="lead">' + esc(a.desc) + '</p>' + innerBody
     + '<div class="cta"><h3>Shop the Selection</h3><p>Browse the full decant catalogue \u2014 ' + FREE_SHIP_ABOVE + '.</p><a class="btn" href="../index.html">View All Fragrances</a><a class="btn ghost" href="https://wa.me/' + PHONE_TEL.replace('+', '') + '">WhatsApp Us</a></div>'
     + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a></div>';
-  return pageShell({ title: a.title, desc: a.desc, canonical: a.url, body, schema, og: { iconPath: '../logo.png', type: 'article', image: BASE + '/og-image.jpg', published: pub, modified: mod } });
+  return pageShell({ title: a.title, desc: a.desc, canonical: a.url, body, schema, og: { iconPath: '../favicon.png', type: 'article', image: BASE + '/og-image.jpg', published: pub, modified: mod } });
 }
 function productGrid(list) {
   return '<div class="grid">' + list.map((pr, i) => {
@@ -609,7 +635,7 @@ function renderTbody(cat) {
       let tr = '<tr' + (i === 0 ? ' class="brand-sep"' : '') + '>';
       if (i === 0) {
         tr += '<td class="brand-cell" rowspan="' + b.items.length + '">'
-          + (pr.brandImg ? '<img src="' + pr.brandImg + '" alt="' + b.brand + '" style="background:#fff;padding:2px;border-radius:4px">' : '')
+          + (pr.brandImg ? '<img src="' + imgWebp(pr.brandImg) + '" alt="' + b.brand + '"' + imgDims(pr.brandImg) + ' style="background:#fff;padding:2px;border-radius:4px">' : '')
           + b.brand + '</td>';
       }
       const price = cheapestPrice(pr);
@@ -673,13 +699,13 @@ function renderCards(cat) {
     return '<div class="frag-card' + (isSO ? ' pc-sold' : '') + '"' + attrs + '>'
       + '<div class="pc-media" role="button" tabindex="0" data-open aria-label="View ' + cardEsc(pr.brand) + ' ' + cardEsc(pr.name) + ' details">'
       + '<span class="pc-ph" aria-hidden="true"></span>'
-      + '<img class="pc-img" alt="' + cardEsc(pr.name) + '" loading="lazy" data-img-base="images/bottles/' + pr.slug + '">'
+      + '<img class="pc-img" alt="' + cardEsc(pr.name) + '" loading="lazy"' + imgDims('images/bottles/' + pr.slug + '.png') + ' data-img-base="images/bottles/' + pr.slug + '">'
       + badges
       + '<button type="button" class="pc-wish" aria-label="Save ' + cardEsc(pr.name) + '" data-wish></button>'
       + (isSO || isCS ? '' : '<button type="button" class="pc-cmp" aria-label="Add ' + cardEsc(pr.name) + ' to compare" data-cmp aria-pressed="false"></button>')
       + (gTag ? '<span class="pc-gender pc-gender-' + gTag.toLowerCase() + '">' + gTag + '</span>' : '')
       + '</div>'
-      + '<div class="card-top">' + (pr.brandImg ? '<img src="' + cardEsc(pr.brandImg) + '" alt="" class="card-brand-logo" loading="lazy">' : '')
+      + '<div class="card-top">' + (pr.brandImg ? '<img src="' + imgWebp(cardEsc(pr.brandImg)) + '" alt="" class="card-brand-logo"' + imgDims(pr.brandImg) + ' loading="lazy">' : '')
       + '<span class="card-brand-name">' + cardEsc(pr.brand) + '</span></div>'
       + '<button type="button" class="card-frag-name pc-name" data-open>' + cardEsc(pr.name) + '</button>'
       + slotHtml

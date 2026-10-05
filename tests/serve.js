@@ -2,8 +2,10 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const zlib = require('zlib');
 
 const ROOT = path.resolve(__dirname, '..');
+const GZIP_OK = new Set(['.html', '.css', '.js', '.mjs', '.json', '.xml', '.txt', '.md', '.webmanifest']);
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -49,7 +51,18 @@ function start(port) {
         return;
       }
       const type = TYPES[path.extname(filePath).toLowerCase()] || 'application/octet-stream';
-      res.writeHead(200, { 'Content-Type': type, 'Cache-Control': 'no-store' });
+      const ext = path.extname(filePath).toLowerCase();
+      const base = { 'Content-Type': type, 'Cache-Control': 'no-cache' };
+      // mirror GitHub Pages: gzip text assets so Lighthouse numbers match production
+      if (GZIP_OK.has(ext) && data.length > 1024 && /\bgzip\b/.test(String(req.headers['accept-encoding'] || ''))) {
+        zlib.gzip(data, (gzErr, z) => {
+          if (gzErr) { res.writeHead(200, base); res.end(data); return; }
+          res.writeHead(200, Object.assign({}, base, { 'Content-Encoding': 'gzip', 'Vary': 'Accept-Encoding' }));
+          res.end(z);
+        });
+        return;
+      }
+      res.writeHead(200, base);
       res.end(data);
     });
   });
