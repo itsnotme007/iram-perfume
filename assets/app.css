@@ -755,7 +755,7 @@ body.pc-lock{overflow:hidden}
   .hero-dot:focus-visible{outline:2px solid #d4af37;outline-offset:2px;border-radius:4px}
   .mobile-brand-rail{display:block;margin:0 -10px 16px;padding:0 10px}
   .mobile-brand-rail-head{display:flex;align-items:center;justify-content:space-between;margin:0 0 8px;font-size:14px;font-weight:800;color:var(--text-heading)}
-  .mobile-brand-track{display:flex;gap:10px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .mobile-brand-track{display:flex;align-items:flex-start;gap:10px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .mobile-brand-track::-webkit-scrollbar{display:none}
   #mobileBrandTrack:empty{height:89px}
   .mobile-brand-chip{flex:0 0 72px;border:0;background:transparent;color:var(--text-primary);font:600 10px/1.2 inherit;text-align:center;cursor:pointer}
