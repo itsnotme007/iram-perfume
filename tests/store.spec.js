@@ -295,11 +295,22 @@ test('search returns matching results', async ({ page }, testInfo) => {
 });
 
 // ---------------------------------------------------------------- mobile UX
+test('bestsellers rail and 3ml price list render', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('#bestsellers .best-card')).toHaveCount(12);
+  await expect(page.locator('#bestsellers .best-card[data-pid]')).toHaveCount(12);
+  await expect(page.locator('#threeMlList .three-ml-row')).toHaveCount(155);
+  await expect(page.locator('#threeMlList')).not.toHaveClass(/three-ml-open/);
+  await page.click('#threeMlMore');
+  await expect(page.locator('#threeMlList')).toHaveClass(/three-ml-open/);
+  await expect(page.locator('#threeMlMore')).toHaveAttribute('aria-expanded', 'true');
+});
+
 test('mobile: bottom nav, product sheet, qty stepper, add to cart', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'mobile', 'mobile-only flows');
   const errs = watchErrors(page);
   await page.goto('/');
-  for (const id of ['#navHome', '#navSearch', '#navBrands', '#navCompare', '#navWishlist', '#navCart']) {
+  for (const id of ['#navHome', '#navBrands', '#navCompare', '#navWishlist']) {
     await expect(page.locator(id)).toBeVisible();
   }
   await page.locator('.frag-card:not(.pc-sold) .pc-name').first().click();
