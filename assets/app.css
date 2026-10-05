@@ -804,7 +804,7 @@ body.pc-lock{overflow:hidden}
   [data-theme="dark"] .pc-toolbar{background:#0d1110}
   [data-theme="dark"] .mobile-menu{background:rgba(0,0,0,.62)}
   [data-theme="dark"] .mobile-menu-panel{background:#131817}
-  [data-theme="dark"] .mobile-brand-chip span{background:#161c1a;border-color:#303a35;box-shadow:none}
+  [data-theme="dark"] .mobile-brand-chip span{background:#fff;border-color:#3a423c;box-shadow:none}
   [data-theme="dark"] .frag-card{background:#161c1a;border-color:#2c3631;box-shadow:none}
   [data-theme="dark"] .pc-wish{background:rgba(8,11,10,.78);color:#f0dfb2}
   [data-theme="dark"] .pc-cmp{background:rgba(8,11,10,.78);color:#f0dfb2}
