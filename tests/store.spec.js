@@ -222,7 +222,7 @@ test('stale cart price is re-priced from current data', async ({ page }, testInf
   await page.goto('/');
   await expect(page.locator('#cartDrawerBody .cart-item')).toHaveCount(1);
   const text = (await page.locator('#cartDrawerBody').textContent()) || '';
-  expect(text).toContain('869');   // current 30ml price
+  expect(text).toContain('899');   // current 30ml price
   expect(text).not.toContain('111');
 });
 
