@@ -759,7 +759,7 @@ body.pc-lock{overflow:hidden}
   .mobile-brand-track::-webkit-scrollbar{display:none}
   #mobileBrandTrack:empty{height:89px}
   .mobile-brand-chip{flex:0 0 72px;border:0;background:transparent;color:var(--text-primary);font:600 10px/1.2 inherit;text-align:center;cursor:pointer}
-  .mobile-brand-chip span{display:grid;place-items:center;width:54px;height:54px;margin:0 auto 5px;padding:6px;border:1px solid var(--border-default);border-radius:50%;background:white;box-shadow:var(--shadow-sm)}
+  .mobile-brand-chip span{display:flex;align-items:center;justify-content:center;width:54px;height:54px;margin:0 auto 5px;padding:6px;border:1px solid var(--border-default);border-radius:50%;background:white;box-shadow:var(--shadow-sm)}
   .mobile-brand-chip img{max-width:100%;max-height:100%;object-fit:contain}
   .featured-rail{display:block;margin:0 -10px 16px;padding:0 10px;height:248px}
   .featured-rail[hidden]{display:block;visibility:hidden}
