@@ -783,11 +783,13 @@ function renderThreeMl() {
       + '<span class="three-ml-price">' + priceHtml + '</span>'
       + '</div>';
   }).join('');
-  return '<div class="section-heading" id="threeMl">3ml decant prices</div>\n'
+  return '<div class="three-ml-section" id="threeMl" hidden>\n'
+    + '<div class="section-heading three-ml-title">3ml decant prices</div>\n'
     + '<div class="three-ml" id="threeMlList">\n'
     + '<div class="three-ml-grid" id="threeMlGrid">\n' + rows + '\n</div>\n'
     + '<button type="button" class="three-ml-more" id="threeMlMore" aria-expanded="false" aria-controls="threeMlGrid">Show all '
     + products.length + ' fragrances</button>\n'
+    + '</div>\n'
     + '</div>';
 }
 

@@ -846,7 +846,9 @@ body.pc-lock{overflow:hidden}
 @keyframes phShimmer{0%{background-position:180% 0,0 0}100%{background-position:-80% 0,0 0}}
 @media(prefers-reduced-motion:reduce){.pc-ph{animation:none!important}#toastRoot .toast{transition:none!important}}
 
-/* --- 3ml price list (static, above the Designer table) --- */
+/* --- 3ml price list (static, above the Designer table; banner-gated) --- */
+.three-ml-section{margin:0}
+.three-ml-section[hidden]{display:none}
 .three-ml{position:relative;margin:0 0 30px}
 .three-ml-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px;max-height:338px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 calc(100% - 30px),transparent);mask-image:linear-gradient(#000 calc(100% - 30px),transparent)}
 .three-ml-open .three-ml-grid{max-height:none;-webkit-mask-image:none;mask-image:none}

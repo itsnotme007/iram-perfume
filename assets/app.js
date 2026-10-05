@@ -21,7 +21,10 @@ try{(function(){
   resultsDiv.style.display='none';
   resultsDiv.innerHTML='<table><thead><tr><th>Fragrance</th><th>3ml</th><th>5ml</th><th>7.5ml</th><th>10ml</th><th>20ml</th><th>30ml</th><th>Reminds Me Of</th><th>Links</th></tr></thead><tbody></tbody></table>';
   var container=document.querySelector('.container');
-  container.insertBefore(resultsDiv,container.querySelector('.section-heading'));
+  var resultsAnchor=document.getElementById('catalogue');
+  if(!resultsAnchor||resultsAnchor.parentNode!==container)resultsAnchor=null;
+  resultsAnchor=resultsAnchor||container.querySelector(':scope > .table-wrap')||container.querySelector(':scope > .section-heading');
+  container.insertBefore(resultsDiv,resultsAnchor||null);
   var brandCounts={};
   document.querySelectorAll('.frag-cell[data-brand]').forEach(function(frag){
     var b=frag.getAttribute('data-brand');
@@ -56,12 +59,12 @@ try{(function(){
     var tbody=resultsDiv.querySelector('tbody');
     if(showAll){
       document.querySelectorAll('.table-wrap>.frag-table').forEach(function(t){t.style.display=''});
-      document.querySelectorAll('.section-heading').forEach(function(s){s.style.display=''});
+      document.querySelectorAll('.section-heading,.three-ml-section').forEach(function(s){s.style.display=''});
       resultsDiv.style.display='none';
       document.querySelectorAll('.frag-card').forEach(function(c){c.style.display=''});
     }else{
       document.querySelectorAll('.table-wrap>.frag-table').forEach(function(t){t.style.display='none'});
-      document.querySelectorAll('.section-heading').forEach(function(s){s.style.display='none'});
+      document.querySelectorAll('.section-heading,.three-ml-section').forEach(function(s){s.style.display='none'});
       document.querySelectorAll('.frag-card').forEach(function(card){
         var match=true;
         for(var i=0;i<cats.length;i++){
@@ -2328,12 +2331,21 @@ try{(function(){
 try{(function(){
   var btn=document.getElementById('threeMlMore');
   var list=document.getElementById('threeMlList');
-  if(!btn||!list)return;
-  btn.addEventListener('click',function(){
-    var open=list.classList.toggle('three-ml-open');
+  var sec=document.getElementById('threeMl');
+  if(!btn||!list||!sec)return;
+  function setOpen(open){
+    list.classList.toggle('three-ml-open',open);
     btn.setAttribute('aria-expanded',open?'true':'false');
     btn.textContent=open?'Show less':'Show all '+list.querySelectorAll('.three-ml-row').length+' fragrances';
-  });
+  }
+  btn.addEventListener('click',function(){setOpen(!list.classList.contains('three-ml-open'))});
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest?e.target.closest('a[href="#threeMl"]'):null;
+    if(!a||!sec.hasAttribute('hidden'))return;
+    sec.removeAttribute('hidden');
+    sec.style.display='';
+    setOpen(true);
+  },true);
 })();}catch(e){console.warn('3ml list init failed:',e)}
 
 try{(function(){
