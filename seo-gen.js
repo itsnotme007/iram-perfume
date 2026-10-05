@@ -721,6 +721,76 @@ function renderCards(cat) {
 }
 
 // ------------------------------------------------------------ html homepage edits
+// ------------------------------------------------- homepage extra sections
+// Curated bestseller order — editorial curation (no order data exists; orders
+// arrive over WhatsApp). Keys must exist in products.json or generation throws.
+const BESTSELLERS = [
+  'Rasasi|Hawas OG',
+  'Afnan|9 PM OG',
+  'Lattafa|Khamrah',
+  'Lattafa|Khamrah Dukhan',
+  'Lattafa|ASAD',
+  'Rasasi|Hawas Black',
+  'Fragrance World|Kohl',
+  'Arabiyat Prestige|Kohl Opulence',
+  'Ajmal|Wave',
+  'Riiffs|Costa de Amalfi',
+  'Zimaya|Mazaaj Rhythm',
+  'Mykonos|Glitch'
+];
+
+function renderBestSellers() {
+  return BESTSELLERS.map((key) => {
+    const pr = products.find((p) => p.key === key);
+    if (!pr) throw new Error('bestseller key not found in products.json: ' + key);
+    const isSO = pr.status === 'soldout';
+    const base = 'images/bottles/' + pr.slug;
+    const webp = imgWebp(base + '.png');
+    const dims = imgDims(base + '.png');
+    let img = '';
+    if (webp) {
+      const srcset = fs.existsSync(path.join(ROOT, base + '-500.webp'))
+        ? ' srcset="' + base + '-500.webp 500w, ' + webp + ' 1024w" sizes="138px"'
+        : '';
+      img = '<img src="' + webp + '" alt="' + cardEsc(pr.name) + '"' + dims + srcset
+        + ' loading="lazy" onerror="this.onerror=null;this.srcset=\'\';this.src=\'' + base + '.png\'">';
+    }
+    const price = cheapestPrice(pr);
+    return '<button type="button" class="best-card' + (isSO ? ' pc-sold' : '') + '" data-pid="' + cardEsc(pr.key) + '">'
+      + '<span class="best-media">' + img + '</span>'
+      + '<span class="best-brand">' + cardEsc(pr.brand) + '</span>'
+      + '<span class="best-name">' + cardEsc(pr.name) + '</span>'
+      + '<span class="best-price">from <b>' + (price ? '\u20B9' + rupeePlain(price) : '') + '</b></span>'
+      + '</button>';
+  }).join('');
+}
+
+// All 155 fragrances priced for 3ml only, in catalogue order (grouped by brand).
+// Static markup — crawlable and shift-free. No data-brand/data-price/.frag-cell
+// classes: brand counts and price-slider bounds read those from the table.
+function renderThreeMl() {
+  const rows = products.map((pr) => {
+    const price = pr.prices ? pr.prices['3'] : null;
+    if (!price) return '';
+    const st = (pr.statusPerSize && pr.statusPerSize['3']) || 'ok';
+    const fmt = '\u20B9' + rupeePlain(price);
+    let priceHtml = fmt;
+    if (st === 'struck') priceHtml = '<s>' + fmt + '</s>';
+    else if (st === 'coming') priceHtml = '<span class="three-ml-soon">' + fmt + '</span>';
+    const off = (st === 'struck' || st === 'coming') ? ' three-ml-off' : '';
+    return '<div class="three-ml-row' + off + '">'
+      + '<span class="three-ml-name"><b>' + cardEsc(pr.brand) + '</b> ' + cardEsc(pr.name) + '</span>'
+      + '<span class="three-ml-price">' + priceHtml + '</span>'
+      + '</div>';
+  }).join('');
+  return '<div class="section-heading" id="threeMl">3ml decant prices</div>\n'
+    + '<div class="three-ml" id="threeMlList">\n'
+    + '<div class="three-ml-grid" id="threeMlGrid">\n' + rows + '\n</div>\n'
+    + '<button type="button" class="three-ml-more" id="threeMlMore" aria-expanded="false" aria-controls="threeMlGrid">Show all '
+    + products.length + ' fragrances</button>\n'
+    + '</div>';
+}
+
 function editHomepage(products, faqHtml, articlesHtml) {
   let out = s;
 
@@ -843,6 +913,7 @@ function editHomepage(products, faqHtml, articlesHtml) {
   for (const cat of cats) {
     const open = '<!--CARDS:' + cat + '-->', close = '<!--/CARDS:' + cat + '-->';
     out = stripMarks(out, open, close);
+    // #catalogue (hero CTA target) wraps this heading — heading markup stays plain
     const hIdx = out.indexOf('<div class="section-heading">' + cat + '</div>');
     if (hIdx < 0) throw new Error('section heading not found: ' + cat);
     const tIdx = out.indexOf('</table>', hIdx);
@@ -850,6 +921,27 @@ function editHomepage(products, faqHtml, articlesHtml) {
     const block = open + '\n<div class="frag-cards" aria-label="' + cat + '">' + renderCards(cat) + '</div>\n' + close + '\n';
     out = out.slice(0, tIdx + '</table>'.length) + block + out.slice(tIdx + '</table>'.length);
   }
+
+  // 8b) curated bestsellers rail — static markup (shift-free), parked right
+  //     after the featured rail; markers keep reruns idempotent
+  out = stripMarks(out, '<!--BESTSELLERS-->', '<!--/BESTSELLERS-->');
+  const frIdx = out.indexOf('<section class="featured-rail"');
+  if (frIdx < 0) throw new Error('featured-rail anchor not found');
+  const frEnd = out.indexOf('</section>', frIdx);
+  if (frEnd < 0) throw new Error('featured-rail closing tag not found');
+  const bsBlock = '<!--BESTSELLERS-->\n'
+    + '<section class="bestsellers-rail" id="bestsellers" aria-label="Best selling fragrances">\n'
+    + '  <div class="mobile-brand-rail-head"><span>Best selling fragrances</span><span aria-hidden="true">Scroll →</span></div>\n'
+    + '  <div class="bestsellers-track" id="bestsellersTrack">' + renderBestSellers() + '</div>\n'
+    + '</section>\n<!--/BESTSELLERS-->\n';
+  out = out.slice(0, frEnd + '</section>'.length) + bsBlock + out.slice(frEnd + '</section>'.length);
+
+  // 8c) 3ml-only price list for every fragrance, above the Designer table
+  out = stripMarks(out, '<!--THREE_ML-->', '<!--/THREE_ML-->');
+  const dIdx = out.indexOf('<div id="catalogue"><div class="section-heading">Designer</div></div>');
+  if (dIdx < 0) throw new Error('Designer section heading not found (3ml anchor)');
+  const mlBlock = '<!--THREE_ML-->\n' + renderThreeMl() + '\n<!--/THREE_ML-->\n';
+  out = out.slice(0, dIdx) + mlBlock + out.slice(dIdx);
 
   // 9) inline the product registry data (window.__PRODUCTS) just before the
   //    app bundle; "</" is escaped so no product link can close the script tag
