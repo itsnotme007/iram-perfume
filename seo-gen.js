@@ -820,6 +820,16 @@ function editHomepage(products, faqHtml, articlesHtml) {
   const pblock = '<!--PRODUCTS_JSON-->\n<script>window.__PRODUCTS=' + pjson + ';</script>\n<!--/PRODUCTS_JSON-->\n';
   out = out.slice(0, appIdx) + pblock + out.slice(appIdx);
 
+  // 10) external asset cache-busters: ?v= = first 12 hex of the file's sha256,
+  //     refreshed on every run so a content edit always busts the cache
+  for (const file of ['assets/app.css', 'assets/app.js']) {
+    const buf = fs.readFileSync(path.join(ROOT, file));
+    const v = crypto.createHash('sha256').update(buf).digest('hex').slice(0, 12);
+    const re = new RegExp('((?:href|src)="' + file.replace(/\//g, '\\/') + '\\?v=)[0-9a-f]+(")');
+    if (!re.test(out)) throw new Error('asset reference missing for ' + file + ' (re-run extraction?)');
+    out = out.replace(re, '$1' + v + '$2');
+  }
+
   return out;
 }
 function trIncludesAnchor(tr) { return tr.includes('class="frag-cell"') && /class="frag-cell"[^>]*>[^<]*<a href=/.test(tr); }

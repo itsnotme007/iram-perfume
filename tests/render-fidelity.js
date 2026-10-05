@@ -9,8 +9,14 @@ const path = require('path');
 const REF = process.argv[2] || 'HEAD';
 const ROOT = path.join(__dirname, '..');
 const norm = (t) => t.replace(/\r\n/g, '\n');
-const oldHtml = norm(execSync('git show ' + REF + ':index.html', { cwd: ROOT, maxBuffer: 1 << 25 }).toString('utf8'));
-const newHtml = norm(fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'));
+// strip the static attrs seo-gen adds so refs from before AND after the 2.1b
+// render inversion (data-brand / data-price / data-pid) both compare equal
+const strip = (t) => t
+  .replace(/ data-brand="[^"]*"/g, '')
+  .replace(/ data-price="\d+"/g, '')
+  .replace(/ data-pid="[^"]*"/g, '');
+const oldHtml = strip(norm(execSync('git show ' + REF + ':index.html', { cwd: ROOT, maxBuffer: 1 << 25 }).toString('utf8')));
+const newHtml = strip(norm(fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8')));
 function tbodies(html) {
   const catStart = html.indexOf('<div class="section-heading">Designer');
   const catEnd = html.indexOf('Bottle Options', catStart);
