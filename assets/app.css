@@ -771,7 +771,7 @@ body.pc-lock{overflow:hidden}
   .feat-card:focus-visible,.best-card:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
   .feat-media,.best-media{position:relative;width:100%;aspect-ratio:1/1;border-radius:9px;background:linear-gradient(135deg,#efe9df,#e6ddd0);display:grid;place-items:center;overflow:hidden}
   [data-theme="dark"] .feat-media,[data-theme="dark"] .best-media{background:linear-gradient(135deg,#262c33,#181d24)}
-  .feat-media img,.best-media img{max-width:78%;max-height:78%;object-fit:contain;filter:drop-shadow(0 6px 8px rgba(0,0,0,.18))}
+  .feat-media img,.best-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.18))}
   .feat-brand,.best-brand{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .feat-name,.best-name{font-size:12px;font-weight:700;line-height:1.3;color:var(--text-heading);min-height:31px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .feat-price,.best-price{font-size:13px;font-weight:800;color:var(--text-heading)}
