@@ -235,6 +235,7 @@ function inspiredLine(pr) {
 }
 // 'a' / 'an' before a scent line (e.g. "an aromatic,fresh; aromatic family")
 const art = s => /^[aeiou]/i.test(String(s || '').trim()) ? 'an' : 'a';
+const capLine = s => { s = String(s || ''); return s.charAt(0).toUpperCase() + s.slice(1); };
 const rupees = n => '\u20b9' + (n == null ? 'N/A' : n.toLocaleString('en-IN'));
 
 function minMax(pr) {
@@ -265,15 +266,25 @@ function fragFAQ(pr) {
 // ------------------------------------------------------------- page shell
 function favicon184() { return '<link rel="icon" type="image/png" href="../logo.png">'; }
 function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en') {
+  const ogType = (og && og.type) || 'website';
+  const ogImage = (og && og.image) || BASE + '/og-image.jpg';
+  const articleMeta = ogType === 'article' && og && og.published
+    ? '<meta property="article:published_time" content="' + og.published + '">\n'
+      + '<meta property="article:modified_time" content="' + (og.modified || og.published) + '">\n'
+    : '';
   return '<!DOCTYPE html>\n<html lang="' + lang + '">\n<head>\n'
     + '<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
     + '<title>' + esc(title) + '</title>\n<meta name="description" content="' + esc(desc) + '">\n'
     + '<meta name="robots" content="index, follow">\n<link rel="canonical" href="' + canonical + '">\n'
     + '<link rel="icon" type="image/png" href="' + (og && og.iconPath || '../logo.png') + '">\n'
-    + '<meta property="og:type" content="website">\n<meta property="og:title" content="' + esc(title) + '">\n'
+    + '<meta property="og:type" content="' + ogType + '">\n<meta property="og:title" content="' + esc(title) + '">\n'
     + '<meta property="og:description" content="' + esc(desc) + '">\n<meta property="og:url" content="' + canonical + '">\n'
+    + '<meta property="og:image" content="' + esc(ogImage) + '">\n'
+    + '<meta property="og:site_name" content="IRAM Perfume">\n'
+    + articleMeta
     + '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="' + esc(title) + '">\n'
     + '<meta name="twitter:description" content="' + esc(desc) + '">\n'
+    + '<meta name="twitter:image" content="' + esc(ogImage) + '">\n'
     + (schema && schema.length ? schema.map(x => '<script type="application/ld+json">\n' + JSON.stringify(x, null, 2) + '\n</script>\n').join('') : '')
     + '<style>'
     + ':root{--bg:#faf9f7;--card:#fff;--ink:#2d2a24;--muted:#7a7168;--accent:#d4af37;--line:#e8e2d9}'
@@ -324,7 +335,7 @@ function fragPage(pr) {
   const schema = [
     {
       '@context': 'https://schema.org', '@type': 'Product', name: pr.name + ' by ' + pr.brand,
-      description: 'Buy an authentic ' + pr.name + ' by ' + pr.brand + ' decant in India \u2014 ' + priceString(pr) + '. ' + art(scentLine(pr)) + ' ' + scentLine(pr) + ' fragrance, ' + inspiredLine(pr) + '. IRAM Perfume ships across India.',
+      description: 'Buy an authentic ' + pr.name + ' by ' + pr.brand + ' decant in India \u2014 ' + priceString(pr) + '. ' + capLine(art(scentLine(pr))) + ' ' + scentLine(pr) + ' fragrance, ' + inspiredLine(pr) + '. IRAM Perfume ships across India.',
       image: pr.brandImg ? BASE + '/' + pr.brandImg : BASE + '/logo.png',
       brand: { '@type': 'Brand', name: pr.brand },
       category: pr.cat || 'Fragrance', sku: pr.slug,
@@ -378,10 +389,16 @@ function fragPage(pr) {
     + fragFAQ(pr).map(([q, a]) => '<details class="qa"><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>').join('')
     + '<h2>Similar Fragrances You May Like</h2><div class="grid">' + relLinks + '</div>'
     + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> \u00b7 <a href="' + WA + '">WhatsApp Community</a> \u00b7 <a href="../index.html">Back to all fragrances</a></div>';
+  const ogImg = bottleImg ? BASE + '/' + bottleImg.replace('../', '') : (pr.brandImg ? BASE + '/' + pr.brandImg : BASE + '/logo.png');
+  let ogDesc = 'Buy ' + pr.name + ' by ' + pr.brand + ' decant in India' + (pr.status === 'instock' ? ' \u2014 from ' + rupees(mm.min) + ' (3ml\u201330ml).' : ' (3ml\u201330ml).');
+  const inspBit = capLine(inspiredLine(pr)) + '.';
+  const shipBit = ' Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.';
+  if ((ogDesc + ' ' + inspBit + shipBit).length <= 160) ogDesc += ' ' + inspBit;
+  ogDesc += shipBit;
   return pageShell({
-    title: pr.name + ' by ' + pr.brand + ' \u2014 3ml\u201330ml Decant Price in India | IRAM Perfume',
-    desc: 'Buy ' + pr.name + ' by ' + pr.brand + ' decant in India. ' + priceString(pr) + '. ' + inspiredLine(pr) + '. Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants. Order on WhatsApp ' + PHONE_DISPLAY + '.',
-    canonical: pr.url, body, schema
+    title: pr.name + ' by ' + pr.brand + ' \u2014 Decant Price in India | IRAM Perfume',
+    desc: ogDesc,
+    canonical: pr.url, body, schema, og: { image: ogImg }
   });
 }
 
@@ -415,14 +432,18 @@ function articleShell(a, innerBody, faqs) {
 }
 function buildArticle(a, innerBody, faqs, pub, mod) {
   const schema = [
-    { '@context': 'https://schema.org', '@type': 'Article', headline: a.title, description: a.desc, datePublished: pub, dateModified: mod, author: { '@type': 'Organization', name: 'IRAM Perfume' }, publisher: { '@type': 'Organization', name: 'IRAM Perfume', url: BASE + '/' }, mainEntityOfPage: a.url, url: a.url, image: BASE + '/logo.png' },
+    { '@context': 'https://schema.org', '@type': 'Article', headline: a.title, description: a.desc, datePublished: pub, dateModified: mod, author: { '@type': 'Organization', name: 'IRAM Perfume' }, publisher: { '@type': 'Organization', name: 'IRAM Perfume', url: BASE + '/' }, mainEntityOfPage: a.url, url: a.url, image: BASE + '/og-image.jpg' },
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'IRAM Perfume', item: BASE + '/' },
+      { '@type': 'ListItem', position: 2, name: a.title, item: a.url }
+    ] },
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, x]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: x } })) }
   ];
   const body = '<div class="top"><div><div class="brand-chip">IRAM PERFUME \u00b7 GUIDES</div><h1>' + esc(a.title) + '</h1></div><a href="../index.html">\u2190 Full collection</a></div>'
     + '<p class="lead">' + esc(a.desc) + '</p>' + innerBody
     + '<div class="cta"><h3>Shop the Selection</h3><p>Browse the full decant catalogue \u2014 ' + FREE_SHIP_ABOVE + '.</p><a class="btn" href="../index.html">View All Fragrances</a><a class="btn ghost" href="https://wa.me/' + PHONE_TEL.replace('+', '') + '">WhatsApp Us</a></div>'
     + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a></div>';
-  return pageShell({ title: a.title, desc: a.desc, canonical: a.url, body, schema, og: { iconPath: '../logo.png' } });
+  return pageShell({ title: a.title, desc: a.desc, canonical: a.url, body, schema, og: { iconPath: '../logo.png', type: 'article', image: BASE + '/og-image.jpg', published: pub, modified: mod } });
 }
 function productGrid(list) {
   return '<div class="grid">' + list.map((pr, i) => {
@@ -678,10 +699,10 @@ function editHomepage(products, faqHtml, articlesHtml) {
   let out = s;
 
   // 1) title + description
-  out = out.replace(/<title>[\s\S]*?<\/title>/, '<title>IRAM Perfume \u2014 Designer &amp; Middle Eastern Fragrance Decants (3ml\u201330ml) &amp; Full Bottles | India</title>');
+  out = out.replace(/<title>[\s\S]*?<\/title>/, '<title>IRAM Perfume \u2014 Designer &amp; Middle Eastern Decants India (3ml\u201330ml)</title>');
   out = out.replace(
     /<meta name="description" content="[^"]*"/,
-    '<meta name="description" content="Buy authentic designer and Middle Eastern perfume decants in India \u2014 3ml, 5ml, 7.5ml, 10ml, 20ml & 30ml from Davidoff, Mancera, Afnan, Lattafa, Rasasi & 25+ brands. Full 30ml\u2013100ml bottles on request. Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants."'
+    '<meta name="description" content="Buy authentic designer &amp; Middle Eastern perfume decants in India \u2014 Davidoff, Mancera, Afnan, Lattafa, Rasasi &amp; more. Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants."'
   );
 
   // 2) og:image -> og-image.jpg
@@ -702,7 +723,7 @@ function editHomepage(products, faqHtml, articlesHtml) {
         '@type': 'Product', position: products.indexOf(pr) + 1,
         name: pr.name + ' \u2014 ' + pr.brand,
         brand: { '@type': 'Brand', name: pr.brand },
-        description: pr.name + ' by ' + pr.brand + ' decant. ' + art(scentLine(pr)) + ' ' + scentLine(pr) + '. ' + inspiredLine(pr) + '.',
+        description: pr.name + ' by ' + pr.brand + ' decant. ' + capLine(art(scentLine(pr))) + ' ' + scentLine(pr) + '. ' + capLine(inspiredLine(pr)) + '.',
         image: pr.brandImg ? BASE + '/' + pr.brandImg : BASE + '/logo.png',
         category: pr.cat || 'Fragrance',
         url: pr.url,

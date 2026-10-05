@@ -73,6 +73,13 @@ Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`pric
 - `<!--PRODUCTS_JSON-->` (inline data script) stays before the `<!--APP-->` anchor, which now precedes `<script src="assets/app.js?v=…">`. Never move/delete either anchor or add `defer`/`async` to the bundle (execution order vs the inline data script matters).
 - Fragrance/article pages keep their own inline per-page `<style>` — only the homepage uses the bundle.
 
+## SEO (Phase 3)
+- **`pageShell` (seo-gen) emits full social tags**: `og:type` (`og.type`, default `website`; articles pass `article` → also `article:published_time`/`article:modified_time`), `og:image` + `twitter:image` (`og.image`, default `BASE + '/og-image.jpg'`), and `og:site_name`. Fragrance pages pass an absolute **bottle PNG** URL (fallback brand logo → `logo.png`); articles pass `og-image.jpg`.
+- **Meta length budget**: homepage `<title>` (≤69) and meta description are rewritten by seo-gen step 1 (`editHomepage`); fragrance `<title>` is `X by Y — Decant Price in India | IRAM Perfume` (size range dropped — it lives in the desc/schema); fragrance meta description is built as `Buy X by Y decant in India — from ₹min (3ml–30ml) [. inspired line] Free shipping…` with a **length fit-check**: the inspired bit is included only when the *final* string stays ≤160 (fits ~150/155; longest names drop it — it remains in schema/FAQ/body).
+- **Sentence-initial casing**: `capLine()` (next to `art`) capitalizes `art()`/`inspiredLine()` wherever they start a sentence — ItemList description, Product schema description, fragrance meta description. `art()` itself stays lowercase for mid-sentence use.
+- Articles: Article JSON-LD `image` = `og-image.jpg`; a 2-level `BreadcrumbList` (home → article) added alongside Article + FAQPage.
+- Audit expectations (re-check with a head-extractor after meta edits): 0 pages missing og:image/twitter:image, 0 duplicate titles, all meta descs ≤160 (homepage raw shows 163 = `&amp;`×2 → 155 rendered), all JSON-LD blocks parse.
+
 ## Gotchas
 - Cart validator expects **6** prices per product (6 size columns); `sizes` arrays in cart code are also 6 entries.
 - `prodOf(id)` in the list-sheet IIFE handles both `brand|frag` pids and `data-product` slugs; `thumbOf` resolves via the `.frag-card[data-pid]` / `[data-product]` lookup and returns `''` if not found (never build a slug by hand — it 404s).
