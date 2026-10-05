@@ -320,18 +320,20 @@ try{(function(){
       if(card)card.scrollIntoView({behavior:'smooth',block:'center'});
     });
   }
-  var featTrack=document.getElementById('featuredTrack');
-  if(featTrack&&featTrack.children.length){
-      featTrack.addEventListener('click',function(e){
-        var f=e.target.closest('.feat-card');if(!f)return;
-        var pid=f.getAttribute('data-pid');
-        var card=pid?document.querySelector('.frag-card[data-pid="'+pid+'"]'):null;
-        if(!card)return;
-        card.scrollIntoView({behavior:'smooth',block:'center'});
-        var opener=card.querySelector('[data-open]');
-        if(opener)setTimeout(function(){opener.click()},350);
-      });
+  function wireRail(track){
+    if(!track||!track.children.length)return;
+    track.addEventListener('click',function(e){
+      var f=e.target.closest('.feat-card,.best-card');if(!f)return;
+      var pid=f.getAttribute('data-pid');
+      var card=pid?document.querySelector('.frag-card[data-pid="'+pid+'"]'):null;
+      if(!card)return;
+      card.scrollIntoView({behavior:'smooth',block:'center'});
+      var opener=card.querySelector('[data-open]');
+      if(opener)setTimeout(function(){opener.click()},350);
+    });
   }
+  wireRail(document.getElementById('featuredTrack'));
+  wireRail(document.getElementById('bestsellersTrack'));
   function wishIds(){try{return JSON.parse(localStorage.getItem('iram_wishlist')||'[]')}catch(e){return[]}}
   function syncWishes(){var on={};wishIds().forEach(function(id){on[id]=true});document.querySelectorAll('.frag-card').forEach(function(card){var btn=card.querySelector('[data-wish]');if(btn)btn.classList.toggle('active',!!on[card.getAttribute('data-product')])})}
   syncWishes();
@@ -919,7 +921,7 @@ try{(function(){
       fc._cartData=data;
       fc.setAttribute('data-pid',pid);
       if(data.gender)fc.setAttribute('data-gender',data.gender);
-      if(data.isSoldOut||data.isComingSoon){cartBtn.disabled=true}
+      if(data.isSoldOut||data.isComingSoon){cartBtn.disabled=true;cartBtn.textContent=data.isComingSoon?'Coming soon':'Sold out';cartBtn.classList.add('cart-btn-so')}
     });
   });
 
@@ -1671,7 +1673,7 @@ try{(function(){
   }
 
   function setupMobile(){
-    var btns=document.querySelectorAll('[data-mobile-search],#mobileSearchBtn');
+    var btns=document.querySelectorAll('[data-mobile-search]');
     var overlay=document.getElementById('mobileSearchOverlay');
     var input=document.getElementById('mobileSearchInput');
     var results=document.getElementById('mobileSearchResults');
@@ -1719,18 +1721,10 @@ try{(function(){
   if(!nav)return;
   var navItems=nav.querySelectorAll('.nav-item');
   function setActive(item){navItems.forEach(function(n){var on=n===item;n.classList.toggle('active',on);if(on)n.setAttribute('aria-current','page');else n.removeAttribute('aria-current')})}
-  function openSearch(){
-    if(window.innerWidth<=1023){
-      var overlay=document.getElementById('mobileSearchOverlay');
-      if(overlay){overlay.classList.add('open');document.body.style.overflow='hidden';var input=document.getElementById('mobileSearchInput');if(input)setTimeout(function(){input.focus()},100)}
-      return;
-    }
-    var bar=document.getElementById('filterBar');
-    if(bar)bar.scrollIntoView({behavior:'smooth',block:'start'});
-  }
-  function openCart(){
-    var drawer=document.getElementById('cartDrawer'),overlay=document.getElementById('cartDrawerOverlay');
-    if(drawer&&overlay){drawer.classList.add('open');overlay.classList.add('open')}
+  function openBrands(){
+    var bb=document.getElementById('pcBrandBtn');
+    if(bb){bb.click();return}
+    scrollTo('#brandSection');
   }
   function openWishlist(){if(window.__openWishlist){window.__openWishlist();return}var first=document.querySelector('.pc-wish.active');if(first)first.closest('.frag-card').scrollIntoView({behavior:'smooth',block:'center'})}
   function openCompare(){if(window.__openCompare){window.__openCompare();return}}
@@ -1738,11 +1732,9 @@ try{(function(){
   navItems.forEach(function(item){item.addEventListener('click',function(e){
     var id=item.id;
     if(id==='navHome'){e.preventDefault();setActive(item);window.scrollTo({top:0,behavior:'smooth'});return}
-    if(id==='navSearch'){e.preventDefault();setActive(item);openSearch();return}
-    if(id==='navBrands'){e.preventDefault();setActive(item);scrollTo('#brandSection');return}
+    if(id==='navBrands'){e.preventDefault();setActive(item);openBrands();return}
     if(id==='navCompare'){e.preventDefault();setActive(item);openCompare();return}
     if(id==='navWishlist'){e.preventDefault();setActive(item);openWishlist();return}
-    if(id==='navCart'){e.preventDefault();setActive(item);openCart();return}
     if(item.getAttribute('target')==='_blank')return;
     if(item.getAttribute('href')==='#'){e.preventDefault();setActive(item)}
   })});
@@ -2320,15 +2312,29 @@ try{(function(){
   }
   document.querySelectorAll('[data-hero-jump]').forEach(function(a){
     a.addEventListener('click',function(e){
+      var href=a.getAttribute('href')||'';
+      if(href.charAt(0)!=='#'||href.length<2)return;
+      var t=document.querySelector(href);
+      if(!t)return;
       e.preventDefault();
-      var bar=document.getElementById('filterBar');
-      if(bar)bar.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+      t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
     });
   });
   document.addEventListener('visibilitychange',function(){document.hidden?stop():start()});
   go(0,false);
   start();
 })();}catch(e){console.warn('Hero carousel init failed:',e)}
+
+try{(function(){
+  var btn=document.getElementById('threeMlMore');
+  var list=document.getElementById('threeMlList');
+  if(!btn||!list)return;
+  btn.addEventListener('click',function(){
+    var open=list.classList.toggle('three-ml-open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.textContent=open?'Show less':'Show all '+list.querySelectorAll('.three-ml-row').length+' fragrances';
+  });
+})();}catch(e){console.warn('3ml list init failed:',e)}
 
 try{(function(){
   var root=document.getElementById('toastRoot');
