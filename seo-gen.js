@@ -177,7 +177,7 @@ for (const reg of REGIONS) {
     const cat = sectionAt(reg.start) || '';
     const key = (brand || 'x') + '|' + name;
     products.push({
-      key, brand: brand || '', brandImg: brandRow.img || '', name, gender, status,
+      key, brand: brand || '', brandImg: (brandRow.img || '').replace(/\.webp$/, '.png'), name, gender, status,
       tags: tags.filter(t => !['Men', 'Women', 'Unisex', 'SOLD OUT', 'COMING SOON', 'NEW'].includes(t)),
       prices, statusPerSize, inspired, links, linksRaw, cat,
       scent: data.scent || '', season: data.season || '', occasion: data.occasion || '',
