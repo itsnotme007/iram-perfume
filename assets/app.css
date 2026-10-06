@@ -169,20 +169,28 @@ tbody td{padding:10px;vertical-align:middle;color:var(--text-body)}
 .card-links{font-size:11px}
 .card-links a{color:var(--accent-link);text-decoration:none;font-weight:500}
 .card-links a:hover{color:var(--accent-danger);text-decoration:underline}
-.bottle-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
-.bottle-grid-item:first-child{flex:0 0 100%}
-.bottle-grid-item:not(:first-child){flex:1 1 calc(33.333% - 8px)}
-.bottle-grid-item{text-align:center}
-.bottle-grid-item img{width:100%;max-height:220px;border-radius:8px;border:1px solid var(--border-default);object-fit:contain}
-.bottle-grid-item .bottle-caption{font-size:12px;color:var(--text-muted);margin-top:4px;font-weight:600}
+#bottles{scroll-margin-top:96px}
+.bottle-shop{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:16px}
+.bottle-card{display:flex;flex-direction:column;background:var(--bg-surface);border:1px solid var(--border-default);border-radius:12px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.bottle-media img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:var(--bg-elevated)}
+.bottle-card-info .bottle-media img{object-fit:contain;padding:8px;aspect-ratio:3/4}
+.bottle-body{display:flex;flex-direction:column;gap:8px;padding:12px;flex:1}
+.bottle-name{font-size:14px;font-weight:700;color:var(--text-heading)}
+.bottle-opts{display:flex;flex-wrap:wrap;gap:6px}
+.bottle-opt{padding:6px 10px;min-height:32px;border:1px solid var(--border-default);border-radius:8px;background:var(--bg-surface);color:var(--text-body);font-family:inherit;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .15s}
+.bottle-opt:hover{background:var(--bg-hover)}
+.bottle-opt[aria-pressed="true"]{border-color:var(--color-gold);background:rgba(212,169,90,.16);color:var(--text-heading)}
+.bottle-price{font-size:16px;font-weight:800;color:var(--text-heading);margin-top:auto}
+.bottle-add{display:flex;align-items:center;justify-content:center;gap:6px;min-height:38px;border:none;border-radius:8px;background:#d7a94e;color:#21190f;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;transition:background .15s}
+.bottle-add:hover{background:#c99a3d}
+.bottle-note{font-size:12.5px;color:var(--text-muted);margin:0;line-height:1.5}
 @media(max-width:600px){
   .bottle-labels span{font-size:11px;padding:4px 8px}
   .label-30{left:3%}.label-8{right:3%}
-  .bottle-grid{display:flex;flex-wrap:wrap;gap:8px}
-  .bottle-grid-item:first-child{flex:0 0 100%}
-  .bottle-grid-item:not(:first-child){flex:0 0 calc(50% - 4px)}
-  .bottle-grid-item img{max-height:none;height:auto}
-  .bottle-grid-item .bottle-caption{font-size:10px}
+  .bottle-shop{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .bottle-body{padding:10px}
+  .bottle-opt{font-size:11px;padding:5px 8px}
+  .bottle-add{min-height:34px;font-size:12px}
 }
 @media(max-width:768px){
   .banner h1{font-size:32px}

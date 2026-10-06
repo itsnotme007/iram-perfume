@@ -59,12 +59,12 @@ try{(function(){
     var tbody=resultsDiv.querySelector('tbody');
     if(showAll){
       document.querySelectorAll('.table-wrap>.frag-table').forEach(function(t){t.style.display=''});
-      document.querySelectorAll('.section-heading,.three-ml-section').forEach(function(s){s.style.display=''});
+      document.querySelectorAll('.section-heading,.three-ml-section,#bottles').forEach(function(s){s.style.display=''});
       resultsDiv.style.display='none';
       document.querySelectorAll('.frag-card').forEach(function(c){c.style.display=''});
     }else{
       document.querySelectorAll('.table-wrap>.frag-table').forEach(function(t){t.style.display='none'});
-      document.querySelectorAll('.section-heading,.three-ml-section').forEach(function(s){s.style.display='none'});
+      document.querySelectorAll('.section-heading,.three-ml-section,#bottles').forEach(function(s){s.style.display='none'});
       document.querySelectorAll('.frag-card').forEach(function(card){
         var match=true;
         for(var i=0;i<cats.length;i++){
@@ -942,6 +942,26 @@ try{(function(){
   window._products=_products;
 })();}catch(e){console.warn('Cart data init failed:',e)}
 try{(function(){
+  if(!window._products)return;
+  var defs=[
+    ['Plastic Atomizer Bottle',{0:15,1:15,2:15}],
+    ['Metal Black Atomizer Bottle',{0:25,1:25,2:25,3:28}],
+    ['Metal Gold Atomizer Bottle',{0:25,1:25,2:25,3:28}],
+    ['Round Gold Bottle',{4:30}],
+    ['Round Black Bottle',{4:30}],
+    ['Square Gold Bottle',{5:35}],
+    ['Square Black Bottle',{5:35}],
+    ['Oval Gold Bottle',{5:35}],
+    ['Oval Black Bottle',{5:35}]
+  ];
+  for(var i=0;i<defs.length;i++){
+    var name=defs[i][0],slots=defs[i][1];
+    var prices=[0,0,0,0,0,0],available=[false,false,false,false,false,false];
+    for(var k in slots){prices[k]=slots[k];available[k]=true}
+    window._products['Bottles|'+name]={id:'Bottles|'+name,brand:'Bottles',frag:name,gender:'',badges:'',prices:prices,available:available,inspired:'',links:'',attrs:{},isSoldOut:false,isComingSoon:false};
+  }
+})();}catch(e){console.warn('Bottle registry init failed:',e)}
+try{(function(){
   var cart=[];
   try{var _raw=localStorage.getItem('iram_cart');cart=_raw?JSON.parse(_raw):[]}catch(e){cart=[]}
   if(!Array.isArray(cart))cart=[];
@@ -1054,6 +1074,7 @@ try{(function(){
     var decantEst=0;
     for(var i=0;i<cart.length;i++){
       var it=cart[i];
+      if(it.brand==='Bottles')continue;
       var fk=it.brand+'|'+it.frag;
       if(!fragSet[fk]){fragSet[fk]=1;uniqueFrags++}
       decantEst+=it.qty;
@@ -1239,6 +1260,37 @@ try{(function(){
 
   renderCart();
 })();}catch(e){console.warn('Cart init failed:',e)}
+
+try{(function(){
+  var cards=document.querySelectorAll('.bottle-card[data-bottle]');
+  if(!cards.length)return;
+  cards.forEach(function(card){
+    var out=card.querySelector('[data-price-out]');
+    function sync(){
+      var p=card.querySelector('.bottle-opt[data-price][aria-pressed="true"]');
+      if(p&&out)out.textContent='\u20B9'+parseInt(p.getAttribute('data-price'),10);
+    }
+    card.querySelectorAll('.bottle-opts').forEach(function(group){
+      group.addEventListener('click',function(e){
+        var b=e.target.closest('.bottle-opt');
+        if(!b||!group.contains(b))return;
+        group.querySelectorAll('.bottle-opt').forEach(function(o){o.setAttribute('aria-pressed','false')});
+        b.setAttribute('aria-pressed','true');
+        sync();
+      });
+    });
+    var add=card.querySelector('.bottle-add');
+    if(add)add.addEventListener('click',function(){
+      var pb=card.querySelector('.bottle-opt[data-price][aria-pressed="true"]');
+      if(!pb||!window.__iramAddToCart)return;
+      var sb=card.querySelector('.bottle-opt[data-size][aria-pressed="true"]');
+      var size=sb?sb.getAttribute('data-size'):card.getAttribute('data-size');
+      if(!size)return;
+      window.__iramAddToCart('Bottles',pb.getAttribute('data-frag'),size,parseInt(pb.getAttribute('data-price'),10),1);
+    });
+    sync();
+  });
+})();}catch(e){console.warn('Bottle shop init failed:',e)}
 
 try{(function(){
   var overlay=document.getElementById('pcOverlay');
