@@ -1854,10 +1854,10 @@ try{(function(){
             if(p!==null)prices[sizeKeys[i]].push(p);
           }
         });
-        var fragName='';
-        fc.childNodes.forEach(function(n){if(n.nodeType===3)fragName+=n.textContent});
-        fragName=fragName.trim();
-        var brandName=bc?bc.textContent.trim():'';
+        var pid=fc.getAttribute('data-pid')||'';
+        var anchor=fc.querySelector('a');
+        var fragName=(anchor?anchor.textContent:(pid.split('|')[1]||'')).trim();
+        var brandName=(fc.getAttribute('data-brand')||pid.split('|')[0]||(bc?bc.textContent.trim():'')).trim();
         var p30=parsePrice(cells[5]?cells[5].textContent:'');
         if(p30!==null&&p30<cheapest.price){cheapest={price:p30,name:fragName,brand:brandName}}
         if(p30!==null&&p30>expensive.price){expensive={price:p30,name:fragName,brand:brandName}}
