@@ -2405,23 +2405,23 @@
   "brandImg": "logos/assaf.png",
   "name": "Tobacco Jam 50",
   "gender": "Unisex",
-  "status": "soldout",
+  "status": "instock",
   "tags": [],
   "prices": {
-   "3": 179,
-   "5": 279,
-   "10": 539,
-   "20": 1039,
-   "30": 1499,
-   "7.5": 435
+   "3": 169,
+   "5": 265,
+   "10": 509,
+   "20": 975,
+   "30": 1399,
+   "7.5": 409
   },
   "statusPerSize": {
-   "3": "struck",
-   "5": "struck",
-   "10": "struck",
-   "20": "struck",
-   "30": "struck",
-   "7.5": "struck"
+   "3": "ok",
+   "5": "ok",
+   "10": "ok",
+   "20": "ok",
+   "30": "ok",
+   "7.5": "ok"
   },
   "inspired": "Amouage Purpose 50",
   "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Assaf/Tobacco-Jam-50-121367.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/assaf/tobacco-jam-50'>Parfumo</a>",
@@ -2437,7 +2437,7 @@
   "added": "",
   "slug": "assaf-tobacco-jam-50",
   "url": "https://itsnotme007.github.io/iram-perfume/fragrance/assaf-tobacco-jam-50.html",
-  "availability": "https://schema.org/OutOfStock"
+  "availability": "https://schema.org/InStock"
  },
  {
   "key": "French Avenue|Aether Extrait",
