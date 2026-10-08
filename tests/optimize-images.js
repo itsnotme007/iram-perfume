@@ -64,7 +64,7 @@ async function main() {
   for (const f of fs.readdirSync(bottleDir).filter(x => x.endsWith('.png')).sort()) {
     const r = await optPng(f, bottleDir);
     t0 += r.before; t1 += r.after; w0 += r.before; w1 += r.webp; n++;
-    if (n % 40 === 0) console.log('  ...' + n + '/155');
+    if (n % 40 === 0) console.log('  ...' + n + '/156');
   }
   console.log('bottles PNG: ' + n + ' files  ' + MB(t0) + ' -> ' + MB(t1) + '  (webp total ' + MB(w1) + ')');
   const grid = [];

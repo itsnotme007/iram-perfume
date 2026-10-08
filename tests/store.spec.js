@@ -3,7 +3,7 @@
 // (they document bugs 1.1, 1.2, 1.5, 1.7, 1.8, 1.9, 1.3, 1.4).
 const { test, expect } = require('@playwright/test');
 
-const TOTAL = 155;
+const TOTAL = 156;
 
 function watchErrors(page) {
   const errs = [];
@@ -16,19 +16,19 @@ async function cartCount(page) {
 }
 
 // ---------------------------------------------------------------- catalogue
-test('catalogue renders 155 cards + rows with accurate counts', async ({ page }, testInfo) => {
+test('catalogue renders 156 cards + rows with accurate counts', async ({ page }, testInfo) => {
   const errs = watchErrors(page);
   await page.goto('/');
   await expect(page).toHaveTitle(/IRAM Perfume/);
   await expect(page.locator('.frag-cell')).toHaveCount(TOTAL);
   await expect(page.locator('.frag-card')).toHaveCount(TOTAL);
-  await expect(page.locator('#filterCount')).toHaveText(/155 fragrances/);
-  await expect(page.locator('#filterCountMobile')).toHaveText(/155 fragrances/);
+  await expect(page.locator('#filterCount')).toHaveText(/156 fragrances/);
+  await expect(page.locator('#filterCountMobile')).toHaveText(/156 fragrances/);
   await expect(page.locator('#filterApply')).toHaveText(/Show all fragrances/);
   // raw (pre-JS) markup must never claim the old count
   const raw = await (await page.request.get('/')).text();
   expect(raw).not.toMatch(/147 fragrances/);
-  expect(raw).toMatch(/Show 155 fragrances/);
+  expect(raw).toMatch(/Show 156 fragrances/);
   expect(errs).toEqual([]);
 });
 
@@ -301,7 +301,7 @@ test('bestsellers rail and 3ml price list render', async ({ page }) => {
   await expect(page.locator('#bestsellers .best-card[data-pid]')).toHaveCount(12);
   // 3ml list stays hidden until the hero banner CTA reveals it
   await expect(page.locator('#threeMl')).toBeHidden();
-  await expect(page.locator('#threeMlList .three-ml-row')).toHaveCount(155);
+  await expect(page.locator('#threeMlList .three-ml-row')).toHaveCount(156);
   await page.evaluate(() => document.querySelector('.mobile-hero a[href="#threeMl"]').click());
   await expect(page.locator('#threeMl')).toBeVisible();
   await expect(page.locator('#threeMlList')).toHaveClass(/three-ml-open/);

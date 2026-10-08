@@ -765,7 +765,7 @@ function renderBestSellers() {
   }).join('');
 }
 
-// All 155 fragrances priced for 3ml only, in catalogue order (grouped by brand).
+// All 156 fragrances priced for 3ml only, in catalogue order (grouped by brand).
 // Static markup — crawlable and shift-free. No data-brand/data-price/.frag-cell
 // classes: brand counts and price-slider bounds read those from the table.
 function renderThreeMl() {

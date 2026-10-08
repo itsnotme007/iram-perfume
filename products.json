@@ -360,6 +360,46 @@
   "availability": "https://schema.org/InStock"
  },
  {
+  "key": "YSL|Myself",
+  "brand": "YSL",
+  "brandImg": "",
+  "name": "Myself",
+  "gender": "Men",
+  "status": "instock",
+  "tags": [],
+  "prices": {
+   "3": 265,
+   "5": 419,
+   "10": 819,
+   "20": 1599,
+   "30": 2333,
+   "7.5": 655
+  },
+  "statusPerSize": {
+   "3": "ok",
+   "5": "ok",
+   "10": "ok",
+   "20": "ok",
+   "30": "ok",
+   "7.5": "ok"
+  },
+  "inspired": "Original",
+  "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Yves-Saint-Laurent/MYSLF-Eau-de-Parfum-84094.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/Yves_Saint_Laurent/myslf-eau-de-parfum'>Parfumo</a>",
+  "linksRaw": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Yves-Saint-Laurent/MYSLF-Eau-de-Parfum-84094.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/Yves_Saint_Laurent/myslf-eau-de-parfum'>Parfumo</a>",
+  "cat": "Designer",
+  "scent": "fresh,aromatic,woody",
+  "season": "spring,summer,fall",
+  "occasion": "daily,date-night,office",
+  "time": "day,evening",
+  "weather": "hot,mild",
+  "mood": "clean,confident,fresh",
+  "family": "floral,fresh,woody",
+  "added": "2026-10-08",
+  "slug": "ysl-myself",
+  "url": "https://itsnotme007.github.io/iram-perfume/fragrance/ysl-myself.html",
+  "availability": "https://schema.org/InStock"
+ },
+ {
   "key": "Afnan|9 PM Night Out",
   "brand": "Afnan",
   "brandImg": "logos/afnan.png",
