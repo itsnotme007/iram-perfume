@@ -14,8 +14,14 @@
 
 ## Fragrance catalogue (India decant prices)
 
+### Azzaro
+- Most Wanted Parfum (Men): 3ml ₹219 | 5ml ₹349 | 7.5ml ₹539 | 10ml ₹675 | 20ml ₹1309 | 30ml ₹1899
+
 ### Bvlgari
 - Man in Black Parfum (Men, soldout): 3ml ₹249 | 5ml ₹399 | 7.5ml ₹619 | 10ml ₹775 | 20ml ₹1509 | 30ml ₹2199
+
+### Calvin Klein
+- One (Unisex): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 10ml ₹239 | 20ml ₹439 | 30ml ₹599
 
 ### Davidoff
 - Cool Water EDT (Men): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 10ml ₹239 | 20ml ₹439 | 30ml ₹599
@@ -29,9 +35,14 @@
 - French Riviera (Unisex): 3ml ₹229 | 5ml ₹365 | 7.5ml ₹569 | 10ml ₹709 | 20ml ₹1375 | 30ml ₹1999
 - Instant Crush (Unisex): 3ml ₹229 | 5ml ₹365 | 7.5ml ₹569 | 10ml ₹709 | 20ml ₹1375 | 30ml ₹1999
 - Gold Intensive Aoud (Unisex): 3ml ₹239 | 5ml ₹379 | 7.5ml ₹595 | 10ml ₹739 | 20ml ₹1439 | 30ml ₹2099
+- Red Tobacco (Unisex): 3ml ₹229 | 5ml ₹365 | 7.5ml ₹569 | 10ml ₹709 | 20ml ₹1375 | 30ml ₹1999
+
+### Montblanc
+- Individuel (Men): 3ml ₹179 | 5ml ₹279 | 7.5ml ₹435 | 10ml ₹539 | 20ml ₹1039 | 30ml ₹1499
 
 ### Versace
 - The Dreamer (Men): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹709 | 30ml ₹999
+- Eros (Men): 3ml ₹149 | 5ml ₹229 | 7.5ml ₹355 | 10ml ₹439 | 20ml ₹839 | 30ml ₹1199
 
 ### YSL
 - Myself (Men): 3ml ₹265 | 5ml ₹419 | 7.5ml ₹655 | 10ml ₹819 | 20ml ₹1599 | 30ml ₹2333
@@ -76,6 +87,9 @@
 - Gentlemen Reserve Privée (Men): 3ml ₹119 | 5ml ₹185 | 7.5ml ₹279 | 10ml ₹349 | 20ml ₹659 | 30ml ₹929
 - Special Ombre Leather (Unisex): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹709 | 30ml ₹999
 
+### Al Wataniah
+- Kayaan Classic (Men): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹575 | 30ml ₹799
+
 ### Ajmal
 - Wave (Men): 3ml ₹59 | 5ml ₹79 | 7.5ml ₹115 | 10ml ₹139 | 20ml ₹239 | 30ml ₹299
 
@@ -99,7 +113,9 @@
 - Overdose (Unisex): 3ml ₹149 | 5ml ₹229 | 7.5ml ₹355 | 10ml ₹439 | 20ml ₹839 | 30ml ₹1199
 - Odyssey Mega (Men): 3ml ₹95 | 5ml ₹145 | 7.5ml ₹215 | 10ml ₹269 | 20ml ₹495 | 30ml ₹679
 - Club de Nuit Urban Man Elixir (Men): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 10ml ₹339 | 20ml ₹639 | 30ml ₹899
-- Club de Nuit Iconic (Men): 3ml ₹149 | 5ml ₹229 | 7.5ml ₹355 | 10ml ₹439 | 20ml ₹839 | 30ml ₹1199
+- Club de Nuit Iconic (Men): 3ml ₹125 | 5ml ₹189 | 7.5ml ₹285 | 10ml ₹355 | 20ml ₹669 | 30ml ₹939
+- CDN Intense LTD Edition (Men): 3ml ₹215 | 5ml ₹345 | 7.5ml ₹535 | 10ml ₹665 | 20ml ₹1289 | 30ml ₹1869
+- Spartacus (Men): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹265 | 10ml ₹329 | 20ml ₹619 | 30ml ₹869
 
 ### Assaf
 - Tobacco Jam 50 (Unisex): 3ml ₹169 | 5ml ₹265 | 7.5ml ₹409 | 10ml ₹509 | 20ml ₹975 | 30ml ₹1399
@@ -119,6 +135,7 @@
 - Kohl (Unisex): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹575 | 30ml ₹799
 
 ### Ibraq
+- Black Diamond Incense (Unisex): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹575 | 30ml ₹799
 - Blue Diamond Aqua (Men): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹575 | 30ml ₹799
 - Blue Oud (Men): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹775 | 30ml ₹1099
 - Blueberry Musk (Unisex): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 10ml ₹325 | 20ml ₹609 | 30ml ₹849
@@ -133,6 +150,7 @@
 - Island (Unisex): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 10ml ₹275 | 20ml ₹509 | 30ml ₹699
 - Shiyaaka Sky (Men): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹259 | 10ml ₹325 | 20ml ₹609 | 30ml ₹849
 - Karus Gold Absolu (Unisex): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹575 | 30ml ₹799
+- Onyx Gold (Unisex): 3ml ₹99 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹285 | 20ml ₹529 | 30ml ₹729
 
 ### Lattafa
 - Ana Abiyed Coral (Unisex): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 10ml ₹259 | 20ml ₹475 | 30ml ₹649
@@ -161,6 +179,9 @@
 ### Laverne
 - Blue Laverne Sport (Unisex): 3ml ₹99 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹285 | 20ml ₹529 | 30ml ₹729
 
+### Maison Alhambra
+- Jean Lowe Immortal (Men): 3ml ₹109 | 5ml ₹169 | 7.5ml ₹255 | 10ml ₹315 | 20ml ₹589 | 30ml ₹825
+
 ### Mykonos
 - Glitch (Unisex): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 10ml ₹339 | 20ml ₹639 | 30ml ₹899
 - Reflection (Unisex): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹775 | 30ml ₹1099
@@ -168,6 +189,7 @@
 ### Nusuk
 - Al Mukhtalif Silver (Women): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹235 | 10ml ₹289 | 20ml ₹539 | 30ml ₹749
 - Al Mukhtalif Signature (Men): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹235 | 10ml ₹289 | 20ml ₹539 | 30ml ₹749
+- Sama (Unisex): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹225 | 10ml ₹279 | 20ml ₹519 | 30ml ₹719
 
 ### Paris Corner
 - Rifaqaat (Unisex): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹235 | 10ml ₹289 | 20ml ₹539 | 30ml ₹749
@@ -180,10 +202,12 @@
 
 ### Rasasi
 - Daarej Pour Homme (Men): 3ml ₹79 | 5ml ₹115 | 7.5ml ₹169 | 10ml ₹209 | 20ml ₹375 | 30ml ₹499
-- Fattan (Men, soldout): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹305 | 10ml ₹379 | 20ml ₹715 | 30ml ₹1009
+- Fattan (Men): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹709 | 30ml ₹999
 - Hawas Black (Men): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 10ml ₹339 | 20ml ₹639 | 30ml ₹899
+- Hawas Chrome (Men): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹709 | 30ml ₹999
 - Hawas Fire (Unisex, soldout): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹775 | 30ml ₹1099
 - Hawas Ice (Men): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 10ml ₹339 | 20ml ₹639 | 30ml ₹899
+- Hawas Ice Freeze (Men): 3ml ₹145 | 5ml ₹225 | 7.5ml ₹339 | 10ml ₹425 | 20ml ₹809 | 30ml ₹1149
 - Hawas Kobra (Men): 3ml ₹115 | 5ml ₹175 | 7.5ml ₹265 | 10ml ₹329 | 20ml ₹619 | 30ml ₹869
 - Hawas OG (Men): 3ml ₹109 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹575 | 30ml ₹799
 - Hawas Venom (Men): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹775 | 30ml ₹1099
@@ -218,6 +242,9 @@
 - Freeze in Flames (Unisex): 3ml ₹125 | 5ml ₹189 | 7.5ml ₹289 | 10ml ₹359 | 20ml ₹679 | 30ml ₹959
 - Privè Platinum Silver (Unisex): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 10ml ₹259 | 20ml ₹475 | 30ml ₹649
 - Portofino Noir (Men): 3ml ₹85 | 5ml ₹125 | 7.5ml ₹179 | 10ml ₹225 | 20ml ₹409 | 30ml ₹549
+
+### Rue Broca
+- Theoreme (Men): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹189 | 10ml ₹239 | 20ml ₹435 | 30ml ₹589
 
 ### Swiss Arabian
 - Enigma of Taif (Unisex, soldout): 3ml ₹189 | 5ml ₹299 | 7.5ml ₹459 | 10ml ₹575 | 20ml ₹1109 | 30ml ₹1599
