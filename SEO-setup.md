@@ -30,13 +30,13 @@ git commit -m "SEO: per-fragrance pages, articles, FAQ schema, sitemap"
 git push
 ```
 
-The site updates on **https://itsnotme007.github.io/iram-perfume/** within a minute or two.
+The site updates on **https://iramperfume.in/** within a minute or two.
 
 ## 2. Google Search Console (free, ~15 min)
 
 1. Go to **https://search.google.com/search-console** → sign in with any Google account (the same one that owns the GitHub repo is fine).
 2. Click **Add property** → choose **URL prefix** → enter:
-   `https://itsnotme007.github.io/iram-perfume/`
+   `https://iramperfume.in/`
 3. Verification options:
    - **HTML tag** (easiest): copy the `<meta name="google-site-verification" content="...">` line, paste it just before `</head>` in `index.html`, commit + push, then click **Verify**.
    - (Alternative) **HTML file** upload: download the `google<code>.html` file, drop it in the repo root, commit + push, then verify.
@@ -59,7 +59,7 @@ The site updates on **https://itsnotme007.github.io/iram-perfume/** within a min
 
 ## 5. Optional quick wins later
 
-- Custom domain (`iramperfume.in`) — better trust signals; keep a **redirect** from the github.io address.
+- Custom domain (`iramperfume.in`) — use the apex HTTPS address as the canonical origin.
 - LocalBusiness/LiquorStore schema if a physical shop opens (contact, hours, address).
 - AggregateRating — only once you collect verified customer reviews; Google requires real ratings.
 

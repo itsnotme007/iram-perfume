@@ -20,7 +20,7 @@
 ## 2. Verified healthy (no action needed)
 
 - **Pricing formula:** 0 deviations across all 155 × 5 computed sizes using the documented `CEILING(x, 5)` + "−1 if ends in 0" rule; no computed price ends in 0; no non-integer prices; every product has all 6 prices.
-- **Uniqueness:** no duplicate keys, slugs, or cross-brand names; all slugs lowercase/kebab-safe; `url` = absolute canonical (`https://itsnotme007.github.io/iram-perfume/fragrance/<slug>.html`) for all 155.
+- **Uniqueness:** no duplicate keys, slugs, or cross-brand names; all slugs lowercase/kebab-safe; `url` = absolute canonical fragrance URL for all 155.
 - **Images:** 155/155 bottle PNG cutouts present (0 jpg-only, 0 missing); every referenced `brandImg` file exists in `logos/`.
 - **Parity:** static `.frag-card[data-gender]` counts match `products.json` exactly (78/72/5); `render-fidelity.js` reports EXACT tbody equality vs the pre-render markup; `--make-data` round-trip is byte-stable; seo-gen re-runs are byte-identical (incl. forced-CRLF test).
 - **Availability:** all 9 sold-out products have every size struck; the single coming-soon product is all-`coming`; `availability` schema URLs match status (InStock/OutOfStock/PreOrder).
@@ -79,19 +79,6 @@ The "−1 if ends in 0" rule applies to the five *computed* sizes only; the 30ml
 - 155 hero bottle `<img>` lines present in `fragrance/`.
 - No missing/blank mandatory fields (`key`, `prices`, `statusPerSize`, `slug`, `scent`… `family`) anywhere.
 
-## 5. Hosting: HTTPS & www redirect (Phase 2.5, report-only)
+## 5. Hosting: custom-domain migration note
 
-Measured live 2026-10-05 with `curl -I` / `Resolve-DnsName` against `itsnotme007.github.io`:
-
-| Check | Result |
-|---|---|
-| `http://itsnotme007.github.io/iram-perfume/` | **301 → `https://…`** (GitHub Pages "Force HTTPS" enabled) |
-| `https://itsnotme007.github.io/iram-perfume/` | **200** |
-| `https://www.itsnotme007.github.io/…` | **TLS certificate error** (curl exit 60): GitHub's `*.github.io` cert covers only one label, not `www.itsnotme007` |
-| `http://www.itsnotme007.github.io/…` (and `-k` https) | **404** — DNS resolves via the `*.github.io` wildcard, but no site/CNAME is bound to that host |
-
-**Conclusions:**
-
-- There is **no live duplicate host**: the `www.` variant fails TLS in browsers and 404s without it, so users and crawlers cannot reach a second copy of the site. Nothing exists to redirect *from*, and GitHub Pages cannot issue a cert (or bind a redirect) for a two-label `*.github.io` host — that only becomes possible with a **custom domain** (apex + `www` CNAME, both covered by Pages' Let's Encrypt cert).
-- Repo-side hygiene is already correct: every page emits an absolute canonical on the apex HTTPS origin (homepage `index.html:11`, all 155 fragrance pages + 4 articles from `seo-gen.js` `fragShell`), and there are **no** `http://` or internal `www.` links anywhere (only external `www.fragrantica.com` / `www.parfumo.com` and `w3.org`/`schema.org` XML namespaces).
-- **Recommendation:** no change for a `*.github.io` site — keep the canonicals and HTTPS-only internal linking as-is. If a custom domain is ever added, then bind `www` in DNS/Pages settings and pick one canonical host (301 the other, or rely on the canonical tags already in place). Also re-verify `BASE` in `seo-gen.js:15` at that time.
+The site is configured for the apex HTTPS origin. Verify DNS and the hosting provider's custom-domain settings during deployment, then confirm the apex host is canonical and `www` redirects to it.

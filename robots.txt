@@ -20,4 +20,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://itsnotme007.github.io/iram-perfume/sitemap.xml
+Sitemap: https://iramperfume.in/sitemap.xml

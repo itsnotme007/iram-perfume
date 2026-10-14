@@ -1,5 +1,7 @@
 # IRAM Perfume Website
 
+**Domain guard:** CNAME must always contain `iramperfume.in`. Never delete or regenerate it. The generator and deploy steps must preserve it.
+
 **Repo:** https://github.com/itsnotme007/iram-perfume.git
 **File:** `C:\Users\Fateh\Downloads\models\index.html` (HTML/CSS/JS inline, ~7740 lines)
 **Logos:** `C:\Users\Fateh\Downloads\models\logos/`
@@ -57,7 +59,7 @@ Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`pric
 - **Announcement:** `#announceBar`, `sessionStorage['iram_announce_dismissed']`, rotates 3 messages/6s, sets `--announce-h` (fixed top ≤768px; body/header/toolbar offsets derive from it).
 - **Skeleton:** `.pc-ph` has a looping shimmer (`phShimmer`), reduced-motion disables it.
 - **Search:** fuzzy (substring → subsequence → Levenshtein ≤2/3 per word) ranking exact-first; recent searches `iram_recent_searches` (max 6) rendered as `.srch-chip` when input is empty. `pushRecent` fires on result pick.
-- **PWA:** `manifest.webmanifest` linked in head; `404.html` (styled, links to `/iram-perfume/`). `theme-color` already present.
+- **PWA:** `manifest.webmanifest` linked in head; `404.html` (styled, links to `/`). `theme-color` already present.
 - **Hamburger sidebar** (`#mobileMenu` > `.mobile-menu-panel`) has **no brand kicker** — the `IRAM Perfume` `<p class="mobile-menu-kicker">` and its CSS were removed; links start at the panel's 24px padding.
 
 ## Data Pipeline (Phase 2.1)

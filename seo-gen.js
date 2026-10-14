@@ -12,7 +12,10 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = __dirname;
 const IDX = path.join(ROOT, 'index.html');
-const BASE = 'https://itsnotme007.github.io/iram-perfume';
+const BASE = 'https://iramperfume.in';
+// The sole builder for absolute URLs belonging to this site. It accepts paths
+// with or without a leading slash and guarantees exactly one after the origin.
+const siteUrl = (pathname = '') => BASE + '/' + String(pathname).replace(/^\/+/, '');
 const PHONE_DISPLAY = '+91 93555 33509';
 const PHONE_TEL = '+919355533509';
 const EMAIL = 'perfumeiram@gmail.com';
@@ -94,6 +97,8 @@ let products = [];
 if (!makeData) {
   if (!fs.existsSync(DATA_FILE)) throw new Error('products.json missing — run: node seo-gen.js --make-data once');
   products = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+  // Do not trust persisted absolute URLs when the site's origin changes.
+  for (const pr of products) pr.url = siteUrl('fragrance/' + pr.slug + '.html');
 }
 // catalogue tbody regions — also used by editHomepage (anchor wrapping),
 // so they are computed whether or not we re-snapshot products.json
@@ -196,7 +201,7 @@ for (const pr of products) {
   while (seen[slug]) slug = base + '-' + n++;
   seen[slug] = 1;
   pr.slug = slug;
-  pr.url = BASE + '/fragrance/' + slug + '.html';
+  pr.url = siteUrl('fragrance/' + slug + '.html');
 }
 const avail = new Set(['instock']);
 for (const pr of products) {
@@ -291,7 +296,7 @@ function fragFAQ(pr) {
 function favicon184() { return '<link rel="icon" type="image/png" href="../logo.png">'; }
 function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en') {
   const ogType = (og && og.type) || 'website';
-  const ogImage = (og && og.image) || BASE + '/og-image.jpg';
+  const ogImage = (og && og.image) || siteUrl('og-image.jpg');
   const articleMeta = ogType === 'article' && og && og.published
     ? '<meta property="article:published_time" content="' + og.published + '">\n'
       + '<meta property="article:modified_time" content="' + (og.modified || og.published) + '">\n'
@@ -360,7 +365,7 @@ function fragPage(pr) {
     {
       '@context': 'https://schema.org', '@type': 'Product', name: pr.name + ' by ' + pr.brand,
       description: 'Buy an authentic ' + pr.name + ' by ' + pr.brand + ' decant in India \u2014 ' + priceString(pr) + '. ' + capLine(art(scentLine(pr))) + ' ' + scentLine(pr) + ' fragrance, ' + inspiredLine(pr) + '. IRAM Perfume ships across India.',
-      image: pr.brandImg ? BASE + '/' + pr.brandImg : BASE + '/logo.png',
+      image: pr.brandImg ? siteUrl(pr.brandImg) : siteUrl('logo.png'),
       brand: { '@type': 'Brand', name: pr.brand },
       category: pr.cat || 'Fragrance', sku: pr.slug,
       url: pr.url,
@@ -369,8 +374,8 @@ function fragPage(pr) {
     {
       '@context': 'https://schema.org', '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'IRAM Perfume', item: BASE + '/' },
-        { '@type': 'ListItem', position: 2, name: pr.brand, item: BASE + '/#filterBar' },
+        { '@type': 'ListItem', position: 1, name: 'IRAM Perfume', item: siteUrl() },
+        { '@type': 'ListItem', position: 2, name: pr.brand, item: siteUrl('#filterBar') },
         { '@type': 'ListItem', position: 3, name: pr.name, item: pr.url }
       ]
     },
@@ -415,7 +420,7 @@ function fragPage(pr) {
     + fragFAQ(pr).map(([q, a]) => '<details class="qa"><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>').join('')
     + '<h2>Similar Fragrances You May Like</h2><div class="grid">' + relLinks + '</div>'
     + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> \u00b7 <a href="' + WA + '">WhatsApp Community</a> \u00b7 <a href="../index.html">Back to all fragrances</a></div>';
-  const ogImg = ogPng ? BASE + '/images/bottles/' + ogPng : (pr.brandImg ? BASE + '/' + pr.brandImg : BASE + '/logo.png');
+  const ogImg = ogPng ? siteUrl('images/bottles/' + ogPng) : (pr.brandImg ? siteUrl(pr.brandImg) : siteUrl('logo.png'));
   let ogDesc = 'Buy ' + pr.name + ' by ' + pr.brand + ' decant in India' + (pr.status === 'instock' ? ' \u2014 from ' + rupees(mm.min) + ' (3ml\u201330ml).' : ' (3ml\u201330ml).');
   const inspBit = capLine(inspiredLine(pr)) + '.';
   const shipBit = ' Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.';
@@ -458,9 +463,9 @@ function articleShell(a, innerBody, faqs) {
 }
 function buildArticle(a, innerBody, faqs, pub, mod) {
   const schema = [
-    { '@context': 'https://schema.org', '@type': 'Article', headline: a.title, description: a.desc, datePublished: pub, dateModified: mod, author: { '@type': 'Organization', name: 'IRAM Perfume' }, publisher: { '@type': 'Organization', name: 'IRAM Perfume', url: BASE + '/' }, mainEntityOfPage: a.url, url: a.url, image: BASE + '/og-image.jpg' },
+    { '@context': 'https://schema.org', '@type': 'Article', headline: a.title, description: a.desc, datePublished: pub, dateModified: mod, author: { '@type': 'Organization', name: 'IRAM Perfume' }, publisher: { '@type': 'Organization', name: 'IRAM Perfume', url: siteUrl() }, mainEntityOfPage: a.url, url: a.url, image: siteUrl('og-image.jpg') },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'IRAM Perfume', item: BASE + '/' },
+      { '@type': 'ListItem', position: 1, name: 'IRAM Perfume', item: siteUrl() },
       { '@type': 'ListItem', position: 2, name: a.title, item: a.url }
     ] },
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, x]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: x } })) }
@@ -469,7 +474,7 @@ function buildArticle(a, innerBody, faqs, pub, mod) {
     + '<p class="lead">' + esc(a.desc) + '</p>' + innerBody
     + '<div class="cta"><h3>Shop the Selection</h3><p>Browse the full decant catalogue \u2014 ' + FREE_SHIP_ABOVE + '.</p><a class="btn" href="../index.html">View All Fragrances</a><a class="btn ghost" href="https://wa.me/' + PHONE_TEL.replace('+', '') + '">WhatsApp Us</a></div>'
     + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a></div>';
-  return pageShell({ title: a.title, desc: a.desc, canonical: a.url, body, schema, og: { iconPath: '../favicon.png', type: 'article', image: BASE + '/og-image.jpg', published: pub, modified: mod } });
+  return pageShell({ title: a.title, desc: a.desc, canonical: a.url, body, schema, og: { iconPath: '../favicon.png', type: 'article', image: siteUrl('og-image.jpg'), published: pub, modified: mod } });
 }
 function productGrid(list) {
   return '<div class="grid">' + list.map((pr, i) => {
@@ -803,17 +808,14 @@ function editHomepage(products, faqHtml, articlesHtml) {
     '<meta name="description" content="Buy authentic designer &amp; Middle Eastern perfume decants in India \u2014 Davidoff, Mancera, Afnan, Lattafa, Rasasi &amp; more. Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants."'
   );
 
-  // 2) og:image -> og-image.jpg
-  out = out.split('https://itsnotme007.github.io/iram-perfume/logo.png').join('https://itsnotme007.github.io/iram-perfume/og-image.jpg');
-
-  // 3) replace ItemList block with all-products version
+  // 2) replace ItemList block with all-products version
   if (!itemListBlock) throw new Error('ItemList block not found');
   const itemListNew = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'IRAM Perfume Fragrance Collection',
     description: 'Premium designer and Middle Eastern fragrance decants available in 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml sizes, plus full bottles on request.',
-    url: BASE + '/',
+    url: siteUrl(),
     numberOfItems: products.length,
     itemListElement: products.map((pr) => {
       const mm = minMax(pr);
@@ -822,7 +824,7 @@ function editHomepage(products, faqHtml, articlesHtml) {
         name: pr.name + ' \u2014 ' + pr.brand,
         brand: { '@type': 'Brand', name: pr.brand },
         description: pr.name + ' by ' + pr.brand + ' decant. ' + capLine(art(scentLine(pr))) + ' ' + scentLine(pr) + '. ' + capLine(inspiredLine(pr)) + '.',
-        image: pr.brandImg ? BASE + '/' + pr.brandImg : BASE + '/logo.png',
+        image: pr.brandImg ? siteUrl(pr.brandImg) : siteUrl('logo.png'),
         category: pr.cat || 'Fragrance',
         url: pr.url,
         offers: { '@type': 'AggregateOffer', lowPrice: (mm.min || 0).toString(), highPrice: (mm.max || 0).toString(), priceCurrency: 'INR', availability: pr.availability, url: pr.url, offerCount: 5 }
@@ -990,7 +992,7 @@ function stripMarks(str, open, close) {
 function buildSitemap(products, articles, lm) {
   lm = lm || {};
   const locs = [
-    { l: BASE + '/', lastmod: lm.home || TODAY, pri: '1.0' },
+    { l: siteUrl(), lastmod: lm.home || TODAY, pri: '1.0' },
     ...articles.map(a => ({ l: a.url, lastmod: lm['article:' + a.slug] || TODAY, pri: '0.9' })),
     ...products.map(p => ({ l: p.url, lastmod: lm['frag:' + p.slug] || TODAY, pri: '0.8' }))
   ];
@@ -1002,7 +1004,7 @@ function buildSitemap(products, articles, lm) {
 
 // ----------------------------------------------------------------------- llms.txt
 function buildLlmstxt() {
-  let t = '# IRAM Perfume\n\n> Authentic designer and Middle Eastern fragrance decants (3ml, 5ml, 7.5ml, 10ml, 20ml, 30ml) and full bottles, shipped across India. Free shipping above \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.\n\n## Key facts\n- Decants filled from original genuine bottles, proof shared on request\n- Sizes: 3ml / 5ml / 7.5ml / 20ml / 30ml; full bottles on request\n- Order via WhatsApp ' + PHONE_DISPLAY + ' or email ' + EMAIL + '\n- Free shipping on orders above \u20b9' + FREE_SHIP_MIN + ' for ' + FREE_SHIP_MIN_QTY + '+ decants (delivery 3\u20137 working days)\n\n## Link addresses\n- Homepage: ' + BASE + '/\n- Fragrance catalogue pages: ' + BASE + '/fragrance/\n\n## Fragrance catalogue (India decant prices)\n';
+  let t = '# IRAM Perfume\n\n> Authentic designer and Middle Eastern fragrance decants (3ml, 5ml, 7.5ml, 10ml, 20ml, 30ml) and full bottles, shipped across India. Free shipping above \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.\n\n## Key facts\n- Decants filled from original genuine bottles, proof shared on request\n- Sizes: 3ml / 5ml / 7.5ml / 20ml / 30ml; full bottles on request\n- Order via WhatsApp ' + PHONE_DISPLAY + ' or email ' + EMAIL + '\n- Free shipping on orders above \u20b9' + FREE_SHIP_MIN + ' for ' + FREE_SHIP_MIN_QTY + '+ decants (delivery 3\u20137 working days)\n\n## Link addresses\n- Homepage: ' + siteUrl() + '\n- Fragrance catalogue: ' + siteUrl('#filterBar') + '\n\n## Fragrance catalogue (India decant prices)\n';
   const byBrand = {};
   for (const pr of products) (byBrand[pr.brand] = byBrand[pr.brand] || []).push(pr);
   for (const b of Object.keys(byBrand)) {
@@ -1051,7 +1053,7 @@ function main() {
   // 2. articles
   const artDir = path.join(ROOT, 'articles');
   fs.mkdirSync(artDir, { recursive: true });
-  for (const m of articlesMeta) m.url = BASE + '/articles/' + m.slug + '.html';
+  for (const m of articlesMeta) m.url = siteUrl('articles/' + m.slug + '.html');
   const artPages = buildArticles();
   artPages.forEach((html, i) => {
     const slug = articlesMeta[i].slug;
@@ -1071,7 +1073,7 @@ function main() {
   // 4. sitemap / robots / llms
   writeFileSafe(path.join(ROOT, 'sitemap.xml'), buildSitemap(products, articlesMeta, lastmods));
   writeFileSafe(path.join(ROOT, 'llms.txt'), buildLlmstxt());
-  const robots = 'User-agent: *\nAllow: /\n\n# AI / answer-engine crawlers\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: ' + BASE + '/sitemap.xml\n';
+  const robots = 'User-agent: *\nAllow: /\n\n# AI / answer-engine crawlers\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: ' + siteUrl('sitemap.xml') + '\n';
   writeFileSafe(path.join(ROOT, 'robots.txt'), robots);
   if (DATES_DIRTY) writeFileSafe(DATES_FILE, JSON.stringify(DATES, null, 2) + '\n');
   console.log('sitemap.xml, robots.txt, llms.txt written; content-dates.json', DATES_DIRTY ? 'updated' : 'unchanged');
