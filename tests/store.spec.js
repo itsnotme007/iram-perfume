@@ -1,4 +1,4 @@
-// IRAM Perfume storefront test suite (baseline for the storefront-overhaul branch).
+// IRAM Perfume storefront test suite (baseline for main).
 // Tests assert DESIRED behaviour: a few fail on the pre-fix baseline by design
 // (they document bugs 1.1, 1.2, 1.5, 1.7, 1.8, 1.9, 1.3, 1.4).
 const { test, expect } = require('@playwright/test');
