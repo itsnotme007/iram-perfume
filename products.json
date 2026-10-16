@@ -2800,6 +2800,46 @@
     "availability": "https://schema.org/InStock"
   },
   {
+    "key": "Assaf|Tobacco Jam 60",
+    "brand": "Assaf",
+    "brandImg": "logos/assaf.png",
+    "name": "Tobacco Jam 60",
+    "gender": "Unisex",
+    "status": "instock",
+    "tags": [],
+    "prices": {
+      "3": 185,
+      "5": 289,
+      "10": 559,
+      "20": 1075,
+      "30": 1549,
+      "7.5": 449
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
+    "inspired": "Original",
+    "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Assaf/Tobacco-Jam-60-132738.html'>Fragrantica</a>",
+    "linksRaw": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Assaf/Tobacco-Jam-60-132738.html'>Fragrantica</a>",
+    "cat": "Middle Eastern",
+    "scent": "tobacco,warm-spicy,woody,balsamic",
+    "season": "fall,winter",
+    "occasion": "date-night,special-occasion",
+    "time": "evening,night",
+    "weather": "cold",
+    "mood": "cozy,sexy",
+    "family": "oriental,woody",
+    "added": "2026-10-16",
+    "slug": "assaf-tobacco-jam-60",
+    "url": "https://itsnotme007.github.io/iram-perfume/fragrance/assaf-tobacco-jam-60.html",
+    "availability": "https://schema.org/InStock"
+  },
+  {
     "key": "French Avenue|Aether Extrait",
     "brand": "French Avenue",
     "brandImg": "logos/french-avenue.png",

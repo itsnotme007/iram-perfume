@@ -156,8 +156,8 @@
     "mod": "2026-10-05"
   },
   "frag:albait-aldimashqi-gentlemen-reserve-priv-e": {
-    "sig": "80cc9b5a78c231b135f6d29c",
-    "mod": "2026-10-05"
+    "sig": "e8974fc7e3f000b03b78e983",
+    "mod": "2026-10-16"
   },
   "frag:ajmal-wave": {
     "sig": "b1294604a0bc4ef21f27d5e2",
@@ -236,8 +236,8 @@
     "mod": "2026-10-11"
   },
   "frag:assaf-tobacco-jam-50": {
-    "sig": "d0592e564601211febafc3ef",
-    "mod": "2026-10-07"
+    "sig": "47d1cacfba80fdd412b93077",
+    "mod": "2026-10-16"
   },
   "frag:french-avenue-aether-extrait": {
     "sig": "3690dc5e5d5c14587ad3fa45",
@@ -248,8 +248,8 @@
     "mod": "2026-10-05"
   },
   "frag:french-avenue-spectre-ghost": {
-    "sig": "0e3bad0bda4b252f67619e91",
-    "mod": "2026-10-07"
+    "sig": "3b11b7f42d501993ecb245cd",
+    "mod": "2026-10-16"
   },
   "frag:french-avenue-vulcan-feu": {
     "sig": "961c25de2ba8cb5f309eb7b5",
@@ -296,8 +296,8 @@
     "mod": "2026-10-11"
   },
   "frag:ibraq-sandalwood": {
-    "sig": "60cfbc562c617f2512468b2a",
-    "mod": "2026-10-05"
+    "sig": "7f78a8457e3ab9a89de50951",
+    "mod": "2026-10-16"
   },
   "frag:ibraq-spanish-tobacco": {
     "sig": "b20cfbc6196b55276cc20067",
@@ -572,8 +572,8 @@
     "mod": "2026-10-08"
   },
   "frag:riiffs-priv-platinum-silver": {
-    "sig": "6ac268958a5fedd000facd26",
-    "mod": "2026-10-05"
+    "sig": "8f787394ef20c6fe72717351",
+    "mod": "2026-10-16"
   },
   "frag:swiss-arabian-enigma-of-taif": {
     "sig": "843419e33d056befb9e7eb02",
@@ -620,8 +620,8 @@
     "mod": "2026-10-11"
   },
   "home": {
-    "sig": "b0c968c9c98e0089072254fd",
-    "mod": "2026-10-13"
+    "sig": "db0d9499c29e5865533f414c",
+    "mod": "2026-10-16"
   },
   "frag:albait-aldimashqi-special-ombre-leather": {
     "sig": "462e7a42b402dc32b5d1d837",
@@ -702,5 +702,9 @@
   "frag:rue-broca-theoreme": {
     "sig": "880aed0edffd79ab351526ca",
     "mod": "2026-10-11"
+  },
+  "frag:assaf-tobacco-jam-60": {
+    "sig": "61c30292cfe4e558839209ca",
+    "mod": "2026-10-16"
   }
 }
