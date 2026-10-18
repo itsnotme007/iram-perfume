@@ -17,9 +17,9 @@
 Column order in the table: `3ml, 5ml, 7.5ml, 10ml, 20ml, 30ml` (the 7.5ml column is priced with the 8× rule above).
 Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`prices[5]` for 30ml.
 
-## Brands (35)
-**Designer (8):** Azzaro, Bvlgari, Calvin Klein, Davidoff, Jaguar, Mancera, Montblanc, Versace
-**Middle Eastern (27):** Afnan, Ahmed Al Maghribi, Ajmal, Al Majed, Al Wataniah, Albait Aldimashqi, Arabiyat Prestige, Armaf, Assaf, Fragrance World, French Avenue, Ibraq, Khadlaj, Lattafa, Laverne, Maison Alhambra, Mykonos, Nusuk, Paris Corner, Pendora Scents, Rasasi, Rayhaan, Reef, Riiffs, Rue Broca, Swiss Arabian, Zimaya
+## Brands (37)
+**Designer (9):** Azzaro, Bvlgari, Calvin Klein, Davidoff, Jaguar, Mancera, Montblanc, Versace, YSL
+**Middle Eastern (28):** Afnan, Ahmed Al Maghribi, Ajmal, Al Majed, Al Wataniah, Albait Aldimashqi, Arabiyat Prestige, Armaf, Assaf, Dumont, Fragrance World, French Avenue, Ibraq, Khadlaj, Lattafa, Laverne, Maison Alhambra, Mykonos, Nusuk, Paris Corner, Pendora Scents, Rasasi, Rayhaan, Reef, Riiffs, Rue Broca, Swiss Arabian, Zimaya
 
 ## Conventions
 - Gender tags: Men (blue), Unisex (purple), Women (pink)
@@ -29,7 +29,7 @@ Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`pric
 - Filter UI: `#filterBar` (desktop popover) + `#pcToolbar`/sticky ≤1023px (mobile sheet); one reusable `#filterPanel` is moved between `#filterPanelHost` and `#pcFilterBody`
 - Filter options: 10 groups of `.filter-btn` inside `#filterPanelBody` — 9 `role="radiogroup"` (Brand, Gender, Scent, Season, Occasion, Time, Weather, Mood, Family) + a Price group whose `.filter-opts` is the radiogroup (single-select per category, AND across); state lives in `window.__filterState` (10 keys incl. `price`), applied by `applyFilter()`. There is deliberately **no "New Arrivals" filter** — `data-added` is kept only for the NEW badge and the Newest First sort.
 - Brand group is injected at runtime (`insertAdjacentHTML('afterbegin')`, id `filterBrandGroup`) from `brandCounts`; `#pcBrandBtn` in `#pcToolbar` opens the sheet/panel and scrolls to it.
-- Price filter: dual `#priceMin`/`#priceMax` range sliders (step 5, bounds auto-derived from `data-price` on `.frag-cell`), state `f.price = 'all' | '<min>-<max>'`, matched numerically via `window.__priceMatch` (not the comma-split path); label via `window.__priceLabel`. `data-price` = cheapest *available* size price, falling back to any size price (so all 171 cells carry it); `.frag-card` inherits it through the generic `data-*` copy loop.
+- Price filter: dual `#priceMin`/`#priceMax` range sliders (step 5, bounds auto-derived from `data-price` on `.frag-cell`), state `f.price = 'all' | '<min>-<max>'`, matched numerically via `window.__priceMatch` (not the comma-split path); label via `window.__priceLabel`. `data-price` = cheapest *available* size price, falling back to any size price (so all 185 cells carry it); `.frag-card` inherits it through the generic `data-*` copy loop.
 - URL sync: `window.__syncUrl` rewrites `?brand=…&price=…&sort=…` via `history.replaceState` on every `__onFilterChange` / sort `change`, and the URL-sync IIFE replays params on load (clicks filter buttons, `__setPriceRange`, `__applySort`).
 - Filter results/count read from `.table-wrap .frag-cell` (unfiltered) and `#filterResults tbody tr` (filtered); keep `#filterBar` id (scroll target + seo-gen)
 - Unavailable sizes: table `.cart-btn` is `disabled` **and relabelled** `Sold out` / `Coming soon` (`.cart-btn-so`); mobile cards already emit `SOLD OUT` / `COMING SOON` (`pc-add-so`/`pc-add-cs`). Never leave a dead button reading "Add to Cart".
@@ -61,10 +61,10 @@ Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`pric
 - **Hamburger sidebar** (`#mobileMenu` > `.mobile-menu-panel`) has **no brand kicker** — the `IRAM Perfume` `<p class="mobile-menu-kicker">` and its CSS were removed; links start at the panel's 24px padding.
 
 ## Data Pipeline (Phase 2.1)
-- **`products.json` (172 products) is the source of truth.** `node seo-gen.js` reads it every run; the catalogue table in `index.html` is only re-snapshotted via `node seo-gen.js --make-data` (use after hand-editing the table instead of products.json). A `--make-data` re-run against an already-rendered table must leave products.json byte-stable (round-trip test).
+- **`products.json` (185 products) is the source of truth.** `node seo-gen.js` reads it every run; the catalogue table in `index.html` is only re-snapshotted via `node seo-gen.js --make-data` (use after hand-editing the table instead of products.json). A `--make-data` re-run against an already-rendered table must leave products.json byte-stable (round-trip test).
 - Fields: `key` (`brand|name`), `prices`/`statusPerSize` (6 sizes 3/5/7.5/10/20/30 → ok|struck|coming), `links` (preview-stripped + separator-normalized) + `linksRaw` (verbatim links-cell HTML — the registry/`.card-links` use `linksRaw`; a preview-only cell yields `links=''`), `slug`/`url`, `added` (45 products; NEW badge + Newest First), `tags` always `[]`, `inspired` keeps raw entities.
 - **seo-gen renders FROM products.json into index.html every run:**
-  1. The two catalogue `<tbody>` regions (Designer 15 / Middle Eastern 156 rows), byte-parity with the historical hand-authored markup plus static `data-brand`, `data-price` (cheapest available else any), `data-pid`, `data-added` on fresh products. Attr order: scent…family, added, brand, price, pid.
+  1. The two catalogue `<tbody>` regions (Designer 16 / Middle Eastern 169 rows), byte-parity with the historical hand-authored markup plus static `data-brand`, `data-price` (cheapest available else any), `data-pid`, `data-added` on fresh products. Attr order: scent…family, added, brand, price, pid.
   2. The mobile `.frag-cards` grids at `<!--CARDS:Designer-->` / `<!--CARDS:Middle Eastern-->` markers (inserted right after each `</table>`; markers are `stripMarks`-style so reruns stay idempotent) — exact mirror of the runtime builder output, **no static NEW badge**.
   3. The `<!--BESTSELLERS-->` rail (after the featured rail's `</section>`) and the `<!--THREE_ML-->` list (before the `#catalogue` wrapper) — both `stripMarks`-style; the anchors are `editHomepage` steps 8b/8c and throw if missing.
   4. `window.__PRODUCTS` (slim projection incl. `linksRaw` as `links`, `</` escaped) at `<!--PRODUCTS_JSON-->`, inserted immediately before the `<!--APP-->` anchor that precedes the giant inline `<script>`.
