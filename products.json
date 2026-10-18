@@ -1965,7 +1965,7 @@
     "brandImg": "logos/al-wataniah.png",
     "name": "Kayaan Terra",
     "gender": "Unisex",
-    "status": "instock",
+    "status": "soldout",
     "tags": [],
     "prices": {
       "3": 105,
@@ -1976,12 +1976,12 @@
       "7.5": 229
     },
     "statusPerSize": {
-      "3": "ok",
-      "5": "ok",
-      "10": "ok",
-      "20": "ok",
-      "30": "ok",
-      "7.5": "ok"
+      "3": "struck",
+      "5": "struck",
+      "10": "struck",
+      "20": "struck",
+      "30": "struck",
+      "7.5": "struck"
     },
     "inspired": "Bottled Absolute",
     "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Al-Wataniah/Kayaan-Terra-121433.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/Al_Wataniah/kayaan-terra-terra'>Parfumo</a>",
@@ -1997,7 +1997,7 @@
     "added": "2026-10-17",
     "slug": "al-wataniah-kayaan-terra",
     "url": "https://itsnotme007.github.io/iram-perfume/fragrance/al-wataniah-kayaan-terra.html",
-    "availability": "https://schema.org/InStock"
+    "availability": "https://schema.org/OutOfStock"
   },
   {
     "key": "Ajmal|Wave",
