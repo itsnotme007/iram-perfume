@@ -1,6 +1,6 @@
 {
   "frag:bvlgari-man-in-black-parfum": {
-    "sig": "e0592bda28ffc0033fb26c89",
+    "sig": "e96c6cd8879a78ed7ee0f2e4",
     "mod": "2026-10-18"
   },
   "frag:davidoff-cool-water-edt": {
@@ -73,7 +73,7 @@
   },
   "frag:afnan-9-pm-elixir": {
     "sig": "8dc80f498eb516067be70ce1",
-    "mod": "2026-10-11"
+    "mod": "2026-10-18"
   },
   "frag:afnan-9-pm-og": {
     "sig": "c96a127aeebc453b3e2198da",
@@ -177,7 +177,7 @@
   },
   "frag:arabiyat-prestige-raees": {
     "sig": "12d2457b2400bd24f9064d51",
-    "mod": "2026-10-05"
+    "mod": "2026-10-18"
   },
   "frag:arabiyat-prestige-marwa": {
     "sig": "450bbf585edff25e23a17f09",
@@ -189,7 +189,7 @@
   },
   "frag:arabiyat-prestige-aariz-l-absolu": {
     "sig": "87e2236f0d77eb8092939fd5",
-    "mod": "2026-10-05"
+    "mod": "2026-10-18"
   },
   "frag:arabiyat-prestige-mahd-al-dhahab": {
     "sig": "262c2286f2972d6b35b8d905",
@@ -261,7 +261,7 @@
   },
   "frag:french-avenue-aromatix-teas-me": {
     "sig": "2bc7a9be20114b9832f4f9bc",
-    "mod": "2026-10-05"
+    "mod": "2026-10-18"
   },
   "frag:french-avenue-zenith-santal": {
     "sig": "8dc5848443119d42a3d5cba2",
@@ -365,7 +365,7 @@
   },
   "frag:lattafa-raghba-wood-intense": {
     "sig": "112cdf59f7dabc1844c84451",
-    "mod": "2026-10-05"
+    "mod": "2026-10-18"
   },
   "frag:lattafa-rave-now-rouge": {
     "sig": "ef4008213d6394c6c6e05488",
@@ -453,7 +453,7 @@
   },
   "frag:rasasi-fattan": {
     "sig": "e15044504689b0c31b503efd",
-    "mod": "2026-10-11"
+    "mod": "2026-10-18"
   },
   "frag:rasasi-hawas-black": {
     "sig": "04dce040305c96c68383b362",
@@ -508,7 +508,7 @@
     "mod": "2026-10-08"
   },
   "frag:rayhaan-obsidian": {
-    "sig": "ba80e96b227b065b1e8507e4",
+    "sig": "393d4a928d69f6b0883afdc2",
     "mod": "2026-10-18"
   },
   "frag:rayhaan-pacific": {
@@ -516,7 +516,7 @@
     "mod": "2026-10-05"
   },
   "frag:rayhaan-terra": {
-    "sig": "5cfb4049b2190b8b3e2b7412",
+    "sig": "c33f6aa53ce69ce367c5ed1b",
     "mod": "2026-10-18"
   },
   "frag:rayhaan-valhalla": {
@@ -537,10 +537,10 @@
   },
   "frag:rayhaan-italia": {
     "sig": "12ea96c915473941ac849b6a",
-    "mod": "2026-10-07"
+    "mod": "2026-10-18"
   },
   "frag:reef-reef-33": {
-    "sig": "839751b852739a0857e60956",
+    "sig": "7982843cafac2106011aa070",
     "mod": "2026-10-18"
   },
   "frag:riiffs-season-rise": {
@@ -585,7 +585,7 @@
   },
   "frag:swiss-arabian-shaghaf-oud": {
     "sig": "fa526a36f20a78f75a166472",
-    "mod": "2026-10-05"
+    "mod": "2026-10-18"
   },
   "frag:swiss-arabian-shaghaf-oud-tonka": {
     "sig": "1883593cceaec0d91509726c",
@@ -620,12 +620,12 @@
     "mod": "2026-10-18"
   },
   "home": {
-    "sig": "8eb1d48674e9e4cfa156a2bf",
+    "sig": "3cdf7a5e6be34c5902b0078a",
     "mod": "2026-10-18"
   },
   "frag:albait-aldimashqi-special-ombre-leather": {
     "sig": "462e7a42b402dc32b5d1d837",
-    "mod": "2026-10-11"
+    "mod": "2026-10-18"
   },
   "frag:khadlaj-shiyaaka-sky": {
     "sig": "ff917c9fd4f34d3b1b8686ce",
@@ -708,11 +708,11 @@
     "mod": "2026-10-18"
   },
   "frag:bvlgari-man-in-black-edp": {
-    "sig": "2003c11364d1c0823612221b",
+    "sig": "24b54290905e5aa71b797529",
     "mod": "2026-10-18"
   },
   "frag:al-wataniah-kayaan-terra": {
-    "sig": "5356f5fdcba9158105593543",
+    "sig": "ce46318721a76ac722b79b0c",
     "mod": "2026-10-18"
   },
   "frag:armaf-tres-nuit": {
