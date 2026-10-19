@@ -925,7 +925,7 @@
     "brandImg": "logos/afnan.png",
     "name": "Supremacy Incense",
     "gender": "Men",
-    "status": "instock",
+    "status": "soldout",
     "tags": [],
     "prices": {
       "3": 119,
@@ -936,8 +936,8 @@
       "7.5": 279
     },
     "statusPerSize": {
-      "3": "ok",
-      "5": "ok",
+      "3": "struck",
+      "5": "struck",
       "10": "struck",
       "20": "struck",
       "30": "struck",
@@ -957,7 +957,7 @@
     "added": "",
     "slug": "afnan-supremacy-incense",
     "url": "https://itsnotme007.github.io/iram-perfume/fragrance/afnan-supremacy-incense.html",
-    "availability": "https://schema.org/InStock"
+    "availability": "https://schema.org/OutOfStock"
   },
   {
     "key": "Afnan|Turathi Blue",
