@@ -15,7 +15,7 @@
 ## Fragrance catalogue (India decant prices)
 
 ### Azzaro
-- Most Wanted Parfum (Men): 3ml ₹219 | 5ml ₹349 | 7.5ml ₹539 | 10ml ₹675 | 20ml ₹1309 | 30ml ₹1899
+- Most Wanted Parfum (Men, soldout): 3ml ₹219 | 5ml ₹349 | 7.5ml ₹539 | 10ml ₹675 | 20ml ₹1309 | 30ml ₹1899
 
 ### Bvlgari
 - Man in Black Parfum (Men, soldout): 3ml ₹249 | 5ml ₹399 | 7.5ml ₹619 | 10ml ₹775 | 20ml ₹1509 | 30ml ₹2199

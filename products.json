@@ -5,7 +5,7 @@
     "brandImg": "logos/azzaro.png",
     "name": "Most Wanted Parfum",
     "gender": "Men",
-    "status": "instock",
+    "status": "soldout",
     "tags": [],
     "prices": {
       "3": 219,
@@ -16,12 +16,12 @@
       "7.5": 539
     },
     "statusPerSize": {
-      "3": "ok",
-      "5": "ok",
-      "10": "ok",
-      "20": "ok",
-      "30": "ok",
-      "7.5": "ok"
+      "3": "struck",
+      "5": "struck",
+      "10": "struck",
+      "20": "struck",
+      "30": "struck",
+      "7.5": "struck"
     },
     "inspired": "Original",
     "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Azzaro/The-Most-Wanted-Parfum-73664.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/Azzaro/the-most-wanted-parfum'>Parfumo</a>",
@@ -37,7 +37,7 @@
     "added": "2026-10-11",
     "slug": "azzaro-most-wanted-parfum",
     "url": "https://itsnotme007.github.io/iram-perfume/fragrance/azzaro-most-wanted-parfum.html",
-    "availability": "https://schema.org/InStock"
+    "availability": "https://schema.org/OutOfStock"
   },
   {
     "key": "Bvlgari|Man in Black Parfum",
