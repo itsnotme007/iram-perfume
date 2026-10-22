@@ -100,3 +100,11 @@
   .frag-card.pc-sold .card-brand-name,.frag-card.pc-sold .card-frag-name,.frag-card.pc-sold .pc-name,.frag-card.pc-sold .card-inspired,.frag-card.pc-sold .pc-price-line,.frag-card.pc-sold .pc-from b,.frag-card.pc-sold .card-links a{color:#8b857a}
   .frag-card.pc-sold .card-brand-logo{background:rgba(255,255,255,.75)}
 }
+
+/* --- premium decant promo strip: desktop/tablet polish (base rules live in app.css) --- */
+@media (min-width:769px){
+  .dp-strip{gap:16px;padding:16px 22px;border-radius:16px}
+  .dp-strip-ico{width:34px;height:34px}
+  .dp-strip-h{font-size:19px}
+  .dp-strip-sub{font-size:13px;margin-top:5px}
+}
