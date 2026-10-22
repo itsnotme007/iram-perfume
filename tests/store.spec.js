@@ -376,3 +376,28 @@ test('fragrance detail page renders with schema, prices and FAQ', async ({ page 
   expect(ok).toBeGreaterThanOrEqual(3);
   expect(errs).toEqual([]);
 });
+
+// ---------------------------------------------------------------- bottles page
+test('bottle options page: stats render, chips switch, add to cart survives home', async ({ page }) => {
+  const errs = watchErrors(page);
+  await page.goto('/bottles.html');
+  await expect(page).toHaveTitle(/Bottle Options/);
+  await expect(page.locator('#statTotal')).toHaveText(String(TOTAL));
+  await expect(page.locator('#statBrands')).toHaveText('37');
+  await expect(page.locator('.bottle-card')).toHaveCount(5);
+  const out = page.locator('.bottle-card[data-bottle="group"] [data-price-out]');
+  await expect(out).toHaveText('\u20B915');
+  await page.locator('.bottle-card[data-bottle="group"] .bottle-opt[data-frag="Metal Gold Atomizer Bottle"]').click();
+  await expect(out).toHaveText('\u20B925');
+  await page.locator('.bottle-card[data-bottle="group"] .bottle-add').click();
+  await expect(page.locator('#toastRoot .toast')).toBeVisible();
+  const cart = await page.evaluate(() => JSON.parse(localStorage.getItem('iram_cart') || '[]'));
+  expect(cart).toHaveLength(1);
+  expect(cart[0]).toMatchObject({ key: 'Bottles|Metal Gold Atomizer Bottle|3ml', brand: 'Bottles', frag: 'Metal Gold Atomizer Bottle', size: '3ml', price: 25, qty: 1 });
+  await page.goto('/');
+  const after = await page.evaluate(() => JSON.parse(localStorage.getItem('iram_cart') || '[]'));
+  expect(after).toHaveLength(1);
+  expect(after[0].frag).toBe('Metal Gold Atomizer Bottle');
+  expect(await cartCount(page)).not.toBe('0');
+  expect(errs).toEqual([]);
+});

@@ -19,7 +19,7 @@ const oldHtml = strip(norm(execSync('git show ' + REF + ':index.html', { cwd: RO
 const newHtml = strip(norm(fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8')));
 function tbodies(html) {
   const catStart = html.indexOf('<div class="section-heading">Designer');
-  const catEnd = html.indexOf('Bottle Options', catStart);
+  const catEnd = html.indexOf('<!--ARTICLES-->', catStart);
   if (catStart < 0 || catEnd < 0) { console.error('catalogue region not found'); process.exit(2); }
   return [...html.slice(catStart, catEnd).matchAll(/<tbody>[\s\S]*?<\/tbody>/g)].map((m) => m[0]);
 }

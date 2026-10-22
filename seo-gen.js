@@ -104,7 +104,10 @@ if (!makeData) {
 // catalogue tbody regions — also used by editHomepage (anchor wrapping),
 // so they are computed whether or not we re-snapshot products.json
 const catStart = s.indexOf('<div class="section-heading">Designer');
-const catEnd = s.indexOf('Bottle Options');
+// end of the catalogue region: Bottle Options + stats moved to bottles.html,
+// so the stable end anchor is the generated articles strip (seo-gen-owned,
+// always present, and always after both tables / card grids / 3ml list)
+const catEnd = s.indexOf('<!--ARTICLES-->');
 const catRaw = s.slice(catStart, catEnd > -1 ? catEnd : catStart + 400000);
 const tbodyMarks = [...catRaw.matchAll(/<tbody>/g)].map(m => ({ start: m.index + catStart }));
 const tbodyEnds = [...catRaw.matchAll(/<\/tbody>/g)].map(m => ({ end: m.index + '</tbody>'.length + catStart }));
@@ -603,6 +606,287 @@ function buildArticles() {
   return guides;
 }
 
+// ----------------------------------------------- bottles.html (homepage move)
+// Bottle Options + Collection Statistics live on their own root page now.
+// The statistics mirror the old runtime computeStats() in app.js, evaluated at
+// build time from products.json (reference: 189/37, 16/173, 92/7/90, 1 coming
+// soon, ₹299 Ajmal Wave, ₹2,599 Swiss Arabian Incense 01, avgs 126/193/294/
+// 365/690/972, fresh 87 / woody 116 / sweet 77).
+function collectionStats() {
+  const SIZES = ['3', '5', '7.5', '10', '20', '30'];
+  const brands = new Set();
+  let designer = 0, me = 0, men = 0, women = 0, unisex = 0;
+  let fresh = 0, woody = 0, sweet = 0, coming = 0;
+  const prices = { '3': [], '5': [], '7.5': [], '10': [], '20': [], '30': [] };
+  let cheap = { price: Infinity, name: '', brand: '' }, exp = { price: 0, name: '', brand: '' };
+  for (const pr of products) {
+    brands.add(pr.brand);
+    if (pr.cat === 'Designer') designer++; else me++;
+    if (pr.gender === 'Men') men++;
+    else if (pr.gender === 'Women') women++;
+    else if (pr.gender === 'Unisex') unisex++;
+    const combined = ((pr.scent || '') + ',' + (pr.family || '')).toLowerCase();
+    if (combined.indexOf('fresh') !== -1 || combined.indexOf('aquatic') !== -1 || combined.indexOf('citrus') !== -1) fresh++;
+    if (combined.indexOf('woody') !== -1 || combined.indexOf('amber') !== -1) woody++;
+    if (combined.indexOf('sweet') !== -1 || combined.indexOf('vanilla') !== -1 || combined.indexOf('gourmand') !== -1) sweet++;
+    if (pr.status === 'coming') coming++;
+    for (const k of SIZES) { const v = pr.prices[k]; if (typeof v === 'number') prices[k].push(v); }
+    const p30 = pr.prices['30'];
+    if (typeof p30 === 'number') {
+      if (p30 < cheap.price) cheap = { price: p30, name: pr.name, brand: pr.brand };
+      if (p30 > exp.price) exp = { price: p30, name: pr.name, brand: pr.brand };
+    }
+  }
+  const avg = a => { if (!a.length) return 0; return Math.round(a.reduce((x, y) => x + y, 0) / a.length); };
+  const rup = n => (n === 0 || n === Infinity ? '\u2014' : '\u20b9' + n.toLocaleString('en-IN'));
+  return {
+    total: products.length, brands: brands.size, designer, me, men, women, unisex, coming,
+    cheapest: cheap.price === Infinity ? '\u2014' : rup(cheap.price) + ' (' + cheap.brand + ' ' + cheap.name + ')',
+    expensive: exp.price === 0 ? '\u2014' : rup(exp.price) + ' (' + exp.brand + ' ' + exp.name + ')',
+    avg3: rup(avg(prices['3'])), avg5: rup(avg(prices['5'])), avg75: rup(avg(prices['7.5'])),
+    avg10: rup(avg(prices['10'])), avg20: rup(avg(prices['20'])), avg30: rup(avg(prices['30'])),
+    fresh, woody, sweet
+  };
+}
+
+const BOTTLE_SHOP_HTML = `<div class="bottle-shop">
+  <div class="bottle-card" data-bottle="group">
+    <div class="bottle-media"><img src="bottles/empty-3-5-7-5ml.jpg" alt="Empty 3ml, 5ml and 7.5ml spray bottles" width="1400" height="1050" loading="lazy" decoding="async"></div>
+    <div class="bottle-body">
+      <div class="bottle-name">3ml / 5ml / 7.5ml</div>
+      <div class="bottle-opts" role="group" aria-label="Bottle size">
+        <button type="button" class="bottle-opt" data-size="3ml" aria-pressed="true">3ml</button>
+        <button type="button" class="bottle-opt" data-size="5ml" aria-pressed="false">5ml</button>
+        <button type="button" class="bottle-opt" data-size="7.5ml" aria-pressed="false">7.5ml</button>
+      </div>
+      <div class="bottle-opts" role="group" aria-label="Atomizer type">
+        <button type="button" class="bottle-opt" data-frag="Plastic Atomizer Bottle" data-price="15" aria-pressed="true">Plastic &middot; &#8377;15</button>
+        <button type="button" class="bottle-opt" data-frag="Metal Black Atomizer Bottle" data-price="25" aria-pressed="false">Metal Black &middot; &#8377;25</button>
+        <button type="button" class="bottle-opt" data-frag="Metal Gold Atomizer Bottle" data-price="25" aria-pressed="false">Metal Gold &middot; &#8377;25</button>
+      </div>
+      <div class="bottle-price"><span data-price-out>&#8377;15</span></div>
+      <button type="button" class="bottle-add">&#128722; Add to Cart</button>
+    </div>
+  </div>
+  <div class="bottle-card" data-bottle="10" data-size="10ml">
+    <div class="bottle-media"><img src="bottles/empty-10ml.jpg" alt="Empty 10ml spray bottle" width="1400" height="1050" loading="lazy" decoding="async"></div>
+    <div class="bottle-body">
+      <div class="bottle-name">10ml</div>
+      <div class="bottle-opts" role="group" aria-label="Atomizer colour">
+        <button type="button" class="bottle-opt" data-frag="Metal Black Atomizer Bottle" data-price="28" aria-pressed="true">Metal Black &middot; &#8377;28</button>
+        <button type="button" class="bottle-opt" data-frag="Metal Gold Atomizer Bottle" data-price="28" aria-pressed="false">Metal Gold &middot; &#8377;28</button>
+      </div>
+      <div class="bottle-price"><span data-price-out>&#8377;28</span></div>
+      <button type="button" class="bottle-add">&#128722; Add to Cart</button>
+    </div>
+  </div>
+  <div class="bottle-card" data-bottle="20" data-size="20ml">
+    <div class="bottle-media"><img src="bottles/empty-20ml.jpg" alt="Empty 20ml spray bottle in gold and black" width="1400" height="1050" loading="lazy" decoding="async"></div>
+    <div class="bottle-body">
+      <div class="bottle-name">20ml</div>
+      <div class="bottle-note">Pressurised atomiser</div>
+      <div class="bottle-opts" role="group" aria-label="Bottle colour">
+        <button type="button" class="bottle-opt" data-frag="Round Gold Bottle" data-price="30" aria-pressed="true">Gold &middot; &#8377;30</button>
+        <button type="button" class="bottle-opt" data-frag="Round Black Bottle" data-price="30" aria-pressed="false">Black &middot; &#8377;30</button>
+      </div>
+      <div class="bottle-price"><span data-price-out>&#8377;30</span></div>
+      <button type="button" class="bottle-add">&#128722; Add to Cart</button>
+    </div>
+  </div>
+  <div class="bottle-card" data-bottle="30" data-size="30ml">
+    <div class="bottle-media"><img src="bottles/empty-30ml.jpg" alt="Empty 30ml spray bottle, square and oval, gold and black" width="1400" height="1050" loading="lazy" decoding="async"></div>
+    <div class="bottle-body">
+      <div class="bottle-name">30ml</div>
+      <div class="bottle-note">Pressurised atomiser</div>
+      <div class="bottle-opts" role="group" aria-label="Bottle style">
+        <button type="button" class="bottle-opt" data-frag="Square Gold Bottle" data-price="35" aria-pressed="true">Square Gold &middot; &#8377;35</button>
+        <button type="button" class="bottle-opt" data-frag="Square Black Bottle" data-price="35" aria-pressed="false">Square Black &middot; &#8377;35</button>
+        <button type="button" class="bottle-opt" data-frag="Oval Gold Bottle" data-price="35" aria-pressed="false">Oval Gold &middot; &#8377;35</button>
+        <button type="button" class="bottle-opt" data-frag="Oval Black Bottle" data-price="35" aria-pressed="false">Oval Black &middot; &#8377;35</button>
+      </div>
+      <div class="bottle-price"><span data-price-out>&#8377;35</span></div>
+      <button type="button" class="bottle-add">&#128722; Add to Cart</button>
+    </div>
+  </div>
+  <div class="bottle-card bottle-card-info" data-bottle="50">
+    <div class="bottle-media"><img src="bottles/50ml-bottle-on-demand.jpeg" alt="50ml bottle on demand" width="1200" height="1600" loading="lazy" decoding="async"></div>
+    <div class="bottle-body">
+      <div class="bottle-name">50ml</div>
+      <p class="bottle-note">On request &mdash; message us on WhatsApp for availability and price.</p>
+      <a class="bottle-add bottle-add-wa" href="https://chat.whatsapp.com/JSWEIoCsFd96wzlRAeaewe" target="_blank" rel="noopener">Ask on WhatsApp</a>
+    </div>
+  </div>
+</div>`;
+
+function statsDashHtml(st) {
+  const sv = (id, val) => '<div class="stat-value" id="' + id + '">' + esc(val) + '</div>';
+  const sc = (cls, id, val, label) => '<div class="stat-card ' + cls + '">' + sv(id, val) + '<div class="stat-label">' + label + '</div></div>';
+  const sb = (id, val, label) => '<div class="stat-sub">' + sv(id, val) + '<div class="stat-label">' + label + '</div></div>';
+  return '<div class="stats-dashboard" id="statsDashboard">\n'
+    + '<h3 style="margin:0 0 12px 0;font-size:15px;font-weight:700;color:var(--text-heading)">Collection Statistics</h3>\n'
+    + '<div class="stats-grid" id="statsGrid">\n'
+    + '  ' + sc('highlight', 'statTotal', st.total, 'Total Fragrances') + '\n'
+    + '  ' + sc('highlight', 'statBrands', st.brands, 'Total Brands') + '\n'
+    + '  ' + sc('', 'statDesigner', st.designer, 'Designer') + '\n'
+    + '  ' + sc('', 'statMiddleEastern', st.me, 'Middle Eastern') + '\n'
+    + '  ' + sc('', 'statMen', st.men, 'Men\u2019s') + '\n'
+    + '  ' + sc('', 'statWomen', st.women, 'Women\u2019s') + '\n'
+    + '  ' + sc('', 'statUnisex', st.unisex, 'Unisex') + '\n'
+    + '  ' + sc('accent', 'statComingSoon', st.coming, 'Coming Soon') + '\n'
+    + '  ' + sc('wide', 'statCheapest', st.cheapest, 'Cheapest (30ml)') + '\n'
+    + '  ' + sc('wide', 'statExpensive', st.expensive, 'Most Expensive (30ml)') + '\n'
+    + '</div>\n'
+    + '<div class="stats-subgrid" id="statsSubGrid">\n'
+    + '  ' + sb('statAvg3ml', st.avg3, 'Avg 3ml') + '\n'
+    + '  ' + sb('statAvg5ml', st.avg5, 'Avg 5ml') + '\n'
+    + '  ' + sb('statAvg7ml', st.avg75, 'Avg 7.5ml') + '\n'
+    + '  ' + sb('statAvg10ml', st.avg10, 'Avg 10ml') + '\n'
+    + '  ' + sb('statAvg20ml', st.avg20, 'Avg 20ml') + '\n'
+    + '  ' + sb('statAvg30ml', st.avg30, 'Avg 30ml') + '\n'
+    + '  ' + sb('statFresh', st.fresh, 'Fresh') + '\n'
+    + '  ' + sb('statWoody', st.woody, 'Woody') + '\n'
+    + '  ' + sb('statSweet', st.sweet, 'Sweet') + '\n'
+    + '</div>\n'
+    + '</div>';
+}
+
+function buildBottles(mod) {
+  const st = collectionStats();
+  const cssV = crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, 'assets/app.css'))).digest('hex').slice(0, 12);
+  const canonical = siteUrl('bottles.html');
+  const title = 'Bottle Options & Collection Statistics | IRAM Perfume';
+  const desc = 'Empty 3ml to 30ml spray bottles with plastic and metal atomisers from \u20b915, plus collection statistics for IRAM Perfume\u2019s ' + products.length + ' fragrance decants in India.';
+  const schema = [
+    { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description: desc, url: canonical, dateModified: mod, isPartOf: { '@type': 'WebSite', name: 'IRAM Perfume', url: siteUrl() } },
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'IRAM Perfume', item: siteUrl() },
+      { '@type': 'ListItem', position: 2, name: 'Bottle Options', item: canonical }
+    ] }
+  ];
+  const body = ''
+    + '<header class="desktop-store-header" aria-label="IRAM Perfume navigation"><a class="desktop-brand" href="index.html"><img src="logo-banner.png" alt="" width="42" height="42">IRAM PERFUME</a><nav class="desktop-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#catalogue">Shop</a><a href="index.html#filterBar">Brands</a><a href="index.html#bestsellers">Bestsellers</a><a href="bottles.html" aria-current="page">Bottles</a><a href="contact.html">Contact</a></nav><div class="desktop-actions"><a class="desktop-cart" href="index.html#catalogue" aria-label="Open cart on the shop page">&#128722;</a><button type="button" class="desktop-theme" data-theme-toggle aria-label="Toggle dark mode"><span class="theme-ico theme-ico-moon">&#9789;</span><span class="theme-ico theme-ico-sun">&#9788;</span></button></div></header>\n'
+    + '<div class="btl-header" aria-label="IRAM Perfume"><a href="index.html" aria-label="Back to home">&#8592;</a><a class="btl-brand" href="index.html">IRAM PERFUME</a><a href="tel:' + PHONE_TEL + '" aria-label="Call us">&#9742;</a><button type="button" data-theme-toggle aria-label="Toggle dark mode"><span class="theme-ico theme-ico-moon">&#9789;</span><span class="theme-ico theme-ico-sun">&#9788;</span></button><a href="index.html#catalogue" aria-label="Open cart on the shop page">&#128722;</a></div>\n'
+    + '<main class="btl-main" id="top">\n'
+    + '<div class="btl-hero"><div><a class="btl-back" href="index.html">&#8592; Full collection</a><h1>Bottle Options</h1><p class="btl-lead">Empty spray bottles for decants and travel \u2014 pick a size and atomiser, add it to your cart, and we ship it along with your order.</p></div></div>\n'
+    + '<div id="bottles">\n' + BOTTLE_SHOP_HTML + '\n</div>\n'
+    + statsDashHtml(st) + '\n'
+    + '</main>\n'
+    + '<footer class="site-footer"><div><h2>IRAM Perfume</h2><p>Authentic designer and Middle Eastern decants, filled with care in India.</p><p>Free shipping on orders over \u20b9999 (min 2 decants).</p></div><div><h2>Shop</h2><a href="index.html#catalogue">All fragrances</a><a href="index.html#bestsellers">Bestsellers</a><a href="bottles.html" aria-current="page">Bottle options</a></div><div><h2>Contact</h2><a href="contact.html">Contact &amp; FAQs</a><a href="tel:' + PHONE_TEL + '">' + PHONE_DISPLAY + '</a><a href="mailto:' + EMAIL + '">' + EMAIL + '</a></div><div><h2>Follow</h2><a href="' + IG + '" target="_blank" rel="noopener">Instagram</a><a href="' + WA + '" target="_blank" rel="noopener">WhatsApp community</a><p>Secure packing \u00b7 India-wide delivery</p></div></footer>\n'
+    + '<div id="toastRoot"></div>\n'
+    + '<script>(function(){var root=document.documentElement,s=null;try{s=localStorage.getItem(\'theme\')}catch(e){}if(s===\'dark\'||(!s&&window.matchMedia&&window.matchMedia(\'(prefers-color-scheme:dark)\').matches))root.setAttribute(\'data-theme\',\'dark\');document.querySelectorAll(\'[data-theme-toggle]\').forEach(function(t){t.addEventListener(\'click\',function(){var dark=root.getAttribute(\'data-theme\')===\'dark\';if(dark){root.removeAttribute(\'data-theme\');try{localStorage.setItem(\'theme\',\'light\')}catch(e){}}else{root.setAttribute(\'data-theme\',\'dark\');try{localStorage.setItem(\'theme\',\'dark\')}catch(e){}}})})})();</' + 'script>\n'
+    + '<' + 'script>\n'
+    + 'try{(function(){\n'
+    + '  var root=document.getElementById(\'toastRoot\');\n'
+    + '  if(!root)return;\n'
+    + '  var reduce=window.matchMedia&&window.matchMedia(\'(prefers-reduced-motion:reduce)\').matches;\n'
+    + '  function toast(msg,kind){\n'
+    + '    kind=kind||\'ok\';\n'
+    + '    var el=document.createElement(\'div\');\n'
+    + '    el.className=\'toast toast-\'+(kind===\'err\'?\'err\':\'ok\');\n'
+    + '    el.innerHTML=\'<span class="toast-icon">\'+(kind===\'err\'?\'&#9888;\':\'&#10003;\')+\'</span><span class="toast-msg"></span>\'\n'
+    + '      +\'<button type="button" class="toast-x" aria-label="Dismiss">&times;</button>\';\n'
+    + '    el.querySelector(\'.toast-msg\').textContent=String(msg||\'\');\n'
+    + '    root.appendChild(el);\n'
+    + '    var t=null;\n'
+    + '    function dismiss(){\n'
+    + '      if(t){clearTimeout(t);t=null}\n'
+    + '      el.classList.add(\'out\');\n'
+    + '      setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el)},reduce?0:240);\n'
+    + '    }\n'
+    + '    el.querySelector(\'.toast-x\').addEventListener(\'click\',dismiss);\n'
+    + '    requestAnimationFrame(function(){el.classList.add(\'in\')});\n'
+    + '    t=setTimeout(dismiss,3200);\n'
+    + '    while(root.children.length>4)root.removeChild(root.firstChild);\n'
+    + '    return dismiss;\n'
+    + '  }\n'
+    + '  window.__toast=toast;\n'
+    + '})()}catch(e){}\n'
+    + 'function addBottleToCart(brand,frag,size,price,qty){\n'
+    + '  var cart=[];\n'
+    + '  try{cart=JSON.parse(localStorage.getItem(\'iram_cart\')||\'[]\')||[]}catch(e){cart=[]}\n'
+    + '  var n=Math.max(1,Math.min(99,parseInt(qty,10)||1));\n'
+    + '  var key=brand+\'|\'+frag+\'|\'+size;\n'
+    + '  var found=false;\n'
+    + '  for(var i=0;i<cart.length;i++){if(cart[i].key===key){cart[i].qty+=n;found=true;break}}\n'
+    + '  if(!found)cart.push({key:key,brand:brand,frag:frag,size:size,price:price,qty:n});\n'
+    + '  try{localStorage.setItem(\'iram_cart\',JSON.stringify(cart))}catch(e){}\n'
+    + '  if(window.__toast)window.__toast((n>1?n+\'\u00D7 \':\'\')+size+\' \'+frag+\' added to cart\');\n'
+    + '}\n'
+    + '(function(){\n'
+    + '  var cards=document.querySelectorAll(\'.bottle-card[data-bottle]\');\n'
+    + '  if(!cards.length)return;\n'
+    + '  cards.forEach(function(card){\n'
+    + '    var out=card.querySelector(\'[data-price-out]\');\n'
+    + '    function sync(){\n'
+    + '      var p=card.querySelector(\'.bottle-opt[data-price][aria-pressed="true"]\');\n'
+    + '      if(p&&out)out.textContent=\'\u20B9\'+parseInt(p.getAttribute(\'data-price\'),10);\n'
+    + '    }\n'
+    + '    card.querySelectorAll(\'.bottle-opts\').forEach(function(group){\n'
+    + '      group.addEventListener(\'click\',function(e){\n'
+    + '        var b=e.target.closest(\'.bottle-opt\');\n'
+    + '        if(!b||!group.contains(b))return;\n'
+    + '        group.querySelectorAll(\'.bottle-opt\').forEach(function(o){o.setAttribute(\'aria-pressed\',\'false\')});\n'
+    + '        b.setAttribute(\'aria-pressed\',\'true\');\n'
+    + '        sync();\n'
+    + '      });\n'
+    + '    });\n'
+    + '    var add=card.querySelector(\'.bottle-add\');\n'
+    + '    if(add)add.addEventListener(\'click\',function(){\n'
+    + '      var pb=card.querySelector(\'.bottle-opt[data-price][aria-pressed="true"]\');\n'
+    + '      if(!pb)return;\n'
+    + '      var sb=card.querySelector(\'.bottle-opt[data-size][aria-pressed="true"]\');\n'
+    + '      var size=sb?sb.getAttribute(\'data-size\'):card.getAttribute(\'data-size\');\n'
+    + '      if(!size)return;\n'
+    + '      addBottleToCart(\'Bottles\',pb.getAttribute(\'data-frag\'),size,parseInt(pb.getAttribute(\'data-price\'),10),1);\n'
+    + '    });\n'
+    + '    sync();\n'
+    + '  });\n'
+    + '})();\n'
+    + '</' + 'script>\n';
+  return '<!DOCTYPE html>\n<html lang="en">\n<head>\n'
+    + '<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
+    + '<title>' + esc(title) + '</title>\n<meta name="description" content="' + esc(desc) + '">\n'
+    + '<meta name="robots" content="index, follow">\n<link rel="canonical" href="' + canonical + '">\n'
+    + '<link rel="icon" type="image/png" href="favicon.png">\n'
+    + '<meta property="og:type" content="website">\n<meta property="og:title" content="' + esc(title) + '">\n'
+    + '<meta property="og:description" content="' + esc(desc) + '">\n'
+    + '<meta property="og:url" content="' + canonical + '">\n'
+    + '<meta property="og:image" content="' + siteUrl('og-image.jpg') + '">\n'
+    + '<meta property="og:site_name" content="IRAM Perfume">\n'
+    + '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="' + esc(title) + '">\n'
+    + '<meta name="twitter:description" content="' + esc(desc) + '">\n'
+    + '<meta name="twitter:image" content="' + siteUrl('og-image.jpg') + '">\n'
+    + schema.map(x => '<script type="application/ld+json">\n' + JSON.stringify(x, null, 2) + '\n</script>\n').join('')
+    + '<link rel="stylesheet" href="assets/app.css?v=' + cssV + '">\n'
+    + '<link rel="stylesheet" href="assets/desktop.css">\n'
+    + '<style>.btl-header{display:none}'
+    + '.btl-main{max-width:1200px;margin:0 auto;padding:34px 32px 60px}'
+    + '.btl-hero{margin-bottom:4px}'
+    + '.btl-back{font-size:13.5px;font-weight:700;color:var(--accent-link);text-decoration:none}'
+    + '.btl-main h1{font:700 clamp(30px,4vw,44px)/1.1 var(--font-display);color:var(--text-heading);margin:8px 0 8px}'
+    + '.btl-lead{color:var(--text-muted);font-size:15px;max-width:660px;margin-bottom:10px}'
+    + '.btl-main .stats-dashboard{margin-top:30px}'
+    + '@media(max-width:768px){.btl-page{padding-top:58px}'
+    + '.btl-header{display:grid;position:fixed;top:0;left:0;right:0;height:58px;grid-template-columns:44px 1fr 44px 44px 44px;align-items:center;padding:0 8px;background:rgba(9,12,13,.96);border-bottom:1px solid rgba(212,175,55,.26);z-index:900}'
+    + '.btl-header>a,.btl-header>button{display:grid;place-items:center;min-height:44px;min-width:44px;color:#f8f1e6;background:transparent;border:0;font-size:19px;cursor:pointer;text-decoration:none;padding:0}'
+    + '.btl-header .btl-brand{font:700 18px/1 Georgia,serif;letter-spacing:1.4px;justify-self:start}'
+    + '.btl-main{padding:26px 14px 60px}'
+    + 'footer.site-footer{display:block!important;margin-left:0!important;padding:30px 22px}'
+    + 'footer.site-footer>div{margin-bottom:20px}'
+    + 'footer.site-footer h2{font-size:18px}}'
+    + '</style>\n'
+    + '</head>\n<body class="btl-page">\n'
+    + body
+    + '</body>\n</html>\n';
+}
+function bottlesPage() {
+  // render once with the date masked to hash the whole page (so a shell/CSS or
+  // stats change also bumps dateModified), then render for real.
+  const sig = contentSig(buildBottles(DATE_MASK));
+  const mod = dateFor('bottles', sig);
+  return buildBottles(mod);
+}
+
 // ---------------------------------------------------- homepage table rendering
 // products.json is the source of truth (Phase 2): catalogue tbody rows and the
 // mobile .frag-cards grids are re-rendered from it on every run, so the DOM
@@ -999,6 +1283,7 @@ function buildSitemap(products, articles, lm) {
   const locs = [
     { l: siteUrl(), lastmod: lm.home || TODAY, pri: '1.0' },
     { l: siteUrl('contact.html'), lastmod: lm.contact || TODAY, pri: '0.6' },
+    { l: siteUrl('bottles.html'), lastmod: lm.bottles || TODAY, pri: '0.7' },
     ...articles.map(a => ({ l: a.url, lastmod: lm['article:' + a.slug] || TODAY, pri: '0.9' })),
     ...products.map(p => ({ l: p.url, lastmod: lm['frag:' + p.slug] || TODAY, pri: '0.8' }))
   ];
@@ -1067,6 +1352,13 @@ function main() {
     writeFileSafe(path.join(artDir, slug + '.html'), html);
   });
   console.log('wrote articles:', articlesMeta.length);
+
+  // 2b. bottle options + collection statistics page (moved off the homepage)
+  const btlHtml = bottlesPage();
+  lastmods.bottles = (DATES['bottles'] || {}).mod || TODAY;
+  writeFileSafe(path.join(ROOT, 'bottles.html'), btlHtml);
+  const btlStats = collectionStats();
+  console.log('wrote bottles.html; stats:', btlStats.total, 'fragrances /', btlStats.brands, 'brands / cheapest', btlStats.cheapest);
 
   // 3. homepage edits
   const faqHtml = '', artsHtml = '';

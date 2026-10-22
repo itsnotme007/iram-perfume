@@ -620,7 +620,7 @@
     "mod": "2026-10-22"
   },
   "home": {
-    "sig": "ea0425d54591b50892519f47",
+    "sig": "d42e3e5bc6982e7a9ea20012",
     "mod": "2026-10-22"
   },
   "frag:albait-aldimashqi-special-ombre-leather": {
@@ -777,6 +777,10 @@
   },
   "contact": {
     "sig": "6b0d15acfaa4552e18e87f18",
+    "mod": "2026-10-22"
+  },
+  "bottles": {
+    "sig": "c5318bf2d894644a0429844a",
     "mod": "2026-10-22"
   }
 }

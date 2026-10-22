@@ -59,12 +59,12 @@ try{(function(){
     var tbody=resultsDiv.querySelector('tbody');
     if(showAll){
       document.querySelectorAll('.table-wrap>.frag-table').forEach(function(t){t.style.display=''});
-      document.querySelectorAll('.section-heading,.three-ml-section,#bottles').forEach(function(s){s.style.display=''});
+      document.querySelectorAll('.section-heading,.three-ml-section').forEach(function(s){s.style.display=''});
       resultsDiv.style.display='none';
       document.querySelectorAll('.frag-card').forEach(function(c){c.style.display=''});
     }else{
       document.querySelectorAll('.table-wrap>.frag-table').forEach(function(t){t.style.display='none'});
-      document.querySelectorAll('.section-heading,.three-ml-section,#bottles').forEach(function(s){s.style.display='none'});
+      document.querySelectorAll('.section-heading,.three-ml-section').forEach(function(s){s.style.display='none'});
       document.querySelectorAll('.frag-card').forEach(function(card){
         var match=true;
         for(var i=0;i<cats.length;i++){
@@ -1265,37 +1265,6 @@ try{(function(){
 })();}catch(e){console.warn('Cart init failed:',e)}
 
 try{(function(){
-  var cards=document.querySelectorAll('.bottle-card[data-bottle]');
-  if(!cards.length)return;
-  cards.forEach(function(card){
-    var out=card.querySelector('[data-price-out]');
-    function sync(){
-      var p=card.querySelector('.bottle-opt[data-price][aria-pressed="true"]');
-      if(p&&out)out.textContent='\u20B9'+parseInt(p.getAttribute('data-price'),10);
-    }
-    card.querySelectorAll('.bottle-opts').forEach(function(group){
-      group.addEventListener('click',function(e){
-        var b=e.target.closest('.bottle-opt');
-        if(!b||!group.contains(b))return;
-        group.querySelectorAll('.bottle-opt').forEach(function(o){o.setAttribute('aria-pressed','false')});
-        b.setAttribute('aria-pressed','true');
-        sync();
-      });
-    });
-    var add=card.querySelector('.bottle-add');
-    if(add)add.addEventListener('click',function(){
-      var pb=card.querySelector('.bottle-opt[data-price][aria-pressed="true"]');
-      if(!pb||!window.__iramAddToCart)return;
-      var sb=card.querySelector('.bottle-opt[data-size][aria-pressed="true"]');
-      var size=sb?sb.getAttribute('data-size'):card.getAttribute('data-size');
-      if(!size)return;
-      window.__iramAddToCart('Bottles',pb.getAttribute('data-frag'),size,parseInt(pb.getAttribute('data-price'),10),1);
-    });
-    sync();
-  });
-})();}catch(e){console.warn('Bottle shop init failed:',e)}
-
-try{(function(){
   var overlay=document.getElementById('pcOverlay');
   var sheet=document.getElementById('pcProductSheet');
   var body=document.getElementById('pcBody');
@@ -1857,86 +1826,6 @@ try{(function(){
 })();}catch(e){console.warn('Mobile nav init failed:',e)}
 
 try{(function(){
-  function parsePrice(s){
-    if(!s)return null;
-    var t=s.replace(/<[^>]+>/g,'').replace(/[^\d]/g,'');
-    return t?parseInt(t,10):null;
-  }
-  function set(id,val){var el=document.getElementById(id);if(el)el.textContent=val}
-  function computeStats(){
-    var allFc=document.querySelectorAll('.frag-cell');
-    var totalFragrances=allFc.length;
-    var brands=new Set();
-    var designerCount=0,meCount=0;
-    var menCount=0,womenCount=0,unisexCount=0;
-    var freshCount=0,woodyCount=0,sweetCount=0;
-    var comingSoon=0;
-    var prices={3:[],5:[],7:[],10:[],20:[],30:[]};
-    var cheapest={price:Infinity,name:'',brand:''};
-    var expensive={price:0,name:'',brand:''};
-    var sizeKeys=['3','5','7','10','20','30'];
-    document.querySelectorAll('.frag-table').forEach(function(table){
-      var section=table.closest('.table-wrap');
-      var heading=section?section.previousElementSibling:null;
-      var isDesigner=heading&&heading.textContent.trim()==='Designer';
-      table.querySelectorAll('tbody tr').forEach(function(row){
-        var bc=row.querySelector('.brand-cell');
-        if(bc)brands.add(bc.textContent.trim());
-        var fc=row.querySelector('.frag-cell');
-        if(!fc)return;
-        if(isDesigner)designerCount++;else meCount++;
-        if(fc.querySelector('.tag-men'))menCount++;
-        else if(fc.querySelector('.tag-women'))womenCount++;
-        else if(fc.querySelector('.tag-unisex'))unisexCount++;
-        var scent=(fc.getAttribute('data-scent')||'').toLowerCase();
-        var family=(fc.getAttribute('data-family')||'').toLowerCase();
-        var combined=scent+','+family;
-        if(combined.indexOf('fresh')!==-1||combined.indexOf('aquatic')!==-1||combined.indexOf('citrus')!==-1)freshCount++;
-        if(combined.indexOf('woody')!==-1||combined.indexOf('amber')!==-1)woodyCount++;
-        if(combined.indexOf('sweet')!==-1||combined.indexOf('vanilla')!==-1||combined.indexOf('gourmand')!==-1)sweetCount++;
-        if(fc.textContent.indexOf('COMING SOON')!==-1)comingSoon++;
-        var cells=row.querySelectorAll('.size-cell');
-        cells.forEach(function(c,i){
-          if(i<sizeKeys.length){
-            var p=parsePrice(c.textContent);
-            if(p!==null)prices[sizeKeys[i]].push(p);
-          }
-        });
-        var pid=fc.getAttribute('data-pid')||'';
-        var anchor=fc.querySelector('a');
-        var fragName=(anchor?anchor.textContent:(pid.split('|')[1]||'')).trim();
-        var brandName=(fc.getAttribute('data-brand')||pid.split('|')[0]||(bc?bc.textContent.trim():'')).trim();
-        var p30=parsePrice(cells[5]?cells[5].textContent:'');
-        if(p30!==null&&p30<cheapest.price){cheapest={price:p30,name:fragName,brand:brandName}}
-        if(p30!==null&&p30>expensive.price){expensive={price:p30,name:fragName,brand:brandName}}
-      });
-    });
-    function avg(arr){if(!arr.length)return 0;return Math.round(arr.reduce(function(a,b){return a+b},0)/arr.length)}
-    function fmt(n){return n===Infinity||n===0?'—':'₹'+n.toLocaleString('en-IN')}
-    set('statTotal',totalFragrances);
-    set('statBrands',brands.size);
-    set('statDesigner',designerCount);
-    set('statMiddleEastern',meCount);
-    set('statMen',menCount);
-    set('statWomen',womenCount);
-    set('statUnisex',unisexCount);
-    set('statComingSoon',comingSoon);
-    set('statCheapest',cheapest.price===Infinity?'—':fmt(cheapest.price)+' ('+cheapest.brand+' '+cheapest.name+')');
-    set('statExpensive',expensive.price===0?'—':fmt(expensive.price)+' ('+expensive.brand+' '+expensive.name+')');
-    set('statAvg3ml',fmt(avg(prices['3'])));
-    set('statAvg5ml',fmt(avg(prices['5'])));
-    set('statAvg7ml',fmt(avg(prices['7'])));
-    set('statAvg10ml',fmt(avg(prices['10'])));
-    set('statAvg20ml',fmt(avg(prices['20'])));
-    set('statAvg30ml',fmt(avg(prices['30'])));
-    set('statFresh',freshCount);
-    set('statWoody',woodyCount);
-    set('statSweet',sweetCount);
-  }
-  computeStats();
-})();}catch(e){console.warn('Stats init failed:',e)}
-
-try{(function(){
   if(window.innerWidth>768)return;
   var brandData=[];
   var seen={};
@@ -2488,7 +2377,7 @@ try{(function(){
   }
   var dismissed=false;
   try{dismissed=sessionStorage.getItem(KEY)==='1'}catch(e){}
-  if(dismissed){bar.style.display='none';return}
+  if(dismissed){bar.style.display='none';document.documentElement.style.setProperty('--announce-h','0px');return}
   var i=0;
   var track=document.getElementById('announceTrack');
   if(track&&!reduce()){

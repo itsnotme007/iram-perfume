@@ -170,7 +170,6 @@ tbody td{padding:10px;vertical-align:middle;color:var(--text-body)}
 .card-links{font-size:11px}
 .card-links a{color:var(--accent-link);text-decoration:none;font-weight:500}
 .card-links a:hover{color:var(--accent-danger);text-decoration:underline}
-#bottles{scroll-margin-top:96px}
 .bottle-shop{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:16px}
 .bottle-card{display:flex;flex-direction:column;background:var(--bg-surface);border:1px solid var(--border-default);border-radius:12px;overflow:hidden;box-shadow:var(--shadow-sm)}
 .bottle-media img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:var(--bg-elevated)}
