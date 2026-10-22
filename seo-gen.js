@@ -316,7 +316,7 @@ function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en') {
     + '<meta name="twitter:description" content="' + esc(desc) + '">\n'
     + '<meta name="twitter:image" content="' + esc(ogImage) + '">\n'
     + (schema && schema.length ? schema.map(x => '<script type="application/ld+json">\n' + JSON.stringify(x, null, 2) + '\n</script>\n').join('') : '')
-    + '<style>'
+    + '<link rel="stylesheet" href="../assets/desktop.css">\n<style>'
     + ':root{--bg:#faf9f7;--card:#fff;--ink:#2d2a24;--muted:#7a7168;--accent:#d4af37;--line:#e8e2d9}'
     + '*{box-sizing:border-box;margin:0;padding:0}'
     + 'body{font-family:Inter,-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}'
@@ -998,6 +998,7 @@ function buildSitemap(products, articles, lm) {
   lm = lm || {};
   const locs = [
     { l: siteUrl(), lastmod: lm.home || TODAY, pri: '1.0' },
+    { l: siteUrl('contact.html'), lastmod: lm.contact || TODAY, pri: '0.6' },
     ...articles.map(a => ({ l: a.url, lastmod: lm['article:' + a.slug] || TODAY, pri: '0.9' })),
     ...products.map(p => ({ l: p.url, lastmod: lm['frag:' + p.slug] || TODAY, pri: '0.8' }))
   ];
@@ -1072,6 +1073,7 @@ function main() {
   const newS = editHomepage(products, faqHtml, artsHtml);
   lastmods.home = dateFor('home', contentSig(newS));
   writeFileSafe(IDX, newS);
+  lastmods.contact = dateFor('contact', contentSig(fs.readFileSync(path.join(ROOT, 'contact.html'), 'utf8')));
   const rowsNow = (newS.match(/class="frag-cell"/g) || []).length;
   console.log('index.html rewritten; frag rows still:', rowsNow);
 

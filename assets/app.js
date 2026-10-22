@@ -1391,8 +1391,12 @@ try{(function(){
   document.addEventListener('click',function(e){
     var jump=e.target.closest('[data-close-sheet]');
     if(jump){close();return}
-    var t=e.target.closest('.frag-card [data-open]');
-    if(t){e.preventDefault();e.stopPropagation();var card=t.closest('.frag-card');if(card)open(card)}
+    var card=e.target.closest('.frag-card');
+    if(!card)return;
+    /* Controls keep their own actions; every other part of a card opens quick view. */
+    var control=e.target.closest('a,button,input,select,textarea,.pc-size-pills');
+    if(control&&!control.classList.contains('pc-name'))return;
+    e.preventDefault();e.stopPropagation();open(card);
   });
   document.addEventListener('keydown',function(e){
     if(e.key!=='Enter'&&e.key!==' '&&e.key!=='Spacebar')return;
@@ -1636,7 +1640,7 @@ try{(function(){
   function renderResults(container,results,query,inputEl){
     container.innerHTML='';
     if(!results.length){
-      container.innerHTML='<div class="search-no-results">No fragrances found</div>';
+      container.innerHTML='<div class="search-no-results">No results for “'+escHtml(query)+'” — try a brand or note.</div>';
       container.classList.add('open');
       return;
     }
@@ -1700,7 +1704,7 @@ try{(function(){
     var showRecent=wireRecent(results,input,clear);
     input.addEventListener('input',function(){doSearch(input,results)});
     input.addEventListener('focus',function(){if(input.value.trim())doSearch(input,results);else showRecent()});
-    clear.addEventListener('click',function(){input.value='';results.classList.remove('open');clear.classList.remove('visible');input.focus();showRecent()});
+    clear.addEventListener('click',function(){input.value='';results.classList.remove('open');results.innerHTML='';clear.classList.remove('visible');input.focus()});
     results.addEventListener('click',function(e){
       var item=e.target.closest('.search-result-item');
       if(!item)return;
@@ -1735,7 +1739,8 @@ try{(function(){
     var clear=document.getElementById('mobileSearchClear');
     if(!btns.length||!overlay||!input||!results||!clear)return;
     var showRecent=wireRecent(results,input,clear);
-    function closeOverlay(){overlay.classList.remove('open');results.classList.remove('open');document.body.style.overflow=''}
+    var lastTrigger=null;
+    function closeOverlay(){overlay.classList.remove('open');results.classList.remove('open');document.body.style.overflow='';if(lastTrigger)lastTrigger.focus()}
     function pickResult(el){
       var item=el.closest?el.closest('.search-result-item'):null;
       if(!item)return;
@@ -1745,10 +1750,12 @@ try{(function(){
       navigateToProduct(productId);
     }
     btns.forEach(function(btn){btn.addEventListener('click',function(){
+      lastTrigger=btn;
       overlay.classList.add('open');
       document.body.style.overflow='hidden';
       setTimeout(function(){input.focus();if(input.value.trim())doSearch(input,results);else showRecent()},100);
     })});
+    var closeBtn=document.getElementById('mobileSearchClose');if(closeBtn)closeBtn.addEventListener('click',closeOverlay);
     overlay.addEventListener('click',function(e){
       if(e.target===overlay)closeOverlay();
     });
@@ -1770,6 +1777,44 @@ try{(function(){
   menu.addEventListener('click',function(e){if(e.target===menu||e.target.closest('[data-mobile-menu-link]'))close()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
 })();}catch(e){console.warn('Mobile menu init failed:',e)}
+
+/* Desktop catalogue controls and card-size chooser. This consumes the cart
+   registry so size, price and availability stay tied to products.json. */
+try{(function(){
+  var sizes=['3ml','5ml','7.5ml','10ml','20ml','30ml'];
+  function money(n){return '\u20b9'+Number(n||0).toLocaleString('en-IN')}
+  function setupCard(card){
+    if(card.querySelector('.pc-size-pills'))return;
+    var d=card._cartData||((window._products||{})[card.getAttribute('data-pid')]);
+    if(!d||!d.prices)return;
+    var wrap=document.createElement('div');wrap.className='pc-size-pills';wrap.setAttribute('aria-label','Choose decant size');
+    var chosen=-1;
+    d.prices.forEach(function(price,i){
+      var ok=!!(d.available&&d.available[i]);if(chosen<0&&ok)chosen=i;
+      var b=document.createElement('button');b.type='button';b.className='pc-size-pill';b.textContent=sizes[i];b.disabled=!ok;b.setAttribute('aria-pressed','false');b.setAttribute('data-i',i);wrap.appendChild(b);
+    });
+    function select(i){if(i<0||!d.available[i])return;chosen=i;wrap.querySelectorAll('.pc-size-pill').forEach(function(b){b.setAttribute('aria-pressed',Number(b.getAttribute('data-i'))===i?'true':'false')});var from=card.querySelector('.pc-from b');if(from)from.textContent=money(d.prices[i]);}
+    wrap.addEventListener('click',function(e){var b=e.target.closest('.pc-size-pill');if(!b)return;select(Number(b.getAttribute('data-i')))});
+    var priceLine=card.querySelector('.pc-price-line');if(priceLine)priceLine.before(wrap);select(chosen);
+    var add=card.querySelector('.pc-add');
+    if(add&&!add.disabled){
+      add.removeAttribute('data-open');
+      add.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(chosen>=0&&window.__iramAddToCart)window.__iramAddToCart(d.brand,d.frag,sizes[chosen],d.prices[chosen],1)});
+    }
+  }
+  document.querySelectorAll('.frag-card').forEach(setupCard);
+  document.querySelectorAll('[data-catalogue-view]').forEach(function(btn){btn.addEventListener('click',function(){var table=btn.getAttribute('data-catalogue-view')==='table';document.body.classList.toggle('catalogue-table',table);document.querySelectorAll('[data-catalogue-view]').forEach(function(b){b.setAttribute('aria-pressed',b===btn?'true':'false')})})});
+  var top=document.getElementById('backToTop');if(top){window.addEventListener('scroll',function(){top.classList.toggle('visible',window.scrollY>600)},{passive:true});top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})})}
+  function syncCount(){var n=0;try{n=(JSON.parse(localStorage.getItem('iram_cart')||'[]')||[]).reduce(function(sum,x){return sum+(Number(x.qty)||1)},0)}catch(e){};['desktopCartCount','mobileCartHeadCount','cartFloatCount'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=n})}
+  syncCount();document.addEventListener('click',function(){setTimeout(syncCount,0)});
+  var brandTrack=document.getElementById('mobileBrandTrack');
+  if(brandTrack&&!brandTrack.querySelector('.brand-all')){
+    var all=document.createElement('button');all.type='button';all.className='mobile-brand-chip brand-all';all.textContent='All fragrances';all.setAttribute('aria-label','Browse all fragrances');
+    all.addEventListener('click',function(){var catalogue=document.getElementById('catalogue');if(catalogue)catalogue.scrollIntoView({behavior:'smooth',block:'start'})});brandTrack.appendChild(all);
+  }
+  var catalogue=document.getElementById('catalogue');
+  if(catalogue&&'IntersectionObserver' in window){var observed=false;new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting&&!observed){observed=true;catalogue.classList.add('catalogue-attention');setTimeout(function(){catalogue.classList.remove('catalogue-attention')},2500)}})},{threshold:.35}).observe(catalogue)}
+})();}catch(e){console.warn('Desktop storefront init failed:',e)}
 
 try{(function(){
   var nav=document.getElementById('mobileNav');

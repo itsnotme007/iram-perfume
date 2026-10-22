@@ -1,778 +1,782 @@
 {
   "frag:bvlgari-man-in-black-parfum": {
-    "sig": "220c26bd9db4739ad772a527",
+    "sig": "372cd75821b6b1899eed8dbd",
     "mod": "2026-10-22"
   },
   "frag:davidoff-cool-water-edt": {
-    "sig": "5ed527c7ad75dd7de02b0299",
+    "sig": "0aa76e7e7bd2c21a8a367e49",
     "mod": "2026-10-22"
   },
   "frag:jaguar-classic-black": {
-    "sig": "f85ae7a2542f1e8584c93f77",
+    "sig": "5b577a1f5d252be29fbb71e1",
     "mod": "2026-10-22"
   },
   "frag:mancera-cedrat-boise": {
-    "sig": "10d59c145b9214458f94a4ea",
+    "sig": "9dd5dddaa3428f698e4e13ab",
     "mod": "2026-10-22"
   },
   "frag:mancera-cosmic-pepper": {
-    "sig": "3cb6cc40c5f04cae35f26b54",
+    "sig": "17f83055958b5b254f9be8d5",
     "mod": "2026-10-22"
   },
   "frag:mancera-french-riviera": {
-    "sig": "6b0c8f3fc64a09361cccc7ef",
+    "sig": "98ae960f07594ead92e64b84",
     "mod": "2026-10-22"
   },
   "frag:mancera-instant-crush": {
-    "sig": "a36e1810dee03b4bdcb3fd0b",
+    "sig": "6b73559fefb12a825d7eeae0",
     "mod": "2026-10-22"
   },
   "frag:mancera-gold-intensive-aoud": {
-    "sig": "9ec3b4081ec94047ba0bcb3f",
+    "sig": "6dcc2090898e3d199b292b32",
     "mod": "2026-10-22"
   },
   "frag:versace-the-dreamer": {
-    "sig": "86c859bc21b79c7c74af368d",
+    "sig": "279b03a19365825e7784dd58",
     "mod": "2026-10-22"
   },
   "frag:afnan-9-pm-night-out": {
-    "sig": "ce1cb5b905fbea48aff42a9a",
+    "sig": "ff920daa656c09c6ae03f98b",
     "mod": "2026-10-22"
   },
   "frag:afnan-lynked-forever": {
-    "sig": "4825e3a9c45ef9c1990199ba",
+    "sig": "51ccdaebaacc28e02b237dd5",
     "mod": "2026-10-22"
   },
   "frag:afnan-lynked-freedom": {
-    "sig": "c1e79305074bb3caf9842e39",
+    "sig": "2eba23ec4301a6ecf37b6eb4",
     "mod": "2026-10-22"
   },
   "frag:afnan-modest-une-pour-homme": {
-    "sig": "19d8ad1cdd6a0d2e98bfe839",
+    "sig": "1720c6abe4d978bd59c79916",
     "mod": "2026-10-22"
   },
   "frag:afnan-rare-reef": {
-    "sig": "4ab84d06e104c20a4ac308ab",
+    "sig": "6aaee4a6ddb866f226be8fdd",
     "mod": "2026-10-22"
   },
   "frag:afnan-snoi-supremacy-not-only-intense": {
-    "sig": "e390d3541893bcc17bb88c30",
+    "sig": "541cc309f7dcf3ee173ffb0c",
     "mod": "2026-10-22"
   },
   "frag:afnan-supremacy-collector-s-edition": {
-    "sig": "c37b82b3f034374dd16233af",
+    "sig": "9c1549f9bececf565e72035c",
     "mod": "2026-10-22"
   },
   "frag:afnan-supremacy-incense": {
-    "sig": "ade50bdbede6d79f52413cee",
+    "sig": "bdb668b7503f2ef4e47b711d",
     "mod": "2026-10-22"
   },
   "frag:afnan-turathi-blue": {
-    "sig": "e9d84f8aa3c939de2e77add1",
+    "sig": "d1d8ba85502adb5d611ee84f",
     "mod": "2026-10-22"
   },
   "frag:afnan-9-pm-elixir": {
-    "sig": "df42e92a40aeac792e34818c",
+    "sig": "5eecb9ef4f68a6dea9117437",
     "mod": "2026-10-22"
   },
   "frag:afnan-9-pm-og": {
-    "sig": "33ae150ce2e52b2e196d011d",
+    "sig": "d2e8eaab3ea37ba68aff09eb",
     "mod": "2026-10-22"
   },
   "frag:afnan-9-pm-rebel": {
-    "sig": "a5a9bb000d051201e7c27ec8",
+    "sig": "fd0d87fa0ac31a21e0cc308e",
     "mod": "2026-10-22"
   },
   "frag:afnan-turathi-brown": {
-    "sig": "8101c42d939154a2c398eaf4",
+    "sig": "550828454d36098584677f51",
     "mod": "2026-10-22"
   },
   "frag:afnan-historic-sahara": {
-    "sig": "92b1731540634bccd59f93f8",
+    "sig": "ce709072bf5d949971c18d2c",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-black-fume": {
-    "sig": "c3b192fdd9ec78a2968bdf87",
+    "sig": "f52ba539fd63502eb8ca6e9d",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-blu-oud": {
-    "sig": "1dbe438e92a816a8b33a8578",
+    "sig": "e8dac4eb26e99eded23c4ff8",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-blue-by-ahmed": {
-    "sig": "3d1460f01f06a334b4deb274",
+    "sig": "58fad235ba834fdefd8d509b",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-kaaf": {
-    "sig": "814e022694076852cae1eb7f",
+    "sig": "c227b4a0abe759661b6a5385",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-kaaf-noir": {
-    "sig": "fc29990c5ffa70ec6ca1a1fa",
+    "sig": "a079d8b0af55f0310c718aa4",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-leather": {
-    "sig": "f590bf13c34d4c9ee7123103",
+    "sig": "dfbdbbea3bd0729b609a5e3b",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-muzn": {
-    "sig": "b534696a700493b7e0af8c6a",
+    "sig": "78496b739bc84d846ceae2f4",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-zeleny": {
-    "sig": "cc1b16e7c4436105883d7b9a",
+    "sig": "f6060af5710d4c77169629b5",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-laathani": {
-    "sig": "6676fc6970d8ae9ab8fc44b2",
+    "sig": "8098143f17d24040c86b41c3",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-marj": {
-    "sig": "5fd39d05b77f205e062a081c",
+    "sig": "9cdccbdc91c9e4814acaa055",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-rose-noir": {
-    "sig": "ba5c2dc30d0434dfe1e036f0",
+    "sig": "5201c33e89ae907a2c7dae5e",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-ignite-oud": {
-    "sig": "b2885c31a31712d60024e023",
+    "sig": "1b2268aa4e78fffa89fdf689",
     "mod": "2026-10-22"
   },
   "frag:ahmed-al-maghribi-ghaf": {
-    "sig": "3c7eb0bf3b20adf9475c010c",
+    "sig": "11aba5951c33ad6ebf28b03a",
     "mod": "2026-10-22"
   },
   "frag:al-majed-oud-boisee": {
-    "sig": "fa04a4495d010ebdcd5d2efb",
+    "sig": "c0afbbf3d08f178f7dfc1b54",
     "mod": "2026-10-22"
   },
   "frag:albait-aldimashqi-l-nuit": {
-    "sig": "6842417717e50366b6409cc4",
+    "sig": "cf96e259f5614453d8168f99",
     "mod": "2026-10-22"
   },
   "frag:albait-aldimashqi-y-edp": {
-    "sig": "7a2aa60702401b5853a3c6c3",
+    "sig": "b054360d90a4c8b5caef919e",
     "mod": "2026-10-22"
   },
   "frag:albait-aldimashqi-gentlemen-reserve-priv-e": {
-    "sig": "b9947571fba49cf22c7ab433",
+    "sig": "d85250fbb684da346ea0b138",
     "mod": "2026-10-22"
   },
   "frag:ajmal-wave": {
-    "sig": "136a32ee105fde62257576b0",
+    "sig": "98e75b66b03504b9b2a57764",
     "mod": "2026-10-22"
   },
   "frag:arabiyat-prestige-midnight-oud-al-layl": {
-    "sig": "80b2e566bfa6985b658a1848",
+    "sig": "7103dc3d42600b95013bd743",
     "mod": "2026-10-22"
   },
   "frag:arabiyat-prestige-oud-al-layal": {
-    "sig": "b5e49ba196abe3eeff7fe539",
+    "sig": "13bdc6e173e0fe3a235632ee",
     "mod": "2026-10-22"
   },
   "frag:arabiyat-prestige-oud-al-layal-aswad": {
-    "sig": "838b9d91c177875614ea2d12",
+    "sig": "c6f2af2d5bfe24fcfec7f06c",
     "mod": "2026-10-22"
   },
   "frag:arabiyat-prestige-raees": {
-    "sig": "452241829c22f23dfdab1764",
+    "sig": "143d20269c328a1d54882aa0",
     "mod": "2026-10-22"
   },
   "frag:arabiyat-prestige-marwa": {
-    "sig": "533a8ef40e3b14592035787d",
+    "sig": "de5bf8c96a2df655b78daa88",
     "mod": "2026-10-22"
   },
   "frag:arabiyat-prestige-marwa-extrait": {
-    "sig": "0570811f3454b55146745b4d",
+    "sig": "0d5a08c0a6e7a9f9d2b0878b",
     "mod": "2026-10-22"
   },
   "frag:arabiyat-prestige-aariz-l-absolu": {
-    "sig": "1f2096306866e60395c95439",
+    "sig": "4ee111b3c0d74bf2fc2b92e8",
     "mod": "2026-10-22"
   },
   "frag:arabiyat-prestige-mahd-al-dhahab": {
-    "sig": "08a1a91369a2de65497e0841",
+    "sig": "15c7f3218e8a76b85347fddb",
     "mod": "2026-10-22"
   },
   "frag:arabiyat-prestige-kohl-opulence": {
-    "sig": "ba225517fb41400a1539c811",
+    "sig": "f341f993268b8cb609507982",
     "mod": "2026-10-22"
   },
   "frag:arabiyat-prestige-la-di-da-for-him": {
-    "sig": "23bb6ba8c28262a44cca1a1d",
+    "sig": "69cfec10e56a33c7118624e0",
     "mod": "2026-10-22"
   },
   "frag:arabiyat-prestige-aristo": {
-    "sig": "84bea78328ce589c24168505",
+    "sig": "e95809426e97e7bcbc511f01",
     "mod": "2026-10-22"
   },
   "frag:armaf-cdnim-pp-club-de-nuit-intense-man-pure-parfum": {
-    "sig": "40d01297a552da9b3d19320d",
+    "sig": "b3f4886a3994e938c2b7c907",
     "mod": "2026-10-22"
   },
   "frag:armaf-dunescape": {
-    "sig": "33fbc9b2a557ccfa39a7dfa2",
+    "sig": "838e40561f0680eb42b1582f",
     "mod": "2026-10-22"
   },
   "frag:armaf-odyssey-mandarin-sky-elixir": {
-    "sig": "1991986e635fe4f24dda59a9",
+    "sig": "91a85257bf9496b68ff0cfdd",
     "mod": "2026-10-22"
   },
   "frag:armaf-overdose": {
-    "sig": "48fd784ce7b6eb1f9a410671",
+    "sig": "2d16b7c4f373e9ae8e08bbd0",
     "mod": "2026-10-22"
   },
   "frag:armaf-odyssey-mega": {
-    "sig": "75bdcc16a6f6da8749ee5ef0",
+    "sig": "064e23fdcc617bf6eb111f98",
     "mod": "2026-10-22"
   },
   "frag:armaf-club-de-nuit-urban-man-elixir": {
-    "sig": "aed301a3463194ef13e4ba6c",
+    "sig": "2d4d4ac79ec1417f685c038f",
     "mod": "2026-10-22"
   },
   "frag:armaf-club-de-nuit-iconic": {
-    "sig": "dc974e6b26ca21045d0d9137",
+    "sig": "5c6b8eb6eb068dff363ccfbc",
     "mod": "2026-10-22"
   },
   "frag:assaf-tobacco-jam-50": {
-    "sig": "03cf2c3e1b2dd88ef2e5acc8",
+    "sig": "b55564ae7e1c1b1cea8c30b7",
     "mod": "2026-10-22"
   },
   "frag:french-avenue-aether-extrait": {
-    "sig": "cb986be2e2ba7c938f0b3c7c",
+    "sig": "bfd5f6c0899cf58bd6851576",
     "mod": "2026-10-22"
   },
   "frag:french-avenue-liquid-brun": {
-    "sig": "33843ed1e946fb46d56b61cf",
+    "sig": "3471620d44b43a26ebedf004",
     "mod": "2026-10-22"
   },
   "frag:french-avenue-spectre-ghost": {
-    "sig": "7d1fd623475d46f9ec288d07",
+    "sig": "d1c438aea727a22c2573aeb2",
     "mod": "2026-10-22"
   },
   "frag:french-avenue-vulcan-feu": {
-    "sig": "b10a5c83058a4a6127e1f3d8",
+    "sig": "40f8aefad6eac71e5b8c1406",
     "mod": "2026-10-22"
   },
   "frag:french-avenue-vulcan-sable": {
-    "sig": "2c118eea790abf70fac2e39b",
+    "sig": "6fcb40baf7b5d06c202017b0",
     "mod": "2026-10-22"
   },
   "frag:french-avenue-aromatix-teas-me": {
-    "sig": "44da86a3cbe6825a3741141b",
+    "sig": "58366c4dd38870104bdd913c",
     "mod": "2026-10-22"
   },
   "frag:french-avenue-zenith-santal": {
-    "sig": "452ea85713fa1fa75fe0e067",
+    "sig": "b29a4ea31cfba2d864660ebc",
     "mod": "2026-10-22"
   },
   "frag:french-avenue-ravine-ice": {
-    "sig": "6d159e240a4659fb9d9993ab",
+    "sig": "9480790e8a61d677a25c0372",
     "mod": "2026-10-22"
   },
   "frag:french-avenue-zenith-blue": {
-    "sig": "753cb69c5f802ac30518ca6b",
+    "sig": "f4a70b3c9950ce457c3df67b",
     "mod": "2026-10-22"
   },
   "frag:fragrance-world-kohl": {
-    "sig": "650ddb3eb5b2e67868040b5c",
+    "sig": "7bead2727aab8ba58f7bb144",
     "mod": "2026-10-22"
   },
   "frag:ibraq-blue-diamond-aqua": {
-    "sig": "2e4972a8af8bb7c458d64bea",
+    "sig": "8b10211e7fb40a75bf98bdce",
     "mod": "2026-10-22"
   },
   "frag:ibraq-blue-oud": {
-    "sig": "021a924c15852c93535b72fa",
+    "sig": "54465bc8db6adf845d1ca1eb",
     "mod": "2026-10-22"
   },
   "frag:ibraq-blueberry-musk": {
-    "sig": "03282cd3e8016478bb8755a7",
+    "sig": "a14e1720182e3c15b47c9211",
     "mod": "2026-10-22"
   },
   "frag:ibraq-brazilian-tobacco": {
-    "sig": "d0e1cd907dce861bd3856aeb",
+    "sig": "3dbe7132e74eecdafa72b699",
     "mod": "2026-10-22"
   },
   "frag:ibraq-sandalwood": {
-    "sig": "a2388167bdbcf8af9e3d66d5",
+    "sig": "f10bf7bf57ebc9ba35f7ebb6",
     "mod": "2026-10-22"
   },
   "frag:ibraq-spanish-tobacco": {
-    "sig": "8d3e9b78cdc9bbd651b19b40",
+    "sig": "056e1a397b0241f2f78065ea",
     "mod": "2026-10-22"
   },
   "frag:khadlaj-mocha-latte": {
-    "sig": "7a36b2d8be0f85cc5294edb8",
+    "sig": "cd69a7ceb6bb8381bf84d9d5",
     "mod": "2026-10-22"
   },
   "frag:khadlaj-shiyaaka-snow": {
-    "sig": "8b384edf15f0b4967799389d",
+    "sig": "5534544300c42e94bd7d68f6",
     "mod": "2026-10-22"
   },
   "frag:khadlaj-shiyaaka-shadow": {
-    "sig": "2bc0ef49cc0e0a5fb88e7cdd",
+    "sig": "c969e1539111a3d2a74da2cd",
     "mod": "2026-10-22"
   },
   "frag:khadlaj-island": {
-    "sig": "4064bf25fc62e6199ec0fa34",
+    "sig": "4e2329cdaac6b361b8d9e5b9",
     "mod": "2026-10-22"
   },
   "frag:lattafa-ana-abiyed-coral": {
-    "sig": "0ccd8bf5d0fd1fac18c78c88",
+    "sig": "144d7780b55d978e6f23ad17",
     "mod": "2026-10-22"
   },
   "frag:lattafa-asad": {
-    "sig": "43b7a8412aea3e77f14c8dfb",
+    "sig": "ee6f78f011ef77999dbb1ffb",
     "mod": "2026-10-22"
   },
   "frag:lattafa-asad-elixir": {
-    "sig": "9bb57b26c8e98bf0c1238eec",
+    "sig": "f052a9eb3075d9df600e3891",
     "mod": "2026-10-22"
   },
   "frag:lattafa-habik": {
-    "sig": "0b404a28c3160e719aa46f1f",
+    "sig": "4a09eae6feab97526b2605ff",
     "mod": "2026-10-22"
   },
   "frag:lattafa-khamrah": {
-    "sig": "fa38d592051e15349c2b2b3a",
+    "sig": "109e96a39cf2ea2d90dd9b05",
     "mod": "2026-10-22"
   },
   "frag:lattafa-khamrah-dukhan": {
-    "sig": "6758538e38a71062f8dd436f",
+    "sig": "1493031295d8d04c153e1e22",
     "mod": "2026-10-22"
   },
   "frag:lattafa-khamrah-qahwa": {
-    "sig": "42d52f01720e88256031301b",
+    "sig": "6ccd772048120182edb17d80",
     "mod": "2026-10-22"
   },
   "frag:lattafa-kingdom": {
-    "sig": "16ae661ee8e109c4f72fce73",
+    "sig": "bbeb66358963ee25b6e4c88b",
     "mod": "2026-10-22"
   },
   "frag:lattafa-maahir-gold": {
-    "sig": "3d3e065c1d4b8efd547d8fec",
+    "sig": "a7606aa27b9fb26b5bf267c2",
     "mod": "2026-10-22"
   },
   "frag:lattafa-maahir-legacy": {
-    "sig": "04f9e7717f6b7a427971d7c7",
+    "sig": "a857916b3f9ffdf818fc2fbb",
     "mod": "2026-10-22"
   },
   "frag:lattafa-qaed-al-fursan": {
-    "sig": "ba4980a05159db82458c1d2f",
+    "sig": "b0e94748de9006bfa1d66226",
     "mod": "2026-10-22"
   },
   "frag:lattafa-raghba-wood-intense": {
-    "sig": "8f653d9449920646375ab020",
+    "sig": "7c3d98bdc8a5d3e81ceb0d18",
     "mod": "2026-10-22"
   },
   "frag:lattafa-rave-now-rouge": {
-    "sig": "5f5a45a544964eb38267dc90",
+    "sig": "317892e06562c40f3f8ef103",
     "mod": "2026-10-22"
   },
   "frag:lattafa-sehr": {
-    "sig": "9922075acf377b34c6e2f19e",
+    "sig": "aa753c03249c9ddb785f4cca",
     "mod": "2026-10-22"
   },
   "frag:lattafa-sherif": {
-    "sig": "73f3c17cc737825a766bcb59",
+    "sig": "3e68c7a076061e60f0c45e2e",
     "mod": "2026-10-22"
   },
   "frag:lattafa-teriaq-intense": {
-    "sig": "b9880197da1f89337d01502c",
+    "sig": "48553674007f09c07fe1acf8",
     "mod": "2026-10-22"
   },
   "frag:lattafa-jasoor": {
-    "sig": "b78ad98f91a277f8581f9aec",
+    "sig": "842078ff842579645312e5f5",
     "mod": "2026-10-22"
   },
   "frag:lattafa-raghba": {
-    "sig": "06107075409524bc36288a00",
+    "sig": "17e1a3e5749a2be7bad705cc",
     "mod": "2026-10-22"
   },
   "frag:lattafa-al-nashama-caprice": {
-    "sig": "35169cb20aa39f016727a4d6",
+    "sig": "ebd72fa51757c68936d96fe4",
     "mod": "2026-10-22"
   },
   "frag:lattafa-badee-al-oud-amethyst": {
-    "sig": "9dde15b4683ffbed69c0a6a7",
+    "sig": "8161f0de6734f7a3f9298bc4",
     "mod": "2026-10-22"
   },
   "frag:lattafa-badee-al-oud-amethyst-fusion": {
-    "sig": "f61c30f580377b290c1935bf",
+    "sig": "eafcbf728e69265d8e6f1f0a",
     "mod": "2026-10-22"
   },
   "frag:lattafa-fahad": {
-    "sig": "645bc01019c9cb366de60957",
+    "sig": "64c32138dcd72f43236bd43d",
     "mod": "2026-10-22"
   },
   "frag:laverne-blue-laverne-sport": {
-    "sig": "a0be879587fcde6e44c30203",
+    "sig": "e3cdf4c17f521e1f286bee7c",
     "mod": "2026-10-22"
   },
   "frag:mykonos-glitch": {
-    "sig": "c33c9ed2846cede3d7085b64",
+    "sig": "3ee3fa0d2e605ff3881d0de2",
     "mod": "2026-10-22"
   },
   "frag:mykonos-reflection": {
-    "sig": "8a6b18a07f8ffa7ad2c30795",
+    "sig": "6c4bac9e363421553f6b6739",
     "mod": "2026-10-22"
   },
   "frag:nusuk-al-mukhtalif-silver": {
-    "sig": "f6224d8c589ad991f62ef912",
+    "sig": "67bc9b243711c86470139e8b",
     "mod": "2026-10-22"
   },
   "frag:nusuk-al-mukhtalif-signature": {
-    "sig": "5b37586d1615ed40d24f9af9",
+    "sig": "d9d8f299e7c4946c7e509636",
     "mod": "2026-10-22"
   },
   "frag:paris-corner-rifaqaat": {
-    "sig": "e4d6c687f8e54be06b25fff1",
+    "sig": "b48bab76c5c43e516e21563b",
     "mod": "2026-10-22"
   },
   "frag:paris-corner-rifaqaat-adorn": {
-    "sig": "3db09f92217a5178510568a7",
+    "sig": "cee18fdca5f6202d490f15ae",
     "mod": "2026-10-22"
   },
   "frag:paris-corner-mawj-moscow-mule": {
-    "sig": "5e83ae4b1b5b483682b88895",
+    "sig": "02ce836c2ebad345bbd3011f",
     "mod": "2026-10-22"
   },
   "frag:paris-corner-confidential": {
-    "sig": "eb6d0bbdd545b92701dc1e33",
+    "sig": "3044cb3700d30dbcfc348d75",
     "mod": "2026-10-22"
   },
   "frag:pendora-scents-vanilla-tobacco": {
-    "sig": "c0f7f647c273964282359639",
+    "sig": "868dddc562fa42c1c2ffaad8",
     "mod": "2026-10-22"
   },
   "frag:rasasi-daarej-pour-homme": {
-    "sig": "da696dc461e7c3bbb45333e2",
+    "sig": "18b4c071fac6fe7678c6929a",
     "mod": "2026-10-22"
   },
   "frag:rasasi-fattan": {
-    "sig": "b260dcaa310f496699b38fc4",
+    "sig": "a4b2b205c46a6e1f6a20119e",
     "mod": "2026-10-22"
   },
   "frag:rasasi-hawas-black": {
-    "sig": "511888a0c71bf5465737e7c9",
+    "sig": "0c96c2f410e5e8e6a848a074",
     "mod": "2026-10-22"
   },
   "frag:rasasi-hawas-fire": {
-    "sig": "819aa035e24efa38bcf9cd47",
+    "sig": "3db22327ead167bc1be6cfe0",
     "mod": "2026-10-22"
   },
   "frag:rasasi-hawas-ice": {
-    "sig": "a488179b417eb2d616300ec0",
+    "sig": "2d8957e806c44bfa1bdc00ca",
     "mod": "2026-10-22"
   },
   "frag:rasasi-hawas-kobra": {
-    "sig": "5933733fe616a2fcc89ce975",
+    "sig": "585528478945db69eea51ea1",
     "mod": "2026-10-22"
   },
   "frag:rasasi-hawas-og": {
-    "sig": "e9c2803e5466c74916877681",
+    "sig": "27be1528f0aa0711a4be161b",
     "mod": "2026-10-22"
   },
   "frag:rasasi-hawas-venom": {
-    "sig": "4607b0f2df6e385e8ff7b93f",
+    "sig": "55ba5e70cee315aaf11d5298",
     "mod": "2026-10-22"
   },
   "frag:rasasi-hawas-sapphire": {
-    "sig": "4a479a5f7a224aae2db8a448",
+    "sig": "0b5e3bb654e084403203699d",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-aquatica": {
-    "sig": "c27f49c03f298ff2e824bd9e",
+    "sig": "f55c327326d423e45f2c2a00",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-crimson": {
-    "sig": "96064223e42b68c4f374f049",
+    "sig": "2944bb60a621273e2942eb57",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-elixir": {
-    "sig": "c52fc175589787eadd906bba",
+    "sig": "b9e971c5b6c77120262aee7e",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-jungle-vibe": {
-    "sig": "fc8272b8f91d8fa54cd3fc4c",
+    "sig": "500a966e541d1cb133be0d30",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-nocturno": {
-    "sig": "135dd7d442b22ee35ac9dca7",
+    "sig": "bc2f6105ea67cb0c7fbf5a92",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-nocturno-elixir": {
-    "sig": "b38f89d21397bd3c3b44ed79",
+    "sig": "dcc7fda88075d2fb5fba2c5e",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-obsidian": {
-    "sig": "09760163cef67ee6a6f91aa5",
+    "sig": "a15cb3a2ab9a57bf3be45e8e",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-pacific": {
-    "sig": "f2e995f68157abf676bc18fe",
+    "sig": "096d39deddf7afaa9f41c3aa",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-terra": {
-    "sig": "74f156e9d761d1d8c9083bae",
+    "sig": "b92b41cf4eed362c7679225a",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-valhalla": {
-    "sig": "4bac5b9bb0ad000b471440a5",
+    "sig": "1be5f44324ab7554303e9fe4",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-wolf": {
-    "sig": "ce83aeb9ef6c26d968bcd221",
+    "sig": "4bcd0ed30023987eb3639025",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-lion": {
-    "sig": "e2dc443e93a9226478b51196",
+    "sig": "604f8e7730ab81242e0f940f",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-pacific-aura": {
-    "sig": "d1fdaebd96681ea4d8586a42",
+    "sig": "333ac757347f1990cd1e15ff",
     "mod": "2026-10-22"
   },
   "frag:rayhaan-italia": {
-    "sig": "228424f5f48ad3e02e3e3660",
+    "sig": "4973b8917ba7275eab65270d",
     "mod": "2026-10-22"
   },
   "frag:reef-reef-33": {
-    "sig": "49338afad6fffbffd7efa517",
+    "sig": "9073c9600b9d640a765c57bd",
     "mod": "2026-10-22"
   },
   "frag:riiffs-season-rise": {
-    "sig": "97fe9bda9d933e03776c3490",
+    "sig": "4dddc47416b11769ca0bbfcd",
     "mod": "2026-10-22"
   },
   "frag:riiffs-costa-de-amalfi": {
-    "sig": "da68e12852f6de5309242e80",
+    "sig": "077ef9a8e0e0e0441e34eb45",
     "mod": "2026-10-22"
   },
   "frag:riiffs-fareed": {
-    "sig": "16aa3a1ff05505fddb1c7704",
+    "sig": "60f0eb4182b85280d2092beb",
     "mod": "2026-10-22"
   },
   "frag:riiffs-freeze": {
-    "sig": "a601d372738e71f43ab27adb",
+    "sig": "1ef29bdb1bd661a1bd382c1b",
     "mod": "2026-10-22"
   },
   "frag:riiffs-momento": {
-    "sig": "fd1b8bf89b955f542241ed66",
+    "sig": "9116b1bd72ecadd70439c5d8",
     "mod": "2026-10-22"
   },
   "frag:riiffs-season-drift": {
-    "sig": "1f4203b27e6fc306ec350e45",
+    "sig": "68e2d563fe3337c66dbd4aeb",
     "mod": "2026-10-22"
   },
   "frag:riiffs-freeze-in-flames": {
-    "sig": "eced0c69e692c377a44487c8",
+    "sig": "8f1a59a74ceed4163486e1b0",
     "mod": "2026-10-22"
   },
   "frag:riiffs-priv-platinum-silver": {
-    "sig": "3c6d3b1e9fb20447f8b81f49",
+    "sig": "7427c9a8d64517309be449d9",
     "mod": "2026-10-22"
   },
   "frag:swiss-arabian-enigma-of-taif": {
-    "sig": "d47692c0100531f089a93366",
+    "sig": "ea15ae08f2a988adf08db795",
     "mod": "2026-10-22"
   },
   "frag:swiss-arabian-incense-01": {
-    "sig": "b00cf569bc4c6fb6f4b52197",
+    "sig": "360b84890a9f8280acece504",
     "mod": "2026-10-22"
   },
   "frag:swiss-arabian-shaghaf-oud": {
-    "sig": "6c3b48d5eba700742d2b47c9",
+    "sig": "87b1b1e2a52cff8858b1a4f7",
     "mod": "2026-10-22"
   },
   "frag:swiss-arabian-shaghaf-oud-tonka": {
-    "sig": "bbb393cd59846218cb0f1bd1",
+    "sig": "0d9784f8f467c2b061b63d56",
     "mod": "2026-10-22"
   },
   "frag:swiss-arabian-soul-of-bali": {
-    "sig": "5fc7292c89c6df8f5f88c65e",
+    "sig": "17acb1a6a45aa40be94dd779",
     "mod": "2026-10-22"
   },
   "frag:swiss-arabian-vanilla-01": {
-    "sig": "2dbaa496e36326f9ec12c524",
+    "sig": "cb11207a05f3d4d0c52357e8",
     "mod": "2026-10-22"
   },
   "frag:zimaya-mazaaj-rhythm": {
-    "sig": "8cef483692989e65aa85840e",
+    "sig": "b77842f13f7a90e8e9e08896",
     "mod": "2026-10-22"
   },
   "article:summer-decants-under-500": {
-    "sig": "aa3128ed80e9624676fb62f8",
+    "sig": "e2b9f23b915e9080ae7eb862",
     "mod": "2026-10-22"
   },
   "article:winter-date-night-decants-under-500": {
-    "sig": "1b5a0e53d6c78e333f4c2066",
+    "sig": "082322f799c7fb7443d688d9",
     "mod": "2026-10-22"
   },
   "article:decant-vs-full-bottle": {
-    "sig": "f6cb8231b0c1f3912aed9481",
+    "sig": "fa22c8452eff7b0b8f528a3e",
     "mod": "2026-10-22"
   },
   "article:make-perfume-last-longer": {
-    "sig": "1571fb43f281bd9d4a68de88",
+    "sig": "e285c5113084cf8783a9aed3",
     "mod": "2026-10-22"
   },
   "home": {
-    "sig": "533534ddd8e4bde9916bade9",
+    "sig": "cc271be9b60ed0efe563cbc0",
     "mod": "2026-10-22"
   },
   "frag:albait-aldimashqi-special-ombre-leather": {
-    "sig": "8e5473891c867f016b9aca90",
+    "sig": "863aee6981250cff255d46c1",
     "mod": "2026-10-22"
   },
   "frag:khadlaj-shiyaaka-sky": {
-    "sig": "93071e0101cb252e2199bea9",
+    "sig": "d2d2d486c628bea6d937ed22",
     "mod": "2026-10-22"
   },
   "frag:khadlaj-karus-gold-absolu": {
-    "sig": "ab585bf4a3e3076ee443ca9e",
+    "sig": "f2d0bdd2aa32230f3b9a7085",
     "mod": "2026-10-22"
   },
   "frag:riiffs-portofino-noir": {
-    "sig": "11a24dd9b325e3c2e0bdbfa7",
+    "sig": "8a3813e2edd380f3e3e879a6",
     "mod": "2026-10-22"
   },
   "frag:ysl-myself": {
-    "sig": "1f525d5ac07370680124b37d",
+    "sig": "a7c4dd39df87f3e7a9d51661",
     "mod": "2026-10-22"
   },
   "frag:azzaro-most-wanted-parfum": {
-    "sig": "2a4bebf516c4cb51063dda1f",
+    "sig": "f9b7404bf0df06a8ad85804f",
     "mod": "2026-10-22"
   },
   "frag:calvin-klein-one": {
-    "sig": "26c818e5646016afd3b8a9d4",
+    "sig": "2b4e3b328294e239b16cda63",
     "mod": "2026-10-22"
   },
   "frag:mancera-red-tobacco": {
-    "sig": "e289b44f9b1964bc12102076",
+    "sig": "32c37633ac05e11bcc77823c",
     "mod": "2026-10-22"
   },
   "frag:montblanc-individuel": {
-    "sig": "48b2b5c2db3303c84ba151e5",
+    "sig": "d52dc1a4c6efc412c3f6dc6b",
     "mod": "2026-10-22"
   },
   "frag:versace-eros": {
-    "sig": "4ac78b70e1f75cd93ab060c5",
+    "sig": "919613b3327170c3e2e25043",
     "mod": "2026-10-22"
   },
   "frag:al-wataniah-kayaan-classic": {
-    "sig": "b5a8f12b5bc6411fb9755064",
+    "sig": "7eea0b1db08fe4da549e0130",
     "mod": "2026-10-22"
   },
   "frag:armaf-cdn-intense-ltd-edition": {
-    "sig": "f8a151ba738e2ccdb1fb7c08",
+    "sig": "a373ef7284846201d546367c",
     "mod": "2026-10-22"
   },
   "frag:armaf-spartacus": {
-    "sig": "b80188de1286050f1b258568",
+    "sig": "5a219f67bf99a2697631566a",
     "mod": "2026-10-22"
   },
   "frag:ibraq-black-diamond-incense": {
-    "sig": "f760e1380e91663b52262854",
+    "sig": "30baeed694846407a691c5ae",
     "mod": "2026-10-22"
   },
   "frag:khadlaj-onyx-gold": {
-    "sig": "5041b0b3e9bb076cc6dde1d6",
+    "sig": "0f0fe7b97a881136038427c8",
     "mod": "2026-10-22"
   },
   "frag:maison-alhambra-jean-lowe-immortal": {
-    "sig": "1396083adb2da150f79266e0",
+    "sig": "709a8afbf3135293ef4089d9",
     "mod": "2026-10-22"
   },
   "frag:nusuk-sama": {
-    "sig": "f4551ac890f09912ddc9cb79",
+    "sig": "ab59bbabff5510f9a18a6b54",
     "mod": "2026-10-22"
   },
   "frag:rasasi-hawas-chrome": {
-    "sig": "63ac34896e88d073a6c80f9e",
+    "sig": "a9a8237521c363239c39003a",
     "mod": "2026-10-22"
   },
   "frag:rasasi-hawas-ice-freeze": {
-    "sig": "a9f1c1fba0e78695033429dc",
+    "sig": "37e232f9004bd7433e49f0b6",
     "mod": "2026-10-22"
   },
   "frag:rue-broca-theoreme": {
-    "sig": "813768f4975e4c7721633178",
+    "sig": "d87ba3287d29e90a1dde5ab8",
     "mod": "2026-10-22"
   },
   "frag:assaf-tobacco-jam-60": {
-    "sig": "e8bd91942b9580ba1661eb9a",
+    "sig": "6c121ba6b65979e463369759",
     "mod": "2026-10-22"
   },
   "frag:bvlgari-man-in-black-edp": {
-    "sig": "31d9731576954b159ee88e12",
+    "sig": "c169ca73659cd3d9f26e9b54",
     "mod": "2026-10-22"
   },
   "frag:al-wataniah-kayaan-terra": {
-    "sig": "3336c9ba5354b116c37ce953",
+    "sig": "0d95612bb636b2d637fa5b06",
     "mod": "2026-10-22"
   },
   "frag:armaf-tres-nuit": {
-    "sig": "25ffda134ea7a3238dce5e18",
+    "sig": "4c615b3eaec92b1d1447e9ec",
     "mod": "2026-10-22"
   },
   "frag:dumont-nitro-red": {
-    "sig": "e9bf4ed71ff105e276e7b0b8",
+    "sig": "b85321d8dd46502bc7e151d1",
     "mod": "2026-10-22"
   },
   "frag:french-avenue-liquid-brun-limited-edition": {
-    "sig": "96537a5350a81a992783a6a0",
+    "sig": "2e727d33ce3be2dc0dea6e23",
     "mod": "2026-10-22"
   },
   "frag:mykonos-inception": {
-    "sig": "de3c2e67c6e74ed4ceaefc7e",
+    "sig": "a00693eef8e70fbcf1ab4519",
     "mod": "2026-10-22"
   },
   "frag:mykonos-slow-living": {
-    "sig": "b93e2bcbfee92cf2e4d8ff16",
+    "sig": "d71241d7fb79691fecc7ee7a",
     "mod": "2026-10-22"
   },
   "frag:mykonos-reflection-elixir": {
-    "sig": "bdee13a73c4d42d01d3fd205",
+    "sig": "ea594554847d2e9e1a930250",
     "mod": "2026-10-22"
   },
   "frag:riiffs-momento-liquid-gold": {
-    "sig": "be321eae2bcf32a7f0599549",
+    "sig": "128c357afd623011890759be",
     "mod": "2026-10-22"
   },
   "frag:zimaya-sharaf-divine": {
-    "sig": "4ce3b36f0dc43302c6905069",
+    "sig": "ce94df556d12dfb6e3d3fc9b",
     "mod": "2026-10-22"
   },
   "frag:zimaya-fatima": {
-    "sig": "90d86eff1b673929cacbad6b",
+    "sig": "87c6ce12f9310af322d24a4a",
     "mod": "2026-10-22"
   },
   "frag:zimaya-tiramisu-caramel": {
-    "sig": "9f4ddee1fa9a7f57cf31fe33",
+    "sig": "a6b70ae46cc6ea5b45286f70",
     "mod": "2026-10-22"
   },
   "frag:zimaya-tiramisu-s-mores": {
-    "sig": "e28fcdb8abde02877590cda4",
+    "sig": "1d5ef427eaa4e88c0adeaf91",
     "mod": "2026-10-22"
   },
   "frag:assaf-wild-colt-tobacco": {
-    "sig": "012ecd79fe226c06eb86ebcb",
+    "sig": "2652bdd5a949a590eaa3fb70",
     "mod": "2026-10-22"
   },
   "frag:laverne-king-tobacco": {
-    "sig": "904aab1c8c9acc7df3afb09c",
+    "sig": "c63663045de3ffc31b658d24",
     "mod": "2026-10-22"
   },
   "frag:laverne-la-dor-bakhur": {
-    "sig": "9c9468a51c093aa64726d052",
+    "sig": "fc2c408e91d8fd650334a8f1",
     "mod": "2026-10-22"
   },
   "frag:swiss-arabian-opulence-of-dubai": {
-    "sig": "3d2c7c53330a7ce9978188c7",
+    "sig": "64938d01c240d523567de525",
+    "mod": "2026-10-22"
+  },
+  "contact": {
+    "sig": "6b0d15acfaa4552e18e87f18",
     "mod": "2026-10-22"
   }
 }

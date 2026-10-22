@@ -75,9 +75,7 @@ test('gender filter narrows results (desktop UI / mobile URL)', async ({ page },
     expect(state.allMen).toBe(true);
   } else {
     await page.goto('/');
-    await page.click('#filterTrigger');
     await page.click('.filter-btn[data-gender="Men"]');
-    await page.click('#filterApply');
     const rows = page.locator('#filterResults tbody tr');
     await expect(rows.first()).toBeVisible();
     await expect(page.locator('#filterCount')).toHaveText(/\d+ fragrances? found/);
@@ -125,9 +123,7 @@ test('taxonomy filter options return matches (gym + new moods)', async ({ page }
 test('add to cart works from filtered desktop results', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'desktop table filter flow');
   await page.goto('/');
-  await page.click('#filterTrigger');
   await page.click('.filter-btn[data-gender="Men"]');
-  await page.click('#filterApply');
   await page.locator('#filterResults .cart-btn:not([disabled])').first().click();
   await expect(page.locator('#sizeSelector')).toHaveClass(/open/);
   await page.locator('#sizeSelector input[name="ssSize"]').first().check();
@@ -171,6 +167,7 @@ test('table add-to-cart, drawer, clear (desktop)', async ({ page }, testInfo) =>
   test.skip(testInfo.project.name !== 'desktop', 'drawer flow uses the desktop FAB');
   const errs = watchErrors(page);
   await page.goto('/');
+  await page.click('.desktop-view-toggle [data-catalogue-view="table"]');
   await page.locator('.table-wrap .cart-btn:not([disabled])').first().click();
   await expect(page.locator('#sizeSelector')).toHaveClass(/open/);
   await page.locator('#sizeSelector input[name="ssSize"]').first().check();
@@ -254,8 +251,9 @@ test('cart works with cleared storage', async ({ page }) => {
 test('dark-mode unavailable price contrast is >= 3:1', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'table price contrast checked on desktop');
   await page.goto('/');
-  await page.click('#themeToggle');
+  await page.click('.desktop-theme');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await page.click('.desktop-view-toggle [data-catalogue-view="table"]');
   await page.waitForTimeout(700); // let the 0.3s background transition settle
   const ratio = await page.evaluate(() => {
     const el = document.querySelector('.table-wrap .u-price') || document.querySelector('.table-wrap .size-cell s');
