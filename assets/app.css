@@ -86,6 +86,7 @@ tbody td{padding:10px;vertical-align:middle;color:var(--text-body)}
 .filter-trigger:hover{border-color:var(--accent-brand);color:var(--accent-secondary)}
 .filter-trigger[aria-expanded="true"]{border-color:var(--accent-brand);background:var(--bg-hover);color:var(--text-heading)}
 .filter-trigger-n{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:var(--accent-brand);color:#3a2a12;font-size:10.5px;font-weight:800;line-height:1}
+.filter-trigger-n[hidden]{display:none}
 .filter-trigger:focus-visible,.filter-chip:focus-visible,.filter-clear:focus-visible,.filter-apply:focus-visible,.filter-panel-x:focus-visible,.filter-sort:focus-visible,.filter-btn:focus-visible,.pc-sort:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 .filter-bar-end{margin-left:auto;display:flex;align-items:center;gap:10px}
 .filter-count{font-size:12.5px;font-weight:500;color:var(--text-muted);white-space:nowrap}
@@ -301,6 +302,9 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 .search-overlay-close{display:flex;width:44px;height:44px;margin:0 0 8px auto;border:none;background:var(--bg-elevated);color:var(--text-primary);border-radius:50%;font-size:20px;cursor:pointer;align-items:center;justify-content:center;font-family:inherit}
 .search-overlay-close:hover{background:var(--bg-hover)}
 .search-overlay-close:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+.theme-ico-sun{display:none}
+[data-theme="dark"] .theme-ico-moon{display:none}
+[data-theme="dark"] .theme-ico-sun{display:inline-block}
 .mobile-search-trigger{display:none;position:fixed;bottom:80px;right:16px;width:48px;height:48px;border-radius:50%;background:var(--gradient-primary);color:var(--text-on-dark);border:none;font-size:20px;cursor:pointer;z-index:998;box-shadow:0 4px 16px rgba(0,0,0,.25);align-items:center;justify-content:center}
 @media(max-width:768px){
   .search-shortcut{display:none}
@@ -621,6 +625,12 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 [data-theme="dark"] .pc-gender{background:rgba(22,27,34,.85)}
 .pc-inspired{font-size:10px;color:var(--text-muted);font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
 .pc-price-line{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:auto}
+.pc-size-pills{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.pc-size-pill{min-height:32px;border:1px solid var(--border-strong);border-radius:7px;padding:4px 7px;background:var(--bg-surface);color:var(--text-primary);font:700 11px var(--font-ui);font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pc-size-pill:hover{border-color:var(--accent-brand);background:var(--bg-hover)}
+.pc-size-pill[aria-pressed=true]{border-color:var(--accent-brand);background:var(--bg-hover);color:var(--text-heading)}
+.pc-size-pill:disabled{opacity:.42;cursor:not-allowed}
+.pc-size-pill:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 .pc-from{font-size:11px;color:var(--text-muted)}
 .pc-from b{color:var(--text-heading);font-size:13px}
 .pc-30{font-size:10.5px;color:var(--text-muted);white-space:nowrap}
@@ -644,6 +654,7 @@ tr.pc-sold td{color:var(--text-muted)}
 .pc-filter-pill.active{border-color:var(--accent-brand);color:var(--text-heading);background:var(--bg-hover)}
 .pc-filter-pill:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 .pc-filter-count{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:var(--accent-brand);color:#3a2a12;font-size:10.5px;font-weight:800;line-height:1}
+.pc-filter-count[hidden]{display:none}
 .pc-sort{flex:1;min-height:44px;padding:0 34px 0 14px;border:1px solid var(--border-strong);border-radius:10px;background:var(--bg-surface);color:var(--text-primary);font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237a7168'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
 .pc-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1200}
 .pc-overlay.open{display:block}
@@ -741,7 +752,7 @@ body.pc-lock{overflow:hidden}
 @media(max-width:768px){
   body{padding-top:58px;background:#faf9f7}
   .banner{display:none}
-  .mobile-store-header{position:fixed;inset:0 0 auto;z-index:900;display:grid;grid-template-columns:44px 1fr 44px 44px;align-items:center;height:58px;padding:0 8px;background:rgba(9,12,13,.96);border-bottom:1px solid rgba(212,175,55,.26);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  .mobile-store-header{position:fixed;inset:0 0 auto;z-index:900;display:grid;grid-template-columns:44px 1fr 44px 44px 44px;align-items:center;height:58px;padding:0 8px;background:rgba(9,12,13,.96);border-bottom:1px solid rgba(212,175,55,.26);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
   .mobile-store-header button{width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:#f6f0e5;display:grid;place-items:center;cursor:pointer}
   .mobile-store-brand{justify-self:center;font:700 18px/1 Georgia,serif;letter-spacing:1.4px;color:#f8f1e6;text-decoration:none;white-space:nowrap}
   .mobile-store-header .mobile-cart-head{position:relative;text-decoration:none}
@@ -883,3 +894,8 @@ body.pc-lock{overflow:hidden}
 .cart-btn.cart-btn-so:hover{background:#f1efec;border-color:#d8d3cc}
 [data-theme="dark"] .cart-btn.cart-btn-so{background:#262b2f;color:#9aa3ab;border-color:#3a4148}
 [data-theme="dark"] .cart-btn.cart-btn-so:hover{background:#262b2f;border-color:#3a4148}
+
+/* --- card links: Parfumo left, Fragrantica right --- */
+.card-links,.frag-card .card-links{display:flex;flex-wrap:wrap;gap:5px;align-items:baseline}
+.card-links a[href*="parfumo.com"]{order:-1}
+.card-links a[href*="fragrantica.com"]{order:1}

@@ -669,8 +669,8 @@ try{(function(){
     if(refocus&&trig)trig.focus();
   }
   if(btn)btn.addEventListener('click',function(e){e.preventDefault();openSheet()});
-  if(brandBtn)brandBtn.addEventListener('click',function(e){
-    e.preventDefault();
+  function openBrandFilters(e){
+    if(e){e.preventDefault();e.stopPropagation()}
     var mob=window.innerWidth<=1023;
     if(mob)openSheet();else openPanel();
     setTimeout(function(){
@@ -680,7 +680,10 @@ try{(function(){
       var first=g.querySelector('.filter-btn:not(.active)');
       if(first&&mob===false)first.focus();
     },80);
-  });
+  }
+  if(brandBtn)brandBtn.addEventListener('click',openBrandFilters);
+  var navBrand=document.getElementById('desktopNavBrands');
+  if(navBrand)navBrand.addEventListener('click',openBrandFilters);
   if(trig)trig.addEventListener('click',function(e){
     e.preventDefault();
     e.stopPropagation();
@@ -1460,7 +1463,7 @@ try{(function(){
   var toggles=document.querySelectorAll('#themeToggle,[data-theme-toggle]');
   var stored=null;try{stored=localStorage.getItem('theme')}catch(e){}
   var prefersDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;
-  function setIcon(dark){if(btn)btn.innerHTML=dark?'&#9788;':'&#9789;';toggles.forEach(function(t){if(t!==btn)t.textContent=dark?'Use light mode':'Use dark mode'})}
+  function setIcon(dark){if(btn)btn.innerHTML=dark?'&#9788;':'&#9789;'}
   if(stored==='dark'||(!stored&&prefersDark)){root.setAttribute('data-theme','dark');setIcon(true)}
   toggles.forEach(function(toggle){toggle.addEventListener('click',function(){
     var isDark=root.getAttribute('data-theme')==='dark';
