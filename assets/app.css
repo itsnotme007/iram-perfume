@@ -633,6 +633,9 @@ mark.highlight{background:var(--highlight-bg);color:inherit;padding:0 1px;border
 .pc-from{font-size:11px;color:var(--text-muted)}
 .pc-from b{color:var(--text-heading);font-size:13px}
 .pc-30{font-size:10.5px;color:var(--text-muted);white-space:nowrap}
+.pc-fsz{display:none}
+.pc-rmax{display:none;font-size:10px;color:var(--text-muted);white-space:nowrap}
+.pc-rmax b{color:var(--text-heading);font-size:13px}
 .pc-add{min-height:40px;border:none;border-radius:8px;background:#2e7d32;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
 .pc-add:hover{background:#1b5e20}
 .pc-add-so{background:transparent;border:1px solid var(--accent-danger);color:var(--accent-danger);cursor:not-allowed}
@@ -811,6 +814,8 @@ body.pc-lock{overflow:hidden}
   .frag-card .card-inspired{order:3;font-size:9px}
   .frag-card .pc-price-line{order:4}.frag-card .card-links{display:block;order:5;font-size:9.5px;line-height:1.4;margin:0}.frag-card .pc-add{order:6;min-height:34px;font-size:12px;background:#d7a94e;color:#21190f;border-radius:8px}
   .card-brand-name{font-size:10px}.card-brand-logo{max-width:19px;max-height:16px}.pc-from{font-size:10px}.pc-from b{font-size:13px}.pc-30{display:none}
+  .frag-card .pc-price-line.pc-has-range{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+  .frag-card .pc-has-range .pc-fsz{display:inline}.frag-card .pc-has-range .pc-fw{display:none}.frag-card .pc-has-range .pc-rmax{display:inline}
   .pc-wish{width:29px;height:29px;font-size:18px}.pc-badge-new{right:42px}.pc-cmp{width:29px;height:29px;top:40px}
   .mobile-cart-bar{position:fixed;right:10px;bottom:calc(64px + env(safe-area-inset-bottom,0px));left:10px;z-index:870;align-items:center;justify-content:space-between;min-height:48px;padding:0 14px;border-radius:12px;background:#211d19;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.22);transform:translateY(12px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
   .mobile-cart-bar.visible{display:flex;opacity:1;transform:translateY(0);pointer-events:auto}.mobile-cart-bar span{font-size:12px;font-weight:700}.mobile-cart-bar button{border:0;background:transparent;color:#e4c86e;font:800 12px inherit;cursor:pointer;min-height:44px;padding:0 4px}
@@ -894,7 +899,7 @@ body.pc-lock{overflow:hidden}
 [data-theme="dark"] .cart-btn.cart-btn-so{background:#262b2f;color:#9aa3ab;border-color:#3a4148}
 [data-theme="dark"] .cart-btn.cart-btn-so:hover{background:#262b2f;border-color:#3a4148}
 
-/* --- card links: Parfumo left, Fragrantica right --- */
-.card-links,.frag-card .card-links{display:flex;flex-wrap:wrap;gap:5px;align-items:baseline}
-.card-links a[href*="parfumo.com"]{order:-1}
-.card-links a[href*="fragrantica.com"]{order:1}
+/* --- card links: Fragrantica left, Parfumo right (spread across the full row) --- */
+.card-links,.frag-card .card-links{display:flex;flex-wrap:wrap;justify-content:space-between;gap:5px;align-items:baseline}
+.card-links a[href*="fragrantica.com"]{order:-1}
+.card-links a[href*="parfumo.com"]{order:1}

@@ -193,6 +193,7 @@ try{(function(){
   function slugify(brand,name){return(brand+'-'+name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
   function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
   function fmt(n){return n?('\u20B9'+Number(n).toLocaleString('en-IN')):''}
+  var szLabels=['3ml','5ml','7.5ml','10ml','20ml','30ml'];
   document.querySelectorAll('.table-wrap').forEach(function(wrap){
     var table=wrap.querySelector('.frag-table');
     if(!table)return;
@@ -247,8 +248,8 @@ try{(function(){
       var linksHtml=lc?lc.innerHTML:'';
       var pid=bName+'|'+fName;
       var slug=nameA?nameA.getAttribute('href').replace(/^fragrance\//,'').replace(/\.html$/,''):slugify(bName,fName);
-      var minAvail=null;
-      for(var i=0;i<prices.length;i++){if(available[i]&&(minAvail===null||prices[i]<minAvail))minAvail=prices[i]}
+      var minAvail=null,minIdx=-1,maxIdx=-1,nAvail=0;
+      for(var i=0;i<prices.length;i++){if(available[i]){if(minAvail===null||prices[i]<minAvail)minAvail=prices[i];if(minIdx<0)minIdx=i;maxIdx=i;nAvail++}}
       var badges='';
       if(isSO){badges+='<span class="pc-badge pc-badge-so">SOLD OUT</span>'}
       else if(isCS){badges+='<span class="pc-badge pc-badge-cs">COMING SOON</span>'}
@@ -281,9 +282,10 @@ try{(function(){
         +'<div class="card-top">'+(bSrc?'<img src="'+esc(bSrc)+'" alt="" class="card-brand-logo" loading="lazy">':'')+'<span class="card-brand-name">'+esc(bName)+'</span></div>'
         +'<button type="button" class="card-frag-name pc-name" data-open>'+esc(fName)+'</button>'
         +slotHtml
-        +'<div class="pc-price-line">'
-        +'<span class="pc-from">from <b>'+fmt(minAvail)+'</b></span>'
+        +'<div class="pc-price-line'+(minIdx>=0?' pc-has-range':'')+'">'
+        +'<span class="pc-from">'+(minIdx>=0?'<span class="pc-fsz">'+szLabels[minIdx]+'</span>':'')+'<span class="pc-fw">from</span> <b>'+fmt(minAvail)+'</b></span>'
         +(available[5]?'<span class="pc-30">30ml '+fmt(prices[5])+'</span>':'')
+        +(nAvail>1?'<span class="pc-rmax">'+szLabels[maxIdx]+' <b>'+fmt(prices[maxIdx])+'</b></span>':'')
         +'</div>'
         +(linksHtml?'<div class="card-links">'+linksHtml+'</div>':'')
         +'<button type="button" class="pc-add'+(isSO?' pc-add-so':isCS?' pc-add-cs':'')+'" data-open '+(isSO||isCS?'disabled':'')+'>'+(isSO?'SOLD OUT':isCS?'COMING SOON':'Add')+'</button>';
@@ -1765,7 +1767,7 @@ try{(function(){
       var ok=!!(d.available&&d.available[i]);if(chosen<0&&ok)chosen=i;
       var b=document.createElement('button');b.type='button';b.className='pc-size-pill';b.textContent=sizes[i];b.disabled=!ok;b.setAttribute('aria-pressed','false');b.setAttribute('data-i',i);wrap.appendChild(b);
     });
-    function select(i){if(i<0||!d.available[i])return;chosen=i;wrap.querySelectorAll('.pc-size-pill').forEach(function(b){b.setAttribute('aria-pressed',Number(b.getAttribute('data-i'))===i?'true':'false')});var from=card.querySelector('.pc-from b');if(from)from.textContent=money(d.prices[i]);}
+    function select(i){if(i<0||!d.available[i])return;chosen=i;wrap.querySelectorAll('.pc-size-pill').forEach(function(b){b.setAttribute('aria-pressed',Number(b.getAttribute('data-i'))===i?'true':'false')});var from=card.querySelector('.pc-from b');if(from)from.textContent=money(d.prices[i]);var fsz=card.querySelector('.pc-fsz');if(fsz)fsz.textContent=sizes[i];}
     wrap.addEventListener('click',function(e){var b=e.target.closest('.pc-size-pill');if(!b)return;select(Number(b.getAttribute('data-i')))});
     var priceLine=card.querySelector('.pc-price-line');if(priceLine)priceLine.before(wrap);select(chosen);
     var add=card.querySelector('.pc-add');

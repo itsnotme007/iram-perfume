@@ -966,8 +966,8 @@ function renderCards(cat) {
     const gTag = pr.gender || '';
     const prices = SIZES6.map((k) => pr.prices[k] || 0);
     const available = SIZES6.map((k) => pr.statusPerSize[k] === 'ok');
-    let minAvail = null;
-    for (let i = 0; i < prices.length; i++) if (available[i] && (minAvail === null || prices[i] < minAvail)) minAvail = prices[i];
+    let minAvail = null, minIdx = -1, maxIdx = -1, nAvail = 0;
+    for (let i = 0; i < prices.length; i++) if (available[i]) { if (minAvail === null || prices[i] < minAvail) minAvail = prices[i]; if (minIdx < 0) minIdx = i; maxIdx = i; nAvail++; }
     const fmt = (n) => n ? ('\u20B9' + Number(n).toLocaleString('en-IN')) : '';
     const iText = cardDec(pr.inspired).replace(/\s+/g, ' ').trim();
     const famTxt = pr.family ? pr.family.split(',').slice(0, 2).join(' \u00b7 ') : '';
@@ -999,9 +999,10 @@ function renderCards(cat) {
       + '<span class="card-brand-name">' + cardEsc(pr.brand) + '</span></div>'
       + '<button type="button" class="card-frag-name pc-name" data-open>' + cardEsc(pr.name) + '</button>'
       + slotHtml
-      + '<div class="pc-price-line">'
-      + '<span class="pc-from">from <b>' + fmt(minAvail) + '</b></span>'
+      + '<div class="pc-price-line' + (minIdx >= 0 ? ' pc-has-range' : '') + '">'
+      + '<span class="pc-from">' + (minIdx >= 0 ? '<span class="pc-fsz">' + SIZES6[minIdx] + 'ml</span>' : '') + '<span class="pc-fw">from</span> <b>' + fmt(minAvail) + '</b></span>'
       + (available[5] ? '<span class="pc-30">30ml ' + fmt(prices[5]) + '</span>' : '')
+      + (nAvail > 1 ? '<span class="pc-rmax">' + SIZES6[maxIdx] + 'ml <b>' + fmt(prices[maxIdx]) + '</b></span>' : '')
       + '</div>'
       + ((pr.linksRaw || pr.links) ? '<div class="card-links">' + (pr.linksRaw || pr.links) + '</div>' : '')
       + '<button type="button" class="pc-add' + (isSO ? ' pc-add-so' : isCS ? ' pc-add-cs' : '') + '" data-open ' + (isSO || isCS ? 'disabled' : '') + '>'
