@@ -816,7 +816,8 @@ body.pc-lock{overflow:hidden}
   .card-brand-name{font-size:10px}.card-brand-logo{max-width:19px;max-height:16px}.pc-from{font-size:10px}.pc-from b{font-size:13px}.pc-30{display:none}
   .frag-card .pc-price-line.pc-has-range{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
   .frag-card .pc-has-range .pc-fsz{display:inline}.frag-card .pc-has-range .pc-fw{display:none}.frag-card .pc-has-range .pc-rmax{display:inline}
-  .pc-wish{width:29px;height:29px;font-size:18px}.pc-badge-new{right:42px}.pc-cmp{width:29px;height:29px;top:40px}
+  .pc-wish{width:29px;height:29px;font-size:18px}.pc-badge-new{top:auto;bottom:7px;left:7px;right:auto}.pc-cmp{width:29px;height:29px;top:40px}
+  .frag-card.pc-new .pc-gender{bottom:27px}
   .mobile-cart-bar{position:fixed;right:10px;bottom:calc(64px + env(safe-area-inset-bottom,0px));left:10px;z-index:870;align-items:center;justify-content:space-between;min-height:48px;padding:0 14px;border-radius:12px;background:#211d19;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.22);transform:translateY(12px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
   .mobile-cart-bar.visible{display:flex;opacity:1;transform:translateY(0);pointer-events:auto}.mobile-cart-bar span{font-size:12px;font-weight:700}.mobile-cart-bar button{border:0;background:transparent;color:#e4c86e;font:800 12px inherit;cursor:pointer;min-height:44px;padding:0 4px}
   .mobile-cart-bar .mcb-thumbs{display:flex;gap:5px;margin-right:auto;padding-right:8px}
@@ -903,3 +904,6 @@ body.pc-lock{overflow:hidden}
 .card-links,.frag-card .card-links{display:flex;flex-wrap:wrap;justify-content:space-between;gap:5px;align-items:baseline}
 .card-links a[href*="fragrantica.com"]{order:-1}
 .card-links a[href*="parfumo.com"]{order:1}
+
+/* --- new-fragrance highlight: thin champagne-gold ring + soft glow on the card (driven by the NEW badge window) --- */
+.frag-card.pc-new{border-color:rgba(212,175,55,.65);box-shadow:0 0 0 1px rgba(212,175,55,.22),0 12px 28px -14px rgba(212,175,55,.55),inset 0 1px 0 rgba(212,175,55,.2)}

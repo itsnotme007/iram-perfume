@@ -1,5 +1,5 @@
 
-try{(function(){var NEW_MS=window.IRAM_NEW_DAYS_MS||7*864e5;var now=new Date();document.querySelectorAll('.frag-cell[data-added]').forEach(function(c){var added=new Date(c.getAttribute('data-added'));if(now-added<NEW_MS&&!c.querySelector('.tag-new')){var t=document.createElement('span');t.className='tag tag-new';t.textContent='NEW';c.appendChild(t)}else if(now-added>=NEW_MS){c.removeAttribute('data-added')}});document.querySelectorAll('.frag-card[data-added]').forEach(function(card){var added=new Date(card.getAttribute('data-added')),fresh=!isNaN(added)&&(now-added)<NEW_MS;var badge=card.querySelector('.pc-badge-new');if(fresh&&!badge){var b=document.createElement('span');b.className='pc-badge pc-badge-new';b.textContent='NEW';var media=card.querySelector('.pc-media');if(media){var w=media.querySelector('.pc-wish');media.insertBefore(b,w||null)}}else if(!fresh){if(badge)badge.remove();card.removeAttribute('data-added')}})})();}catch(e){console.warn('NEW tag init failed:',e)}
+try{(function(){var NEW_MS=window.IRAM_NEW_DAYS_MS||7*864e5;var now=new Date();document.querySelectorAll('.frag-cell[data-added]').forEach(function(c){var added=new Date(c.getAttribute('data-added'));if(now-added<NEW_MS&&!c.querySelector('.tag-new')){var t=document.createElement('span');t.className='tag tag-new';t.textContent='NEW';c.appendChild(t)}else if(now-added>=NEW_MS){c.removeAttribute('data-added')}});document.querySelectorAll('.frag-card[data-added]').forEach(function(card){var added=new Date(card.getAttribute('data-added')),fresh=!isNaN(added)&&(now-added)<NEW_MS;var badge=card.querySelector('.pc-badge-new');if(fresh){if(!badge){var b=document.createElement('span');b.className='pc-badge pc-badge-new';b.textContent='NEW';var media=card.querySelector('.pc-media');if(media){var w=media.querySelector('.pc-wish');media.insertBefore(b,w||null)}}card.classList.add('pc-new')}else{if(badge)badge.remove();card.removeAttribute('data-added');card.classList.remove('pc-new')}})})();}catch(e){console.warn('NEW tag init failed:',e)}
 
 try{(function(){
   var cats=['brand','gender','scent','season','occasion','time','weather','mood','family','price'];
@@ -266,6 +266,7 @@ try{(function(){
         if(gTag)card.setAttribute('data-gender',gTag);
       if(isSO)row.classList.add('pc-sold');
       if(fc.getAttribute('data-added'))card.setAttribute('data-added',fc.getAttribute('data-added'));
+      if(isNew)card.classList.add('pc-new');
       var famTxt=fc.getAttribute('data-family')?fc.getAttribute('data-family').split(',').slice(0,2).join(' · '):'';
       var slotInsp=(iText||'').replace(/\s+/g,' ').trim();
       var showInsp=!!(slotInsp&&slotInsp.length>1&&slotInsp!=='Original');
