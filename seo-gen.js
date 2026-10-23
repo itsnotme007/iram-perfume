@@ -12,19 +12,21 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = __dirname;
 const IDX = path.join(ROOT, 'index.html');
-const BASE = 'https://iramperfume.in';
+const CFG = require(path.join(ROOT, 'config.js'));
+const BASE = CFG.base;
 // The sole builder for absolute URLs belonging to this site. It accepts paths
 // with or without a leading slash and guarantees exactly one after the origin.
 const siteUrl = (pathname = '') => BASE + '/' + String(pathname).replace(/^\/+/, '');
 const LEGACY_SITE_RE = new RegExp('https://[^/]+/' + ['iram', 'perfume'].join('-'), 'g');
-const PHONE_DISPLAY = '+91 93555 33509';
-const PHONE_TEL = '+919355533509';
-const EMAIL = 'perfumeiram@gmail.com';
-const WA = 'https://chat.whatsapp.com/JSWEIoCsFd96wzlRAeaewe';
+const PHONE_DISPLAY = CFG.phoneDisplay;
+const PHONE_TEL = CFG.phoneTel;
+const EMAIL = CFG.email;
+const WA = CFG.whatsappCommunity;
 const IG = 'https://instagram.com/iram.perfume';
-// keep in sync with FREE_SHIP_MIN / FREE_SHIP_MIN_QTY in index.html
-const FREE_SHIP_MIN = 999;
-const FREE_SHIP_MIN_QTY = 2;
+// shared single source of truth with assets/app.js (see config.js)
+const FREE_SHIP_MIN = CFG.freeShipMin;
+const FREE_SHIP_MIN_QTY = CFG.freeShipMinQty;
+const SHIPPING_FLAT = CFG.shippingFlat;
 const FREE_SHIP_ABOVE = 'free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants';
 const TODAY = new Date().toISOString().slice(0, 10);
 const waLink = t => 'https://wa.me/' + PHONE_TEL.replace('+', '') + '?text=' + encodeURIComponent(t);
@@ -67,7 +69,7 @@ const HOME_FAQS = [
   ['Do you sell full perfume bottles too?',
    'Yes. We source genuine 30ml, 50ml and 100ml bottles for most fragrances in our catalogue on request. Full-bottle prices and availability are confirmed over WhatsApp before you pay.'],
   ['Do you provide free shipping on orders?',
-   'Yes — shipping is free on orders of ' + FREE_SHIP_MIN_QTY + '+ decants above \u20b9' + FREE_SHIP_MIN + '. Every other order ships at a flat \u20b9100.'],
+   'Yes — shipping is free on orders of ' + FREE_SHIP_MIN_QTY + '+ decants above \u20b9' + FREE_SHIP_MIN + '. Every other order ships at a flat \u20b9' + SHIPPING_FLAT + '.'],
   ['How do I place an order with IRAM Perfume?',
    'Pick your fragrances and sizes from the price list, then copy your cart or message us directly on WhatsApp at ' + PHONE_DISPLAY + ' or email ' + EMAIL + '. We confirm stock, payment and share the tracking number once dispatched.'],
   ['How long does delivery take across India?',
@@ -348,7 +350,7 @@ function offersFor(pr, opts) {
   const currency = 'INR';
   const shipping = {
     '@type': 'OfferShippingDetails',
-    shippingRate: { '@type': 'MonetaryAmount', value: '100', currency: currency },
+    shippingRate: { '@type': 'MonetaryAmount', value: String(SHIPPING_FLAT), currency: currency },
     shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'IN' },
     deliveryTime: {
       '@type': 'ShippingDeliveryTime',
@@ -734,7 +736,7 @@ function buildArticles() {
     const faqs = [
       ['Which is the best summer perfume under \u20b9500 in India?', 'There is no single best, but the strongest categories are fresh aquatic and citrus scents from our list above. Popular everyday picks include ' + (summer[0] ? summer[0].name + ' by ' + summer[0].brand : 'our fresh summer picks') + '.'],
       ['Do summer decants last less?', 'Fresh perfumes are lighter by nature, so they sit closer to skin. Buying 20\u201330ml decants and reapplying once mid-day is the standard routine.'],
-      ['Is shipping free for a single decant?', 'No \u2014 shipping is free on orders of ' + FREE_SHIP_MIN_QTY + '+ decants above \u20b9' + FREE_SHIP_MIN + '. A single-decant order ships at a flat \u20b9100, so bundle two or more.']
+      ['Is shipping free for a single decant?', 'No \u2014 shipping is free on orders of ' + FREE_SHIP_MIN_QTY + '+ decants above \u20b9' + FREE_SHIP_MIN + '. A single-decant order ships at a flat \u20b9' + SHIPPING_FLAT + ', so bundle two or more.']
     ];
     const inner = '<h2>Why buy summer perfumes as decants?</h2>'
       + '<div class="card"><p>' + hyp(['A 100ml fresh fragrance is a big commitment for only three hot months', 'decants let you rotate 5\u20136 summer scents for the price of one bottle']) + '</p></div>'
@@ -1511,11 +1513,17 @@ function editHomepage(products, faqHtml, articlesHtml) {
   out = out.slice(0, appIdx) + pblock + out.slice(appIdx);
 
   // 10) external asset cache-busters: ?v= = first 12 hex of the file's sha256,
-  //     refreshed on every run so a content edit always busts the cache
-  for (const file of ['assets/app.css', 'assets/app.js']) {
-    const buf = fs.readFileSync(path.join(ROOT, file));
-    const v = crypto.createHash('sha256').update(buf).digest('hex').slice(0, 12);
-    const re = new RegExp('((?:href|src)="' + file.replace(/\//g, '\\/') + '\\?v=)[0-9a-f]+(")');
+  //     refreshed on every run so a content edit always busts the cache.
+  //     config.js must load before app.js (app.js reads IRAM_CONFIG at init).
+  const hashOf = (file) => crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, file))).digest('hex').slice(0, 12);
+  if (!/src="config\.js\?v=/.test(out)) {
+    const appTag = /<script src="assets\/app\.js\?v=[0-9a-z]+"><\/script>/;
+    if (!appTag.test(out)) throw new Error('app.js tag missing (re-run extraction?)');
+    out = out.replace(appTag, '<script src="config.js?v=' + hashOf('config.js') + '"></script>\n$&');
+  }
+  for (const file of ['config.js', 'assets/app.css', 'assets/app.js']) {
+    const v = hashOf(file);
+    const re = new RegExp('((?:href|src)="' + file.replace(/\//g, '\\/') + '\\?v=)[0-9a-z]+(")');
     if (!re.test(out)) throw new Error('asset reference missing for ' + file + ' (re-run extraction?)');
     out = out.replace(re, '$1' + v + '$2');
   }

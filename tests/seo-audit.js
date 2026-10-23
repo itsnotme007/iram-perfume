@@ -189,6 +189,23 @@ try {
 } catch (e) { fail('robots.txt missing'); }
 if (!fs.existsSync(path.join(ROOT, 'llms.txt'))) fail('llms.txt missing');
 
+// shared config: single source for store facts + shipping maths
+try {
+  const cfg = require(path.join(ROOT, 'config.js'));
+  for (const k of ['base', 'phoneDisplay', 'phoneTel', 'email', 'freeShipMin', 'freeShipMinQty', 'shippingFlat']) {
+    if (cfg[k] === undefined || cfg[k] === '') fail('config.js: missing ' + k);
+  }
+  const home = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  const ci = home.indexOf('src="config.js?');
+  const ai = home.indexOf('src="assets/app.js?');
+  if (ci < 0) fail('index.html does not load config.js');
+  else if (ai < 0 || ci > ai) fail('config.js must load before assets/app.js');
+  const appjs = fs.readFileSync(path.join(ROOT, 'assets/app.js'), 'utf8');
+  if (!/IRAM_CONFIG/.test(appjs)) fail('assets/app.js does not read window.IRAM_CONFIG');
+  const gen = fs.readFileSync(path.join(ROOT, 'seo-gen.js'), 'utf8');
+  if (!/require\([^)]*config\.js/.test(gen)) fail('seo-gen.js does not require config.js');
+} catch (e) { fail('config.js missing or unreadable: ' + e.message); }
+
 // report
 for (const w of warnings) console.warn('WARN  ' + w);
 for (const f of failures) console.error('FAIL  ' + f);

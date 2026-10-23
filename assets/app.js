@@ -1198,8 +1198,9 @@ try{(function(){
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
   function totalItems(){var n=0;for(var i=0;i<cart.length;i++)n+=cart[i].qty;return n}
   function subtotal(){var t=0;for(var i=0;i<cart.length;i++)t+=cart[i].price*cart[i].qty;return t}
-  var FREE_SHIP_MIN=999,FREE_SHIP_MIN_QTY=2;
-  function baseShipping(s){return(s>=FREE_SHIP_MIN&&totalItems()>=FREE_SHIP_MIN_QTY)?0:100}
+  var CFG=window.IRAM_CONFIG||{};
+  var FREE_SHIP_MIN=CFG.freeShipMin||999,FREE_SHIP_MIN_QTY=CFG.freeShipMinQty||2,FLAT_SHIP=CFG.shippingFlat||100;
+  function baseShipping(s){return(s>=FREE_SHIP_MIN&&totalItems()>=FREE_SHIP_MIN_QTY)?0:FLAT_SHIP}
   function shipping(s){return baseShipping(s)+surcharge()}
 
   function addToCart(brand,frag,size,price,qty){
