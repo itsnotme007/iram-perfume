@@ -22,7 +22,8 @@ async function main() {
   });
   const urls = [
     ['home', 'http://127.0.0.1:' + PORT + '/index.html'],
-    ['product', 'http://127.0.0.1:' + PORT + '/fragrance/afnan-turathi-brown.html']
+    ['product', 'http://127.0.0.1:' + PORT + '/fragrance/afnan-turathi-brown.html'],
+    ['brand', 'http://127.0.0.1:' + PORT + '/brands/lattafa.html']
   ];
   fs.mkdirSync(OUT_DIR, { recursive: true });
   const summary = {};

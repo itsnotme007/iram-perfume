@@ -401,3 +401,32 @@ test('bottle options page: stats render, chips switch, add to cart survives home
   expect(await cartCount(page)).not.toBe('0');
   expect(errs).toEqual([]);
 });
+
+// ---------------------------------------------------------------- brand pages
+test('brand landing page: products, FAQ, schema and working breadcrumb', async ({ page }) => {
+  const errs = watchErrors(page);
+  await page.goto('/brands/lattafa.html');
+  await expect(page).toHaveTitle(/Lattafa Perfume Decants/);
+  await expect(page.locator('h1')).toContainText('Lattafa');
+  const canon = await page.locator('link[rel="canonical"]').getAttribute('href');
+  expect(canon).toBe('https://iramperfume.in/brands/lattafa.html');
+  const links = page.locator('.grid a.rel[href*="../fragrance/"]');
+  expect(await links.count()).toBeGreaterThan(0);
+  await expect(page.locator('details.qa').first()).toBeVisible();
+  const types = await page.evaluate(() => Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
+    .map((s) => { try { return JSON.parse(s.textContent)['@type']; } catch (e) { return 'invalid'; } }));
+  expect(types).toEqual(expect.arrayContaining(['CollectionPage', 'BreadcrumbList', 'FAQPage']));
+  const href = await links.first().getAttribute('href');
+  const url = href.replace('../', '/');
+  const res = await page.request.get(url);
+  expect(res.status()).toBe(200);
+  expect(errs).toEqual([]);
+});
+
+test('product breadcrumb links to its brand landing page', async ({ page }) => {
+  await page.goto('/fragrance/lattafa-khamrah.html');
+  const brandLink = page.locator('nav.crumbs a[href*="../brands/"]');
+  await expect(brandLink).toHaveAttribute('href', '../brands/lattafa.html');
+  const res = await page.request.get('/brands/lattafa.html');
+  expect(res.status()).toBe(200);
+});
