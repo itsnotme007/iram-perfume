@@ -323,7 +323,7 @@ function offersFor(pr, opts) {
   const currency = 'INR';
   const shipping = {
     '@type': 'OfferShippingDetails',
-    shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: currency },
+    shippingRate: { '@type': 'MonetaryAmount', value: '100', currency: currency },
     shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'IN' },
     deliveryTime: {
       '@type': 'ShippingDeliveryTime',
@@ -439,6 +439,7 @@ function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en') {
     + '.rel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--ink);font-size:14px;display:block}'
     + '.rel b{color:#0f3460}.rel small{display:block;color:var(--muted);margin-top:2px}'
     + '.foot{margin-top:30px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}'
+    + '.crumbs{font-size:12.5px;color:var(--muted);margin-bottom:10px}.crumbs a{color:#0f3460;text-decoration:none}.crumbs a:hover{text-decoration:underline}.crumbs span[aria-hidden]{margin:0 4px}'
     + '</style>\n</head>\n<body>\n<div class="wrap">\n'
     + body
     + '</div>\n</body>\n</html>\n';
@@ -496,6 +497,7 @@ function fragPage(pr) {
   if (ogPng && fs.existsSync(path.join(bottleDir, pr.slug + '.webp'))) bottleImg = '../images/bottles/' + pr.slug + '.webp';
   else if (ogPng) bottleImg = '../images/bottles/' + ogPng;
   const body = ''
+    + '<nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">/</span> <a href="../brands/' + slugify(pr.brand) + '.html">' + esc(pr.brand) + '</a> <span aria-hidden="true">/</span> <span aria-current="page">' + esc(pr.name) + '</span></nav>'
     + '<div class="top"><div><div class="brand-chip">' + esc(pr.brand.toUpperCase()) + '</div><h1>' + esc(pr.name) + ' \u2014 Decant Price in India</h1></div><a href="../index.html">\u2190 Full collection</a></div>'
     + (bottleImg ? '<img src="' + bottleImg + '" alt="' + esc(pr.name) + ' bottle"' + (ogPng ? imgDims('images/bottles/' + ogPng) : '') + ' fetchpriority="high" decoding="async" style="max-width:220px;border-radius:12px;margin:16px 0;display:block' + (pr.status === 'soldout' ? ';filter:grayscale(1);opacity:.55' : '') + '">' : '')
     + '<p class="lead">' + esc(pr.name) + ' by ' + esc(pr.brand) + ' as an authentic decant \u2014 ' + art(scentLine(pr)) + ' ' + esc(scentLine(pr)) + '. ' + esc(inspiredLine(pr)) + '. Ships across India with ' + FREE_SHIP_ABOVE + '.</p>'
@@ -555,7 +557,7 @@ function articleShell(a, innerBody, faqs) {
 }
 function buildArticle(a, innerBody, faqs, pub, mod) {
   const schema = [
-    { '@context': 'https://schema.org', '@type': 'Article', headline: a.title, description: a.desc, datePublished: pub, dateModified: mod, author: { '@type': 'Organization', name: 'IRAM Perfume' }, publisher: { '@type': 'Organization', name: 'IRAM Perfume', url: siteUrl() }, mainEntityOfPage: a.url, url: a.url, image: siteUrl('og-image.jpg') },
+    { '@context': 'https://schema.org', '@type': 'Article', headline: a.title, description: a.desc, datePublished: pub, dateModified: mod, author: { '@type': 'Organization', name: 'IRAM Perfume', url: siteUrl() }, publisher: { '@type': 'Organization', name: 'IRAM Perfume', url: siteUrl(), logo: { '@type': 'ImageObject', url: siteUrl('logo.png'), width: 512, height: 512 } }, mainEntityOfPage: a.url, url: a.url, image: siteUrl('og-image.jpg') },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'IRAM Perfume', item: siteUrl() },
       { '@type': 'ListItem', position: 2, name: a.title, item: a.url }
@@ -1186,7 +1188,8 @@ function editHomepage(products, faqHtml, articlesHtml) {
     '<meta name="description" content="Buy authentic designer &amp; Middle Eastern perfume decants in India \u2014 Davidoff, Mancera, Afnan, Lattafa, Rasasi &amp; more. Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants."'
   );
 
-  // 2) replace ItemList block with all-products version
+  // 2) replace ItemList block with all-products version (ListItem, not Product —
+  // product detail lives on the product pages; this also drops ~150KB of JSON-LD)
   if (!itemListBlock) throw new Error('ItemList block not found');
   const itemListNew = {
     '@context': 'https://schema.org',
@@ -1195,19 +1198,9 @@ function editHomepage(products, faqHtml, articlesHtml) {
     description: 'Premium designer and Middle Eastern fragrance decants available in 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml sizes, plus full bottles on request.',
     url: siteUrl(),
     numberOfItems: products.length,
-    itemListElement: products.map((pr) => {
-      const mm = minMax(pr);
-      return {
-        '@type': 'Product', position: products.indexOf(pr) + 1,
-        name: pr.name + ' \u2014 ' + pr.brand,
-        brand: { '@type': 'Brand', name: pr.brand },
-        description: pr.name + ' by ' + pr.brand + ' decant. ' + capLine(art(scentLine(pr))) + ' ' + scentLine(pr) + '. ' + capLine(inspiredLine(pr)) + '.',
-        image: pr.brandImg ? siteUrl(pr.brandImg) : siteUrl('logo.png'),
-        category: pr.cat || 'Fragrance',
-        url: pr.url,
-        offers: { '@type': 'AggregateOffer', lowPrice: (mm.min || 0).toString(), highPrice: (mm.max || 0).toString(), priceCurrency: 'INR', availability: pr.availability, url: pr.url, offerCount: 5 }
-      };
-    })
+    itemListElement: products.map((pr, i) => ({
+      '@type': 'ListItem', position: i + 1, name: pr.name + ' \u2014 ' + pr.brand, url: pr.url
+    }))
   };
   const itemListJson = '<script type="application/ld+json">\n' + JSON.stringify(itemListNew, null, 2) + '\n</script>\n';
   const ob = [...out.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].find(b => { try { return JSON.parse(b[1]).hasOwnProperty('itemListElement'); } catch (e) { return false; } });
@@ -1217,6 +1210,48 @@ function editHomepage(products, faqHtml, articlesHtml) {
   let obEnd = ob.index + ob[0].length;
   if (out[obEnd] === '\n') obEnd += 1;
   out = out.slice(0, ob.index) + itemListJson + out.slice(obEnd);
+
+  // 2b) Organization + WebSite JSON-LD (rewritten every run, idempotently)
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': siteUrl('#organization'),
+    name: 'IRAM Perfume',
+    url: siteUrl(),
+    logo: { '@type': 'ImageObject', url: siteUrl('logo.png'), width: 512, height: 512 },
+    image: siteUrl('og-image.jpg'),
+    description: 'Authentic designer and Middle Eastern perfume decants in 3ml to 30ml, shipped across India.',
+    email: EMAIL,
+    telephone: PHONE_TEL,
+    areaServed: { '@type': 'Country', name: 'India' },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: PHONE_TEL,
+      contactType: 'customer service',
+      areaServed: 'IN',
+      availableLanguage: ['English', 'Hindi']
+    },
+    sameAs: [IG, WA]
+  };
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': siteUrl('#website'),
+    name: 'IRAM Perfume',
+    url: siteUrl(),
+    publisher: { '@id': siteUrl('#organization') },
+    inLanguage: 'en-IN'
+  };
+  const replaceJsonType = (html, type, obj) => {
+    const re = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
+    const blk = [...html.matchAll(re)].find(b => { try { return JSON.parse(b[1])['@type'] === type; } catch (e) { return false; } });
+    if (!blk) return html;
+    let end = blk.index + blk[0].length;
+    if (html[end] === '\n') end += 1;
+    return html.slice(0, blk.index) + '<script type="application/ld+json">\n' + JSON.stringify(obj, null, 2) + '\n</script>\n' + html.slice(end);
+  };
+  out = replaceJsonType(out, 'Organization', orgSchema);
+  out = replaceJsonType(out, 'WebSite', websiteSchema);
 
   // 4) FAQPage schema + visible FAQ + articles strip (idempotent markers)
   // JSON-LD must contain JSON only; HTML comments make the structured data invalid.
