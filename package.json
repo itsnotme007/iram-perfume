@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node seo-gen.js",
     "og": "node tests/og-cards.js",
+    "indexnow": "node tests/indexnow.js",
     "serve": "node tests/serve.js",
     "test": "playwright test",
     "lighthouse": "node tests/lighthouse.js"

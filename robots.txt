@@ -20,4 +20,5 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+# LLM summary: https://iramperfume.in/llms.txt
 Sitemap: https://iramperfume.in/sitemap.xml

@@ -1450,14 +1450,35 @@ function buildSitemap(products, articles, lm) {
     ...products.map(p => ({ l: p.url, lastmod: lm['frag:' + p.slug] || TODAY, pri: '0.8' }))
   ];
   let x = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-  for (const o of locs) x += '  <url>\n    <loc>' + o.l + '</loc>\n    <lastmod>' + o.lastmod + '</lastmod>\n    <priority>' + o.pri + '</priority>\n  </url>\n';
+  for (const o of locs) x += '  <url>\n    <loc>' + o.l + '</loc>\n    <lastmod>' + o.lastmod + '</lastmod>\n  </url>\n';
   x += '</urlset>\n';
   return x;
 }
 
 // ----------------------------------------------------------------------- llms.txt
-function buildLlmstxt() {
-  let t = '# IRAM Perfume\n\n> Authentic designer and Middle Eastern fragrance decants (3ml, 5ml, 7.5ml, 10ml, 20ml, 30ml) and full bottles, shipped across India. Free shipping above \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.\n\n## Key facts\n- Decants filled from original genuine bottles, proof shared on request\n- Sizes: 3ml / 5ml / 7.5ml / 20ml / 30ml; full bottles on request\n- Order via WhatsApp ' + PHONE_DISPLAY + ' or email ' + EMAIL + '\n- Free shipping on orders above \u20b9' + FREE_SHIP_MIN + ' for ' + FREE_SHIP_MIN_QTY + '+ decants (delivery 3\u20137 working days)\n\n## Link addresses\n- Homepage: ' + siteUrl() + '\n- Fragrance catalogue: ' + siteUrl('#filterBar') + '\n\n## Fragrance catalogue (India decant prices)\n';
+function buildLlmstxt(articles) {
+  articles = articles || [];
+  const brandExists = b => fs.existsSync(path.join(ROOT, 'brands', slugify(b) + '.html'));
+  const brands = [...new Set(products.map(p => p.brand))];
+  let t = '# IRAM Perfume\n\n'
+    + '> IRAM Perfume sells designer and Middle Eastern fragrance decants in India in six sizes \u2014 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml \u2014 plus full bottles on request. Decants are filled from original bottles and shipped across India.\n\n'
+    + '## Key facts\n'
+    + '- Sizes: 3ml / 5ml / 7.5ml / 10ml / 20ml / 30ml; full bottles on request\n'
+    + '- Price range: cheapest decant from ' + rupees(Math.min(...products.map(p => minMax(p).min))) + '; each product page lists all six prices\n'
+    + '- Free shipping on orders above \u20b9' + FREE_SHIP_MIN + ' with ' + FREE_SHIP_MIN_QTY + '+ decants; otherwise flat \u20b9100\n'
+    + '- Delivery: 3\u20137 working days across India\n'
+    + '- Orders and questions: WhatsApp ' + PHONE_DISPLAY + ' or email ' + EMAIL + '\n\n'
+    + '## Key pages\n'
+    + '- Homepage & catalogue: ' + siteUrl() + '\n'
+    + '- Empty bottles: ' + siteUrl('bottles.html') + '\n'
+    + '- Contact: ' + siteUrl('contact.html') + '\n';
+  for (const a of articles) t += '- Guide: ' + a.title + ' \u2014 ' + a.url + '\n';
+  const liveBrands = brands.filter(brandExists);
+  if (liveBrands.length) {
+    t += '\n## Brand pages\n';
+    for (const b of liveBrands) t += '- ' + b + ': ' + siteUrl('brands/' + slugify(b) + '.html') + '\n';
+  }
+  t += '\n## Fragrance catalogue (India decant prices)\n';
   const byBrand = {};
   for (const pr of products) (byBrand[pr.brand] = byBrand[pr.brand] || []).push(pr);
   for (const b of Object.keys(byBrand)) {
@@ -1538,8 +1559,8 @@ function main() {
 
   // 4. sitemap / robots / llms
   writeFileSafe(path.join(ROOT, 'sitemap.xml'), buildSitemap(products, articlesMeta, lastmods));
-  writeFileSafe(path.join(ROOT, 'llms.txt'), buildLlmstxt());
-  const robots = 'User-agent: *\nAllow: /\n\n# AI / answer-engine crawlers\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: ' + siteUrl('sitemap.xml') + '\n';
+  writeFileSafe(path.join(ROOT, 'llms.txt'), buildLlmstxt(articlesMeta));
+  const robots = 'User-agent: *\nAllow: /\n\n# AI / answer-engine crawlers\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\n# LLM summary: ' + siteUrl('llms.txt') + '\nSitemap: ' + siteUrl('sitemap.xml') + '\n';
   writeFileSafe(path.join(ROOT, 'robots.txt'), robots);
   if (DATES_DIRTY) writeFileSafe(DATES_FILE, JSON.stringify(DATES, null, 2) + '\n');
   console.log('sitemap.xml, robots.txt, llms.txt written; content-dates.json', DATES_DIRTY ? 'updated' : 'unchanged');
