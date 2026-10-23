@@ -6,7 +6,7 @@
 //   - every indexable HTML page: <title>, meta description (<=160), one <h1>,
 //     absolute canonical on the production host, og:image + twitter:image
 //   - titles and meta descriptions are unique per page
-//   - all JSON-LD blocks parse; no U+FFFD anywhere
+//   - all JSON-LD blocks parse; no U+FFFD or mojibake anywhere
 //   - all internal href/src targets resolve to a real file
 //   - every <img> has an alt attribute
 //   - sitemap: absolute locs, no <priority>, every loc maps to a file, and every
@@ -96,6 +96,10 @@ for (const file of pages) {
   const noindex = NOINDEX.has(rel) || /noindex/i.test((getMeta(html).robots || ''));
 
   if (html.includes('\uFFFD')) fail(rel + ': contains U+FFFD replacement character');
+  // double-encoded UTF-8: a UTF-8 lead-byte misread (U+00C2-U+00F4) followed by a
+  // continuation-byte misread - catches mangled apostrophes/dashes/rupee signs and
+  // "Â"-style middle dots (classic UTF-8-read-as-cp1252 corruption)
+  if (/[\u00c2-\u00f4][\u0080-\u024f\u2000-\u218f\u2200-\u22ff]/.test(html)) fail(rel + ': contains mojibake (double-encoded UTF-8)');
   if (/TODO\(owner\)/i.test(html)) fail(rel + ': contains an unpublished TODO(owner) marker');
 
   const m = getMeta(html);
