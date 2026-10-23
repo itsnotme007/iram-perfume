@@ -959,3 +959,16 @@ body.pc-lock{overflow:hidden}
 
 /* --- new-fragrance highlight: thin champagne-gold ring + soft glow on the card (driven by the NEW badge window) --- */
 .frag-card.pc-new{border-color:rgba(212,175,55,.65);box-shadow:0 0 0 1px rgba(212,175,55,.22),0 12px 28px -14px rgba(212,175,55,.55),inset 0 1px 0 rgba(212,175,55,.2)}
+
+/* --- a11y: footer is only styled in desktop.css, so below 1024px it rendered unstyled (default blue links on the page bg).
+       Give it the same accent panel at every width, force readable text in dark theme, keep the pressed catalogue
+       toggle readable on light-blue accents, and give the small reference links a 24px tap target. --- */
+.site-footer{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:34px 16px;background:var(--accent-primary);color:#e8e4df}
+.site-footer h2{font:700 17px var(--font-display);margin:0 0 8px;color:#fff}
+.site-footer p{margin:0 0 6px}
+.site-footer p,.site-footer a{display:block;color:#e8e4df;text-decoration:none;font-size:13px;line-height:1.8}
+.site-footer a{padding:4px 0}
+.site-footer a:hover{color:#e4c470}
+[data-theme="dark"] .site-footer{background:#14161c;border-top:1px solid #2a2f36}
+[data-theme="dark"] .mobile-view-toggle button[aria-pressed=true]{color:#0b1220}
+.card-links a,.frag-card .card-links a{display:inline-block;padding:6px 0}

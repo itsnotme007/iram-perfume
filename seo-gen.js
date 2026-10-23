@@ -446,7 +446,7 @@ const PAGE_CSS = [
   '.rel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--ink);font-size:14px;display:block}',
   '.rel b{color:#0f3460}.rel small{display:block;color:var(--muted);margin-top:2px}',
   '.foot{margin-top:30px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}',
-  '.crumbs{font-size:12.5px;color:var(--muted);margin-bottom:10px}.crumbs a{color:#0f3460;text-decoration:none}.crumbs a:hover{text-decoration:underline}.crumbs span[aria-hidden]{margin:0 4px}'
+  '.crumbs{font-size:12.5px;color:var(--muted);margin-bottom:10px}.crumbs a{color:#0f3460;text-decoration:underline;text-underline-offset:2px}.crumbs a:hover{color:#0a2448}.crumbs span[aria-hidden]{margin:0 4px}'
 ].join('\n');
 let PAGE_CSS_VER = 'dev';
 function favicon184() { return '<link rel="icon" type="image/png" href="../logo.png">'; }
