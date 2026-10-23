@@ -5,6 +5,7 @@
   "description": "IRAM Perfume static storefront - build, tests and audit tooling",
   "scripts": {
     "build": "node seo-gen.js",
+    "og": "node tests/og-cards.js",
     "serve": "node tests/serve.js",
     "test": "playwright test",
     "lighthouse": "node tests/lighthouse.js"

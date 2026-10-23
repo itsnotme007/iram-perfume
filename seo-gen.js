@@ -245,8 +245,10 @@ function inspiredLine(pr) {
 // 'a' / 'an' before a scent line (e.g. "an aromatic,fresh; aromatic family")
 const art = s => /^[aeiou]/i.test(String(s || '').trim()) ? 'an' : 'a';
 const capLine = s => { s = String(s || ''); return s.charAt(0).toUpperCase() + s.slice(1); };
-// intrinsic width/height attrs for a local PNG (keeps the unsized-images audit clean
-// without touching CSS sizing); returns '' for anything unreadable.
+// intrinsic width/height attrs for a local image (keeps the unsized-images audit
+// clean without touching CSS sizing); returns '' for anything unreadable.
+// Handles PNG, JPEG (incl. JPEG bytes mislabelled .png), WEBP (RIFF — some logos
+// ship WEBP bytes with a .png extension) and SVG width/height or viewBox.
 function imgDims(rel) {
   try {
     const b = fs.readFileSync(path.join(ROOT, rel));
@@ -261,6 +263,29 @@ function imgDims(rel) {
         if (m === 0xd8 || m === 0x01 || (m >= 0xd0 && m <= 0xd7)) { i += 2; continue; }
         i += 2 + b.readUInt16BE(i + 2);
       }
+    }
+    // WEBP (RIFF....WEBP)
+    if (b.length >= 30 && b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP') {
+      const fourcc = b.toString('ascii', 12, 16);
+      if (fourcc === 'VP8X') {
+        return ' width="' + (b.readUIntLE(24, 3) + 1) + '" height="' + (b.readUIntLE(27, 3) + 1) + '"';
+      }
+      if (fourcc === 'VP8L') {
+        const bits = b.readUInt32LE(21);
+        return ' width="' + ((bits & 0x3fff) + 1) + '" height="' + (((bits >> 14) & 0x3fff) + 1) + '"';
+      }
+      if (fourcc === 'VP8 ') {
+        return ' width="' + (b.readUInt16LE(26) & 0x3fff) + '" height="' + (b.readUInt16LE(28) & 0x3fff) + '"';
+      }
+    }
+    // SVG (may start with a UTF-8 BOM)
+    const head = b.toString('utf8', 0, Math.min(b.length, 600)).replace(/^\uFEFF/, '');
+    if (/<svg\b/i.test(head)) {
+      const w = /\bwidth\s*=\s*["']?\s*([\d.]+)/i.exec(head);
+      const h = /\bheight\s*=\s*["']?\s*([\d.]+)/i.exec(head);
+      if (w && h) return ' width="' + Math.round(+w[1]) + '" height="' + Math.round(+h[1]) + '"';
+      const vb = /viewBox\s*=\s*["']\s*[-\d.]+[\s,]+[-\d.]+[\s,]+([\d.]+)[\s,]+([\d.]+)/i.exec(head);
+      if (vb) return ' width="' + Math.round(+vb[1]) + '" height="' + Math.round(+vb[2]) + '"';
     }
   } catch (e) {}
   return '';
@@ -384,6 +409,44 @@ function fragFAQ(pr) {
 }
 
 // ------------------------------------------------------------- page shell
+// Shared chrome for every generated sub-page (fragrance + articles). Kept in
+// assets/page.css so 190+ pages don't each carry ~4KB of duplicated CSS.
+const PAGE_CSS = [
+  ':root{--bg:#faf9f7;--card:#fff;--ink:#2d2a24;--muted:#7a7168;--accent:#d4af37;--line:#e8e2d9}',
+  '*{box-sizing:border-box;margin:0;padding:0}',
+  'body{font-family:Inter,-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}',
+  '.wrap{max-width:860px;margin:0 auto;padding:24px 18px 60px}',
+  '.top{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap;border-bottom:3px solid var(--accent);padding-bottom:14px;margin-bottom:20px}',
+  '.top a{color:#0f3460;text-decoration:none;font-weight:600;font-size:14px}',
+  '.brand-chip{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#0f3460;font-weight:700}',
+  'h1{font-size:26px;line-height:1.25;margin:6px 0 8px}',
+  '.lead{color:var(--muted);font-size:15px;margin-bottom:18px}',
+  '.pills{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 18px}',
+  '.pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:14px;background:#fff;border:1px solid var(--line);color:#444}',
+  '.pill.g{background:#e3f2fd;color:#1565c0;border:0}.pill.w{background:#fce4ec;color:#c62828;border:0}.pill.u{background:#f3e5f5;color:#7b1fa2;border:0}',
+  '.pill.so{background:#fdecea;color:#c62828;border:0}.pill.cs{background:#e8f5e9;color:#2e7d32;border:0}.pill.new{background:var(--accent);color:#fff;border:0}',
+  '.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}',
+  'table{width:100%;border-collapse:collapse;font-size:14px}',
+  'th{text-align:left;font-size:12px;color:var(--muted);padding:8px 10px;border-bottom:2px solid var(--line);text-transform:uppercase;letter-spacing:.5px}',
+  'td{padding:9px 10px;border-bottom:1px solid #f3efe9}',
+  'td.n{font-weight:700;color:#0f3460}',
+  'td.strike{text-decoration:line-through;color:#999}',
+  'h2{font-size:19px;margin:26px 0 8px;border-bottom:2px solid var(--accent);padding-bottom:6px}',
+  '.cta{background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;border-radius:12px;padding:18px;margin:22px 0;text-align:center}',
+  '.cta h3{font-size:16px;margin-bottom:6px}.cta p{font-size:13px;color:#cfd8e3;margin-bottom:12px}',
+  '.btn{display:inline-block;background:var(--accent);color:#1a1a2e;font-weight:700;text-decoration:none;padding:10px 18px;border-radius:8px;margin:2px 4px;font-size:14px}',
+  '.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff}',
+  'details.qa{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0;background:#fff}',
+  'details.qa summary{cursor:pointer;font-weight:600;font-size:15px;color:#222}',
+  'details.qa p{margin-top:8px;font-size:14px;color:#444}',
+  '.muted{color:var(--muted);font-size:13px}',
+  '.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}',
+  '.rel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--ink);font-size:14px;display:block}',
+  '.rel b{color:#0f3460}.rel small{display:block;color:var(--muted);margin-top:2px}',
+  '.foot{margin-top:30px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}',
+  '.crumbs{font-size:12.5px;color:var(--muted);margin-bottom:10px}.crumbs a{color:#0f3460;text-decoration:none}.crumbs a:hover{text-decoration:underline}.crumbs span[aria-hidden]{margin:0 4px}'
+].join('\n');
+let PAGE_CSS_VER = 'dev';
 function favicon184() { return '<link rel="icon" type="image/png" href="../logo.png">'; }
 function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en') {
   const ogType = (og && og.type) || 'website';
@@ -406,41 +469,9 @@ function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en') {
     + '<meta name="twitter:description" content="' + esc(desc) + '">\n'
     + '<meta name="twitter:image" content="' + esc(ogImage) + '">\n'
     + (schema && schema.length ? schema.map(x => '<script type="application/ld+json">\n' + JSON.stringify(x, null, 2) + '\n</script>\n').join('') : '')
-    + '<link rel="stylesheet" href="../assets/desktop.css">\n<style>'
-    + ':root{--bg:#faf9f7;--card:#fff;--ink:#2d2a24;--muted:#7a7168;--accent:#d4af37;--line:#e8e2d9}'
-    + '*{box-sizing:border-box;margin:0;padding:0}'
-    + 'body{font-family:Inter,-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}'
-    + '.wrap{max-width:860px;margin:0 auto;padding:24px 18px 60px}'
-    + '.top{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap;border-bottom:3px solid var(--accent);padding-bottom:14px;margin-bottom:20px}'
-    + '.top a{color:#0f3460;text-decoration:none;font-weight:600;font-size:14px}'
-    + '.brand-chip{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#0f3460;font-weight:700}'
-    + 'h1{font-size:26px;line-height:1.25;margin:6px 0 8px}'
-    + '.lead{color:var(--muted);font-size:15px;margin-bottom:18px}'
-    + '.pills{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 18px}'
-    + '.pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:14px;background:#fff;border:1px solid var(--line);color:#444}'
-    + '.pill.g{background:#e3f2fd;color:#1565c0;border:0}.pill.w{background:#fce4ec;color:#c62828;border:0}.pill.u{background:#f3e5f5;color:#7b1fa2;border:0}'
-    + '.pill.so{background:#fdecea;color:#c62828;border:0}.pill.cs{background:#e8f5e9;color:#2e7d32;border:0}.pill.new{background:var(--accent);color:#fff;border:0}'
-    + '.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}'
-    + 'table{width:100%;border-collapse:collapse;font-size:14px}'
-    + 'th{text-align:left;font-size:12px;color:var(--muted);padding:8px 10px;border-bottom:2px solid var(--line);text-transform:uppercase;letter-spacing:.5px}'
-    + 'td{padding:9px 10px;border-bottom:1px solid #f3efe9}'
-    + 'td.n{font-weight:700;color:#0f3460}'
-    + 'td.strike{text-decoration:line-through;color:#999}'
-    + 'h2{font-size:19px;margin:26px 0 8px;border-bottom:2px solid var(--accent);padding-bottom:6px}'
-    + '.cta{background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;border-radius:12px;padding:18px;margin:22px 0;text-align:center}'
-    + '.cta h3{font-size:16px;margin-bottom:6px}.cta p{font-size:13px;color:#cfd8e3;margin-bottom:12px}'
-    + '.btn{display:inline-block;background:var(--accent);color:#1a1a2e;font-weight:700;text-decoration:none;padding:10px 18px;border-radius:8px;margin:2px 4px;font-size:14px}'
-    + '.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff}'
-    + 'details.qa{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0;background:#fff}'
-    + 'details.qa summary{cursor:pointer;font-weight:600;font-size:15px;color:#222}'
-    + 'details.qa p{margin-top:8px;font-size:14px;color:#444}'
-    + '.muted{color:var(--muted);font-size:13px}'
-    + '.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}'
-    + '.rel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--ink);font-size:14px;display:block}'
-    + '.rel b{color:#0f3460}.rel small{display:block;color:var(--muted);margin-top:2px}'
-    + '.foot{margin-top:30px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}'
-    + '.crumbs{font-size:12.5px;color:var(--muted);margin-bottom:10px}.crumbs a{color:#0f3460;text-decoration:none}.crumbs a:hover{text-decoration:underline}.crumbs span[aria-hidden]{margin:0 4px}'
-    + '</style>\n</head>\n<body>\n<div class="wrap">\n'
+    + '<link rel="stylesheet" href="../assets/desktop.css">\n'
+    + '<link rel="stylesheet" href="../assets/page.css?v=' + PAGE_CSS_VER + '">\n'
+    + '</head>\n<body>\n<div class="wrap">\n'
     + body
     + '</div>\n</body>\n</html>\n';
 }
@@ -497,8 +528,8 @@ function fragPage(pr) {
   if (ogPng && fs.existsSync(path.join(bottleDir, pr.slug + '.webp'))) bottleImg = '../images/bottles/' + pr.slug + '.webp';
   else if (ogPng) bottleImg = '../images/bottles/' + ogPng;
   const body = ''
-    + '<nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> <span aria-hidden="true">/</span> <a href="../brands/' + slugify(pr.brand) + '.html">' + esc(pr.brand) + '</a> <span aria-hidden="true">/</span> <span aria-current="page">' + esc(pr.name) + '</span></nav>'
-    + '<div class="top"><div><div class="brand-chip">' + esc(pr.brand.toUpperCase()) + '</div><h1>' + esc(pr.name) + ' \u2014 Decant Price in India</h1></div><a href="../index.html">\u2190 Full collection</a></div>'
+    + '<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <a href="../brands/' + slugify(pr.brand) + '.html">' + esc(pr.brand) + '</a> <span aria-hidden="true">/</span> <span aria-current="page">' + esc(pr.name) + '</span></nav>'
+    + '<div class="top"><div><div class="brand-chip">' + esc(pr.brand.toUpperCase()) + '</div><h1>' + esc(pr.name) + ' \u2014 Decant Price in India</h1></div><a href="/">\u2190 Full collection</a></div>'
     + (bottleImg ? '<img src="' + bottleImg + '" alt="' + esc(pr.name) + ' bottle"' + (ogPng ? imgDims('images/bottles/' + ogPng) : '') + ' fetchpriority="high" decoding="async" style="max-width:220px;border-radius:12px;margin:16px 0;display:block' + (pr.status === 'soldout' ? ';filter:grayscale(1);opacity:.55' : '') + '">' : '')
     + '<p class="lead">' + esc(pr.name) + ' by ' + esc(pr.brand) + ' as an authentic decant \u2014 ' + art(scentLine(pr)) + ' ' + esc(scentLine(pr)) + '. ' + esc(inspiredLine(pr)) + '. Ships across India with ' + FREE_SHIP_ABOVE + '.</p>'
     + '<div class="pills">' + pills.join('') + '</div>'
@@ -513,8 +544,11 @@ function fragPage(pr) {
     + '<h2>Frequently Asked Questions</h2>'
     + fragFAQ(pr).map(([q, a]) => '<details class="qa"><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>').join('')
     + '<h2>Similar Fragrances You May Like</h2><div class="grid">' + relLinks + '</div>'
-    + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> \u00b7 <a href="' + WA + '">WhatsApp Community</a> \u00b7 <a href="../index.html">Back to all fragrances</a></div>';
-  const ogImg = ogPng ? siteUrl('images/bottles/' + ogPng) : (pr.brandImg ? siteUrl(pr.brandImg) : siteUrl('logo.png'));
+    + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> \u00b7 <a href="' + WA + '">WhatsApp Community</a> \u00b7 <a href="/">Back to all fragrances</a></div>';
+  const ogCard = path.join(ROOT, 'images', 'og', pr.slug + '.jpg');
+  const ogImg = fs.existsSync(ogCard)
+    ? siteUrl('images/og/' + pr.slug + '.jpg')
+    : (ogPng ? siteUrl('images/bottles/' + ogPng) : (pr.brandImg ? siteUrl(pr.brandImg) : siteUrl('logo.png')));
   let ogDesc = 'Buy ' + pr.name + ' by ' + pr.brand + ' decant in India' + (pr.status === 'instock' ? ' \u2014 from ' + rupees(mm.min) + ' (3ml\u201330ml).' : ' (3ml\u201330ml).');
   const inspBit = capLine(inspiredLine(pr)) + '.';
   const shipBit = ' Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.';
@@ -564,9 +598,9 @@ function buildArticle(a, innerBody, faqs, pub, mod) {
     ] },
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, x]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: x } })) }
   ];
-  const body = '<div class="top"><div><div class="brand-chip">IRAM PERFUME \u00b7 GUIDES</div><h1>' + esc(a.title) + '</h1></div><a href="../index.html">\u2190 Full collection</a></div>'
+  const body = '<div class="top"><div><div class="brand-chip">IRAM PERFUME \u00b7 GUIDES</div><h1>' + esc(a.title) + '</h1></div><a href="/">\u2190 Full collection</a></div>'
     + '<p class="lead">' + esc(a.desc) + '</p>' + innerBody
-    + '<div class="cta"><h3>Shop the Selection</h3><p>Browse the full decant catalogue \u2014 ' + FREE_SHIP_ABOVE + '.</p><a class="btn" href="../index.html">View All Fragrances</a><a class="btn ghost" href="https://wa.me/' + PHONE_TEL.replace('+', '') + '">WhatsApp Us</a></div>'
+    + '<div class="cta"><h3>Shop the Selection</h3><p>Browse the full decant catalogue \u2014 ' + FREE_SHIP_ABOVE + '.</p><a class="btn" href="/">View All Fragrances</a><a class="btn ghost" href="https://wa.me/' + PHONE_TEL.replace('+', '') + '">WhatsApp Us</a></div>'
     + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a></div>';
   return pageShell({ title: a.title, desc: a.desc, canonical: a.url, body, schema, og: { iconPath: '../favicon.png', type: 'article', image: siteUrl('og-image.jpg'), published: pub, modified: mod } });
 }
@@ -582,10 +616,10 @@ function faqBox(faqs) {
 const hyp = parts => parts.filter(Boolean).join(' \u2014 ') + '.';
 
 const articlesMeta = [
-  { slug: 'summer-decants-under-500', pub: '2026-09-10', title: 'Top 10 Summer Decants Under \u20b9500 in India (2026)', desc: 'The best fresh, long-lasting summer perfume decants you can buy in India under \u20b9500 \u2014 perfect for office, daily wear and hot weather.' },
+  { slug: 'summer-decants-under-500', pub: '2026-09-10', title: 'Top 10 Summer Decants Under \u20b9500 in India (2026)', desc: 'Fresh summer perfume decants you can buy in India under \u20b9500 \u2014 picked by season and price for office, daily wear and hot weather.' },
   { slug: 'winter-date-night-decants-under-500', pub: '2026-09-10', title: '10 Best Winter Date-Night Decants Under \u20b9500 in India', desc: 'Warm, sweet and cozy winter evening perfumes at decant prices under \u20b9500 \u2014 perfect for dates, parties and cold nights across India.' },
   { slug: 'decant-vs-full-bottle', pub: '2026-09-10', title: 'Decant vs Full Bottle: What\u2019s Smarter for Testing Perfumes in India?', desc: 'Should you buy a decant or a full 100ml bottle? We break down the per-ml math with real examples so you decide before spending.' },
-  { slug: 'make-perfume-last-longer', pub: '2026-09-10', title: 'How to Make Perfume Last Longer (and Get More from a 30ml Decant)', desc: 'Simple, proven tips to make your perfume last all day \u2014 from storage and pulse-point application to layering. Works for any 30ml decant.' }
+  { slug: 'make-perfume-last-longer', pub: '2026-09-10', title: 'How to Make Perfume Last Longer (and Get More from a 30ml Decant)', desc: 'Practical tips to get more from your perfume \u2014 storage, pulse-point application and layering. Works for any 30ml decant.' }
 ];
 
 function buildArticles() {
@@ -624,7 +658,7 @@ function buildArticles() {
       + productGrid(winter)
       + '<h2>Tips for cold-weather wear</h2>'
       + '<div class="card"><ul style="margin-left:18px">'
-      + '<li>Spray on your sweater \u2014 fabric holds winter gourmands hours longer than skin</li>'
+      + '<li>Spray on your sweater or scarf \u2014 fabric can hold a winter gourmand longer than skin</li>'
       + '<li>Layer a 3ml sample before buying a 30ml decant of the same fragrance</li>'
       + '<li>Store decants away from sunlight and heat to keep them stable across winters</li>'
       + '</ul></div>'
@@ -1253,6 +1287,10 @@ function editHomepage(products, faqHtml, articlesHtml) {
   out = replaceJsonType(out, 'Organization', orgSchema);
   out = replaceJsonType(out, 'WebSite', websiteSchema);
 
+  // 2c) homepage H1: keep the brand but add the primary keyword (one H1 per page)
+  const h1Rich = '<h1>IRAM Perfume <span class="h1-sub">Perfume Decants in India</span></h1>';
+  if (!out.includes('class="h1-sub"')) out = out.replace('<h1>IRAM Perfume</h1>', h1Rich);
+
   // 4) FAQPage schema + visible FAQ + articles strip (idempotent markers)
   // JSON-LD must contain JSON only; HTML comments make the structured data invalid.
   const tagOpen = '<script type="application/ld+json">\n';
@@ -1451,6 +1489,11 @@ function main() {
   console.log('parsed products:', products.length);
   const dup = products.length - new Set(products.map(p => p.key)).size;
   if (dup) console.warn('warning: duplicate keys:', dup);
+
+  // 0. shared sub-page chrome stylesheet (content-addressed ?v= cache-buster)
+  const pageCssPath = path.join(ROOT, 'assets', 'page.css');
+  writeFileSafe(pageCssPath, PAGE_CSS + '\n');
+  PAGE_CSS_VER = crypto.createHash('sha256').update(fs.readFileSync(pageCssPath)).digest('hex').slice(0, 12);
 
   // 1. fragrance pages
   const fragDir = path.join(ROOT, 'fragrance');
