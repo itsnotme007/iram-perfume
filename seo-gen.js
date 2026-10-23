@@ -512,8 +512,17 @@ function fragPage(pr) {
     const sz = ['3', '5', '7.5', '10', '20', '30'][i];
     const v = pr.prices[sz];
     const cls = pr.statusPerSize[sz] === 'struck' || pr.statusPerSize[sz] === 'coming' ? 'strike' : 'n';
-    return '<tr><td>' + k + '</td><td class="' + cls + '">' + (v == null ? '\u2014' : rupees(v)) + '</td></tr>';
+    const perMl = v == null ? '\u2014' : rupees(Math.round(v / Number(sz)));
+    return '<tr><td>' + k + '</td><td class="' + cls + '">' + (v == null ? '\u2014' : rupees(v)) + '</td><td class="muted">' + perMl + '</td></tr>';
   }).join('');
+  const wearBits = [];
+  if (pr.season) wearBits.push(['Season', pr.season]);
+  if (pr.occasion) wearBits.push(['Occasion', pr.occasion]);
+  if (pr.time) wearBits.push(['Time of day', pr.time]);
+  if (pr.weather) wearBits.push(['Weather', pr.weather]);
+  if (pr.family) wearBits.push(['Fragrance family', pr.family]);
+  if (pr.gender) wearBits.push(['Made for', pr.gender]);
+  const wearRows = wearBits.map(([k, v]) => '<p style="margin-top:8px"><strong>' + esc(k) + ':</strong> ' + esc(v) + '.</p>').join('');
   const pills = [];
   if (pr.gender) pills.push('<span class="pill ' + { Men: 'g', Women: 'w', Unisex: 'u' }[pr.gender] + '">' + pr.gender + '</span>');
   pills.push('<span class="pill ' + (pr.status === 'soldout' ? 'so' : pr.status === 'coming' ? 'cs' : '') + '">' + ({ soldout: 'SOLD OUT', coming: 'COMING SOON', instock: 'In Stock' }[pr.status] || '') + '</span>');
@@ -533,7 +542,7 @@ function fragPage(pr) {
     + (bottleImg ? '<img src="' + bottleImg + '" alt="' + esc(pr.name) + ' bottle"' + (ogPng ? imgDims('images/bottles/' + ogPng) : '') + ' fetchpriority="high" decoding="async" style="max-width:220px;border-radius:12px;margin:16px 0;display:block' + (pr.status === 'soldout' ? ';filter:grayscale(1);opacity:.55' : '') + '">' : '')
     + '<p class="lead">' + esc(pr.name) + ' by ' + esc(pr.brand) + ' as an authentic decant \u2014 ' + art(scentLine(pr)) + ' ' + esc(scentLine(pr)) + '. ' + esc(inspiredLine(pr)) + '. Ships across India with ' + FREE_SHIP_ABOVE + '.</p>'
     + '<div class="pills">' + pills.join('') + '</div>'
-    + '<div class="card"><h2 style="margin-top:0">Prices (per ml gets cheaper as size grows)</h2><table><thead><tr><th>Size</th><th>Price</th></tr></thead><tbody>' + priceRows + '</tbody></table><p class="muted" style="margin-top:10px">' + esc(probeAvailability) + '</p></div>'
+    + '<div class="card"><h2 style="margin-top:0">Prices (per ml gets cheaper as size grows)</h2><table><thead><tr><th>Size</th><th>Price</th><th>Per ml</th></tr></thead><tbody>' + priceRows + '</tbody></table><p class="muted" style="margin-top:10px">' + esc(probeAvailability) + '</p></div>'
     + '<div class="cta"><h3>Order ' + esc(pr.name) + ' Today</h3><p>Copy your choice and message us on WhatsApp \u2014 we confirm stock and payment instantly.</p><a class="btn" href="' + waLink('Hi! I want to order a decant of ' + pr.name + ' by ' + pr.brand + ': 5ml \u20b9' + (pr.prices['5'] ?? '?') + ', 20ml \u20b9' + (pr.prices['20'] ?? '?') + ', 30ml \u20b9' + (pr.prices['30'] ?? '?')) + '">Order on WhatsApp</a><a class="btn ghost" href="tel:' + PHONE_TEL + '">Call ' + PHONE_DISPLAY + '</a></div>'
     + '<h2>About ' + esc(pr.name) + '</h2>'
     + '<div class="card"><p><strong>Notes / profile:</strong> ' + esc(scentLine(pr)) + '.</p>'
@@ -541,10 +550,12 @@ function fragPage(pr) {
     + (pr.mood ? '<p style="margin-top:8px"><strong>Mood:</strong> ' + esc(pr.mood) + '.</p>' : '')
     + '<p style="margin-top:8px"><strong>Reminds me of:</strong> ' + esc(pr.inspired && pr.inspired !== '—' && pr.inspired.trim().toLowerCase() !== 'original' ? pr.inspired : 'Original / unique') + '.</p>'
     + (pr.links ? '<p style="margin-top:8px"><strong>References:</strong> ' + pr.links + '</p>' : '') + '</div>'
+    + '<h2>How to wear ' + esc(pr.name) + '</h2><div class="card">' + wearRows
+    + '<p style="margin-top:8px">A 3ml decant is the smallest way to try this scent before committing to a larger size. New to decants? Read the <a href="/articles/decant-vs-full-bottle.html">decant vs full bottle guide</a>, or see <a href="/articles/make-perfume-last-longer.html">how to make perfume last longer</a>.</p></div>'
     + '<h2>Frequently Asked Questions</h2>'
     + fragFAQ(pr).map(([q, a]) => '<details class="qa"><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>').join('')
     + '<h2>Similar Fragrances You May Like</h2><div class="grid">' + relLinks + '</div>'
-    + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> \u00b7 <a href="' + WA + '">WhatsApp Community</a> \u00b7 <a href="/">Back to all fragrances</a></div>';
+    + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> \u00b7 <a href="' + WA + '">WhatsApp Community</a> \u00b7 <a href="/articles/decant-vs-full-bottle.html">Decant guide</a> \u00b7 <a href="/articles/summer-decants-under-500.html">Summer picks</a> \u00b7 <a href="/">Back to all fragrances</a></div>';
   const ogCard = path.join(ROOT, 'images', 'og', pr.slug + '.jpg');
   const ogImg = fs.existsSync(ogCard)
     ? siteUrl('images/og/' + pr.slug + '.jpg')
@@ -568,7 +579,7 @@ function brandPage(brand, items, allBrands) {
   const minP = Math.min(...items.map(p => minMax(p).min));
   const maxP = Math.max(...items.map(p => minMax(p).max));
   const genders = [...new Set(items.map(p => p.gender).filter(Boolean))];
-  const families = [...new Set(items.map(p => p.family).filter(Boolean))].slice(0, 4);
+  const families = [...new Set(items.flatMap(p => String(p.family || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean)))].slice(0, 4);
   const nameList = items.slice(0, 6).map(p => p.name).join(', ') + (items.length > 6 ? ' and more' : '');
   const isDesigner = items.some(p => p.cat === 'Designer');
 
@@ -626,11 +637,11 @@ function brandPage(brand, items, allBrands) {
     + (genders.length ? '<span class="pill">' + esc(genders.join(' / ')) + '</span>' : '')
     + '</div>'
     + '<h2>' + esc(brand) + ' decants &amp; prices</h2><div class="grid">' + cards + '</div>'
-    + (families.length ? '<h2>What ' + esc(brand) + ' smells like</h2><div class="card"><p>' + esc(brand) + ' fragrances in this catalogue lean toward ' + esc(families.join(', ')) + ' families. Open any fragrance page for its notes, best season and occasion, and a full 3ml\u201330ml price list.</p></div>' : '')
+    + (families.length ? '<h2>What ' + esc(brand) + ' smells like</h2><div class="card"><p>' + esc(brand) + ' fragrances in this catalogue lean toward ' + esc(families.map(f => f.charAt(0).toUpperCase() + f.slice(1)).join(', ')) + ' families. Open any fragrance page for its notes, best season and occasion, and a full 3ml\u201330ml price list.</p></div>' : '')
     + '<h2>Frequently Asked Questions</h2>'
     + faqs.map(([q, a]) => '<details class="qa"><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>').join('')
     + '<h2>Explore other brands</h2><div class="grid">' + others + '</div>'
-    + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> \u00b7 <a href="' + WA + '">WhatsApp Community</a> \u00b7 <a href="/">Back to all fragrances</a></div>';
+    + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> \u00b7 <a href="' + WA + '">WhatsApp Community</a> \u00b7 <a href="/articles/decant-vs-full-bottle.html">Decant guide</a> \u00b7 <a href="/articles/summer-decants-under-500.html">Summer picks</a> \u00b7 <a href="/">Back to all fragrances</a></div>';
 
   let desc = 'Shop ' + brand + ' perfume decants in India from ' + rupees(minP) + ' \u2014 ' + items.length + ' fragrance' + (items.length === 1 ? '' : 's') + ', 3ml to 30ml. Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.';
   if (desc.length > 160) desc = 'Shop ' + brand + ' perfume decants in India from ' + rupees(minP) + ' \u2014 3ml to 30ml. Free shipping over \u20b9' + FREE_SHIP_MIN + '.';
