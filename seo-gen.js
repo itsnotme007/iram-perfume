@@ -279,6 +279,93 @@ function priceString(pr) {
   return ['3ml \u20b9' + (pr.prices['3'] ?? '—'), '5ml \u20b9' + (pr.prices['5'] ?? '—'), '7.5ml \u20b9' + (pr.prices['7.5'] ?? '—'), '10ml \u20b9' + (pr.prices['10'] ?? '—'), '20ml \u20b9' + (pr.prices['20'] ?? '—'), '30ml \u20b9' + (pr.prices['30'] ?? '—')].join(' | ');
 }
 
+// The 6 canonical decant sizes, in catalogue order (see AGENTS.md).
+const SIZE_LIST = [
+  { key: '3', label: '3ml' },
+  { key: '5', label: '5ml' },
+  { key: '7.5', label: '7.5ml' },
+  { key: '10', label: '10ml' },
+  { key: '20', label: '20ml' },
+  { key: '30', label: '30ml' }
+];
+const SIZE_LABEL = { '3': '3ml', '5': '5ml', '7.5': '7.5ml', '10': '10ml', '20': '20ml', '30': '30ml' };
+
+// Schema availability per size; struck=OutOfStock, coming=PreOrder, ok=InStock.
+function sizeAvailability(status) {
+  if (status === 'struck') return 'https://schema.org/OutOfStock';
+  if (status === 'coming') return 'https://schema.org/PreOrder';
+  return 'https://schema.org/InStock';
+}
+
+// Top-level product availability: InStock only when at least one size is ok,
+// OutOfStock when every size is struck, PreOrder otherwise.
+function productAvailability(pr) {
+  const vals = SIZE_LIST.map(s => (pr.statusPerSize || {})[s.key] || 'ok');
+  if (vals.every(v => v === 'struck')) return 'https://schema.org/OutOfStock';
+  if (vals.some(v => v === 'ok')) return 'https://schema.org/InStock';
+  return 'https://schema.org/PreOrder';
+}
+
+// Rolling, deterministic priceValidUntil: at least 90 days past the newest
+// content date we know about, so builds stay idempotent (no Date.now()).
+function priceValidUntil() {
+  const mods = Object.keys(DATES).map(k => DATES[k] && DATES[k].mod).filter(Boolean).sort();
+  const base = mods.length ? mods[mods.length - 1] : TODAY;
+  const d = new Date(base + 'T00:00:00Z');
+  d.setUTCDate(d.getUTCDate() + 120);
+  return d.toISOString().slice(0, 10);
+}
+
+// One Offer per size (name, sku, price, availability, url, shipping + returns).
+function offersFor(pr, opts) {
+  opts = opts || {};
+  const validUntil = opts.priceValidUntil || priceValidUntil();
+  const currency = 'INR';
+  const shipping = {
+    '@type': 'OfferShippingDetails',
+    shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: currency },
+    shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'IN' },
+    deliveryTime: {
+      '@type': 'ShippingDeliveryTime',
+      handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
+      transitTime: { '@type': 'QuantitativeValue', minValue: 3, maxValue: 7, unitCode: 'DAY' }
+    }
+  };
+  return SIZE_LIST.filter(s => pr.prices[s.key] != null).map(s => {
+    const st = (pr.statusPerSize || {})[s.key] || 'ok';
+    const offer = {
+      '@type': 'Offer',
+      name: SIZE_LABEL[s.key],
+      sku: pr.slug + '-' + s.key,
+      price: String(pr.prices[s.key]),
+      priceCurrency: currency,
+      url: pr.url,
+      itemCondition: 'https://schema.org/NewCondition',
+      availability: sizeAvailability(st),
+      priceValidUntil: validUntil,
+      seller: { '@type': 'Organization', name: 'IRAM Perfume' },
+      shippingDetails: shipping
+    };
+    return offer;
+  });
+}
+function offersSchema(pr) {
+  const offers = offersFor(pr);
+  if (offers.length === 1) return offers[0];
+  return { '@type': 'AggregateOffer', priceCurrency: 'INR', lowPrice: offers[0].price, highPrice: offers[offers.length - 1].price, offerCount: offers.length, offers: offers, url: pr.url };
+}
+
+// Absolute bottle image URL for a product (webp preferred, png fallback);
+// falls back to the brand logo, then the site logo.
+function bottleUrl(pr) {
+  const bottleDir = path.join(ROOT, 'images', 'bottles');
+  if (fs.existsSync(path.join(bottleDir, pr.slug + '.webp'))) return siteUrl('images/bottles/' + pr.slug + '.webp');
+  if (fs.existsSync(path.join(bottleDir, pr.slug + '.png'))) return siteUrl('images/bottles/' + pr.slug + '.png');
+  if (pr.brandImg) return siteUrl(pr.brandImg);
+  return siteUrl('logo.png');
+}
+function productImage(pr) { return bottleUrl(pr); }
+
 function fragFAQ(pr) {
   const cloneQ = 'Is ' + pr.name + ' by ' + pr.brand + ' a clone or an original?';
   const cloneA = pr.inspired && pr.inspired !== '—' && pr.inspired.trim().toLowerCase() !== 'original'
@@ -369,17 +456,18 @@ function fragPage(pr) {
     {
       '@context': 'https://schema.org', '@type': 'Product', name: pr.name + ' by ' + pr.brand,
       description: 'Buy an authentic ' + pr.name + ' by ' + pr.brand + ' decant in India \u2014 ' + priceString(pr) + '. ' + capLine(art(scentLine(pr))) + ' ' + scentLine(pr) + ' fragrance, ' + inspiredLine(pr) + '. IRAM Perfume ships across India.',
-      image: pr.brandImg ? siteUrl(pr.brandImg) : siteUrl('logo.png'),
+      image: productImage(pr),
       brand: { '@type': 'Brand', name: pr.brand },
       category: pr.cat || 'Fragrance', sku: pr.slug,
       url: pr.url,
-      offers: { '@type': 'AggregateOffer', lowPrice: (mm.min || 0).toString(), highPrice: (mm.max || 0).toString(), priceCurrency: 'INR', availability: pr.availability, offerCount: 5, url: pr.url, description: priceString(pr) }
+      availability: productAvailability(pr),
+      offers: offersSchema(pr)
     },
     {
       '@context': 'https://schema.org', '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'IRAM Perfume', item: siteUrl() },
-        { '@type': 'ListItem', position: 2, name: pr.brand, item: siteUrl('#filterBar') },
+        { '@type': 'ListItem', position: 2, name: pr.brand, item: siteUrl('brands/' + slugify(pr.brand) + '.html') },
         { '@type': 'ListItem', position: 3, name: pr.name, item: pr.url }
       ]
     },

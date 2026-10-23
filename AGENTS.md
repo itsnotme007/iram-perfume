@@ -3,9 +3,9 @@
 **Domain guard:** CNAME must always contain `iramperfume.in`. Never delete or regenerate it. The generator and deploy steps must preserve it.
 
 **Repo:** https://github.com/itsnotme007/iram-perfume.git
-**File:** `C:\Users\Fateh\Downloads\models\index.html` (HTML/CSS/JS inline, ~7740 lines)
-**Logos:** `C:\Users\Fateh\Downloads\models\logos/`
-**Reviews:** `C:\Users\Fateh\Downloads\models\reviews/`
+**File:** `index.html` (generated catalogue + page shell; CSS/JS in `assets/app.css` / `assets/app.js`)
+**Logos:** `logos/`
+**Reviews:** `reviews/`
 
 ## Pricing Formula
 ```

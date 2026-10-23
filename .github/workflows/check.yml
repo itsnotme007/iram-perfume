@@ -1,0 +1,53 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Regenerate site (idempotency check)
+        run: |
+          node seo-gen.js
+          if ! git diff --exit-code; then
+            echo "::error::Generated files are stale. Run 'node seo-gen.js' locally and commit the result."
+            git diff --stat
+            exit 1
+          fi
+
+      - name: SEO audit
+        run: node tests/seo-audit.js
+
+      - name: Parse check
+        run: node tests/parse-check.js
+
+      - name: Render fidelity
+        run: node tests/render-fidelity.js
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Console check
+        run: node tests/console-check.js
+
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

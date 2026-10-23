@@ -7,6 +7,8 @@ Selling & Expense.xlsx
 orders-app/
 # Puppy bot (local, contains .env token + sessions.json)
 Puppy_tg_bot/
+# Logs (may contain tokens/secrets - never commit)
+*.log
 # Node tooling
 node_modules/
 # Test / audit artifacts
