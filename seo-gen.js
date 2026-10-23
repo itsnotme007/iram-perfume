@@ -561,6 +561,91 @@ function fragPage(pr) {
   });
 }
 
+// ------------------------------------------------------------ brand pages
+function brandPage(brand, items, allBrands) {
+  const slug = slugify(brand);
+  const url = siteUrl('brands/' + slug + '.html');
+  const minP = Math.min(...items.map(p => minMax(p).min));
+  const maxP = Math.max(...items.map(p => minMax(p).max));
+  const genders = [...new Set(items.map(p => p.gender).filter(Boolean))];
+  const families = [...new Set(items.map(p => p.family).filter(Boolean))].slice(0, 4);
+  const nameList = items.slice(0, 6).map(p => p.name).join(', ') + (items.length > 6 ? ' and more' : '');
+  const isDesigner = items.some(p => p.cat === 'Designer');
+
+  const cards = items.map(pr => {
+    const mm = minMax(pr);
+    const status = pr.status === 'soldout' ? 'SOLD OUT' : pr.status === 'coming' ? 'COMING SOON' : '';
+    return '<a class="rel" href="../fragrance/' + pr.slug + '.html"><b>' + esc(pr.name) + '</b>'
+      + '<span class="muted">' + esc(pr.gender || 'Fragrance') + (status ? ' \u00b7 ' + status : '') + '</span>'
+      + '<small>from ' + rupees(mm.min) + '</small></a>';
+  }).join('');
+
+  const faqs = [
+    ['Which ' + brand + ' fragrances can I buy as decants?',
+      'IRAM Perfume currently lists ' + items.length + ' ' + brand + ' fragrance' + (items.length === 1 ? '' : 's') + ' as decants: ' + nameList + '.'],
+    ['How much does a ' + brand + ' decant cost?',
+      brand + ' decants start from ' + rupees(minP) + '. Each fragrance page lists prices for 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml.'],
+    ['Are ' + brand + ' decants authentic?',
+      'IRAM Perfume fills decants from original ' + brand + ' bottles bought from trusted suppliers, and shares proof on request.']
+  ];
+
+  const schema = [
+    {
+      '@context': 'https://schema.org', '@type': 'CollectionPage',
+      name: brand + ' Perfume Decants', url: url,
+      description: 'Shop ' + brand + ' perfume decants in India in 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml sizes.',
+      mainEntity: {
+        '@type': 'ItemList', numberOfItems: items.length,
+        itemListElement: items.map((pr, i) => ({ '@type': 'ListItem', position: i + 1, name: pr.name + ' by ' + brand, url: pr.url }))
+      }
+    },
+    {
+      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'IRAM Perfume', item: siteUrl() },
+        { '@type': 'ListItem', position: 2, name: brand, item: url }
+      ]
+    },
+    {
+      '@context': 'https://schema.org', '@type': 'FAQPage',
+      mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
+    }
+  ];
+
+  const others = allBrands.filter(b => b !== brand).slice(0, 8)
+    .map(b => '<a class="rel" href="' + slugify(b) + '.html"><b>' + esc(b) + '</b><small>View decants</small></a>').join('');
+
+  const body = ''
+    + '<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">' + esc(brand) + '</span></nav>'
+    + '<div class="top"><div><div class="brand-chip">BRAND</div><h1>' + esc(brand) + ' Perfume Decants in India</h1></div><a href="/">\u2190 Full collection</a></div>'
+    + '<p class="lead">Shop ' + items.length + ' ' + esc(brand) + ' fragrance' + (items.length === 1 ? '' : 's') + ' as decants \u2014 from ' + rupees(minP) + ' for 3ml, with 5ml, 7.5ml, 10ml, 20ml and 30ml sizes on every product page. ' + (isDesigner ? 'Designer' : 'Middle Eastern') + ' perfumery, shipped across India with ' + FREE_SHIP_ABOVE + '.</p>'
+    + '<div class="pills">'
+    + '<span class="pill">' + items.length + ' fragrance' + (items.length === 1 ? '' : 's') + '</span>'
+    + '<span class="pill">From ' + rupees(minP) + '</span>'
+    + '<span class="pill">Up to ' + rupees(maxP) + '</span>'
+    + (genders.length ? '<span class="pill">' + esc(genders.join(' / ')) + '</span>' : '')
+    + '</div>'
+    + '<h2>' + esc(brand) + ' decants &amp; prices</h2><div class="grid">' + cards + '</div>'
+    + (families.length ? '<h2>What ' + esc(brand) + ' smells like</h2><div class="card"><p>' + esc(brand) + ' fragrances in this catalogue lean toward ' + esc(families.join(', ')) + ' families. Open any fragrance page for its notes, best season and occasion, and a full 3ml\u201330ml price list.</p></div>' : '')
+    + '<h2>Frequently Asked Questions</h2>'
+    + faqs.map(([q, a]) => '<details class="qa"><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>').join('')
+    + '<h2>Explore other brands</h2><div class="grid">' + others + '</div>'
+    + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> \u00b7 <a href="' + WA + '">WhatsApp Community</a> \u00b7 <a href="/">Back to all fragrances</a></div>';
+
+  let desc = 'Shop ' + brand + ' perfume decants in India from ' + rupees(minP) + ' \u2014 ' + items.length + ' fragrance' + (items.length === 1 ? '' : 's') + ', 3ml to 30ml. Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.';
+  if (desc.length > 160) desc = 'Shop ' + brand + ' perfume decants in India from ' + rupees(minP) + ' \u2014 3ml to 30ml. Free shipping over \u20b9' + FREE_SHIP_MIN + '.';
+
+  return pageShell({
+    title: brand + ' Perfume Decants in India \u2014 Prices | IRAM Perfume',
+    desc: desc,
+    canonical: url,
+    body: body,
+    schema: schema,
+    og: { image: siteUrl('og-image.jpg') }
+  });
+}
+function brandPageSlug(brand) { return slugify(brand); }
+
 // relative-scoring for related fragrances
 function relatedScore(a, b) {
   let sc = 0;
@@ -1440,14 +1525,16 @@ function stripMarks(str, open, close) {
 }
 
 // --------------------------------------------------------------------- sitemap
-function buildSitemap(products, articles, lm) {
+function buildSitemap(products, articles, lm, brands) {
   lm = lm || {};
+  brands = brands || [];
   const locs = [
-    { l: siteUrl(), lastmod: lm.home || TODAY, pri: '1.0' },
-    { l: siteUrl('contact.html'), lastmod: lm.contact || TODAY, pri: '0.6' },
-    { l: siteUrl('bottles.html'), lastmod: lm.bottles || TODAY, pri: '0.7' },
-    ...articles.map(a => ({ l: a.url, lastmod: lm['article:' + a.slug] || TODAY, pri: '0.9' })),
-    ...products.map(p => ({ l: p.url, lastmod: lm['frag:' + p.slug] || TODAY, pri: '0.8' }))
+    { l: siteUrl(), lastmod: lm.home || TODAY },
+    { l: siteUrl('contact.html'), lastmod: lm.contact || TODAY },
+    { l: siteUrl('bottles.html'), lastmod: lm.bottles || TODAY },
+    ...brands.map(b => ({ l: siteUrl('brands/' + b.slug + '.html'), lastmod: lm['brand:' + b.slug] || TODAY })),
+    ...articles.map(a => ({ l: a.url, lastmod: lm['article:' + a.slug] || TODAY })),
+    ...products.map(p => ({ l: p.url, lastmod: lm['frag:' + p.slug] || TODAY }))
   ];
   let x = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   for (const o of locs) x += '  <url>\n    <loc>' + o.l + '</loc>\n    <lastmod>' + o.lastmod + '</lastmod>\n  </url>\n';
@@ -1529,6 +1616,21 @@ function main() {
   }
   console.log('wrote fragrance pages:', n);
 
+  // 1b. brand landing pages (one per brand; target "<brand> perfume decants india")
+  const brandDir = path.join(ROOT, 'brands');
+  fs.mkdirSync(brandDir, { recursive: true });
+  const allBrands = [...new Set(products.map(p => p.brand))].sort((a, b) => a.localeCompare(b));
+  const brandMeta = [];
+  for (const b of allBrands) {
+    const items = products.filter(p => p.brand === b);
+    const html = brandPage(b, items, allBrands);
+    const slug = brandPageSlug(b);
+    lastmods['brand:' + slug] = dateFor('brand:' + slug, contentSig(html));
+    writeFileSafe(path.join(brandDir, slug + '.html'), html);
+    brandMeta.push({ brand: b, slug: slug });
+  }
+  console.log('wrote brand pages:', brandMeta.length);
+
   // 2. articles
   const artDir = path.join(ROOT, 'articles');
   fs.mkdirSync(artDir, { recursive: true });
@@ -1558,7 +1660,7 @@ function main() {
   console.log('index.html rewritten; frag rows still:', rowsNow);
 
   // 4. sitemap / robots / llms
-  writeFileSafe(path.join(ROOT, 'sitemap.xml'), buildSitemap(products, articlesMeta, lastmods));
+  writeFileSafe(path.join(ROOT, 'sitemap.xml'), buildSitemap(products, articlesMeta, lastmods, brandMeta));
   writeFileSafe(path.join(ROOT, 'llms.txt'), buildLlmstxt(articlesMeta));
   const robots = 'User-agent: *\nAllow: /\n\n# AI / answer-engine crawlers\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\n# LLM summary: ' + siteUrl('llms.txt') + '\nSitemap: ' + siteUrl('sitemap.xml') + '\n';
   writeFileSafe(path.join(ROOT, 'robots.txt'), robots);

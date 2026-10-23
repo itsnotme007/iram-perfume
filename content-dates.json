@@ -782,5 +782,153 @@
   "bottles": {
     "sig": "906a9b230e7147e3776e9761",
     "mod": "2026-10-23"
+  },
+  "brand:afnan": {
+    "sig": "10314de573665b8620514ab7",
+    "mod": "2026-10-23"
+  },
+  "brand:ahmed-al-maghribi": {
+    "sig": "d554bffd932c559b45600abc",
+    "mod": "2026-10-23"
+  },
+  "brand:ajmal": {
+    "sig": "ab788e8419b98d024621c916",
+    "mod": "2026-10-23"
+  },
+  "brand:al-majed": {
+    "sig": "5f09f7326032ccc604cc044b",
+    "mod": "2026-10-23"
+  },
+  "brand:al-wataniah": {
+    "sig": "9e000a6acd8811b8b9153dea",
+    "mod": "2026-10-23"
+  },
+  "brand:albait-aldimashqi": {
+    "sig": "0fa1263428b730b684a08ec7",
+    "mod": "2026-10-23"
+  },
+  "brand:arabiyat-prestige": {
+    "sig": "01c9c1551feca87be50d2a52",
+    "mod": "2026-10-23"
+  },
+  "brand:armaf": {
+    "sig": "aa9cd9143db455ebadc2d1c4",
+    "mod": "2026-10-23"
+  },
+  "brand:assaf": {
+    "sig": "117aa2824cdb2e3f6892a541",
+    "mod": "2026-10-23"
+  },
+  "brand:azzaro": {
+    "sig": "1da171fab01780ca48d3ca50",
+    "mod": "2026-10-23"
+  },
+  "brand:bvlgari": {
+    "sig": "f26cd87ef1da4a6f1392f9b5",
+    "mod": "2026-10-23"
+  },
+  "brand:calvin-klein": {
+    "sig": "f260e9f62f3ad16fadee1557",
+    "mod": "2026-10-23"
+  },
+  "brand:davidoff": {
+    "sig": "9420b4ec2f492d4176ddc429",
+    "mod": "2026-10-23"
+  },
+  "brand:dumont": {
+    "sig": "cfb51e1bbabf9e83b5cad013",
+    "mod": "2026-10-23"
+  },
+  "brand:fragrance-world": {
+    "sig": "acf4a1f6ee8ac8923e85a014",
+    "mod": "2026-10-23"
+  },
+  "brand:french-avenue": {
+    "sig": "7eaa3ef90fd72c4ebe7c03fc",
+    "mod": "2026-10-23"
+  },
+  "brand:ibraq": {
+    "sig": "dd428b7df92710174b851b5b",
+    "mod": "2026-10-23"
+  },
+  "brand:jaguar": {
+    "sig": "ceb0b0d936642e333c1df0d9",
+    "mod": "2026-10-23"
+  },
+  "brand:khadlaj": {
+    "sig": "00c7479604c136c4ac72151c",
+    "mod": "2026-10-23"
+  },
+  "brand:lattafa": {
+    "sig": "d2540e50f58a1ffd8ef111c0",
+    "mod": "2026-10-23"
+  },
+  "brand:laverne": {
+    "sig": "cccbf1ebfcb749cd7c85e12e",
+    "mod": "2026-10-23"
+  },
+  "brand:maison-alhambra": {
+    "sig": "3ba3bb92f4eae9cf76ab6c36",
+    "mod": "2026-10-23"
+  },
+  "brand:mancera": {
+    "sig": "754ffeafa08b7b8ac1be3e74",
+    "mod": "2026-10-23"
+  },
+  "brand:montblanc": {
+    "sig": "eebbf41500dad0e0168491da",
+    "mod": "2026-10-23"
+  },
+  "brand:mykonos": {
+    "sig": "c4c7949e1c58fb1a619d7e54",
+    "mod": "2026-10-23"
+  },
+  "brand:nusuk": {
+    "sig": "08c8575d3a6b6648f96767b0",
+    "mod": "2026-10-23"
+  },
+  "brand:paris-corner": {
+    "sig": "fe9da1f82d53f3e1256559e6",
+    "mod": "2026-10-23"
+  },
+  "brand:pendora-scents": {
+    "sig": "f60ca6d8eb40035e2eaff748",
+    "mod": "2026-10-23"
+  },
+  "brand:rasasi": {
+    "sig": "029a9ff015df43fcc3780d42",
+    "mod": "2026-10-23"
+  },
+  "brand:rayhaan": {
+    "sig": "530daf38ba92da1e0456c403",
+    "mod": "2026-10-23"
+  },
+  "brand:reef": {
+    "sig": "834b5a87b715338da312af66",
+    "mod": "2026-10-23"
+  },
+  "brand:riiffs": {
+    "sig": "1d12256521f6eef9968955b3",
+    "mod": "2026-10-23"
+  },
+  "brand:rue-broca": {
+    "sig": "70a8d454ea9b7a07a5517a21",
+    "mod": "2026-10-23"
+  },
+  "brand:swiss-arabian": {
+    "sig": "6cc208188055fb56d4914c9c",
+    "mod": "2026-10-23"
+  },
+  "brand:versace": {
+    "sig": "986d2085d15dd9d2d5dc5bbd",
+    "mod": "2026-10-23"
+  },
+  "brand:ysl": {
+    "sig": "485344d4ab5326478c294f28",
+    "mod": "2026-10-23"
+  },
+  "brand:zimaya": {
+    "sig": "4d5af3ce3940195dc6995f3a",
+    "mod": "2026-10-23"
   }
 }
