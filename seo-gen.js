@@ -77,7 +77,7 @@ const HOME_FAQS = [
   ['How can I be sure the decants are authentic?',
    'Every decant is filled from an original, genuine perfume bottle we buy from trusted suppliers. We share photos, videos and opening proof of the source bottles on request before you order.'],
   ['What is your refund and returns policy?',
-   'If anything is wrong with your order, message us on WhatsApp or by email with your order details and we will sort it out with a replacement or refund.'],
+   'No. Returns are not applicable after an order is placed. Please review your selection and contact us with any questions before ordering.'],
   ['Do you issue an invoice for orders?',
    'Not yet — we are a small business and do not currently issue formal invoices. Your order is confirmed over WhatsApp and you receive the tracking number once dispatched. We plan to introduce invoices as we grow.']
 ];
@@ -223,20 +223,26 @@ const PHRASE = {
   scent: 'scent', season: 'season', occasion: 'occasion', time: 'time', weather: 'weather',
   mood: 'mood', family: 'family'
 };
+// Catalogue tags are comma/semicolon-separated storage values.  Convert them
+// to display strings before using them in public copy or structured data.
+function normalizeScent(value) {
+  const seen = new Set();
+  return String(value || '').split(/[;,]/).map(x => x.trim()).filter(Boolean)
+    .filter(x => { const key = x.toLowerCase(); if (seen.has(key)) return false; seen.add(key); return true; })
+    .map(x => x.replace(/\b\w/g, c => c.toUpperCase()));
+}
+function tagLine(value) { return normalizeScent(value).join(', '); }
 function scentLine(pr) {
-  const parts = [];
-  if (pr.scent) parts.push(pr.scent);
-  const extra = [];
-  if (pr.family) extra.push(pr.family + ' family');
-  if (extra.length) parts.push(extra.join(', '));
-  return parts.join('; ') || 'signature fragrance';
+  const parts = normalizeScent(pr.scent);
+  for (const family of normalizeScent(pr.family)) if (!parts.some(x => x.toLowerCase() === family.toLowerCase())) parts.push(family);
+  return parts.join(', ') || 'signature fragrance';
 }
 function bestForLine(pr) {
   const bits = [];
-  if (pr.season) bits.push(pr.season.replace(/,/g, ' / ') + ' seasons');
-  if (pr.time) bits.push((pr.time.includes(',') ? 'day and evening' : pr.time));
-  if (pr.occasion) bits.push('for ' + pr.occasion.replace(/,/g, ', '));
-  if (pr.weather) bits.push(pr.weather.replace(/,/g, ', ') + ' weather');
+  if (pr.season) bits.push(normalizeScent(pr.season).join(' / ') + ' seasons');
+  if (pr.time) bits.push(normalizeScent(pr.time).join(' and ').toLowerCase());
+  if (pr.occasion) bits.push('for ' + normalizeScent(pr.occasion).join(', ').toLowerCase());
+  if (pr.weather) bits.push(normalizeScent(pr.weather).join(', ').toLowerCase() + ' weather');
   return bits.length ? bits.join(', ') : 'everyday wear';
 }
 function inspiredLine(pr) {
@@ -304,6 +310,13 @@ function minMax(pr) {
 }
 function priceString(pr) {
   return ['3ml \u20b9' + (pr.prices['3'] ?? '—'), '5ml \u20b9' + (pr.prices['5'] ?? '—'), '7.5ml \u20b9' + (pr.prices['7.5'] ?? '—'), '10ml \u20b9' + (pr.prices['10'] ?? '—'), '20ml \u20b9' + (pr.prices['20'] ?? '—'), '30ml \u20b9' + (pr.prices['30'] ?? '—')].join(' | ');
+}
+function productTitle(pr) {
+  const core = pr.brand + ' ' + pr.name + ' Decant India - from Rs' + minMax(pr).min;
+  // Preserve the query terms and product identity; branding is dropped before
+  // shortening a long name so titles remain useful in search results.
+  const branded = core + ' | IRAM Perfume';
+  return branded.length <= 60 ? branded : core.slice(0, 60).replace(/[\s-]+$/, '');
 }
 
 // The 6 canonical decant sizes, in catalogue order (see AGENTS.md).
@@ -445,12 +458,13 @@ const PAGE_CSS = [
   '.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}',
   '.rel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--ink);font-size:14px;display:block}',
   '.rel b{color:#0f3460}.rel small{display:block;color:var(--muted);margin-top:2px}',
+  '.product-bottle{display:block;max-width:100%;height:auto;margin:16px auto;border-radius:12px}',
   '.foot{margin-top:30px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}',
   '.crumbs{font-size:12.5px;color:var(--muted);margin-bottom:10px}.crumbs a{color:#0f3460;text-decoration:underline;text-underline-offset:2px}.crumbs a:hover{color:#0a2448}.crumbs span[aria-hidden]{margin:0 4px}'
 ].join('\n');
 let PAGE_CSS_VER = 'dev';
 function favicon184() { return '<link rel="icon" type="image/png" href="../logo.png">'; }
-function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en') {
+function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en-IN') {
   const ogType = (og && og.type) || 'website';
   const ogImage = (og && og.image) || siteUrl('og-image.jpg');
   const articleMeta = ogType === 'article' && og && og.published
@@ -460,7 +474,7 @@ function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en') {
   return '<!DOCTYPE html>\n<html lang="' + lang + '">\n<head>\n'
     + '<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
     + '<title>' + esc(title) + '</title>\n<meta name="description" content="' + esc(desc) + '">\n'
-    + '<meta name="robots" content="index, follow">\n<link rel="canonical" href="' + canonical + '">\n'
+    + '<meta name="robots" content="index, follow">\n<meta name="theme-color" content="#1a1a2e">\n<link rel="manifest" href="../manifest.webmanifest">\n<link rel="canonical" href="' + canonical + '">\n'
     + '<link rel="icon" type="image/png" href="' + (og && og.iconPath || '../favicon.png') + '">\n'
     + '<meta property="og:type" content="' + ogType + '">\n<meta property="og:title" content="' + esc(title) + '">\n'
     + '<meta property="og:description" content="' + esc(desc) + '">\n<meta property="og:url" content="' + canonical + '">\n'
@@ -524,7 +538,7 @@ function fragPage(pr) {
   if (pr.weather) wearBits.push(['Weather', pr.weather]);
   if (pr.family) wearBits.push(['Fragrance family', pr.family]);
   if (pr.gender) wearBits.push(['Made for', pr.gender]);
-  const wearRows = wearBits.map(([k, v]) => '<p style="margin-top:8px"><strong>' + esc(k) + ':</strong> ' + esc(v) + '.</p>').join('');
+  const wearRows = wearBits.map(([k, v]) => '<p style="margin-top:8px"><strong>' + esc(k) + ':</strong> ' + esc(k === 'Made for' ? v : tagLine(v)) + '.</p>').join('');
   const pills = [];
   if (pr.gender) pills.push('<span class="pill ' + { Men: 'g', Women: 'w', Unisex: 'u' }[pr.gender] + '">' + pr.gender + '</span>');
   pills.push('<span class="pill ' + (pr.status === 'soldout' ? 'so' : pr.status === 'coming' ? 'cs' : '') + '">' + ({ soldout: 'SOLD OUT', coming: 'COMING SOON', instock: 'In Stock' }[pr.status] || '') + '</span>');
@@ -538,10 +552,18 @@ function fragPage(pr) {
   else if (fs.existsSync(path.join(bottleDir, pr.slug + '.jpg'))) ogPng = pr.slug + '.jpg';
   if (ogPng && fs.existsSync(path.join(bottleDir, pr.slug + '.webp'))) bottleImg = '../images/bottles/' + pr.slug + '.webp';
   else if (ogPng) bottleImg = '../images/bottles/' + ogPng;
+  const noteRows = pr.notes && ['top', 'heart', 'base'].filter(k => Array.isArray(pr.notes[k]) && pr.notes[k].length)
+    .map(k => '<p><strong>' + k.charAt(0).toUpperCase() + k.slice(1) + ':</strong> ' + esc(pr.notes[k].join(', ')) + '</p>').join('');
+  const details = (noteRows ? '<h2>Notes</h2><div class="card">' + noteRows + '</div>' : '')
+    + ((pr.longevityHours || pr.projection) ? '<h2>Performance</h2><div class="card">'
+      + (pr.longevityHours ? '<p><strong>Longevity:</strong> Owner-supplied estimate: ' + esc(pr.longevityHours) + ' hours.</p>' : '')
+      + (pr.projection ? '<p><strong>Projection:</strong> ' + esc(pr.projection) + '.</p>' : '') + '</div>' : '')
+    + (pr.inspiredBrand && pr.inspired && pr.inspired !== 'Original' ? '<h2>Compare with ' + esc(pr.inspiredBrand) + ' ' + esc(pr.inspired) + '</h2><div class="card"><p>This listing is described as inspired by ' + esc(pr.inspiredBrand) + ' ' + esc(pr.inspired) + '. It is not presented as the same formula; compare the listed scent profile and choose based on your own preference.</p></div>' : '')
+    + '<p class="muted">Learn <a href="/authenticity.html">how this decant is filled and verified</a>.</p>';
   const body = ''
     + '<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <a href="../brands/' + slugify(pr.brand) + '.html">' + esc(pr.brand) + '</a> <span aria-hidden="true">/</span> <span aria-current="page">' + esc(pr.name) + '</span></nav>'
-    + '<div class="top"><div><div class="brand-chip">' + esc(pr.brand.toUpperCase()) + '</div><h1>' + esc(pr.name) + ' \u2014 Decant Price in India</h1></div><a href="/">\u2190 Full collection</a></div>'
-    + (bottleImg ? '<img src="' + bottleImg + '" alt="' + esc(pr.name) + ' bottle"' + (ogPng ? imgDims('images/bottles/' + ogPng) : '') + ' fetchpriority="high" decoding="async" style="max-width:220px;border-radius:12px;margin:16px 0;display:block' + (pr.status === 'soldout' ? ';filter:grayscale(1);opacity:.55' : '') + '">' : '')
+    + '<div class="top"><div><div class="brand-chip">' + esc(pr.brand.toUpperCase()) + '</div><h1>' + esc(pr.brand) + ' ' + esc(pr.name) + ' Decant in India</h1></div><a href="/">\u2190 Full collection</a></div>'
+    + (bottleImg ? '<img class="product-bottle" src="' + bottleImg + '" alt="' + esc(pr.brand) + ' ' + esc(pr.name) + ' perfume bottle"' + (ogPng ? imgDims('images/bottles/' + ogPng) : '') + ' fetchpriority="high" decoding="async"' + (pr.status === 'soldout' ? ' style="filter:grayscale(1);opacity:.55"' : '') + '>' : '')
     + '<p class="lead">' + esc(pr.name) + ' by ' + esc(pr.brand) + ' as an authentic decant \u2014 ' + art(scentLine(pr)) + ' ' + esc(scentLine(pr)) + '. ' + esc(inspiredLine(pr)) + '. Ships across India with ' + FREE_SHIP_ABOVE + '.</p>'
     + '<div class="pills">' + pills.join('') + '</div>'
     + '<div class="card"><h2 style="margin-top:0">Prices (per ml gets cheaper as size grows)</h2><table><thead><tr><th>Size</th><th>Price</th><th>Per ml</th></tr></thead><tbody>' + priceRows + '</tbody></table><p class="muted" style="margin-top:10px">' + esc(probeAvailability) + '</p></div>'
@@ -549,9 +571,10 @@ function fragPage(pr) {
     + '<h2>About ' + esc(pr.name) + '</h2>'
     + '<div class="card"><p><strong>Notes / profile:</strong> ' + esc(scentLine(pr)) + '.</p>'
     + '<p style="margin-top:8px"><strong>Best for:</strong> ' + esc(bestForLine(pr)) + '.</p>'
-    + (pr.mood ? '<p style="margin-top:8px"><strong>Mood:</strong> ' + esc(pr.mood) + '.</p>' : '')
+    + (pr.mood ? '<p style="margin-top:8px"><strong>Mood:</strong> ' + esc(tagLine(pr.mood)) + '.</p>' : '')
     + '<p style="margin-top:8px"><strong>Reminds me of:</strong> ' + esc(pr.inspired && pr.inspired !== '—' && pr.inspired.trim().toLowerCase() !== 'original' ? pr.inspired : 'Original / unique') + '.</p>'
     + (pr.links ? '<p style="margin-top:8px"><strong>References:</strong> ' + pr.links + '</p>' : '') + '</div>'
+    + details
     + '<h2>How to wear ' + esc(pr.name) + '</h2><div class="card">' + wearRows
     + '<p style="margin-top:8px">A 3ml decant is the smallest way to try this scent before committing to a larger size. New to decants? Read the <a href="/articles/decant-vs-full-bottle.html">decant vs full bottle guide</a>, or see <a href="/articles/make-perfume-last-longer.html">how to make perfume last longer</a>.</p></div>'
     + '<h2>Frequently Asked Questions</h2>'
@@ -568,7 +591,7 @@ function fragPage(pr) {
   if ((ogDesc + ' ' + inspBit + shipBit).length <= 160) ogDesc += ' ' + inspBit;
   ogDesc += shipBit;
   return pageShell({
-    title: pr.name + ' by ' + pr.brand + ' \u2014 Decant Price in India | IRAM Perfume',
+    title: productTitle(pr),
     desc: ogDesc,
     canonical: pr.url, body, schema, og: { image: ogImg }
   });
@@ -1065,7 +1088,7 @@ function buildBottles(mod) {
     + '  });\n'
     + '})();\n'
     + '</' + 'script>\n';
-  return '<!DOCTYPE html>\n<html lang="en">\n<head>\n'
+  return '<!DOCTYPE html>\n<html lang="en-IN">\n<head>\n'
     + '<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
     + '<title>' + esc(title) + '</title>\n<meta name="description" content="' + esc(desc) + '">\n'
     + '<meta name="robots" content="index, follow">\n<link rel="canonical" href="' + canonical + '">\n'
@@ -1309,15 +1332,17 @@ function renderThreeMl() {
 function editHomepage(products, faqHtml, articlesHtml) {
   let out = s;
 
+  out = out.replace(/<html\s+lang="[^"]*">/i, '<html lang="en-IN">');
+
   // Homepage metadata and schema are generated in-place; normalise a prior
   // deployment origin before replacing the generated blocks below.
   out = out.replace(LEGACY_SITE_RE, BASE);
 
   // 1) title + description
-  out = out.replace(/<title>[\s\S]*?<\/title>/, '<title>IRAM Perfume \u2014 Designer &amp; Middle Eastern Decants India (3ml\u201330ml)</title>');
+  out = out.replace(/<title>[\s\S]*?<\/title>/, '<title>Perfume Decants India | IRAM Perfume</title>');
   out = out.replace(
     /<meta name="description" content="[^"]*"/,
-    '<meta name="description" content="Buy authentic designer &amp; Middle Eastern perfume decants in India \u2014 Davidoff, Mancera, Afnan, Lattafa, Rasasi &amp; more. Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants."'
+    '<meta name="description" content="Perfume decants in India from 3ml to 30ml, across designer and Middle Eastern brands. Prices from \u20b979; free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants."'
   );
 
   // 2) replace ItemList block with all-products version (ListItem, not Product —
@@ -1386,8 +1411,8 @@ function editHomepage(products, faqHtml, articlesHtml) {
   out = replaceJsonType(out, 'WebSite', websiteSchema);
 
   // 2c) homepage H1: keep the brand but add the primary keyword (one H1 per page)
-  const h1Rich = '<h1>IRAM Perfume <span class="h1-sub">Perfume Decants in India</span></h1>';
-  if (!out.includes('class="h1-sub"')) out = out.replace('<h1>IRAM Perfume</h1>', h1Rich);
+  const h1Rich = '<h1>Perfume Decants in India <span class="h1-sub">Designer &amp; Middle Eastern, 3ml to 30ml</span></h1>';
+  out = out.replace(/<h1>[^<]*(?:<span class="h1-sub">[\s\S]*?<\/span>)?<\/h1>/, h1Rich);
 
   // 4) FAQPage schema + visible FAQ + articles strip (idempotent markers)
   // JSON-LD must contain JSON only; HTML comments make the structured data invalid.
@@ -1544,7 +1569,25 @@ function stripMarks(str, open, close) {
 }
 
 // --------------------------------------------------------------------- sitemap
-function buildSitemap(products, articles, lm, brands) {
+const COLLECTIONS = [
+  { slug: 'decants-under-200', title: 'Perfume Decants Under ₹200 in India', pick: p => minMax(p).min < 200 },
+  { slug: '3ml-decants', title: '3ml Perfume Decants in India', pick: p => p.prices['3'] != null },
+  { slug: 'men', title: 'Men’s Perfume Decants in India', pick: p => p.gender === 'Men' },
+  { slug: 'unisex', title: 'Unisex Perfume Decants in India', pick: p => p.gender === 'Unisex' },
+  { slug: 'women', title: 'Women’s Perfume Decants in India', pick: p => p.gender === 'Women' },
+  { slug: 'new-arrivals', title: 'New Perfume Decants in India', pick: p => !!p.added }
+];
+function collectionPage(col, items) {
+  const url = siteUrl('collections/' + col.slug + '.html');
+  const list = items.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.brand + ' ' + p.name, url: p.url }));
+  const body = '<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <span aria-current="page">Collections</span></nav>'
+    + '<div class="top"><div><div class="brand-chip">COLLECTION</div><h1>' + esc(col.title) + '</h1></div><a href="/">← Full collection</a></div>'
+    + '<p class="lead">Browse ' + items.length + ' currently listed fragrances with live decant prices in 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml sizes.</p>'
+    + productGrid(items) + '<div class="foot"><a href="/">All fragrances</a> · <a href="/contact.html">Contact</a></div>';
+  return pageShell({ title: col.title + ' | IRAM Perfume', desc: 'Browse ' + col.title.toLowerCase() + ' with live sizes and prices from IRAM Perfume.', canonical: url, body,
+    schema: [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: col.title, url, mainEntity: { '@type': 'ItemList', numberOfItems: list.length, itemListElement: list } }, { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'IRAM Perfume', item: siteUrl() }, { '@type': 'ListItem', position: 2, name: col.title, item: url }] }], og: { image: siteUrl('og-image.jpg') } });
+}
+function buildSitemap(products, articles, lm, brands, collections) {
   lm = lm || {};
   brands = brands || [];
   const locs = [
@@ -1552,6 +1595,7 @@ function buildSitemap(products, articles, lm, brands) {
     { l: siteUrl('contact.html'), lastmod: lm.contact || TODAY },
     { l: siteUrl('bottles.html'), lastmod: lm.bottles || TODAY },
     ...brands.map(b => ({ l: siteUrl('brands/' + b.slug + '.html'), lastmod: lm['brand:' + b.slug] || TODAY })),
+    ...(collections || []).map(c => ({ l: siteUrl('collections/' + c.slug + '.html'), lastmod: lm['collection:' + c.slug] || TODAY })),
     ...articles.map(a => ({ l: a.url, lastmod: lm['article:' + a.slug] || TODAY })),
     ...products.map(p => ({ l: p.url, lastmod: lm['frag:' + p.slug] || TODAY }))
   ];
@@ -1590,7 +1634,7 @@ function buildLlmstxt(articles) {
   for (const b of Object.keys(byBrand)) {
     t += '\n### ' + b + '\n';
     for (const pr of byBrand[b]) {
-      t += '- ' + pr.name + ' (' + (pr.gender || 'fragrance') + (pr.status === 'instock' ? '' : ', ' + pr.status) + '): ' + priceString(pr) + '\n';
+      t += '- [' + pr.name + '](' + pr.url + ') (' + (pr.gender || 'fragrance') + (pr.status === 'instock' ? '' : ', ' + pr.status) + '): ' + priceString(pr) + '\n';
     }
   }
   return t;
@@ -1612,8 +1656,25 @@ function writeFileSafe(file, data) {
     }
   }
 }
+function productDetailsTemplate() {
+  const quote = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+  const head = ['key', 'notes_top', 'notes_heart', 'notes_base', 'longevity_hours', 'projection', 'inspired_brand', 'best_for'];
+  return [head.join(','), ...products.map(p => [p.key, '', '', '', '', '', '', ''].map(quote).join(','))].join('\n') + '\n';
+}
 function main() {
   console.log('parsed products:', products.length);
+  // Repair the short-lived migration that incorrectly used `added` as a
+  // product page's modified date. Those entries already carry the current
+  // content signature, so mark this real generated-content update today.
+  for (const pr of products) {
+    const rec = DATES['frag:' + pr.slug];
+    if (rec && pr.added && rec.mod === pr.added) {
+      rec.mod = TODAY;
+      DATES_DIRTY = true;
+    }
+  }
+  fs.mkdirSync(path.join(ROOT, 'data'), { recursive: true });
+  writeFileSafe(path.join(ROOT, 'data', 'product-details-template.csv'), productDetailsTemplate());
   const dup = products.length - new Set(products.map(p => p.key)).size;
   if (dup) console.warn('warning: duplicate keys:', dup);
 
@@ -1650,6 +1711,20 @@ function main() {
   }
   console.log('wrote brand pages:', brandMeta.length);
 
+  // 1c. data-driven collection pages. A thin collection is not emitted.
+  const collectionDir = path.join(ROOT, 'collections');
+  fs.mkdirSync(collectionDir, { recursive: true });
+  const collectionMeta = [];
+  for (const col of COLLECTIONS) {
+    const items = products.filter(col.pick);
+    if (items.length < 6) continue;
+    const html = collectionPage(col, items);
+    lastmods['collection:' + col.slug] = dateFor('collection:' + col.slug, contentSig(html));
+    writeFileSafe(path.join(collectionDir, col.slug + '.html'), html);
+    collectionMeta.push({ slug: col.slug, title: col.title });
+  }
+  console.log('wrote collection pages:', collectionMeta.length);
+
   // 2. articles
   const artDir = path.join(ROOT, 'articles');
   fs.mkdirSync(artDir, { recursive: true });
@@ -1679,7 +1754,7 @@ function main() {
   console.log('index.html rewritten; frag rows still:', rowsNow);
 
   // 4. sitemap / robots / llms
-  writeFileSafe(path.join(ROOT, 'sitemap.xml'), buildSitemap(products, articlesMeta, lastmods, brandMeta));
+  writeFileSafe(path.join(ROOT, 'sitemap.xml'), buildSitemap(products, articlesMeta, lastmods, brandMeta, collectionMeta));
   writeFileSafe(path.join(ROOT, 'llms.txt'), buildLlmstxt(articlesMeta));
   const robots = 'User-agent: *\nAllow: /\n\n# AI / answer-engine crawlers\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\n# LLM summary: ' + siteUrl('llms.txt') + '\nSitemap: ' + siteUrl('sitemap.xml') + '\n';
   writeFileSafe(path.join(ROOT, 'robots.txt'), robots);

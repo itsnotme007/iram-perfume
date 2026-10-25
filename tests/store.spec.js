@@ -301,7 +301,7 @@ test('bestsellers rail and 3ml price list render', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#bestsellers .best-card')).toHaveCount(12);
   await expect(page.locator('#bestsellers .best-card[data-pid]')).toHaveCount(12);
-  // 3ml list stays hidden until the hero banner CTA reveals it
+  // 3ml list stays hidden until the hero banner CTA reveals it.
   await expect(page.locator('#threeMl')).toBeHidden();
   await expect(page.locator('#threeMlList .three-ml-row')).toHaveCount(189);
   await page.evaluate(() => document.querySelector('.mobile-hero a[href="#threeMl"]').click());

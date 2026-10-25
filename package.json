@@ -8,7 +8,7 @@
     "og": "node tests/og-cards.js",
     "indexnow": "node tests/indexnow.js",
     "serve": "node tests/serve.js",
-    "test": "playwright test",
+    "test": "node tests/seo-audit.js && playwright test",
     "lighthouse": "node tests/lighthouse.js"
   },
   "devDependencies": {

@@ -113,7 +113,7 @@ for (const file of pages) {
 
   if (!m.title) fail(rel + ': missing <title>');
   else {
-    if (m.title.length > 70) warn(rel + ': title is ' + m.title.length + ' chars (>70)');
+    if (m.title.length > 60) warn(rel + ': title is ' + m.title.length + ' chars (>60)');
     if (titles.has(m.title)) fail(rel + ': duplicate title with ' + titles.get(m.title));
     else titles.set(m.title, rel);
   }
@@ -133,6 +133,7 @@ for (const file of pages) {
   }
   if (!m.ogImage) fail(rel + ': missing og:image');
   if (!m.twImage) fail(rel + ': missing twitter:image');
+  if (!/<html\b[^>]*\blang="en-IN"/i.test(html)) fail(rel + ': html lang must be en-IN');
 
   // every <img> has alt
   for (const img of html.matchAll(/<img\b[^>]*>/g)) {
@@ -156,6 +157,8 @@ for (const file of pages) {
       if (!prod) fail(rel + ': no Product JSON-LD');
       else {
         const offers = prod.offers && (prod.offers.offers || [prod.offers]);
+        if (!offers || offers.length !== 6) fail(rel + ': Product offer count is not 6');
+        if (String(prod.image || '').includes('/logos/')) fail(rel + ': Product image points at a logo');
         for (const o of (offers || [])) {
           const size = String(o.name || '').replace(/ml$/i, '');
           if (!size) continue;
@@ -192,6 +195,10 @@ try {
   if (/Disallow:\s*\/\s*$/m.test(robots)) warn('robots.txt disallows the whole site');
 } catch (e) { fail('robots.txt missing'); }
 if (!fs.existsSync(path.join(ROOT, 'llms.txt'))) fail('llms.txt missing');
+else {
+  const llms = fs.readFileSync(path.join(ROOT, 'llms.txt'), 'utf8');
+  for (const p of products) if (!llms.includes(p.url)) fail('llms.txt missing product URL: ' + p.url);
+}
 
 // shared config: single source for store facts + shipping maths
 try {
