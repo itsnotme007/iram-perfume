@@ -2960,10 +2960,10 @@
   "availability": "https://schema.org/InStock"
  },
  {
-  "key": "Assaf|Wild Colt Tobacco",
+  "key": "Assaf|Wild Colt",
   "brand": "Assaf",
   "brandImg": "logos/assaf.png",
-  "name": "Wild Colt Tobacco",
+  "name": "Wild Colt",
   "gender": "Unisex",
   "status": "instock",
   "tags": [],
@@ -2984,8 +2984,8 @@
    "7.5": "ok"
   },
   "inspired": "Santal Royal Guerlain",
-  "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Assaf/WILD-COLT-TOBACCO-119905.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/assaf/wild-colt-tobacco'>Parfumo</a>",
-  "linksRaw": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Assaf/WILD-COLT-TOBACCO-119905.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/assaf/wild-colt-tobacco'>Parfumo</a>",
+  "links": "<a target=\"_blank\" href='https://www.parfumo.com/Perfumes/assaf/wild-colt'>Parfumo</a> <a target=\"_blank\" href='https://assaf.ae/products/wild-colt-200-ml'>Official product page</a>",
+  "linksRaw": "<a target=\"_blank\" href='https://www.parfumo.com/Perfumes/assaf/wild-colt'>Parfumo</a> <a target=\"_blank\" href='https://assaf.ae/products/wild-colt-200-ml'>Official product page</a>",
   "cat": "Middle Eastern",
   "scent": "powdery,floral,violet,woody",
   "season": "fall,winter",
@@ -2995,8 +2995,8 @@
   "mood": "elegant,romantic",
   "family": "floral,woody,musk",
   "added": "2026-10-21",
-  "slug": "assaf-wild-colt-tobacco",
-  "url": "https://iramperfume.in/fragrance/assaf-wild-colt-tobacco.html",
+  "slug": "assaf-wild-colt",
+  "url": "https://iramperfume.in/fragrance/assaf-wild-colt.html",
   "availability": "https://schema.org/InStock"
  },
  {

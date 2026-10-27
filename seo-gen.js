@@ -404,7 +404,12 @@ function bottleUrl(pr) {
   if (pr.brandImg) return siteUrl(pr.brandImg);
   return siteUrl('logo.png');
 }
-function productImage(pr) { return bottleUrl(pr); }
+function productImage(pr) {
+  const bottleDir = path.join(ROOT, 'images', 'bottles');
+  if (fs.existsSync(path.join(bottleDir, pr.slug + '.webp'))) return siteUrl('images/bottles/' + pr.slug + '.webp');
+  if (fs.existsSync(path.join(bottleDir, pr.slug + '.png'))) return siteUrl('images/bottles/' + pr.slug + '.png');
+  return '';
+}
 
 function fragFAQ(pr) {
   const cloneQ = 'Is ' + pr.name + ' by ' + pr.brand + ' a clone or an original?';
