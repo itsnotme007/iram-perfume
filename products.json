@@ -3000,6 +3000,45 @@
   "availability": "https://schema.org/InStock"
  },
  {
+  "key": "Assaf|Wild Colt Tobacco",
+  "brand": "Assaf",
+  "brandImg": "logos/assaf.png",
+  "name": "Wild Colt Tobacco",
+  "gender": "Unisex",
+  "status": "instock",
+  "tags": [],
+  "prices": {
+   "3": 99,
+   "5": 155,
+   "10": 285,
+   "20": 529,
+   "30": 729,
+   "7.5": 229
+  },
+  "statusPerSize": {
+   "3": "ok",
+   "5": "ok",
+   "10": "ok",
+   "20": "ok",
+   "30": "ok",
+   "7.5": "ok"
+  },
+  "inspired": "Santal Royal Guerlain",
+  "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Assaf/WILD-COLT-TOBACCO-119905.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/assaf/wild-colt-tobacco'>Parfumo</a>",
+  "linksRaw": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Assaf/WILD-COLT-TOBACCO-119905.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/assaf/wild-colt-tobacco'>Parfumo</a>",
+  "cat": "Middle Eastern",
+  "scent": "powdery,floral,violet,woody",
+  "season": "fall,winter",
+  "occasion": "date-night,special-occasion",
+  "time": "evening,night",
+  "weather": "cold,mild",
+  "mood": "elegant,romantic",
+  "family": "floral,woody,musk",
+  "slug": "assaf-wild-colt-tobacco",
+  "url": "https://iramperfume.in/fragrance/assaf-wild-colt-tobacco.html",
+  "availability": "https://schema.org/InStock"
+ },
+ {
   "key": "Dumont|Nitro Red",
   "brand": "Dumont",
   "brandImg": "",

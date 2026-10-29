@@ -132,7 +132,7 @@
     "mod": "2026-10-29"
   },
   "frag:ahmed-al-maghribi-rose-noir": {
-    "sig": "511fdc7c8debbedce2a704f7",
+    "sig": "44faae564ff711dfce71bb6f",
     "mod": "2026-10-29"
   },
   "frag:ahmed-al-maghribi-ignite-oud": {
@@ -156,7 +156,7 @@
     "mod": "2026-10-29"
   },
   "frag:albait-aldimashqi-gentlemen-reserve-priv-e": {
-    "sig": "63a5dd8e712f8af9f230a32b",
+    "sig": "08bcd6ffeeb7249b8f642e26",
     "mod": "2026-10-29"
   },
   "frag:ajmal-wave": {
@@ -620,7 +620,7 @@
     "mod": "2026-10-23"
   },
   "home": {
-    "sig": "a4b3dcc0136b5e859f7eb8a6",
+    "sig": "fc3973e05669bba770048e27",
     "mod": "2026-10-29"
   },
   "frag:albait-aldimashqi-special-ombre-leather": {
@@ -664,7 +664,7 @@
     "mod": "2026-10-29"
   },
   "frag:al-wataniah-kayaan-classic": {
-    "sig": "36b3c9745878d72e3e3d909d",
+    "sig": "edbf5438786f80f6eee56ea1",
     "mod": "2026-10-29"
   },
   "frag:armaf-cdn-intense-ltd-edition": {
@@ -704,7 +704,7 @@
     "mod": "2026-10-29"
   },
   "frag:assaf-tobacco-jam-60": {
-    "sig": "ded7195466d3d6045c25c81c",
+    "sig": "1bc98bfc1f20fd31fca14440",
     "mod": "2026-10-29"
   },
   "frag:bvlgari-man-in-black-edp": {
@@ -760,8 +760,8 @@
     "mod": "2026-10-29"
   },
   "frag:assaf-wild-colt-tobacco": {
-    "sig": "310857361b0ece9ded7d4558",
-    "mod": "2026-10-21"
+    "sig": "e954485edf4aa67829dbb0a5",
+    "mod": "2026-10-29"
   },
   "frag:laverne-king-tobacco": {
     "sig": "c7e75764954629922b829650",
@@ -780,8 +780,8 @@
     "mod": "2026-10-23"
   },
   "bottles": {
-    "sig": "25272be40f8ebe4e7bff70cb",
-    "mod": "2026-10-27"
+    "sig": "df03a235db72f3d4e7ebd0ba",
+    "mod": "2026-10-29"
   },
   "brand:afnan": {
     "sig": "07f86c75a73b2c7776692bca",
@@ -816,8 +816,8 @@
     "mod": "2026-10-23"
   },
   "brand:assaf": {
-    "sig": "690870e0abf68496c9aa3dfb",
-    "mod": "2026-10-27"
+    "sig": "6a6d22ac0eb8fa05bb54aede",
+    "mod": "2026-10-29"
   },
   "brand:azzaro": {
     "sig": "ee671849b7bded450d48d099",
@@ -932,20 +932,20 @@
     "mod": "2026-10-23"
   },
   "collection:decants-under-200": {
-    "sig": "42cd4fd222a423520be91779",
-    "mod": "2026-10-27"
+    "sig": "84d575d33ba09fef527fe82f",
+    "mod": "2026-10-29"
   },
   "collection:3ml-decants": {
-    "sig": "07b3b30afcf2989ccad59c77",
-    "mod": "2026-10-27"
+    "sig": "7c9bf04a6f8a79db9e0f2499",
+    "mod": "2026-10-29"
   },
   "collection:men": {
     "sig": "9b04e83edbfa95a6f6d250da",
     "mod": "2026-10-23"
   },
   "collection:unisex": {
-    "sig": "a873e389515771fb2bc3eb13",
-    "mod": "2026-10-27"
+    "sig": "8bd819e18e1c22eab9ddb002",
+    "mod": "2026-10-29"
   },
   "collection:women": {
     "sig": "305e71d2b73b32851fad4a63",
@@ -956,7 +956,7 @@
     "mod": "2026-10-27"
   },
   "frag:assaf-wild-colt": {
-    "sig": "a22b04b988c39f6a7a98d557",
+    "sig": "97713a30df74593a0a5b894a",
     "mod": "2026-10-29"
   }
 }

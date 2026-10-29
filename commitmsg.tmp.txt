@@ -1,0 +1,37 @@
+fix(catalogue): split Wild Colt and Wild Colt Tobacco into separate products
+
+Wild Colt and Wild Colt Tobacco are two distinct Assaf fragrances. An earlier
+rename (3a655ae) collapsed them into one entry, which left the catalogue in a
+state where the only bottle photo on disk belonged to Wild Colt Tobacco but was
+being served as the Wild Colt image.
+
+Split them again:
+
+* Restore the tobacco photo to its own slug. assaf-wild-colt-tobacco.* is the
+  cutout that shipped with the original Wild Colt Tobacco listing (768x768 RGBA)
+  and it goes back to serving that product only.
+
+* Add Assaf|Wild Colt Tobacco to products.json with the same price ladder as
+  Wild Colt (3ml 99 / 5 155 / 7.5 229 / 10 285 / 20 529 / 30 729) but its own
+  identity: Fragrantica WILD-COLT-TOBACCO-119905 plus the Parfumo
+  wild-colt-tobacco page, and its own inspiration (Santal Royal Guerlain, the
+  value this product carried before the rename). No added date, so it claims no
+  NEW badge and no New Arrivals slot.
+
+* Source a real Wild Colt bottle image from the Parfumo listing
+  (parfumo.com/Perfumes/assaf/wild-colt, canonical p-main-img, 480x480) and turn
+  it into a transparent RGBA cutout: background flood-filled from the border so
+  white label areas stay opaque, alpha derived from the source's own
+  anti-aliasing, and edge pixels un-composited off the white backdrop.
+
+  Result is a 480x480 canvas with the bottle at ~21% of the width, matching the
+  repo convention (assaf-wild-colt-tobacco.png is 768x768 at ~24%) and keeping
+  the rendered img in line with the 554px site median rather than becoming a
+  102px outlier. Transparency means it sits correctly on both the light
+  (#FAF9F7) and dark (#1a1a2e) themes; measured contrast leaves 5.7% of bottle
+  pixels near the light background and 2.1% near the dark one.
+
+Also regenerates the OG card for Wild Colt, which did not exist while the
+product was merged.
+
+Catalogue is now 190 products.
