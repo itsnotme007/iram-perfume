@@ -2364,10 +2364,11 @@ try{(function(){
     });
   },{rootMargin:'100px'});
   items.forEach(function(item){io.observe(item);imgs.push(item.querySelector('img'))});
-  function open(i){idx=i;lbImg.src=imgs[idx].src;lightbox.classList.add('open');document.body.style.overflow='hidden'}
-  function close(){lightbox.classList.remove('open');document.body.style.overflow='';lbImg.src=''}
-  function prev(){idx=(idx-1+imgs.length)%imgs.length;lbImg.src=imgs[idx].src}
-  function next(){idx=(idx+1)%imgs.length;lbImg.src=imgs[idx].src}
+  function srcOf(i){var im=imgs[i];return im&&(im.src||im.dataset.src)||''}
+  function open(i){idx=i;lbImg.src=srcOf(i);lightbox.classList.add('open');document.body.style.overflow='hidden'}
+  function close(){lightbox.classList.remove('open');document.body.style.overflow='';lbImg.removeAttribute('src')}
+  function prev(){idx=(idx-1+imgs.length)%imgs.length;lbImg.src=srcOf(idx)}
+  function next(){idx=(idx+1)%imgs.length;lbImg.src=srcOf(idx)}
   items.forEach(function(item,i){item.addEventListener('click',function(){open(i)})});
   lbClose.addEventListener('click',close);
   lbPrev.addEventListener('click',prev);
