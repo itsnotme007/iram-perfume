@@ -204,7 +204,7 @@
     "mod": "2026-10-29"
   },
   "frag:arabiyat-prestige-aristo": {
-    "sig": "2273af6cf534a1209e2d08d5",
+    "sig": "1f2572be40571a145b6d16ec",
     "mod": "2026-10-29"
   },
   "frag:armaf-cdnim-pp-club-de-nuit-intense-man-pure-parfum": {
@@ -620,7 +620,7 @@
     "mod": "2026-10-23"
   },
   "home": {
-    "sig": "fc3973e05669bba770048e27",
+    "sig": "4a3f08242bba03d2fa88d0c5",
     "mod": "2026-10-29"
   },
   "frag:albait-aldimashqi-special-ombre-leather": {
@@ -732,7 +732,7 @@
     "mod": "2026-10-29"
   },
   "frag:mykonos-slow-living": {
-    "sig": "cde1c476c9cfa80933bc73da",
+    "sig": "b957bc650a3156413cd9630b",
     "mod": "2026-10-29"
   },
   "frag:mykonos-reflection-elixir": {
@@ -768,7 +768,7 @@
     "mod": "2026-10-29"
   },
   "frag:laverne-la-dor-bakhur": {
-    "sig": "88684ea343e4ff95df17d3da",
+    "sig": "680a719c129db525fe749330",
     "mod": "2026-10-29"
   },
   "frag:swiss-arabian-opulence-of-dubai": {
@@ -780,7 +780,7 @@
     "mod": "2026-10-23"
   },
   "bottles": {
-    "sig": "df03a235db72f3d4e7ebd0ba",
+    "sig": "820ff32c9b34a9d709b4f7eb",
     "mod": "2026-10-29"
   },
   "brand:afnan": {
@@ -864,8 +864,8 @@
     "mod": "2026-10-23"
   },
   "brand:laverne": {
-    "sig": "b406b46dbd1f0d3cbf4a49a0",
-    "mod": "2026-10-23"
+    "sig": "74e731249d514b169d428c33",
+    "mod": "2026-10-29"
   },
   "brand:maison-alhambra": {
     "sig": "7fcdf980e09d75bef6ad6358",
@@ -932,11 +932,11 @@
     "mod": "2026-10-23"
   },
   "collection:decants-under-200": {
-    "sig": "84d575d33ba09fef527fe82f",
+    "sig": "459bf7d01b0173f7223beed3",
     "mod": "2026-10-29"
   },
   "collection:3ml-decants": {
-    "sig": "7c9bf04a6f8a79db9e0f2499",
+    "sig": "3f212922a9216bbc8f4dc338",
     "mod": "2026-10-29"
   },
   "collection:men": {
@@ -944,7 +944,7 @@
     "mod": "2026-10-23"
   },
   "collection:unisex": {
-    "sig": "8bd819e18e1c22eab9ddb002",
+    "sig": "a3d623a1926719cf009aca92",
     "mod": "2026-10-29"
   },
   "collection:women": {
@@ -957,6 +957,10 @@
   },
   "frag:assaf-wild-colt": {
     "sig": "97713a30df74593a0a5b894a",
+    "mod": "2026-10-29"
+  },
+  "frag:laverne-fearless": {
+    "sig": "fbff5e8dc2131b3bacb1d11c",
     "mod": "2026-10-29"
   }
 }

@@ -69,6 +69,15 @@ Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`pric
 ## Data Pipeline (Phase 2.1)
 - **`products.json` (189 products) is the source of truth.** `node seo-gen.js` reads it every run; the catalogue table in `index.html` is only re-snapshotted via `node seo-gen.js --make-data` (use after hand-editing the table instead of products.json). A `--make-data` re-run against an already-rendered table must leave products.json byte-stable (round-trip test).
 - Fields: `key` (`brand|name`), `prices`/`statusPerSize` (6 sizes 3/5/7.5/10/20/30 → ok|struck|coming), `links` (preview-stripped + separator-normalized) + `linksRaw` (verbatim links-cell HTML — the registry/`.card-links` use `linksRaw`; a preview-only cell yields `links=''`), `slug`/`url`, `added` (45 products; NEW badge + Newest First), `tags` always `[]`, `inspired` keeps raw entities.
+- **Product tags must be sourced from Fragrantica/Parfumo — never invented.** Every tag field (`gender`, `scent`, `family`, `season`, `time`, `weather`, `occasion`, `mood`) is a *claim about a real fragrance*, so derive it from the reference sites' data, not from the product name or guesswork:
+  - `gender` ← the Fragrantica "for Men/Women/Unisex" header (Men+Women listed = `Unisex`).
+  - `scent` ← the ordered **main accords** (most prominent first), plus pyramid notes where an accord has no matching term.
+  - `family` ← Fragrantica's own family phrasing (e.g. "oriental floral" → `oriental,floral`) blended with the accord list.
+  - `season`/`time` ← the community **"When to wear it"** vote split (include the leading buckets); `weather` follows from those same buckets.
+  - `occasion`/`mood` are the only judgement calls — keep them consistent with the accord profile and the existing entries for that brand.
+  - Fragrantica itself 403s bots; `www.fragrantica.<tld>` and the `parfumistas.us/perfume/<name>-<brand>/` mirror both serve the accords, the note pyramid, the vote split and the gender line. Parfumo is authoritative for `links` but is **not** a source for tags when it lacks the scent.
+  - **Every value must already exist** in the catalogue's vocabulary — the filter UI has fixed option lists, so a novel term silently creates an unfilterable card. Enumerate the current values across `products.json` before adding a product; if the reference data genuinely needs a new term, add it to the filter UI in the same commit.
+
 - **seo-gen renders FROM products.json into index.html every run:**
   1. The two catalogue `<tbody>` regions (Designer 16 / Middle Eastern 169 rows), byte-parity with the historical hand-authored markup plus static `data-brand`, `data-price` (cheapest available else any), `data-pid`, `data-added` on fresh products. Attr order: scent…family, added, brand, price, pid.
   2. The mobile `.frag-cards` grids at `<!--CARDS:Designer-->` / `<!--CARDS:Middle Eastern-->` markers (inserted right after each `</table>`; markers are `stripMarks`-style so reruns stay idempotent) — exact mirror of the runtime builder output, **no static NEW badge**.
