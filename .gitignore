@@ -15,3 +15,8 @@ node_modules/
 test-results/
 playwright-report/
 tests/.lighthouse/
+# Scratch files (commit messages, one-off probes) - never ship these
+*.tmp.txt
+_*.js
+_wc/
+_lf*/
