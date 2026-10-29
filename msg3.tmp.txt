@@ -1,9 +1,0 @@
-data(catalogue): Fearless is inspired by Bvlgari Tygar
-
-Owner-supplied inspiration for the new Laverne Fearless listing. Written
-brand-first as "Tygar Bvlgari" to match the one existing precedent for this
-house (Rue Broca Theoreme carries the same value) and the YSL entries.
-
-Renders in the card title/caption, the tablet inspired-cell, the fragrance meta
-description and the lead paragraph. seo-gen still idempotent, parse-check clean,
-battery greps unaffected.
