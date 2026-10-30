@@ -9,11 +9,11 @@
 
 ## Pricing Formula
 ```
-3ml  = CEILING(3 × (30ml/30 + 9),  5); if result ends in 0 → -1
+3ml  = CEILING(3 × (30ml/30 + 11),  5); if result ends in 0 → -1
 5ml  = CEILING(5 × (30ml/30 + 6),  5); if result ends in 0 → -1
 8ml  = CEILING(8 × (30ml/30 + 4),  5); if result ends in 0 → -1
 10ml = CEILING(10 × (30ml/30 + 4), 5); if result ends in 0 → -1
-20ml = CEILING(20 × (30ml/30 + 2),5); if result ends in 0 → -1
+20ml = CEILING(20 × (30ml/30 + 1.5),5); if result ends in 0 → -1
 30ml = base price
 ```
 Column order in the table: `3ml, 5ml, 7.5ml, 10ml, 20ml, 30ml` (the 7.5ml column is priced with the 8× rule above).
