@@ -5760,6 +5760,46 @@
     "availability": "https://schema.org/InStock"
   },
   {
+    "key": "Rasasi|Hawas Gold Digger",
+    "brand": "Rasasi",
+    "brandImg": "logos/rasasi.png",
+    "name": "Hawas Gold Digger",
+    "gender": "Men",
+    "status": "instock",
+    "tags": [],
+    "prices": {
+      "3": 129,
+      "5": 199,
+      "10": 375,
+      "20": 709,
+      "30": 999,
+      "7.5": 299
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
+    "inspired": "Ultra Male",
+    "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Rasasi/Hawas-Gold-Digger-139499.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Rasasi/hawas-gold-digger-gold-digger\">Parfumo</a>",
+    "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Rasasi/Hawas-Gold-Digger-139499.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Rasasi/hawas-gold-digger-gold-digger\">Parfumo</a>",
+    "cat": "Middle Eastern",
+    "scent": "vanilla,aromatic,cinnamon,warm-spicy,woody,amber,green,sweet,lavender,fresh-spicy",
+    "season": "winter,fall,spring",
+    "occasion": "date-night,party",
+    "time": "night,day",
+    "weather": "cold,mild",
+    "mood": "bold,sexy",
+    "family": "woody,aromatic",
+    "added": "2026-10-30",
+    "slug": "rasasi-hawas-gold-digger",
+    "url": "https://iramperfume.in/fragrance/rasasi-hawas-gold-digger.html",
+    "availability": "https://schema.org/InStock"
+  },
+  {
     "key": "Rasasi|Hawas Black",
     "brand": "Rasasi",
     "brandImg": "logos/rasasi.png",
@@ -7650,18 +7690,18 @@
     "prices": {
       "3": 139,
       "5": 215,
-      "7.5": 329,
       "10": 409,
       "20": 775,
-      "30": 1099
+      "30": 1099,
+      "7.5": 329
     },
     "statusPerSize": {
       "3": "ok",
       "5": "ok",
-      "7.5": "ok",
       "10": "ok",
       "20": "ok",
-      "30": "ok"
+      "30": "ok",
+      "7.5": "ok"
     },
     "inspired": "Original",
     "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Ibraheem-AlQurashi/Golden-Amber-100575.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/ibraheem-al-qurashi/golden-amber\">Parfumo</a>",
@@ -7690,18 +7730,18 @@
     "prices": {
       "3": 139,
       "5": 215,
-      "7.5": 329,
       "10": 409,
       "20": 775,
-      "30": 1099
+      "30": 1099,
+      "7.5": 329
     },
     "statusPerSize": {
       "3": "ok",
       "5": "ok",
-      "7.5": "ok",
       "10": "ok",
       "20": "ok",
-      "30": "ok"
+      "30": "ok",
+      "7.5": "ok"
     },
     "inspired": "Original",
     "links": "<a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/ibraheem-al-qurashi/dark-lavender\">Parfumo</a>",
@@ -7730,18 +7770,18 @@
     "prices": {
       "3": 89,
       "5": 129,
-      "7.5": 195,
       "10": 239,
       "20": 439,
-      "30": 599
+      "30": 599,
+      "7.5": 195
     },
     "statusPerSize": {
       "3": "ok",
       "5": "ok",
-      "7.5": "ok",
       "10": "ok",
       "20": "ok",
-      "30": "ok"
+      "30": "ok",
+      "7.5": "ok"
     },
     "inspired": "Original",
     "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Riiffs-Perfumes/Prive-Noir-99064.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/riiffs/prive-noir\">Parfumo</a>",
@@ -7770,18 +7810,18 @@
     "prices": {
       "3": 119,
       "5": 179,
-      "7.5": 275,
       "10": 339,
       "20": 639,
-      "30": 899
+      "30": 899,
+      "7.5": 275
     },
     "statusPerSize": {
       "3": "ok",
       "5": "ok",
-      "7.5": "ok",
       "10": "ok",
       "20": "ok",
-      "30": "ok"
+      "30": "ok",
+      "7.5": "ok"
     },
     "inspired": "Original",
     "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Rayhaan/Vantage-143352.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/rayhaan/vantage\">Parfumo</a>",
@@ -7797,46 +7837,6 @@
     "added": "2026-10-30",
     "slug": "rayhaan-vantage",
     "url": "https://iramperfume.in/fragrance/rayhaan-vantage.html",
-    "availability": "https://schema.org/InStock"
-  },
-  {
-    "key": "Rasasi|Hawas Gold Digger",
-    "brand": "Rasasi",
-    "brandImg": "logos/rasasi.png",
-    "name": "Hawas Gold Digger",
-    "gender": "Men",
-    "status": "instock",
-    "tags": [],
-    "prices": {
-      "3": 129,
-      "5": 199,
-      "7.5": 299,
-      "10": 375,
-      "20": 709,
-      "30": 999
-    },
-    "statusPerSize": {
-      "3": "ok",
-      "5": "ok",
-      "7.5": "ok",
-      "10": "ok",
-      "20": "ok",
-      "30": "ok"
-    },
-    "inspired": "Ultra Male",
-    "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Rasasi/Hawas-Gold-Digger-139499.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Rasasi/hawas-gold-digger-gold-digger\">Parfumo</a>",
-    "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Rasasi/Hawas-Gold-Digger-139499.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Rasasi/hawas-gold-digger-gold-digger\">Parfumo</a>",
-    "cat": "Middle Eastern",
-    "scent": "vanilla,aromatic,cinnamon,warm-spicy,woody,amber,green,sweet,lavender,fresh-spicy",
-    "season": "winter,fall,spring",
-    "occasion": "date-night,party",
-    "time": "night,day",
-    "weather": "cold,mild",
-    "mood": "bold,sexy",
-    "family": "woody,aromatic",
-    "added": "2026-10-30",
-    "slug": "rasasi-hawas-gold-digger",
-    "url": "https://iramperfume.in/fragrance/rasasi-hawas-gold-digger.html",
     "availability": "https://schema.org/InStock"
   }
 ]
