@@ -197,6 +197,8 @@
 - [Brazilian Tobacco](https://iramperfume.in/fragrance/ibraq-brazilian-tobacco.html) (Men): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 10ml ₹399 | 20ml ₹755 | 30ml ₹1069
 - [Sandalwood](https://iramperfume.in/fragrance/ibraq-sandalwood.html) (Unisex): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹775 | 30ml ₹1099
 - [Spanish Tobacco](https://iramperfume.in/fragrance/ibraq-spanish-tobacco.html) (Men): 3ml ₹135 | 5ml ₹209 | 7.5ml ₹319 | 10ml ₹399 | 20ml ₹755 | 30ml ₹1069
+- [Golden Amber](https://iramperfume.in/fragrance/ibraq-golden-amber.html) (Unisex): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹775 | 30ml ₹1099
+- [Dark Lavender](https://iramperfume.in/fragrance/ibraq-dark-lavender.html) (Unisex): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹775 | 30ml ₹1099
 
 ### Khadlaj
 - [Mocha Latte](https://iramperfume.in/fragrance/khadlaj-mocha-latte.html) (Unisex): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 10ml ₹259 | 20ml ₹479 | 30ml ₹659
@@ -273,6 +275,7 @@
 - [Hawas OG](https://iramperfume.in/fragrance/rasasi-hawas-og.html) (Men): 3ml ₹115 | 5ml ₹169 | 7.5ml ₹259 | 10ml ₹319 | 20ml ₹599 | 30ml ₹839
 - [Hawas Venom](https://iramperfume.in/fragrance/rasasi-hawas-venom.html) (Men): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹775 | 30ml ₹1099
 - [Hawas Sapphire](https://iramperfume.in/fragrance/rasasi-hawas-sapphire.html) (Unisex): 3ml ₹139 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹775 | 30ml ₹1099
+- [Hawas Gold Digger](https://iramperfume.in/fragrance/rasasi-hawas-gold-digger.html) (Men): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹709 | 30ml ₹999
 
 ### Rayhaan
 - [Aquatica](https://iramperfume.in/fragrance/rayhaan-aquatica.html) (Men): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 10ml ₹275 | 20ml ₹509 | 30ml ₹699
@@ -289,6 +292,7 @@
 - [Lion](https://iramperfume.in/fragrance/rayhaan-lion.html) (Men): 3ml ₹105 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹535 | 30ml ₹739
 - [Pacific Aura](https://iramperfume.in/fragrance/rayhaan-pacific-aura.html) (Men): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 10ml ₹275 | 20ml ₹509 | 30ml ₹699
 - [Italia](https://iramperfume.in/fragrance/rayhaan-italia.html) (Men): 3ml ₹99 | 5ml ₹149 | 7.5ml ₹219 | 10ml ₹275 | 20ml ₹509 | 30ml ₹699
+- [Vantage](https://iramperfume.in/fragrance/rayhaan-vantage.html) (Unisex): 3ml ₹119 | 5ml ₹179 | 7.5ml ₹275 | 10ml ₹339 | 20ml ₹639 | 30ml ₹899
 
 ### Reef
 - [Reef 33](https://iramperfume.in/fragrance/reef-reef-33.html) (Unisex): 3ml ₹129 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹709 | 30ml ₹999
@@ -304,6 +308,7 @@
 - [Freeze in Flames](https://iramperfume.in/fragrance/riiffs-freeze-in-flames.html) (Unisex): 3ml ₹125 | 5ml ₹189 | 7.5ml ₹289 | 10ml ₹359 | 20ml ₹679 | 30ml ₹959
 - [Privè Platinum Silver](https://iramperfume.in/fragrance/riiffs-priv-platinum-silver.html) (Unisex): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹209 | 10ml ₹259 | 20ml ₹475 | 30ml ₹649
 - [Portofino Noir](https://iramperfume.in/fragrance/riiffs-portofino-noir.html) (Men): 3ml ₹85 | 5ml ₹125 | 7.5ml ₹179 | 10ml ₹225 | 20ml ₹409 | 30ml ₹549
+- [Prive Noir](https://iramperfume.in/fragrance/riiffs-prive-noir.html) (Men): 3ml ₹89 | 5ml ₹129 | 7.5ml ₹195 | 10ml ₹239 | 20ml ₹439 | 30ml ₹599
 
 ### Rue Broca
 - [Theoreme](https://iramperfume.in/fragrance/rue-broca-theoreme.html) (Men): 3ml ₹95 | 5ml ₹139 | 7.5ml ₹205 | 10ml ₹255 | 20ml ₹469 | 30ml ₹639
