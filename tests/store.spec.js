@@ -3,7 +3,7 @@
 // (they document bugs 1.1, 1.2, 1.5, 1.7, 1.8, 1.9, 1.3, 1.4).
 const { test, expect } = require('@playwright/test');
 
-const TOTAL = 196;
+const TOTAL = 197;
 
 function watchErrors(page) {
   const errs = [];
@@ -16,19 +16,19 @@ async function cartCount(page) {
 }
 
 // ---------------------------------------------------------------- catalogue
-test('catalogue renders 196 cards + rows with accurate counts', async ({ page }, testInfo) => {
+test('catalogue renders 197 cards + rows with accurate counts', async ({ page }, testInfo) => {
   const errs = watchErrors(page);
   await page.goto('/');
   await expect(page).toHaveTitle(/IRAM Perfume/);
   await expect(page.locator('.frag-cell')).toHaveCount(TOTAL);
   await expect(page.locator('.frag-card')).toHaveCount(TOTAL);
-  await expect(page.locator('#filterCount')).toHaveText(/196 fragrances/);
-  await expect(page.locator('#filterCountMobile')).toHaveText(/196 fragrances/);
+  await expect(page.locator('#filterCount')).toHaveText(/197 fragrances/);
+  await expect(page.locator('#filterCountMobile')).toHaveText(/197 fragrances/);
   await expect(page.locator('#filterApply')).toHaveText(/Show all fragrances/);
   // raw (pre-JS) markup must never claim the old count
   const raw = await (await page.request.get('/')).text();
   expect(raw).not.toMatch(/147 fragrances/);
-  expect(raw).toMatch(/Show 196 fragrances/);
+  expect(raw).toMatch(/Show 197 fragrances/);
   expect(errs).toEqual([]);
 });
 
@@ -187,9 +187,11 @@ test('table add-to-cart, drawer, clear (desktop)', async ({ page }, testInfo) =>
 test('shipping cost follows subtotal + qty constants', async ({ browser }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'shipping totals asserted on desktop');
   const cases = [
-    { name: 'qty 1 over 999 is NOT free', items: [{ brand: 'Mancera', frag: 'Cedrat Boise', size: '30ml', price: 1899, qty: 1, key: 'Mancera|Cedrat Boise|30ml' }], free: false },
-    { name: 'qty 2 under 999 is NOT free', items: [{ brand: 'Davidoff', frag: 'Cool Water EDT', size: '3ml', price: 89, qty: 1, key: 'Davidoff|Cool Water EDT|3ml' }, { brand: 'Jaguar', frag: 'Classic Black', size: '3ml', price: 89, qty: 1, key: 'Jaguar|Classic Black|3ml' }], free: false },
-    { name: 'qty 2 over 999 IS free', items: [{ brand: 'Mancera', frag: 'Cedrat Boise', size: '30ml', price: 1899, qty: 1, key: 'Mancera|Cedrat Boise|30ml' }, { brand: 'Davidoff', frag: 'Cool Water EDT', size: '3ml', price: 89, qty: 1, key: 'Davidoff|Cool Water EDT|3ml' }], free: true }
+    // Cedrat Boise was used here until it was marked sold out; reconcileCart drops
+    // items whose size is unavailable, so these cases use in-stock products.
+    { name: 'qty 1 over 999 is NOT free', items: [{ brand: 'Mancera', frag: 'Gold Intensive Aoud', size: '30ml', price: 1899, qty: 1, key: 'Mancera|Gold Intensive Aoud|30ml' }], free: false },
+    { name: 'qty 2 under 999 is NOT free', items: [{ brand: 'Davidoff', frag: 'Cool Water EDT', size: '3ml', price: 99, qty: 1, key: 'Davidoff|Cool Water EDT|3ml' }, { brand: 'Jaguar', frag: 'Classic Black', size: '3ml', price: 95, qty: 1, key: 'Jaguar|Classic Black|3ml' }], free: false },
+    { name: 'qty 2 over 999 IS free', items: [{ brand: 'Mancera', frag: 'Gold Intensive Aoud', size: '30ml', price: 1899, qty: 1, key: 'Mancera|Gold Intensive Aoud|30ml' }, { brand: 'Davidoff', frag: 'Cool Water EDT', size: '3ml', price: 99, qty: 1, key: 'Davidoff|Cool Water EDT|3ml' }], free: true }
   ];
   for (const c of cases) {
     await test.step(c.name, async () => {
@@ -303,7 +305,7 @@ test('bestsellers rail and 3ml price list render', async ({ page }) => {
   await expect(page.locator('#bestsellers .best-card[data-pid]')).toHaveCount(12);
   // 3ml list stays hidden until the hero banner CTA reveals it.
   await expect(page.locator('#threeMl')).toBeHidden();
-  await expect(page.locator('#threeMlList .three-ml-row')).toHaveCount(196);
+  await expect(page.locator('#threeMlList .three-ml-row')).toHaveCount(197);
   await page.evaluate(() => document.querySelector('.mobile-hero a[href="#threeMl"]').click());
   await expect(page.locator('#threeMl')).toBeVisible();
   await expect(page.locator('#threeMlList')).toHaveClass(/three-ml-open/);
