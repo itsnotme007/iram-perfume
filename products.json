@@ -5925,7 +5925,7 @@
     "brandImg": "logos/paris-corner.png",
     "name": "Rifaqaat",
     "gender": "Unisex",
-    "status": "soldout",
+    "status": "instock",
     "tags": [],
     "prices": {
       "3": 109,
@@ -5936,12 +5936,12 @@
       "7.5": 235
     },
     "statusPerSize": {
-      "3": "struck",
-      "5": "struck",
-      "10": "struck",
-      "20": "struck",
-      "30": "struck",
-      "7.5": "struck"
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
     },
     "inspired": "Babycat YSL",
     "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/PARIS-CORNER/Rifaaqat-99060.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/paris-corner/rifaaqat'>Parfumo</a>",
