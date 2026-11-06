@@ -1203,7 +1203,74 @@ try{(function(){
   function baseShipping(s){return(s>=FREE_SHIP_MIN&&totalItems()>=FREE_SHIP_MIN_QTY)?0:FLAT_SHIP}
   function shipping(s){return baseShipping(s)+surcharge()}
 
+  // ---- duplicate-decant guard -------------------------------------------------
+  // Two situations are worth checking before something is added:
+  //   same size  -> adding again silently becomes qty 2
+  //   other size -> the same perfume ends up as two separate cart lines
+  // Both ask for confirmation first. Bottles (Bottles|*) are exempt.
+  var dupSheet=document.getElementById('pcDupSheet');
+  var dupOverlay=document.getElementById('pcDupOverlay');
+  var dupMsg=document.getElementById('pcDupMsg');
+  var dupPending=null;
+  function fmtRs(n){return '\u20B9'+Number(n).toLocaleString('en-IN')}
+
+  function duplicateReason(brand,frag,size){
+    if(brand==='Bottles')return null;
+    var sameSize=null,otherSizes=[];
+    for(var i=0;i<cart.length;i++){
+      var it=cart[i];
+      if(it.brand!==brand||it.frag!==frag)continue;
+      if(it.size===size)sameSize=it;
+      else otherSizes.push(it);
+    }
+    if(sameSize)return {kind:'same',item:sameSize};
+    if(otherSizes.length)return {kind:'other',items:otherSizes};
+    return null;
+  }
+  function closeDup(confirmed){
+    dupSheet.classList.remove('open');
+    dupOverlay.classList.remove('open');
+    var pend=dupPending;
+    dupPending=null;
+    if(confirmed&&pend)commitToCart(pend.brand,pend.frag,pend.size,pend.price,pend.qty);
+  }
+  function askDuplicate(pend,reason){
+    dupPending=pend;
+    if(reason.kind==='same'){
+      var ex=reason.item;
+      dupMsg.textContent='You already have '+ex.qty+'\u00D7 '+pend.size+' '+pend.frag+' in your cart ('+
+        fmtRs(ex.price)+' each). Adding this will make it '+((Number(ex.qty)||1)+pend.qty)+'.';
+    }else{
+      var list=reason.items.map(function(it){return it.size}).join(' and ');
+      dupMsg.textContent='You already have '+pend.frag+' in '+list+'. Do you want another size ('+
+        pend.size+' \u00B7 '+fmtRs(pend.price)+') as well?';
+    }
+    dupSheet.classList.add('open');
+    dupOverlay.classList.add('open');
+    var btn=document.getElementById('pcDupConfirm');
+    if(btn)setTimeout(function(){try{btn.focus()}catch(e){}},60);
+  }
+  (function wireDup(){
+    if(!dupSheet||!dupOverlay)return;
+    var confirmBtn=document.getElementById('pcDupConfirm');
+    var cancelBtn=document.getElementById('pcDupCancel');
+    var closeBtn=document.getElementById('pcDupClose');
+    if(confirmBtn)confirmBtn.addEventListener('click',function(){closeDup(true)});
+    if(cancelBtn)cancelBtn.addEventListener('click',function(){closeDup(false)});
+    if(closeBtn)closeBtn.addEventListener('click',function(){closeDup(false)});
+    dupOverlay.addEventListener('click',function(){closeDup(false)});
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&dupSheet.classList.contains('open')){e.preventDefault();closeDup(false)}
+    });
+  })();
+
   function addToCart(brand,frag,size,price,qty){
+    var n=Math.max(1,Math.min(99,parseInt(qty,10)||1));
+    var reason=duplicateReason(brand,frag,size);
+    if(reason){askDuplicate({brand:brand,frag:frag,size:size,price:price,qty:n},reason);return}
+    commitToCart(brand,frag,size,price,qty);
+  }
+  function commitToCart(brand,frag,size,price,qty){
     var n=Math.max(1,Math.min(99,parseInt(qty,10)||1));
     var key=brand+'|'+frag+'|'+size;
     var found=false;
@@ -1212,6 +1279,8 @@ try{(function(){
     save();renderCart();bounceFloat();
     if(window.__toast)window.__toast((n>1?n+'\u00D7 ':'')+size+' '+frag+' added to cart');
   }
+  // exposed for tests: does the current cart already hold this perfume in another size?
+  window.__iramDupReason=duplicateReason;
   window.__iramAddToCart=addToCart;
   function changeQty(key,d){
     for(var i=0;i<cart.length;i++){

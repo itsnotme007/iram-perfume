@@ -229,6 +229,49 @@ test('stale cart price is re-priced from current data', async ({ page }, testInf
   expect(text).not.toContain('111');
 });
 
+test('duplicate decant asks for confirmation before adding', async ({ page }) => {
+  await page.addInitScript(() => { try { localStorage.clear(); } catch (e) {} });
+  await page.goto('/');
+  await page.waitForTimeout(300);
+
+  const cart = () => page.evaluate(() => JSON.parse(localStorage.getItem('iram_cart') || '[]'));
+  const asking = () => page.evaluate(() => {
+    const s = document.getElementById('pcDupSheet');
+    return !!(s && s.classList.contains('open'));
+  });
+
+  // first add: goes straight in, no prompt
+  await page.evaluate(() => window.__iramAddToCart('Afnan', 'Turathi Blue', '5ml', 185, 1));
+  expect(await asking()).toBe(false);
+  expect((await cart()).length).toBe(1);
+
+  // same size again: prompt, and nothing is written until confirmed
+  await page.evaluate(() => window.__iramAddToCart('Afnan', 'Turathi Blue', '5ml', 185, 1));
+  expect(await asking()).toBe(true);
+  expect((await cart())[0].qty).toBe(1);
+  await page.click('#pcDupCancel');
+  expect(await asking()).toBe(false);
+  expect((await cart())[0].qty).toBe(1);          // declined -> unchanged
+
+  await page.evaluate(() => window.__iramAddToCart('Afnan', 'Turathi Blue', '5ml', 185, 1));
+  await page.click('#pcDupConfirm');
+  expect((await cart())[0].qty).toBe(2);          // confirmed -> qty 2
+
+  // different size of the same perfume: prompt, then a second cart line
+  await page.evaluate(() => window.__iramAddToCart('Afnan', 'Turathi Blue', '10ml', 349, 1));
+  expect(await asking()).toBe(true);
+  expect((await cart()).length).toBe(1);
+  await page.click('#pcDupConfirm');
+  const after = await cart();
+  expect(after.length).toBe(2);
+  expect(after.map((x) => x.size).sort()).toEqual(['10ml', '5ml']);
+
+  // a different perfume is not a duplicate
+  await page.evaluate(() => window.__iramAddToCart('Afnan', 'Turathi Brown', '5ml', 185, 1));
+  expect(await asking()).toBe(false);
+  expect((await cart()).length).toBe(3);
+});
+
 test('cart survives corrupted localStorage', async ({ page }) => {
   await page.addInitScript(() => { try { localStorage.setItem('iram_cart', '{oops'); } catch (e) {} });
   await page.goto('/');

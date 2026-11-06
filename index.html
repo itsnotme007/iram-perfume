@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="assets/app.css?v=9bfb13b3d3bb">
+<link rel="stylesheet" href="assets/app.css?v=55a8fc2c8280">
 <link rel="stylesheet" href="assets/desktop.css">
 <noscript><style>#featuredRail[hidden]{display:none!important}#mobileBrandTrack:empty{height:auto!important}</style></noscript>
 <script type="application/ld+json">
@@ -2416,6 +2416,21 @@ if(featPicks.length>=4){
   <div class="pc-sheet-body" id="pcBody"></div>
 </div>
 
+<div class="pc-overlay" id="pcDupOverlay"></div>
+<div class="pc-sheet" id="pcDupSheet" role="alertdialog" aria-modal="true" aria-labelledby="pcDupTitle" aria-describedby="pcDupMsg">
+  <div class="pc-sheet-head">
+    <strong id="pcDupTitle">Already in your cart</strong>
+    <button type="button" class="pc-sheet-close" id="pcDupClose" aria-label="Cancel">&times;</button>
+  </div>
+  <div class="pc-sheet-body">
+    <p id="pcDupMsg" style="margin:0 0 14px;font-size:14px;color:var(--text-body)"></p>
+    <div class="pc-dup-actions">
+      <button type="button" class="pc-dup-primary" id="pcDupConfirm">Add anyway</button>
+      <button type="button" class="pc-dup-cancel" id="pcDupCancel">No, keep what I have</button>
+    </div>
+  </div>
+</div>
+
 <div class="pc-overlay" id="pcListOverlay"></div>
 <div class="pc-sheet" id="pcWishSheet" role="dialog" aria-modal="true" aria-labelledby="pcWishTitle">
   <div class="pc-sheet-head">
@@ -2438,6 +2453,6 @@ if(featPicks.length>=4){
 <!--/PRODUCTS_JSON-->
 <!--APP-->
 <script src="config.js?v=965039b66370"></script>
-<script src="assets/app.js?v=98297b54799c"></script>
+<script src="assets/app.js?v=a189cf5aa1e9"></script>
 </body>
 </html>

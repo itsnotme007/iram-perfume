@@ -711,6 +711,12 @@ tr.pc-sold td{color:var(--text-muted)}
 .pc-sheet-close{width:44px;height:44px;border:none;background:var(--bg-elevated);color:var(--text-primary);border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
 .pc-sheet-close:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 .pc-sheet-body{overflow-y:auto;padding:0 18px calc(18px + env(safe-area-inset-bottom,0px));-webkit-overflow-scrolling:touch}
+/* duplicate-decant confirmation */
+.pc-dup-actions{display:flex;flex-direction:column;gap:10px;padding-bottom:8px}
+.pc-dup-primary,.pc-dup-cancel{min-height:46px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.pc-dup-primary{background:var(--accent-primary);color:var(--text-on-dark);border:1px solid var(--accent-primary)}
+.pc-dup-cancel{background:var(--bg-surface);color:var(--text-primary);border:1px solid var(--border-strong)}
+.pc-dup-primary:focus-visible,.pc-dup-cancel:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 .pc-hero{display:flex;gap:14px;padding-bottom:14px}
 .pc-hero-img{flex:0 0 110px;position:relative;border-radius:10px;overflow:hidden;aspect-ratio:1/1;background:var(--bg-surface);object-fit:contain;padding:8px}
 .pc-hero-img-bg{background:linear-gradient(135deg,#efe9df,#e6ddd0)}
