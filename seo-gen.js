@@ -492,9 +492,10 @@ function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en-IN')
     + (schema && schema.length ? schema.map(x => '<script type="application/ld+json">\n' + JSON.stringify(x, null, 2) + '\n</script>\n').join('') : '')
     + '<link rel="stylesheet" href="../assets/desktop.css">\n'
     + '<link rel="stylesheet" href="../assets/page.css?v=' + PAGE_CSS_VER + '">\n'
-    + '</head>\n<body>\n<div class="wrap">\n'
+    + '<script>(function(){var root=document.documentElement,s=null;try{s=localStorage.getItem(\'theme\')}catch(e){}if(s===\'dark\'||(!s&&window.matchMedia&&window.matchMedia(\'(prefers-color-scheme:dark)\').matches))root.setAttribute(\'data-theme\',\'dark\');})();</script>\n'
+    + '</head>\n<body>\n<button type="button" class="page-theme" data-theme-toggle aria-label="Toggle dark mode"><span class="theme-ico theme-ico-moon">☾</span><span class="theme-ico theme-ico-sun">☀</span></button>\n<div class="wrap">\n'
     + body
-    + '</div>\n</body>\n</html>\n';
+    + '</div>\n<script>(function(){var root=document.documentElement;document.querySelectorAll(\'[data-theme-toggle]\').forEach(function(t){t.addEventListener(\'click\',function(){var dark=root.getAttribute(\'data-theme\')===\'dark\';if(dark){root.removeAttribute(\'data-theme\');try{localStorage.setItem(\'theme\',\'light\')}catch(e){}}else{root.setAttribute(\'data-theme\',\'dark\');try{localStorage.setItem(\'theme\',\'dark\')}catch(e){}}})})})();</script>\n</body>\n</html>\n';
 }
 
 // --------------------------------------------------------- fragrance pages

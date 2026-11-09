@@ -1876,15 +1876,15 @@ try{(function(){
 
   function navigateToProduct(productId){
     if(!productId)return;
-    var candidates=document.querySelectorAll('[data-product="'+productId+'"]');
+    var mobile=window.matchMedia&&window.matchMedia('(max-width:1023px)').matches;
+    var candidates=document.querySelectorAll((mobile?'.frag-card[data-product="': 'tr[data-product="')+productId+'"]');
+    if(!candidates.length)candidates=document.querySelectorAll('[data-product="'+productId+'"]');
     var target=null;
     for(var i=0;i<candidates.length;i++){
       if(candidates[i].offsetHeight>0){target=candidates[i];break}
     }
     if(!target)return;
-    var rect=target.getBoundingClientRect();
-    var scrollTop=window.pageYOffset||document.documentElement.scrollTop;
-    window.scrollTo({top:scrollTop+rect.top-80,behavior:'smooth'});
+    target.scrollIntoView({behavior:'smooth',block:'center',inline:'nearest'});
     var highlightEl=target.classList.contains('frag-card')?target.querySelector('.card-body')||target:target;
     highlightEl.style.transition='background .3s';
     highlightEl.style.background=getComputedStyle(document.documentElement).getPropertyValue('--highlight-bg')||'#FFF5CC';

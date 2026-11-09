@@ -124,6 +124,7 @@
 - [Rose Noir](https://iramperfume.in/fragrance/ahmed-al-maghribi-rose-noir.html) (Women): 3ml ₹165 | 5ml ₹245 | 7.5ml ₹375 | 10ml ₹469 | 20ml ₹885 | 30ml ₹1279
 - [Ignite Oud](https://iramperfume.in/fragrance/ahmed-al-maghribi-ignite-oud.html) (Unisex): 3ml ₹215 | 5ml ₹329 | 7.5ml ₹515 | 10ml ₹639 | 20ml ₹1229 | 30ml ₹1799
 - [Ghaf](https://iramperfume.in/fragrance/ahmed-al-maghribi-ghaf.html) (Unisex): 3ml ₹135 | 5ml ₹199 | 7.5ml ₹305 | 10ml ₹379 | 20ml ₹709 | 30ml ₹1019
+- [Bin Shaikh](https://iramperfume.in/fragrance/ahmed-al-maghribi-bin-shaikh.html) (Unisex): 3ml ₹225 | 5ml ₹349 | 7.5ml ₹539 | 10ml ₹675 | 20ml ₹1299 | 30ml ₹1899
 
 ### Al Majed
 - [Oud Boisee](https://iramperfume.in/fragrance/al-majed-oud-boisee.html) (Unisex): 3ml ₹135 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹699 | 30ml ₹999
@@ -132,7 +133,7 @@
 - [L'Nuit](https://iramperfume.in/fragrance/albait-aldimashqi-l-nuit.html) (Men, soldout): 3ml ₹129 | 5ml ₹185 | 7.5ml ₹279 | 10ml ₹349 | 20ml ₹649 | 30ml ₹929
 - [Y EDP](https://iramperfume.in/fragrance/albait-aldimashqi-y-edp.html) (Men): 3ml ₹129 | 5ml ₹185 | 7.5ml ₹279 | 10ml ₹349 | 20ml ₹649 | 30ml ₹929
 - [Gentlemen Reserve Privée](https://iramperfume.in/fragrance/albait-aldimashqi-gentlemen-reserve-priv-e.html) (Men): 3ml ₹129 | 5ml ₹185 | 7.5ml ₹279 | 10ml ₹349 | 20ml ₹649 | 30ml ₹929
-- [Special Ombre Leather](https://iramperfume.in/fragrance/albait-aldimashqi-special-ombre-leather.html) (Unisex): 3ml ₹135 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹699 | 30ml ₹999
+- [Ombre Leather 16](https://iramperfume.in/fragrance/albait-aldimashqi-ombre-leather-16.html) (Unisex): 3ml ₹135 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹699 | 30ml ₹999
 
 ### Al Wataniah
 - [Kayaan Classic](https://iramperfume.in/fragrance/al-wataniah-kayaan-classic.html) (Men): 3ml ₹115 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹565 | 30ml ₹799
@@ -194,6 +195,9 @@
 
 ### Fragrance World
 - [Kohl](https://iramperfume.in/fragrance/fragrance-world-kohl.html) (Unisex): 3ml ₹115 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹565 | 30ml ₹799
+- [Flora by Flora](https://iramperfume.in/fragrance/fragrance-world-flora-by-flora.html) (Women): 3ml ₹75 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹299 | 30ml ₹399
+- [Aventos Blue for Him](https://iramperfume.in/fragrance/fragrance-world-aventos-blue-for-him.html) (Men): 3ml ₹75 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹299 | 30ml ₹399
+- [Elysia Lychee Fizz](https://iramperfume.in/fragrance/fragrance-world-elysia-lychee-fizz.html) (Women): 3ml ₹75 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹299 | 30ml ₹399
 
 ### Ibraq
 - [Black Diamond Incense](https://iramperfume.in/fragrance/ibraq-black-diamond-incense.html) (Unisex): 3ml ₹115 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹565 | 30ml ₹799
@@ -292,7 +296,7 @@
 - [Aquatica](https://iramperfume.in/fragrance/rayhaan-aquatica.html) (Men): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
 - [Crimson](https://iramperfume.in/fragrance/rayhaan-crimson.html) (Men, soldout): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
 - [Elixir](https://iramperfume.in/fragrance/rayhaan-elixir.html) (Men): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
-- [Jungle Vibe](https://iramperfume.in/fragrance/rayhaan-jungle-vibe.html) (Unisex): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
+- [Jungle Vibe](https://iramperfume.in/fragrance/rayhaan-jungle-vibe.html) (Unisex, soldout): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
 - [Nocturno](https://iramperfume.in/fragrance/rayhaan-nocturno.html) (Men): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
 - [Nocturno Elixir](https://iramperfume.in/fragrance/rayhaan-nocturno-elixir.html) (Men): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
 - [Obsidian](https://iramperfume.in/fragrance/rayhaan-obsidian.html) (Men): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
