@@ -1126,13 +1126,20 @@ try{(function(){
   (function reconcileCart(){
     var data=window._products||{};
     if(!data||!Object.keys(data).length)return;
-    var changed=false,dropped=0,repriced=0,kept=[];
+    var changed=false,unavailableCount=0,repriced=0,kept=[];
     for(var ri=0;ri<cart.length;ri++){
       var it=cart[ri];
-      if(!it||typeof it!=='object'||!it.brand||!it.frag){changed=true;dropped++;continue}
+      if(!it||typeof it!=='object'||!it.brand||!it.frag){changed=true;continue}
       var d=data[it.brand+'|'+it.frag];
       var idx=sizes.indexOf(it.size);
-      if(!d||idx<0||!d.available||!d.available[idx]){changed=true;dropped++;continue}
+      var available=!!(d&&idx>=0&&d.available&&d.available[idx]);
+      if(!available){
+        if(!it.unavailable){it.unavailable=true;changed=true}
+        unavailableCount++;
+        kept.push(it);
+        continue
+      }
+      if(it.unavailable){delete it.unavailable;changed=true}
       var q=Math.max(1,Math.min(99,parseInt(it.qty,10)||1));
       if(q!==it.qty){it.qty=q;changed=true}
       var cur=d.prices[idx];
@@ -1145,7 +1152,7 @@ try{(function(){
       save();
       setTimeout(function(){
         if(!window.__toast)return;
-        if(dropped)window.__toast(dropped+' unavailable item'+(dropped===1?'':'s')+' removed from your cart','err');
+        if(unavailableCount)window.__toast(unavailableCount+' unavailable item'+(unavailableCount===1?' remains':'s remain')+' in your cart','err');
         else if(repriced)window.__toast('Cart prices updated to current values','ok');
       },600);
     }
@@ -1196,12 +1203,21 @@ try{(function(){
   function isAvail(c){return!c.querySelector('s')&&!c.querySelector('.u-price')}
   function fmt(n){return'\u20B9'+n.toLocaleString('en-IN')}
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-  function totalItems(){var n=0;for(var i=0;i<cart.length;i++)n+=cart[i].qty;return n}
-  function subtotal(){var t=0;for(var i=0;i<cart.length;i++)t+=cart[i].price*cart[i].qty;return t}
+  function itemAvailable(it){
+    if(it.unavailable)return false;
+    var d=(window._products||{})[it.brand+'|'+it.frag],idx=sizes.indexOf(it.size);
+    return !!(d&&idx>=0&&d.available&&d.available[idx]);
+  }
+  function totalItems(){var n=0;for(var i=0;i<cart.length;i++)if(itemAvailable(cart[i]))n+=cart[i].qty;return n}
+  function subtotal(){var t=0;for(var i=0;i<cart.length;i++)if(itemAvailable(cart[i]))t+=cart[i].price*cart[i].qty;return t}
+  function unavailableLabel(it){
+    var d=(window._products||{})[it.brand+'|'+it.frag];
+    return d&&d.isComingSoon?'Coming soon':d&&d.isSoldOut?'Sold out':'Unavailable';
+  }
   var CFG=window.IRAM_CONFIG||{};
   var FREE_SHIP_MIN=CFG.freeShipMin||999,FREE_SHIP_MIN_QTY=CFG.freeShipMinQty||2,FLAT_SHIP=CFG.shippingFlat||100;
   function baseShipping(s){return(s>=FREE_SHIP_MIN&&totalItems()>=FREE_SHIP_MIN_QTY)?0:FLAT_SHIP}
-  function shipping(s){return baseShipping(s)+surcharge()}
+  function shipping(s){return s>0?baseShipping(s)+surcharge():0}
 
   // ---- duplicate-decant guard -------------------------------------------------
   // Two situations are worth checking before something is added:
@@ -1309,10 +1325,11 @@ try{(function(){
     floatCount.classList.remove('pulse');
     void floatCount.offsetWidth;
     if(n>0)floatCount.classList.add('pulse');
-    floatBtn.classList.toggle('visible',n>0);
-    if(mobileCartBar)mobileCartBar.classList.toggle('visible',n>0);
+    floatBtn.classList.toggle('visible',cart.length>0);
+    if(mobileCartBar)mobileCartBar.classList.toggle('visible',cart.length>0);
     if(mobileCartSummary){
-      var txt=n+' item'+(n===1?'':'s')+'\u00B7'+fmt(tot);
+      var unavailableCount=cart.length-n;
+      var txt=n+' item'+(n===1?'':'s')+(unavailableCount?' · '+unavailableCount+' unavailable':'')+'\u00B7'+fmt(tot);
       if(mobileCartSummary.textContent!==txt){
         mobileCartSummary.textContent=txt;
         mobileCartSummary.classList.remove('bump');
@@ -1343,8 +1360,8 @@ try{(function(){
     else{
       var h='';
       for(var i=0;i<cart.length;i++){
-        var it=cart[i];
-        h+='<div class="cart-item"><div class="cart-item-info"><div class="cart-item-brand">'+esc(it.brand)+'</div><div class="cart-item-name">'+esc(it.frag)+'</div><div class="cart-item-size">'+it.size+' \u2014 '+fmt(it.price)+'</div></div><div class="cart-item-actions"><button class="cart-qty-btn" data-action="minus" data-key="'+esc(it.key)+'">\u2212</button><span class="cart-qty-val">'+it.qty+'</span><button class="cart-qty-btn" data-action="plus" data-key="'+esc(it.key)+'">+</button><button class="cart-remove-btn" data-action="remove" data-key="'+esc(it.key)+'">\u2715</button></div></div>';
+        var it=cart[i],unavailable=!itemAvailable(it);
+        h+='<div class="cart-item'+(unavailable?' cart-item-unavailable':'')+'"><div class="cart-item-info"><div class="cart-item-brand">'+esc(it.brand)+'</div><div class="cart-item-name">'+esc(it.frag)+'</div><div class="cart-item-size">'+it.size+' \u2014 '+fmt(it.price)+'</div>'+(unavailable?'<div class="cart-item-status">'+unavailableLabel(it)+'</div>':'')+'</div><div class="cart-item-actions">'+(unavailable?'<button class="cart-remove-btn cart-remove-unavailable" data-action="remove" data-key="'+esc(it.key)+'">Remove</button>':'<button class="cart-qty-btn" data-action="minus" data-key="'+esc(it.key)+'">\u2212</button><span class="cart-qty-val">'+it.qty+'</span><button class="cart-qty-btn" data-action="plus" data-key="'+esc(it.key)+'">+</button><button class="cart-remove-btn" data-action="remove" data-key="'+esc(it.key)+'">\u2715</button>')+'</div></div>';
       }
       drawerBody.innerHTML=h;
       shipProgress.style.display='';
@@ -1375,6 +1392,7 @@ try{(function(){
       cartStatItems.textContent=n;
       cartStatFrags.textContent=uniqueFrags;
       cartStatDecants.textContent=decantEst;
+      if(!n){shipProgress.style.display='none';shipPartners.style.display='none';cartStats.style.display='none'}
     }
     subtotalEl.textContent=fmt(sub);
     var extraFee=surcharge();

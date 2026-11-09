@@ -56,7 +56,7 @@
     "mod": "2026-11-09"
   },
   "frag:afnan-snoi-supremacy-not-only-intense": {
-    "sig": "82f8f961ea5f3ed66e3cb8fb",
+    "sig": "1c9c84c4539632fab4aaccab",
     "mod": "2026-11-09"
   },
   "frag:afnan-supremacy-collector-s-edition": {
@@ -132,7 +132,7 @@
     "mod": "2026-11-09"
   },
   "frag:ahmed-al-maghribi-rose-noir": {
-    "sig": "d71f5214debf9e978fb6ee11",
+    "sig": "cf75b9b14a7f01ed2c94d69c",
     "mod": "2026-11-09"
   },
   "frag:ahmed-al-maghribi-ignite-oud": {
@@ -288,7 +288,7 @@
     "mod": "2026-11-09"
   },
   "frag:ibraq-blueberry-musk": {
-    "sig": "d12a57320d41a042245e063a",
+    "sig": "5f2687c54a0a2f031d9f406d",
     "mod": "2026-11-09"
   },
   "frag:ibraq-brazilian-tobacco": {
@@ -592,7 +592,7 @@
     "mod": "2026-11-09"
   },
   "frag:swiss-arabian-soul-of-bali": {
-    "sig": "4241369240cd8937e07a9068",
+    "sig": "579c747d6f4f27cc014f4601",
     "mod": "2026-11-09"
   },
   "frag:swiss-arabian-vanilla-01": {
@@ -620,7 +620,7 @@
     "mod": "2026-11-09"
   },
   "home": {
-    "sig": "3648a1f09a6b8a7112502b55",
+    "sig": "c856caeeb37ada74db40d4b8",
     "mod": "2026-11-09"
   },
   "frag:albait-aldimashqi-special-ombre-leather": {
@@ -768,7 +768,7 @@
     "mod": "2026-11-09"
   },
   "frag:laverne-la-dor-bakhur": {
-    "sig": "5a3299af89c0fc41e8d818e8",
+    "sig": "3b92846a54277be16111850f",
     "mod": "2026-11-09"
   },
   "frag:swiss-arabian-opulence-of-dubai": {
@@ -780,7 +780,7 @@
     "mod": "2026-10-23"
   },
   "bottles": {
-    "sig": "ece8a79ec50386e940162907",
+    "sig": "518a4403ca42dff2becf866f",
     "mod": "2026-11-09"
   },
   "brand:afnan": {
@@ -916,7 +916,7 @@
     "mod": "2026-11-09"
   },
   "brand:swiss-arabian": {
-    "sig": "0312793e8806d46dc83aa1c6",
+    "sig": "f1fcfb2c7c4254802f8921e4",
     "mod": "2026-11-09"
   },
   "brand:versace": {
@@ -932,11 +932,11 @@
     "mod": "2026-11-09"
   },
   "collection:decants-under-200": {
-    "sig": "43dafc5d51bfa8f656bc419d",
+    "sig": "266f045ae7da2b5a13ca1075",
     "mod": "2026-11-09"
   },
   "collection:3ml-decants": {
-    "sig": "9a27accc5c468b9691a8b14f",
+    "sig": "6135e38e439dc87803ec78ee",
     "mod": "2026-11-09"
   },
   "collection:men": {
@@ -944,7 +944,7 @@
     "mod": "2026-11-09"
   },
   "collection:unisex": {
-    "sig": "74b54885bc73e3a0cc22dcea",
+    "sig": "616b151cec2d101984bf38f9",
     "mod": "2026-11-09"
   },
   "collection:women": {
@@ -952,7 +952,7 @@
     "mod": "2026-11-09"
   },
   "collection:new-arrivals": {
-    "sig": "163c55159ed723a2f9461b1d",
+    "sig": "7d4cb3be78699b3d2856d48a",
     "mod": "2026-11-09"
   },
   "frag:assaf-wild-colt": {
@@ -996,7 +996,7 @@
     "mod": "2026-11-09"
   },
   "frag:arabiyat-prestige-nisma": {
-    "sig": "e7d8b6ee61a205f95fbb2721",
+    "sig": "bc795c73c8818005cbceb95b",
     "mod": "2026-11-09"
   },
   "frag:armaf-odyssey-homme": {
@@ -1016,7 +1016,7 @@
     "mod": "2026-11-09"
   },
   "frag:nusuk-mahab": {
-    "sig": "cf36329537915e134a3dd865",
+    "sig": "17b7688b26d1713c51c4e680",
     "mod": "2026-11-09"
   },
   "frag:rasasi-hawas-boa": {
@@ -1040,7 +1040,7 @@
     "mod": "2026-11-09"
   },
   "frag:fragrance-world-flora-by-flora": {
-    "sig": "0a22acb5cf88dd5823ed5c4c",
+    "sig": "919160d607c8e4dbb52cbd03",
     "mod": "2026-11-09"
   },
   "frag:fragrance-world-aventos-blue-for-him": {
@@ -1053,6 +1053,10 @@
   },
   "frag:ahmed-al-maghribi-bin-shaikh": {
     "sig": "e716b145e1f2f0342d3c96ac",
+    "mod": "2026-11-09"
+  },
+  "frag:swiss-arabian-musk-07": {
+    "sig": "15d3860e850598f6bb90b107",
     "mod": "2026-11-09"
   }
 }

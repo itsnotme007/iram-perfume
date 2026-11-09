@@ -8384,6 +8384,46 @@
     "availability": "https://schema.org/InStock"
   },
   {
+    "key": "Swiss Arabian|Musk 07",
+    "brand": "Swiss Arabian",
+    "brandImg": "logos/swiss-arabian.png",
+    "name": "Musk 07",
+    "gender": "Unisex",
+    "status": "instock",
+    "tags": [],
+    "prices": {
+      "3": 169,
+      "5": 255,
+      "10": 489,
+      "20": 929,
+      "30": 1349,
+      "7.5": 395
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
+    "inspired": "Original",
+    "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Swiss-Arabian/Musk-07-72630.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/Swiss_Arabian/musk-07-eau-de-parfum'>Parfumo</a>",
+    "linksRaw": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Swiss-Arabian/Musk-07-72630.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/Swiss_Arabian/musk-07-eau-de-parfum'>Parfumo</a>",
+    "cat": "Middle Eastern",
+    "scent": "woody,musky,fruity,rose,powdery,white-floral,floral,fresh-spicy,patchouli,green",
+    "season": "spring,fall",
+    "occasion": "daily,office",
+    "time": "day",
+    "weather": "mild",
+    "mood": "clean,fresh,elegant",
+    "family": "woody,floral,musk",
+    "added": "2026-11-09",
+    "slug": "swiss-arabian-musk-07",
+    "url": "https://iramperfume.in/fragrance/swiss-arabian-musk-07.html",
+    "availability": "https://schema.org/InStock"
+  },
+  {
     "key": "Anfar London|Midnight Frost Intense",
     "brand": "Anfar London",
     "brandImg": "logos/anfar-london.png",
