@@ -1727,8 +1727,22 @@
     "gender": "Unisex",
     "status": "instock",
     "tags": [],
-    "prices": {"3": 215, "5": 329, "10": 639, "20": 1235, "30": 1799, "7.5": 509},
-    "statusPerSize": {"3": "ok", "5": "ok", "10": "ok", "20": "ok", "30": "ok", "7.5": "ok"},
+    "prices": {
+      "3": 215,
+      "5": 329,
+      "10": 639,
+      "20": 1229,
+      "30": 1799,
+      "7.5": 515
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
     "inspired": "Original",
     "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Bin-Shaikh-66619.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/bin-shaikh\">Parfumo</a>",
     "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Bin-Shaikh-66619.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/bin-shaikh\">Parfumo</a>",
@@ -3753,8 +3767,22 @@
     "gender": "Women",
     "status": "instock",
     "tags": [],
-    "prices": {"3": 75, "5": 99, "10": 175, "20": 299, "30": 399, "7.5": 139},
-    "statusPerSize": {"3": "ok", "5": "ok", "10": "ok", "20": "ok", "30": "ok", "7.5": "ok"},
+    "prices": {
+      "3": 75,
+      "5": 99,
+      "10": 175,
+      "20": 299,
+      "30": 399,
+      "7.5": 139
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
     "inspired": "Gucci Flora",
     "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Fragrance-World/Flora-by-Flora-114407.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/fragrance-world/flora-by-flora\">Parfumo</a>",
     "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Fragrance-World/Flora-by-Flora-114407.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/fragrance-world/flora-by-flora\">Parfumo</a>",
@@ -3779,8 +3807,22 @@
     "gender": "Men",
     "status": "instock",
     "tags": [],
-    "prices": {"3": 75, "5": 99, "10": 175, "20": 299, "30": 399, "7.5": 139},
-    "statusPerSize": {"3": "ok", "5": "ok", "10": "ok", "20": "ok", "30": "ok", "7.5": "ok"},
+    "prices": {
+      "3": 75,
+      "5": 99,
+      "10": 175,
+      "20": 299,
+      "30": 399,
+      "7.5": 139
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
     "inspired": "Original",
     "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Fragrance-World/Aventos-Blue-for-Him-107462.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/fragrance-world/aventos\">Parfumo</a>",
     "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Fragrance-World/Aventos-Blue-for-Him-107462.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/fragrance-world/aventos\">Parfumo</a>",
@@ -3805,8 +3847,22 @@
     "gender": "Women",
     "status": "instock",
     "tags": [],
-    "prices": {"3": 75, "5": 99, "10": 175, "20": 299, "30": 399, "7.5": 139},
-    "statusPerSize": {"3": "ok", "5": "ok", "10": "ok", "20": "ok", "30": "ok", "7.5": "ok"},
+    "prices": {
+      "3": 75,
+      "5": 99,
+      "10": 175,
+      "20": 299,
+      "30": 399,
+      "7.5": 139
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
     "inspired": "Kayali Eden Juicy Apple",
     "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Fragrance-World/Elysia-Lychee-Fizz-107611.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/fragrance-world/lychee-fizz\">Parfumo</a>",
     "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Fragrance-World/Elysia-Lychee-Fizz-107611.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/fragrance-world/lychee-fizz\">Parfumo</a>",
