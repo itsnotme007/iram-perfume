@@ -28,7 +28,7 @@
     "mod": "2026-11-10"
   },
   "frag:mancera-gold-intensive-aoud": {
-    "sig": "983fcc17f047f0738aefa357",
+    "sig": "b2b8bbf26f27f14159a1371b",
     "mod": "2026-11-10"
   },
   "frag:versace-the-dreamer": {
@@ -124,7 +124,7 @@
     "mod": "2026-11-10"
   },
   "frag:ahmed-al-maghribi-laathani": {
-    "sig": "865a16df47e042d104432422",
+    "sig": "c77bb3a58fb5879d9f574327",
     "mod": "2026-11-10"
   },
   "frag:ahmed-al-maghribi-marj": {
@@ -136,11 +136,11 @@
     "mod": "2026-11-10"
   },
   "frag:ahmed-al-maghribi-ignite-oud": {
-    "sig": "88878d793c22421b30f6746b",
+    "sig": "5df43370ebe7443d3b40dd28",
     "mod": "2026-11-10"
   },
   "frag:ahmed-al-maghribi-ghaf": {
-    "sig": "6755bdeecd75c7787dfb7294",
+    "sig": "bb02733f3dd6514a194e4cea",
     "mod": "2026-11-10"
   },
   "frag:al-majed-oud-boisee": {
@@ -448,7 +448,7 @@
     "mod": "2026-11-10"
   },
   "frag:rasasi-daarej-pour-homme": {
-    "sig": "3c4028f4834dc46b9797ab69",
+    "sig": "a05d6221d655f411817e3197",
     "mod": "2026-11-10"
   },
   "frag:rasasi-fattan": {
@@ -548,7 +548,7 @@
     "mod": "2026-11-10"
   },
   "frag:riiffs-costa-de-amalfi": {
-    "sig": "efd2ee4836f6adbd4b127e7d",
+    "sig": "26da524990c97e68859018dc",
     "mod": "2026-11-10"
   },
   "frag:riiffs-fareed": {
@@ -564,7 +564,7 @@
     "mod": "2026-11-10"
   },
   "frag:riiffs-season-drift": {
-    "sig": "a5677d6cf5ea8c06e6f82316",
+    "sig": "cd579f6e4642fcd20a88d760",
     "mod": "2026-11-10"
   },
   "frag:riiffs-freeze-in-flames": {
@@ -584,7 +584,7 @@
     "mod": "2026-11-10"
   },
   "frag:swiss-arabian-shaghaf-oud": {
-    "sig": "dec9176daff99602dda1ec94",
+    "sig": "b427a183222e92194d272161",
     "mod": "2026-11-10"
   },
   "frag:swiss-arabian-shaghaf-oud-tonka": {
@@ -616,11 +616,11 @@
     "mod": "2026-11-09"
   },
   "article:make-perfume-last-longer": {
-    "sig": "253862e9c15b0082d7aa799d",
-    "mod": "2026-11-09"
+    "sig": "599fedb1f0a8483d97d4e67a",
+    "mod": "2026-11-10"
   },
   "home": {
-    "sig": "07e8d66bae7b5b9af3848bc9",
+    "sig": "896107ede14009ba9ce601cc",
     "mod": "2026-11-10"
   },
   "frag:albait-aldimashqi-special-ombre-leather": {
@@ -672,7 +672,7 @@
     "mod": "2026-11-10"
   },
   "frag:armaf-spartacus": {
-    "sig": "f1125f12389692f95dc088f4",
+    "sig": "b1e19c5d0b92cfedfb347b5f",
     "mod": "2026-11-10"
   },
   "frag:ibraq-black-diamond-incense": {
@@ -724,7 +724,7 @@
     "mod": "2026-11-10"
   },
   "frag:french-avenue-liquid-brun-limited-edition": {
-    "sig": "9c8095e00a01f45d12ad0777",
+    "sig": "26b61bf10d093c0ede03f44c",
     "mod": "2026-11-10"
   },
   "frag:mykonos-inception": {
@@ -772,7 +772,7 @@
     "mod": "2026-11-10"
   },
   "frag:swiss-arabian-opulence-of-dubai": {
-    "sig": "eb6c52316e6f6c636a90559b",
+    "sig": "33e2c0f79039e806efe7fabe",
     "mod": "2026-11-10"
   },
   "contact": {
@@ -780,16 +780,16 @@
     "mod": "2026-10-23"
   },
   "bottles": {
-    "sig": "518a4403ca42dff2becf866f",
-    "mod": "2026-11-09"
+    "sig": "bccfdfd94691f36acc480fdb",
+    "mod": "2026-11-10"
   },
   "brand:afnan": {
     "sig": "11fc4b14df80de4015604d00",
     "mod": "2026-11-09"
   },
   "brand:ahmed-al-maghribi": {
-    "sig": "deefa539bf899d5c62c3eb98",
-    "mod": "2026-11-09"
+    "sig": "2c76851fa03d21de054107f0",
+    "mod": "2026-11-10"
   },
   "brand:ajmal": {
     "sig": "af5683aa620870fa2d116d85",
@@ -908,8 +908,8 @@
     "mod": "2026-11-09"
   },
   "brand:riiffs": {
-    "sig": "ef577a67679f8f3db1831f7a",
-    "mod": "2026-11-09"
+    "sig": "39a08125296550229249c431",
+    "mod": "2026-11-10"
   },
   "brand:rue-broca": {
     "sig": "a4f3dd71a45b8008d302b792",
@@ -936,24 +936,24 @@
     "mod": "2026-11-09"
   },
   "collection:3ml-decants": {
-    "sig": "6135e38e439dc87803ec78ee",
-    "mod": "2026-11-09"
+    "sig": "74f2e74e3652a678d302cdf8",
+    "mod": "2026-11-10"
   },
   "collection:men": {
     "sig": "1cf8dd6cf43ec85c03c4722f",
     "mod": "2026-11-09"
   },
   "collection:unisex": {
-    "sig": "616b151cec2d101984bf38f9",
-    "mod": "2026-11-09"
+    "sig": "206f3be9ba2f3962e8b3db96",
+    "mod": "2026-11-10"
   },
   "collection:women": {
     "sig": "01b804b4ab79aff751d589cf",
     "mod": "2026-11-09"
   },
   "collection:new-arrivals": {
-    "sig": "7d4cb3be78699b3d2856d48a",
-    "mod": "2026-11-09"
+    "sig": "4abbd2b6f35bf01113ad0b76",
+    "mod": "2026-11-10"
   },
   "frag:assaf-wild-colt": {
     "sig": "514e7a5f960d349737031862",
@@ -976,7 +976,7 @@
     "mod": "2026-11-10"
   },
   "frag:rayhaan-vantage": {
-    "sig": "60231d33b3c4804c806bb20a",
+    "sig": "826d3283a39ebe3af6d0d41c",
     "mod": "2026-11-10"
   },
   "frag:rasasi-hawas-gold-digger": {
@@ -992,7 +992,7 @@
     "mod": "2026-11-10"
   },
   "frag:arabiyat-prestige-rihla": {
-    "sig": "fe0ba97cd8f581dd02efa268",
+    "sig": "035e925fd579fb7f1e14c100",
     "mod": "2026-11-10"
   },
   "frag:arabiyat-prestige-nisma": {
@@ -1000,7 +1000,7 @@
     "mod": "2026-11-10"
   },
   "frag:armaf-odyssey-homme": {
-    "sig": "bfbc3fc1c9ceaee2573cefe6",
+    "sig": "e10dd9e78c1b1f66a85cdbc3",
     "mod": "2026-11-10"
   },
   "frag:lattafa-musamam-black-intense": {
@@ -1052,7 +1052,7 @@
     "mod": "2026-11-10"
   },
   "frag:ahmed-al-maghribi-bin-shaikh": {
-    "sig": "017ee2d76e5dac59c1ce22a8",
+    "sig": "489b7d5847ecef2dd8bccfae",
     "mod": "2026-11-10"
   },
   "frag:swiss-arabian-musk-07": {

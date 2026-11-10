@@ -1727,7 +1727,7 @@
     "gender": "Unisex",
     "status": "instock",
     "tags": [],
-    "prices": {"3": 225, "5": 349, "10": 675, "20": 1299, "30": 1899, "7.5": 539},
+    "prices": {"3": 215, "5": 329, "10": 639, "20": 1235, "30": 1799, "7.5": 509},
     "statusPerSize": {"3": "ok", "5": "ok", "10": "ok", "20": "ok", "30": "ok", "7.5": "ok"},
     "inspired": "Original",
     "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Bin-Shaikh-66619.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/bin-shaikh\">Parfumo</a>",
@@ -7429,7 +7429,7 @@
     "brandImg": "logos/riiffs.png",
     "name": "Costa de Amalfi",
     "gender": "Men",
-    "status": "instock",
+    "status": "soldout",
     "tags": [],
     "prices": {
       "3": 105,
@@ -7440,12 +7440,12 @@
       "7.5": 219
     },
     "statusPerSize": {
-      "3": "ok",
-      "5": "ok",
-      "10": "ok",
-      "20": "ok",
-      "30": "ok",
-      "7.5": "ok"
+      "3": "struck",
+      "5": "struck",
+      "10": "struck",
+      "20": "struck",
+      "30": "struck",
+      "7.5": "struck"
     },
     "inspired": "Mandarino di Amalfi Tom Ford",
     "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Riiffs-Perfumes/Costa-de-Amalfi-116075.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/riiffs/costa-de-amalfi'>Parfumo</a>",
