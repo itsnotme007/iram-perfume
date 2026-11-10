@@ -272,6 +272,41 @@ test('duplicate decant asks for confirmation before adding', async ({ page }) =>
   expect((await cart()).length).toBe(3);
 });
 
+test('renamed product resolves by stable id, not display name', async ({ page }) => {
+  // Regression: a rename changed `name` but not `key`, so a saved cart item whose
+  // `frag` is the old name used to be marked Unavailable. Cart must key on the
+  // stable product id, never the display name.
+  await page.addInitScript(() => {
+    try {
+      localStorage.setItem('iram_cart', JSON.stringify([
+        { key: 'Arabiyat Prestige|Marwa Extrait|30ml', brand: 'Arabiyat Prestige', frag: 'Marwa Extrait', size: '30ml', price: 1799, qty: 1 }
+      ]));
+    } catch (e) {}
+  });
+  await page.goto('/');
+  await page.waitForTimeout(300);
+
+  const item = await page.evaluate(() => {
+    const c = JSON.parse(localStorage.getItem('iram_cart') || '[]');
+    return c[0] || {};
+  });
+  // still present, not flagged unavailable, and its pid was normalised
+  expect(item.unavailable).toBeFalsy();
+  expect(item.pid).toBe('Arabiyat Prestige|Marwa Extrait');
+
+  // fresh add also stores the stable pid
+  await page.evaluate(() => {
+    const prod = window._products['Arabiyat Prestige|Marwa Extrait'];
+    if (prod) window.__iramAddToCart(prod.brand, prod.frag, '30ml', 1799, 1, prod.id);
+  });
+  const fresh = await page.evaluate(() => {
+    const c = JSON.parse(localStorage.getItem('iram_cart') || '[]');
+    return c[0] || {};
+  });
+  expect(fresh.pid).toBe('Arabiyat Prestige|Marwa Extrait');
+  expect(fresh.unavailable).toBeFalsy();
+});
+
 test('cart survives corrupted localStorage', async ({ page }) => {
   await page.addInitScript(() => { try { localStorage.setItem('iram_cart', '{oops'); } catch (e) {} });
   await page.goto('/');

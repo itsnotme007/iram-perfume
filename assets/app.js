@@ -581,7 +581,7 @@ try{(function(){
       var pid=t.getAttribute('data-lt-move')||t.getAttribute('data-lt-add');
       var d=prodOf(pid),c=d&&cheapest(d);
       if(d&&c&&window.__iramAddToCart){
-        window.__iramAddToCart(d.brand,d.frag,c.size,c.price);
+        window.__iramAddToCart(d.brand,d.frag,c.size,c.price,d.qty||1,d.id);
         t.textContent='Added ✓';t.disabled=true;
         setTimeout(function(){t.textContent='Move to cart';t.disabled=false},1400);
       }
@@ -1130,7 +1130,9 @@ try{(function(){
     for(var ri=0;ri<cart.length;ri++){
       var it=cart[ri];
       if(!it||typeof it!=='object'||!it.brand||!it.frag){changed=true;continue}
-      var d=data[it.brand+'|'+it.frag];
+      var d=productLookup(it.brand,it.frag,it.pid);
+      // normalise the stored id so it survives renames of the display name
+      if(d&&d.id&&it.pid!==d.id){it.pid=d.id;changed=true}
       var idx=sizes.indexOf(it.size);
       var available=!!(d&&idx>=0&&d.available&&d.available[idx]);
       if(!available){
@@ -1144,7 +1146,7 @@ try{(function(){
       if(q!==it.qty){it.qty=q;changed=true}
       var cur=d.prices[idx];
       if(cur&&Number(it.price)!==cur){it.price=cur;changed=true;repriced++}
-      it.key=it.brand+'|'+it.frag+'|'+it.size;
+      it.key=(it.pid||(it.brand+'|'+it.frag))+'|'+it.size;
       kept.push(it);
     }
     if(kept.length!==cart.length)cart=kept;
@@ -1205,13 +1207,13 @@ try{(function(){
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
   function itemAvailable(it){
     if(it.unavailable)return false;
-    var d=(window._products||{})[it.brand+'|'+it.frag],idx=sizes.indexOf(it.size);
+    var d=productLookup(it.brand,it.frag,it.pid),idx=sizes.indexOf(it.size);
     return !!(d&&idx>=0&&d.available&&d.available[idx]);
   }
   function totalItems(){var n=0;for(var i=0;i<cart.length;i++)if(itemAvailable(cart[i]))n+=cart[i].qty;return n}
   function subtotal(){var t=0;for(var i=0;i<cart.length;i++)if(itemAvailable(cart[i]))t+=cart[i].price*cart[i].qty;return t}
   function unavailableLabel(it){
-    var d=(window._products||{})[it.brand+'|'+it.frag];
+    var d=productLookup(it.brand,it.frag,it.pid);
     return d&&d.isComingSoon?'Coming soon':d&&d.isSoldOut?'Sold out':'Unavailable';
   }
   var CFG=window.IRAM_CONFIG||{};
@@ -1230,12 +1232,14 @@ try{(function(){
   var dupPending=null;
   function fmtRs(n){return '\u20B9'+Number(n).toLocaleString('en-IN')}
 
-  function duplicateReason(brand,frag,size){
+  function duplicateReason(brand,frag,size,pid){
     if(brand==='Bottles')return null;
+    var key=pid||(brand+'|'+frag);
     var sameSize=null,otherSizes=[];
     for(var i=0;i<cart.length;i++){
       var it=cart[i];
-      if(it.brand!==brand||it.frag!==frag)continue;
+      var itKey=it.pid||(it.brand+'|'+it.frag);
+      if(itKey!==key)continue;
       if(it.size===size)sameSize=it;
       else otherSizes.push(it);
     }
@@ -1248,7 +1252,7 @@ try{(function(){
     dupOverlay.classList.remove('open');
     var pend=dupPending;
     dupPending=null;
-    if(confirmed&&pend)commitToCart(pend.brand,pend.frag,pend.size,pend.price,pend.qty);
+    if(confirmed&&pend)commitToCart(pend.brand,pend.frag,pend.size,pend.price,pend.qty,pend.pid);
   }
   function askDuplicate(pend,reason){
     dupPending=pend;
@@ -1280,18 +1284,27 @@ try{(function(){
     });
   })();
 
-  function addToCart(brand,frag,size,price,qty){
-    var n=Math.max(1,Math.min(99,parseInt(qty,10)||1));
-    var reason=duplicateReason(brand,frag,size);
-    if(reason){askDuplicate({brand:brand,frag:frag,size:size,price:price,qty:n},reason);return}
-    commitToCart(brand,frag,size,price,qty);
+  // The registry is keyed by the stable product id (p.key), while `frag` is the
+  // display name and can change without the id changing (name renames, accent
+  // fixes). The cart item therefore carries a `pid` so lookup never depends on
+  // the display name.
+  function productLookup(brand,frag,pid){
+    var data=window._products||{};
+    if(pid&&data[pid])return data[pid];
+    return data[brand+'|'+frag]||null;
   }
-  function commitToCart(brand,frag,size,price,qty){
+  function addToCart(brand,frag,size,price,qty,pid){
     var n=Math.max(1,Math.min(99,parseInt(qty,10)||1));
-    var key=brand+'|'+frag+'|'+size;
+    var reason=duplicateReason(brand,frag,size,pid);
+    if(reason){askDuplicate({brand:brand,frag:frag,size:size,price:price,qty:n,pid:pid},reason);return}
+    commitToCart(brand,frag,size,price,qty,pid);
+  }
+  function commitToCart(brand,frag,size,price,qty,pid){
+    var n=Math.max(1,Math.min(99,parseInt(qty,10)||1));
+    var key=(pid||(brand+'|'+frag))+'|'+size;
     var found=false;
     for(var i=0;i<cart.length;i++){if(cart[i].key===key){cart[i].qty+=n;found=true;break}}
-    if(!found)cart.push({key:key,brand:brand,frag:frag,size:size,price:price,qty:n});
+    if(!found)cart.push({key:key,brand:brand,frag:frag,size:size,price:price,qty:n,pid:pid||(brand+'|'+frag)});
     save();renderCart();bounceFloat();
     if(window.__toast)window.__toast((n>1?n+'\u00D7 ':'')+size+' '+frag+' added to cart');
   }
@@ -1317,7 +1330,7 @@ try{(function(){
     for(var i=0;i<cart.length;i++){
       var it=cart[i];
       if(it.brand==='Bottles')continue;
-      var fk=it.brand+'|'+it.frag;
+      var fk=it.pid||(it.brand+'|'+it.frag);
       if(!fragSet[fk]){fragSet[fk]=1;uniqueFrags++}
       decantEst+=it.qty;
     }
@@ -1340,7 +1353,7 @@ try{(function(){
     if(mobileCartThumbs){
       var seen={},thumbs='',shown=0;
       for(var ti=0;ti<cart.length&&shown<3;ti++){
-        var k=cart[ti].brand+'|'+cart[ti].frag;
+        var k=cart[ti].pid||(cart[ti].brand+'|'+cart[ti].frag);
         if(seen[k])continue;seen[k]=1;
         var pc=document.querySelector('.frag-card[data-pid="'+k.replace(/"/g,'')+'"] .pc-img[data-img-base]');
         if(pc){thumbs+='<img src="'+pc.getAttribute('data-img-base')+'.png" alt="">';shown++}
@@ -1631,7 +1644,7 @@ try{(function(){
     var addBtn=e.target.closest('#pcAddBtn');
     if(addBtn&&!addBtn.disabled){
       var c=current();
-      if(c.ok&&window.__iramAddToCart)window.__iramAddToCart(_card._cartData.brand,_card._cartData.frag,sizes[selSize],c.price,selQty);
+      if(c.ok&&window.__iramAddToCart)window.__iramAddToCart(_card._cartData.brand,_card._cartData.frag,sizes[selSize],c.price,selQty,_card._cartData.id);
       close();
       return;
     }
@@ -2012,7 +2025,7 @@ try{(function(){
     var add=card.querySelector('.pc-add');
     if(add&&!add.disabled){
       add.removeAttribute('data-open');
-      add.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(chosen>=0&&window.__iramAddToCart)window.__iramAddToCart(d.brand,d.frag,sizes[chosen],d.prices[chosen],1)});
+      add.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(chosen>=0&&window.__iramAddToCart)window.__iramAddToCart(d.brand,d.frag,sizes[chosen],d.prices[chosen],1,d.id)});
     }
   }
   document.querySelectorAll('.frag-card').forEach(setupCard);
