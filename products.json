@@ -408,12 +408,12 @@
     "status": "instock",
     "tags": [],
     "prices": {
-      "3": 225,
-      "5": 349,
-      "10": 675,
-      "20": 1299,
-      "30": 1899,
-      "7.5": 539
+      "3": 255,
+      "5": 399,
+      "10": 775,
+      "20": 1499,
+      "30": 2199,
+      "7.5": 619
     },
     "statusPerSize": {
       "3": "ok",
@@ -1200,6 +1200,46 @@
     "availability": "https://schema.org/InStock"
   },
   {
+    "key": "Afnan|Rare Carbon",
+    "brand": "Afnan",
+    "brandImg": "logos/afnan.png",
+    "name": "Rare Carbon",
+    "gender": "Men",
+    "status": "instock",
+    "tags": [],
+    "prices": {
+      "3": 125,
+      "5": 179,
+      "10": 339,
+      "20": 629,
+      "30": 899,
+      "7.5": 275
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
+    "inspired": "Ombre Leather by Tom Ford",
+    "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Afnan-Perfumes/Rare-Carbon-66627.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Afnan_Perfumes/rare-carbon\">Parfumo</a>",
+    "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Afnan-Perfumes/Rare-Carbon-66627.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Afnan_Perfumes/rare-carbon\">Parfumo</a>",
+    "cat": "Middle Eastern",
+    "scent": "leather,woody,floral,spicy,amber",
+    "season": "fall,winter",
+    "occasion": "date-night,party",
+    "time": "evening,night",
+    "weather": "cold,mild",
+    "mood": "bold,sexy",
+    "family": "leather,woody,floral",
+    "added": "2026-11-11",
+    "slug": "afnan-rare-carbon",
+    "url": "https://iramperfume.in/fragrance/afnan-rare-carbon.html",
+    "availability": "https://schema.org/InStock"
+  },
+  {
     "key": "Ahmed Al Maghribi|Black Fume",
     "brand": "Ahmed Al Maghribi",
     "brandImg": "logos/ahmed-al-maghribi.png",
@@ -1757,6 +1797,86 @@
     "added": "2026-11-09",
     "slug": "ahmed-al-maghribi-bin-shaikh",
     "url": "https://iramperfume.in/fragrance/ahmed-al-maghribi-bin-shaikh.html",
+    "availability": "https://schema.org/InStock"
+  },
+  {
+    "key": "Ahmed Al Maghribi|Bombay Oud",
+    "brand": "Ahmed Al Maghribi",
+    "brandImg": "logos/ahmed-al-maghribi.png",
+    "name": "Bombay Oud",
+    "gender": "Unisex",
+    "status": "instock",
+    "tags": [],
+    "prices": {
+      "3": 179,
+      "5": 275,
+      "10": 525,
+      "20": 999,
+      "30": 1449,
+      "7.5": 419
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
+    "inspired": "Original",
+    "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Bombay-Oud-129908.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/bombay-oud\">Parfumo</a>",
+    "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Bombay-Oud-129908.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/bombay-oud\">Parfumo</a>",
+    "cat": "Middle Eastern",
+    "scent": "sweet,floral,spicy,woody,leather,oud",
+    "season": "fall,winter",
+    "occasion": "date-night,party",
+    "time": "evening,night",
+    "weather": "cold,mild",
+    "mood": "bold,elegant",
+    "family": "oriental,floral,woody,leather",
+    "added": "2026-11-11",
+    "slug": "ahmed-al-maghribi-bombay-oud",
+    "url": "https://iramperfume.in/fragrance/ahmed-al-maghribi-bombay-oud.html",
+    "availability": "https://schema.org/InStock"
+  },
+  {
+    "key": "Ahmed Al Maghribi|Azure Royal",
+    "brand": "Ahmed Al Maghribi",
+    "brandImg": "logos/ahmed-al-maghribi.png",
+    "name": "Azure Royal",
+    "gender": "Unisex",
+    "status": "instock",
+    "tags": [],
+    "prices": {
+      "3": 109,
+      "5": 155,
+      "10": 289,
+      "20": 529,
+      "30": 749,
+      "7.5": 235
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
+    "inspired": "Original",
+    "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Ahmed%20Al%20Maghribi/Ahmed-Al-Maghribi-Azure-Royal-104215.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/azure-royal\">Parfumo</a>",
+    "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Ahmed%20Al%20Maghribi/Ahmed-Al-Maghribi-Azure-Royal-104215.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/azure-royal\">Parfumo</a>",
+    "cat": "Middle Eastern",
+    "scent": "fruity,fresh,sweet,aquatic,musky,floral,citrus",
+    "season": "spring,summer",
+    "occasion": "daily,office",
+    "time": "day,evening",
+    "weather": "hot,mild",
+    "mood": "fresh,elegant",
+    "family": "floral,fresh,fruity",
+    "added": "2026-11-11",
+    "slug": "ahmed-al-maghribi-azure-royal",
+    "url": "https://iramperfume.in/fragrance/ahmed-al-maghribi-azure-royal.html",
     "availability": "https://schema.org/InStock"
   },
   {
@@ -4248,12 +4368,12 @@
     "status": "instock",
     "tags": [],
     "prices": {
-      "3": 105,
-      "5": 149,
-      "10": 275,
-      "20": 499,
-      "30": 699,
-      "7.5": 219
+      "3": 109,
+      "5": 155,
+      "10": 289,
+      "20": 525,
+      "30": 739,
+      "7.5": 229
     },
     "statusPerSize": {
       "3": "ok",
@@ -4289,11 +4409,11 @@
     "tags": [],
     "prices": {
       "3": 115,
-      "5": 159,
-      "10": 299,
-      "20": 549,
-      "30": 779,
-      "7.5": 239
+      "5": 169,
+      "10": 315,
+      "20": 579,
+      "30": 819,
+      "7.5": 255
     },
     "statusPerSize": {
       "3": "ok",
@@ -4329,11 +4449,11 @@
     "tags": [],
     "prices": {
       "3": 115,
-      "5": 159,
-      "10": 299,
-      "20": 549,
-      "30": 779,
-      "7.5": 239
+      "5": 169,
+      "10": 315,
+      "20": 579,
+      "30": 819,
+      "7.5": 255
     },
     "statusPerSize": {
       "3": "ok",
@@ -4517,6 +4637,46 @@
     "added": "2026-10-11",
     "slug": "khadlaj-onyx-gold",
     "url": "https://iramperfume.in/fragrance/khadlaj-onyx-gold.html",
+    "availability": "https://schema.org/InStock"
+  },
+  {
+    "key": "Khadlaj|Island Dreams",
+    "brand": "Khadlaj",
+    "brandImg": "logos/khadlaj.png",
+    "name": "Island Dreams",
+    "gender": "Unisex",
+    "status": "instock",
+    "tags": [],
+    "prices": {
+      "3": 109,
+      "5": 155,
+      "10": 289,
+      "20": 525,
+      "30": 739,
+      "7.5": 229
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
+    "inspired": "Original",
+    "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/p/113593\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/khadlaj/island-dreams\">Parfumo</a>",
+    "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/p/113593\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/khadlaj/island-dreams\">Parfumo</a>",
+    "cat": "Middle Eastern",
+    "scent": "citrus,fresh,spicy,musky,amber",
+    "season": "spring,summer",
+    "occasion": "daily,travel",
+    "time": "day,evening",
+    "weather": "hot,mild",
+    "mood": "fresh,energetic",
+    "family": "oriental,fresh,aromatic",
+    "added": "2026-11-11",
+    "slug": "khadlaj-island-dreams",
+    "url": "https://iramperfume.in/fragrance/khadlaj-island-dreams.html",
     "availability": "https://schema.org/InStock"
   },
   {
@@ -4928,12 +5088,12 @@
     "status": "instock",
     "tags": [],
     "prices": {
-      "3": 95,
-      "5": 129,
-      "10": 239,
-      "20": 429,
-      "30": 599,
-      "7.5": 195
+      "3": 99,
+      "5": 139,
+      "10": 259,
+      "20": 465,
+      "30": 649,
+      "7.5": 209
     },
     "statusPerSize": {
       "3": "ok",
@@ -5448,12 +5608,12 @@
     "status": "instock",
     "tags": [],
     "prices": {
-      "3": 109,
-      "5": 155,
-      "10": 289,
-      "20": 525,
-      "30": 739,
-      "7.5": 229
+      "3": 135,
+      "5": 199,
+      "10": 375,
+      "20": 699,
+      "30": 999,
+      "7.5": 299
     },
     "statusPerSize": {
       "3": "ok",
@@ -6288,12 +6448,12 @@
     "status": "instock",
     "tags": [],
     "prices": {
-      "3": 85,
-      "5": 115,
-      "10": 209,
-      "20": 365,
-      "30": 499,
-      "7.5": 169
+      "3": 95,
+      "5": 129,
+      "10": 239,
+      "20": 429,
+      "30": 599,
+      "7.5": 195
     },
     "statusPerSize": {
       "3": "ok",
@@ -8208,12 +8368,12 @@
     "status": "instock",
     "tags": [],
     "prices": {
-      "3": 249,
-      "5": 389,
-      "10": 759,
-      "20": 1465,
-      "30": 2149,
-      "7.5": 609
+      "3": 295,
+      "5": 465,
+      "10": 909,
+      "20": 1765,
+      "30": 2599,
+      "7.5": 729
     },
     "statusPerSize": {
       "3": "ok",
@@ -8328,12 +8488,12 @@
     "status": "instock",
     "tags": [],
     "prices": {
-      "3": 105,
-      "5": 149,
-      "10": 275,
-      "20": 499,
-      "30": 699,
-      "7.5": 219
+      "3": 99,
+      "5": 139,
+      "10": 255,
+      "20": 459,
+      "30": 639,
+      "7.5": 205
     },
     "statusPerSize": {
       "3": "ok",
@@ -8368,12 +8528,12 @@
     "status": "instock",
     "tags": [],
     "prices": {
-      "3": 105,
-      "5": 145,
-      "10": 269,
-      "20": 485,
-      "30": 679,
-      "7.5": 215
+      "3": 109,
+      "5": 155,
+      "10": 289,
+      "20": 525,
+      "30": 739,
+      "7.5": 229
     },
     "statusPerSize": {
       "3": "ok",
@@ -8517,166 +8677,6 @@
     "added": "2026-11-01",
     "slug": "anfar-london-midnight-frost-intense",
     "url": "https://iramperfume.in/fragrance/anfar-london-midnight-frost-intense.html",
-    "availability": "https://schema.org/InStock"
-  },
-  {
-    "key": "Ahmed Al Maghribi|Bombay Oud",
-    "brand": "Ahmed Al Maghribi",
-    "brandImg": "logos/ahmed-al-maghribi.png",
-    "name": "Bombay Oud",
-    "gender": "Unisex",
-    "status": "instock",
-    "tags": [],
-    "prices": {
-      "3": 179,
-      "5": 275,
-      "10": 525,
-      "20": 999,
-      "30": 1449,
-      "7.5": 419
-    },
-    "statusPerSize": {
-      "3": "ok",
-      "5": "ok",
-      "10": "ok",
-      "20": "ok",
-      "30": "ok",
-      "7.5": "ok"
-    },
-    "inspired": "Original",
-    "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Bombay-Oud-129908.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/bombay-oud\">Parfumo</a>",
-    "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Bombay-Oud-129908.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/bombay-oud\">Parfumo</a>",
-    "cat": "Middle Eastern",
-    "scent": "sweet,floral,spicy,woody,leather,oud",
-    "season": "fall,winter",
-    "occasion": "date-night,party",
-    "time": "evening,night",
-    "weather": "cold,mild",
-    "mood": "bold,elegant",
-    "family": "oriental,floral,woody,leather",
-    "added": "2026-11-11",
-    "slug": "ahmed-al-maghribi-bombay-oud",
-    "url": "https://iramperfume.in/fragrance/ahmed-al-maghribi-bombay-oud.html",
-    "availability": "https://schema.org/InStock"
-  },
-  {
-    "key": "Khadlaj|Island Dreams",
-    "brand": "Khadlaj",
-    "brandImg": "logos/khadlaj.png",
-    "name": "Island Dreams",
-    "gender": "Unisex",
-    "status": "instock",
-    "tags": [],
-    "prices": {
-      "3": 109,
-      "5": 155,
-      "10": 289,
-      "20": 525,
-      "30": 739,
-      "7.5": 229
-    },
-    "statusPerSize": {
-      "3": "ok",
-      "5": "ok",
-      "10": "ok",
-      "20": "ok",
-      "30": "ok",
-      "7.5": "ok"
-    },
-    "inspired": "Original",
-    "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/p/113593\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/khadlaj/island-dreams\">Parfumo</a>",
-    "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/p/113593\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/khadlaj/island-dreams\">Parfumo</a>",
-    "cat": "Middle Eastern",
-    "scent": "citrus,fresh,spicy,musky,amber",
-    "season": "spring,summer",
-    "occasion": "daily,travel",
-    "time": "day,evening",
-    "weather": "hot,mild",
-    "mood": "fresh,energetic",
-    "family": "oriental,fresh,aromatic",
-    "added": "2026-11-11",
-    "slug": "khadlaj-island-dreams",
-    "url": "https://iramperfume.in/fragrance/khadlaj-island-dreams.html",
-    "availability": "https://schema.org/InStock"
-  },
-  {
-    "key": "Ahmed Al Maghribi|Azure Royal",
-    "brand": "Ahmed Al Maghribi",
-    "brandImg": "logos/ahmed-al-maghribi.png",
-    "name": "Azure Royal",
-    "gender": "Unisex",
-    "status": "instock",
-    "tags": [],
-    "prices": {
-      "3": 109,
-      "5": 155,
-      "10": 289,
-      "20": 529,
-      "30": 749,
-      "7.5": 235
-    },
-    "statusPerSize": {
-      "3": "ok",
-      "5": "ok",
-      "10": "ok",
-      "20": "ok",
-      "30": "ok",
-      "7.5": "ok"
-    },
-    "inspired": "Original",
-    "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Ahmed%20Al%20Maghribi/Ahmed-Al-Maghribi-Azure-Royal-104215.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/azure-royal\">Parfumo</a>",
-    "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Ahmed%20Al%20Maghribi/Ahmed-Al-Maghribi-Azure-Royal-104215.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Ahmed_Al_Maghribi/azure-royal\">Parfumo</a>",
-    "cat": "Middle Eastern",
-    "scent": "fruity,fresh,sweet,aquatic,musky,floral,citrus",
-    "season": "spring,summer",
-    "occasion": "daily,office",
-    "time": "day,evening",
-    "weather": "hot,mild",
-    "mood": "fresh,elegant",
-    "family": "floral,fresh,fruity",
-    "added": "2026-11-11",
-    "slug": "ahmed-al-maghribi-azure-royal",
-    "url": "https://iramperfume.in/fragrance/ahmed-al-maghribi-azure-royal.html",
-    "availability": "https://schema.org/InStock"
-  },
-  {
-    "key": "Afnan|Rare Carbon",
-    "brand": "Afnan",
-    "brandImg": "logos/afnan.png",
-    "name": "Rare Carbon",
-    "gender": "Men",
-    "status": "instock",
-    "tags": [],
-    "prices": {
-      "3": 125,
-      "5": 179,
-      "10": 339,
-      "20": 629,
-      "30": 899,
-      "7.5": 275
-    },
-    "statusPerSize": {
-      "3": "ok",
-      "5": "ok",
-      "10": "ok",
-      "20": "ok",
-      "30": "ok",
-      "7.5": "ok"
-    },
-    "inspired": "Ombre Leather by Tom Ford",
-    "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Afnan-Perfumes/Rare-Carbon-66627.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Afnan_Perfumes/rare-carbon\">Parfumo</a>",
-    "linksRaw": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Afnan-Perfumes/Rare-Carbon-66627.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Afnan_Perfumes/rare-carbon\">Parfumo</a>",
-    "cat": "Middle Eastern",
-    "scent": "leather,woody,floral,spicy,amber",
-    "season": "fall,winter",
-    "occasion": "date-night,party",
-    "time": "evening,night",
-    "weather": "cold,mild",
-    "mood": "bold,sexy",
-    "family": "leather,woody,floral",
-    "added": "2026-11-11",
-    "slug": "afnan-rare-carbon",
-    "url": "https://iramperfume.in/fragrance/afnan-rare-carbon.html",
     "availability": "https://schema.org/InStock"
   }
 ]
