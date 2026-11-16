@@ -23,6 +23,7 @@
 - Bvlgari: https://iramperfume.in/brands/bvlgari.html
 - Calvin Klein: https://iramperfume.in/brands/calvin-klein.html
 - Davidoff: https://iramperfume.in/brands/davidoff.html
+- Dolce & Gabbana: https://iramperfume.in/brands/dolce-and-gabbana.html
 - Jaguar: https://iramperfume.in/brands/jaguar.html
 - Mancera: https://iramperfume.in/brands/mancera.html
 - Montblanc: https://iramperfume.in/brands/montblanc.html
@@ -73,6 +74,9 @@
 ### Davidoff
 - [Cool Water EDT (Cool Water)](https://iramperfume.in/fragrance/davidoff-cool-water-edt.html) (Men): 3ml ₹99 | 5ml ₹139 | 7.5ml ₹209 | 10ml ₹259 | 20ml ₹465 | 30ml ₹649
 
+### Dolce & Gabbana
+- [The One Pour Homme Parfum](https://iramperfume.in/fragrance/dolce-gabbana-the-one-pour-homme-parfum.html) (Men): 3ml ₹315 | 5ml ₹495 | 7.5ml ₹779 | 10ml ₹969 | 20ml ₹1889 | 30ml ₹2789
+
 ### Jaguar
 - [Classic Black](https://iramperfume.in/fragrance/jaguar-classic-black.html) (Men): 3ml ₹95 | 5ml ₹129 | 7.5ml ₹195 | 10ml ₹239 | 20ml ₹429 | 30ml ₹599
 
@@ -110,6 +114,7 @@
 - [Turathi Brown](https://iramperfume.in/fragrance/afnan-turathi-brown.html) (Men): 3ml ₹125 | 5ml ₹185 | 7.5ml ₹279 | 10ml ₹349 | 20ml ₹645 | 30ml ₹919
 - [Historic Sahara](https://iramperfume.in/fragrance/afnan-historic-sahara.html) (Unisex): 3ml ₹115 | 5ml ₹169 | 7.5ml ₹255 | 10ml ₹315 | 20ml ₹579 | 30ml ₹819
 - [Rare Carbon](https://iramperfume.in/fragrance/afnan-rare-carbon.html) (Men): 3ml ₹125 | 5ml ₹179 | 7.5ml ₹275 | 10ml ₹339 | 20ml ₹629 | 30ml ₹899
+- [Stardust](https://iramperfume.in/fragrance/afnan-stardust.html) (Unisex): 3ml ₹159 | 5ml ₹239 | 7.5ml ₹369 | 10ml ₹459 | 20ml ₹865 | 30ml ₹1249
 
 ### Ahmed Al Maghribi
 - [Black Fume](https://iramperfume.in/fragrance/ahmed-al-maghribi-black-fume.html) (Men): 3ml ₹125 | 5ml ₹179 | 7.5ml ₹275 | 10ml ₹339 | 20ml ₹629 | 30ml ₹899
@@ -160,6 +165,7 @@
 - [Kohl Luminous](https://iramperfume.in/fragrance/arabiyat-prestige-kohl-luminous.html) (Unisex): 3ml ₹135 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹699 | 30ml ₹999
 - [Rihla](https://iramperfume.in/fragrance/arabiyat-prestige-rihla.html) (Women): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹235 | 10ml ₹289 | 20ml ₹529 | 30ml ₹749
 - [Nisma](https://iramperfume.in/fragrance/arabiyat-prestige-nisma.html) (Women): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹235 | 10ml ₹289 | 20ml ₹529 | 30ml ₹749
+- [Revolt Uncaged](https://iramperfume.in/fragrance/arabiyat-prestige-revolt-uncaged.html) (Unisex): 3ml ₹129 | 5ml ₹189 | 7.5ml ₹289 | 10ml ₹359 | 20ml ₹669 | 30ml ₹959
 
 ### Armaf
 - [Club de Nuit Intense Man Parfum](https://iramperfume.in/fragrance/armaf-cdnim-pp-club-de-nuit-intense-man-pure-parfum.html) (Men): 3ml ₹125 | 5ml ₹179 | 7.5ml ₹275 | 10ml ₹339 | 20ml ₹629 | 30ml ₹899
@@ -183,6 +189,7 @@
 
 ### Dumont
 - [Nitro Red](https://iramperfume.in/fragrance/dumont-nitro-red.html) (Men): 3ml ₹129 | 5ml ₹189 | 7.5ml ₹289 | 10ml ₹359 | 20ml ₹665 | 30ml ₹949
+- [Nitro Red Intensely](https://iramperfume.in/fragrance/dumont-nitro-red-intensely.html) (Men): 3ml ₹155 | 5ml ₹229 | 7.5ml ₹355 | 10ml ₹439 | 20ml ₹829 | 30ml ₹1199
 
 ### French Avenue
 - [Aether Extrait (Aether)](https://iramperfume.in/fragrance/french-avenue-aether-extrait.html) (Men): 3ml ₹135 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹699 | 30ml ₹999
@@ -195,6 +202,7 @@
 - [Zenith Santal](https://iramperfume.in/fragrance/french-avenue-zenith-santal.html) (Unisex): 3ml ₹135 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹699 | 30ml ₹999
 - [Ravine Ice](https://iramperfume.in/fragrance/french-avenue-ravine-ice.html) (Unisex): 3ml ₹145 | 5ml ₹219 | 7.5ml ₹335 | 10ml ₹415 | 20ml ₹779 | 30ml ₹1119
 - [Zenith Blue](https://iramperfume.in/fragrance/french-avenue-zenith-blue.html) (Men): 3ml ₹139 | 5ml ₹205 | 7.5ml ₹315 | 10ml ₹389 | 20ml ₹729 | 30ml ₹1049
+- [Miraj Absolu](https://iramperfume.in/fragrance/french-avenue-miraj-absolu.html) (Women): 3ml ₹145 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹765 | 30ml ₹1099
 
 ### Fragrance World
 - [Kohl](https://iramperfume.in/fragrance/fragrance-world-kohl.html) (Unisex): 3ml ₹115 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹565 | 30ml ₹799
@@ -222,6 +230,7 @@
 - [Karus Gold Absolu](https://iramperfume.in/fragrance/khadlaj-karus-gold-absolu.html) (Unisex): 3ml ₹115 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹565 | 30ml ₹799
 - [Onyx Gold](https://iramperfume.in/fragrance/khadlaj-onyx-gold.html) (Unisex): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹285 | 20ml ₹519 | 30ml ₹729
 - [Island Dreams](https://iramperfume.in/fragrance/khadlaj-island-dreams.html) (Unisex): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
+- [Island Sun](https://iramperfume.in/fragrance/khadlaj-island-sun.html) (Unisex): 3ml ₹119 | 5ml ₹169 | 7.5ml ₹255 | 10ml ₹319 | 20ml ₹585 | 30ml ₹829
 
 ### Lattafa
 - [Ana Abiyedh Coral](https://iramperfume.in/fragrance/lattafa-ana-abiyed-coral.html) (Unisex): 3ml ₹135 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹699 | 30ml ₹999
@@ -247,6 +256,7 @@
 - [Badee Al Oud Amethyst Fusion](https://iramperfume.in/fragrance/lattafa-badee-al-oud-amethyst-fusion.html) (Unisex): 3ml ₹115 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹565 | 30ml ₹799
 - [Fahad](https://iramperfume.in/fragrance/lattafa-fahad.html) (Men): 3ml ₹145 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹765 | 30ml ₹1099
 - [Musamam Black Intense](https://iramperfume.in/fragrance/lattafa-musamam-black-intense.html) (Unisex): 3ml ₹155 | 5ml ₹229 | 7.5ml ₹355 | 10ml ₹439 | 20ml ₹829 | 30ml ₹1199
+- [Asad Bourbon](https://iramperfume.in/fragrance/lattafa-asad-bourbon.html) (Men): 3ml ₹115 | 5ml ₹165 | 7.5ml ₹245 | 10ml ₹305 | 20ml ₹555 | 30ml ₹785
 
 ### Laverne
 - [Blue Laverne Sport](https://iramperfume.in/fragrance/laverne-blue-laverne-sport.html) (Unisex): 3ml ₹135 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹699 | 30ml ₹999
@@ -295,6 +305,8 @@
 - [Hawas Venom](https://iramperfume.in/fragrance/rasasi-hawas-venom.html) (Men): 3ml ₹155 | 5ml ₹229 | 7.5ml ₹349 | 10ml ₹435 | 20ml ₹819 | 30ml ₹1179
 - [Hawas Sapphire](https://iramperfume.in/fragrance/rasasi-hawas-sapphire.html) (Unisex): 3ml ₹155 | 5ml ₹229 | 7.5ml ₹349 | 10ml ₹435 | 20ml ₹819 | 30ml ₹1179
 - [Hawas Boa](https://iramperfume.in/fragrance/rasasi-hawas-boa.html) (Unisex): 3ml ₹175 | 5ml ₹269 | 7.5ml ₹415 | 10ml ₹515 | 20ml ₹979 | 30ml ₹1419
+- [Hawas Nautilus](https://iramperfume.in/fragrance/rasasi-hawas-nautilus.html) (Men): 3ml ₹145 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹765 | 30ml ₹1099
+- [Hawas Lava Gold](https://iramperfume.in/fragrance/rasasi-hawas-lava-gold.html) (Men): 3ml ₹149 | 5ml ₹225 | 7.5ml ₹345 | 10ml ₹429 | 20ml ₹805 | 30ml ₹1159
 
 ### Rayhaan
 - [Aquatica](https://iramperfume.in/fragrance/rayhaan-aquatica.html) (Men): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
