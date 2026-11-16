@@ -1351,6 +1351,14 @@ function editHomepage(products, faqHtml, articlesHtml) {
     '<meta name="description" content="Perfume decants in India from 3ml to 30ml, across designer and Middle Eastern brands. Prices from \u20b979; free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants."'
   );
 
+  // 1b) catalogue count strings. These three are static markup that nothing else
+  // regenerates, so adding products used to leave them stale (and broke the test
+  // suite). Derive them from products.length every run.
+  const countLabel = products.length + ' fragrances';
+  out = out.replace(/(id="filterCount" role="status">)[^<]*(<\/span>)/, '$1' + countLabel + '$2');
+  out = out.replace(/(id="filterCountMobile" role="status">)[^<]*(<\/span>)/, '$1' + countLabel + '$2');
+  out = out.replace(/(id="filterApply">)[^<]*(<\/button>)/, '$1Show ' + countLabel + '$2');
+
   // 2) replace ItemList block with all-products version (ListItem, not Product —
   // product detail lives on the product pages; this also drops ~150KB of JSON-LD)
   if (!itemListBlock) throw new Error('ItemList block not found');
