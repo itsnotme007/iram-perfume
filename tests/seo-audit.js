@@ -157,7 +157,12 @@ for (const file of pages) {
       if (!prod) fail(rel + ': no Product JSON-LD');
       else {
         const offers = prod.offers && (prod.offers.offers || [prod.offers]);
-        if (!offers || offers.length !== 6) fail(rel + ': Product offer count is not 6');
+        // Products may legitimately stock fewer than six sizes (some are
+        // 3ml-only), so expect one offer per size that actually has a price.
+        const expectedSizes = Object.keys(pr.prices || {}).filter(k => pr.prices[k] != null);
+        if (!offers || offers.length !== expectedSizes.length) {
+          fail(rel + ': Product offer count is ' + (offers ? offers.length : 0) + ', expected ' + expectedSizes.length);
+        }
         if (String(prod.image || '').includes('/logos/')) fail(rel + ': Product image points at a logo');
         for (const o of (offers || [])) {
           const size = String(o.name || '').replace(/ml$/i, '');

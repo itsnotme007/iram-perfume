@@ -1,10 +1,10 @@
 # IRAM Perfume
 
-> IRAM Perfume sells designer and Middle Eastern fragrance decants in India in six sizes — 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml — plus full bottles on request. Decants are filled from original bottles and shipped across India.
+> IRAM Perfume sells designer, Middle Eastern and Indian fragrance decants in India in available sizes from 3ml to 30ml, plus full bottles on request. Decants are filled from original bottles and shipped across India.
 
 ## Key facts
 - Sizes: 3ml / 5ml / 7.5ml / 10ml / 20ml / 30ml; full bottles on request
-- Price range: cheapest decant from ₹75; each product page lists all six prices
+- Price range: cheapest decant from ₹75; each product page lists its available sizes and prices
 - Free shipping on orders above ₹999 with 2+ decants; otherwise flat ₹100
 - Delivery: 3–7 working days across India
 - Orders and questions: WhatsApp +91 93555 33509 or email perfumeiram@gmail.com
@@ -58,6 +58,7 @@
 - Swiss Arabian: https://iramperfume.in/brands/swiss-arabian.html
 - Zimaya: https://iramperfume.in/brands/zimaya.html
 - Anfar London: https://iramperfume.in/brands/anfar-london.html
+- Scentedelic: https://iramperfume.in/brands/scentedelic.html
 
 ## Fragrance catalogue (India decant prices)
 
@@ -133,6 +134,8 @@
 - [Bin Shaikh](https://iramperfume.in/fragrance/ahmed-al-maghribi-bin-shaikh.html) (Unisex): 3ml ₹245 | 5ml ₹385 | 7.5ml ₹599 | 10ml ₹749 | 20ml ₹1445 | 30ml ₹2119
 - [Bombay Oud](https://iramperfume.in/fragrance/ahmed-al-maghribi-bombay-oud.html) (Unisex): 3ml ₹235 | 5ml ₹369 | 7.5ml ₹575 | 10ml ₹715 | 20ml ₹1379 | 30ml ₹2019
 - [Azure Royal](https://iramperfume.in/fragrance/ahmed-al-maghribi-azure-royal.html) (Unisex): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹235 | 10ml ₹289 | 20ml ₹529 | 30ml ₹749
+- [Musk & Roses](https://iramperfume.in/fragrance/ahmed-al-maghribi-musk-roses.html) (Women): 3ml ₹149 | 5ml ₹225 | 7.5ml ₹339 | 10ml ₹425 | 20ml ₹799 | 30ml ₹1149
+- [Aqua Oud](https://iramperfume.in/fragrance/ahmed-al-maghribi-aqua-oud.html) (Unisex): 3ml ₹129 | 5ml ₹189 | 7.5ml ₹289 | 10ml ₹359 | 20ml ₹665 | 30ml ₹949
 
 ### Al Majed
 - [Oud Boisee (Boisee)](https://iramperfume.in/fragrance/al-majed-oud-boisee.html) (Unisex): 3ml ₹135 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹699 | 30ml ₹999
@@ -236,6 +239,8 @@
 - [Onyx Gold](https://iramperfume.in/fragrance/khadlaj-onyx-gold.html) (Unisex): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹285 | 20ml ₹519 | 30ml ₹729
 - [Island Dreams](https://iramperfume.in/fragrance/khadlaj-island-dreams.html) (Unisex): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
 - [Island Sun](https://iramperfume.in/fragrance/khadlaj-island-sun.html) (Unisex): 3ml ₹119 | 5ml ₹169 | 7.5ml ₹255 | 10ml ₹319 | 20ml ₹585 | 30ml ₹829
+- [Island Vanilla Dunes](https://iramperfume.in/fragrance/khadlaj-island-vanilla-dunes.html) (Unisex): 3ml ₹105 | 5ml ₹149 | 7.5ml ₹219 | 10ml ₹275 | 20ml ₹499 | 30ml ₹699
+- [Panache Angel Dust](https://iramperfume.in/fragrance/khadlaj-panache-angel-dust.html) (Women): 3ml ₹125 | 5ml ₹179 | 7.5ml ₹275 | 10ml ₹339 | 20ml ₹629 | 30ml ₹899
 
 ### Lattafa
 - [Ana Abiyedh Coral](https://iramperfume.in/fragrance/lattafa-ana-abiyed-coral.html) (Unisex): 3ml ₹135 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹699 | 30ml ₹999
@@ -370,3 +375,12 @@
 
 ### Anfar London
 - [Midnight Frost Intense](https://iramperfume.in/fragrance/anfar-london-midnight-frost-intense.html) (Men): 3ml ₹119 | 5ml ₹169 | 7.5ml ₹259 | 10ml ₹319 | 20ml ₹589 | 30ml ₹839
+
+### Scentedelic
+- [Equilibrium Loop](https://iramperfume.in/fragrance/scentedelic-equilibrium-loop.html) (Men): 3ml ₹129 | 5ml ₹— | 7.5ml ₹— | 10ml ₹— | 20ml ₹— | 30ml ₹—
+- [Pentagram 3.0](https://iramperfume.in/fragrance/scentedelic-pentagram-3-0.html) (Unisex): 3ml ₹159 | 5ml ₹— | 7.5ml ₹— | 10ml ₹— | 20ml ₹— | 30ml ₹—
+- [Solar Spectrum 6.0](https://iramperfume.in/fragrance/scentedelic-solar-spectrum-6-0.html) (Unisex): 3ml ₹149 | 5ml ₹— | 7.5ml ₹— | 10ml ₹— | 20ml ₹— | 30ml ₹—
+- [Inner Child](https://iramperfume.in/fragrance/scentedelic-inner-child.html) (Unisex): 3ml ₹149 | 5ml ₹— | 7.5ml ₹— | 10ml ₹— | 20ml ₹— | 30ml ₹—
+- [Geranium Groove (Paradime)](https://iramperfume.in/fragrance/scentedelic-geranium-groove-paradime.html) (Unisex): 3ml ₹149 | 5ml ₹— | 7.5ml ₹— | 10ml ₹— | 20ml ₹— | 30ml ₹—
+- [Super Saiyan Blue Perfected](https://iramperfume.in/fragrance/scentedelic-super-saiyan-blue-perfected.html) (Men): 3ml ₹149 | 5ml ₹— | 7.5ml ₹— | 10ml ₹— | 20ml ₹— | 30ml ₹—
+- [Enlightened Mist Limited Edition](https://iramperfume.in/fragrance/scentedelic-enlightened-mist-limited-edition.html) (Men): 3ml ₹120 | 5ml ₹— | 7.5ml ₹— | 10ml ₹— | 20ml ₹— | 30ml ₹—

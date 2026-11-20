@@ -63,7 +63,7 @@ const slugify = s => String(s).toLowerCase()
 // ---------------------------------------------------------------- FAQ data
 const HOME_FAQS = [
   ['What sizes do you offer for perfume decants?',
-   'IRAM Perfume offers decants in 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml glass bottles for every fragrance in our catalogue. Pick the size from the price table — the price per ml drops as the bottle gets bigger, so 30ml decants are the best value.'],
+   'Available sizes vary by fragrance and are shown in each product price table. Most fragrances offer 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml glass bottles; some special releases are available only in 3ml.'],
   ['How is a decant different from buying a full perfume bottle?',
    'A decant is perfume poured from an original, genuine bottle into a smaller filled-at-cost glass vial. It lets you try an expensive designer or Middle Eastern perfume without paying for a 100ml bottle. You can test longevity, projection and how it sits on your skin before committing to a full bottle.'],
   ['Do you sell full perfume bottles too?',
@@ -113,10 +113,11 @@ const catEnd = s.indexOf('<!--ARTICLES-->');
 const catRaw = s.slice(catStart, catEnd > -1 ? catEnd : catStart + 400000);
 const tbodyMarks = [...catRaw.matchAll(/<tbody>/g)].map(m => ({ start: m.index + catStart }));
 const tbodyEnds = [...catRaw.matchAll(/<\/tbody>/g)].map(m => ({ end: m.index + '</tbody>'.length + catStart }));
-if (tbodyMarks.length !== 2 || tbodyEnds.length !== 2) throw new Error('Expected exactly 2 <tbody> in catalogue, got ' + tbodyMarks.length + '/' + tbodyEnds.length);
+if (tbodyMarks.length !== 3 || tbodyEnds.length !== 3) throw new Error('Expected exactly 3 <tbody> in catalogue, got ' + tbodyMarks.length + '/' + tbodyEnds.length);
   const REGIONS = [
   { start: tbodyMarks[0].start, end: tbodyEnds[0].end },
-  { start: tbodyMarks[1].start, end: tbodyEnds[1].end }
+  { start: tbodyMarks[1].start, end: tbodyEnds[1].end },
+  { start: tbodyMarks[2].start, end: tbodyEnds[2].end }
 ];
 
 if (makeData) {
@@ -185,7 +186,7 @@ for (const reg of REGIONS) {
       .replace(/<span class="preview-trigger">[\s\S]*?<\/span>/g, '')
       .replace(/<\/a><a /g, '</a> <a ');
 
-    const cat = sectionAt(reg.start) || '';
+    const cat = ['Designer', 'Middle Eastern', 'Indian'][REGIONS.indexOf(reg)] || sectionAt(reg.start) || '';
     const key = (brand || 'x') + '|' + name;
     products.push({
       key, brand: brand || '', brandImg: (brandRow.img || '').replace(/\.webp$/, '.png'), name, gender, status,
@@ -417,7 +418,7 @@ function fragFAQ(pr) {
     ? 'It is a high-quality interpretation inspired by ' + pr.inspired + '. Perfume enthusiasts in India often pick it as an affordable alternative to that profile.'
     : 'It is an original fragrance in the ' + pr.brand + ' catalogue, so there is no clone comparison involved.';
   const priceQ = 'How much does a decant of ' + pr.name + ' by ' + pr.brand + ' cost in India?';
-  const priceA = 'IRAM Perfume sells authentic decants of ' + pr.name + ' by ' + pr.brand + ' at 3ml \u20b9' + (pr.prices['3'] ?? '—') + ', 5ml \u20b9' + (pr.prices['5'] ?? '—') + ', 7.5ml \u20b9' + (pr.prices['7.5'] ?? '—') + ', 10ml \u20b9' + (pr.prices['10'] ?? '—') + ', 20ml \u20b9' + (pr.prices['20'] ?? '—') + ' and 30ml \u20b9' + (pr.prices['30'] ?? '—') + '. Shipping is free on ' + FREE_SHIP_MIN_QTY + '-decant orders above \u20b9' + FREE_SHIP_MIN + '. Full bottles are available on request.';
+  const priceA = 'IRAM Perfume sells authentic decants of ' + pr.name + ' by ' + pr.brand + ' at ' + SIZE_LIST.filter(s => pr.prices[s.key] != null).map(s => s.label + ' \u20b9' + pr.prices[s.key]).join(', ') + '. Shipping is free on ' + FREE_SHIP_MIN_QTY + '-decant orders above \u20b9' + FREE_SHIP_MIN + '. Full bottles are available on request.';
   const wearQ = 'When should I wear ' + pr.name + ' by ' + pr.brand + '?';
   const wearA = pr.gender ? 'A ' + ({ Men: 'men\'s', Women: 'women\'s', Unisex: 'unisex' }[pr.gender] || 'unisex') + ' fragrance, ' : 'A fragrance, ';
   const wearA2 = wearA + 'it works best during ' + bestForLine(pr) + '. It leans ' + (pr.mood || 'versatile') + ' in character with ' + art(scentLine(pr)) + ' ' + scentLine(pr) + ' profile.';
@@ -556,6 +557,7 @@ function fragPage(pr) {
   const bottleDir = path.join(ROOT, 'images', 'bottles');
   if (fs.existsSync(path.join(bottleDir, pr.slug + '.png'))) ogPng = pr.slug + '.png';
   else if (fs.existsSync(path.join(bottleDir, pr.slug + '.jpg'))) ogPng = pr.slug + '.jpg';
+  else if (fs.existsSync(path.join(bottleDir, pr.slug + '.webp'))) ogPng = pr.slug + '.webp';
   if (ogPng && fs.existsSync(path.join(bottleDir, pr.slug + '.webp'))) bottleImg = '../images/bottles/' + pr.slug + '.webp';
   else if (ogPng) bottleImg = '../images/bottles/' + ogPng;
   const noteRows = pr.notes && ['top', 'heart', 'base'].filter(k => Array.isArray(pr.notes[k]) && pr.notes[k].length)
@@ -573,7 +575,7 @@ function fragPage(pr) {
     + '<p class="lead">' + esc(pr.name) + ' by ' + esc(pr.brand) + ' as an authentic decant \u2014 ' + art(scentLine(pr)) + ' ' + esc(scentLine(pr)) + '. ' + esc(inspiredLine(pr)) + '. Ships across India with ' + FREE_SHIP_ABOVE + '.</p>'
     + '<div class="pills">' + pills.join('') + '</div>'
     + '<div class="card"><h2 style="margin-top:0">Prices (per ml gets cheaper as size grows)</h2><table><thead><tr><th>Size</th><th>Price</th><th>Per ml</th></tr></thead><tbody>' + priceRows + '</tbody></table><p class="muted" style="margin-top:10px">' + esc(probeAvailability) + '</p></div>'
-    + '<div class="cta"><h3>Order ' + esc(pr.name) + ' Today</h3><p>Copy your choice and message us on WhatsApp \u2014 we confirm stock and payment instantly.</p><a class="btn" href="' + waLink('Hi! I want to order a decant of ' + pr.name + ' by ' + pr.brand + ': 5ml \u20b9' + (pr.prices['5'] ?? '?') + ', 20ml \u20b9' + (pr.prices['20'] ?? '?') + ', 30ml \u20b9' + (pr.prices['30'] ?? '?')) + '">Order on WhatsApp</a><a class="btn ghost" href="tel:' + PHONE_TEL + '">Call ' + PHONE_DISPLAY + '</a></div>'
+    + '<div class="cta"><h3>Order ' + esc(pr.name) + ' Today</h3><p>Copy your choice and message us on WhatsApp \u2014 we confirm stock and payment instantly.</p><a class="btn" href="' + waLink('Hi! I want to order a decant of ' + pr.name + ' by ' + pr.brand + ': ' + SIZE_LIST.filter(s => pr.prices[s.key] != null).map(s => s.label + ' ₹' + pr.prices[s.key]).join(', ')) + '">Order on WhatsApp</a><a class="btn ghost" href="tel:' + PHONE_TEL + '">Call ' + PHONE_DISPLAY + '</a></div>'
     + '<h2>About ' + esc(pr.name) + '</h2>'
     + '<div class="card"><p><strong>Notes / profile:</strong> ' + esc(scentLine(pr)) + '.</p>'
     + '<p style="margin-top:8px"><strong>Best for:</strong> ' + esc(bestForLine(pr)) + '.</p>'
@@ -590,12 +592,29 @@ function fragPage(pr) {
   const ogCard = path.join(ROOT, 'images', 'og', pr.slug + '.jpg');
   const ogImg = fs.existsSync(ogCard)
     ? siteUrl('images/og/' + pr.slug + '.jpg')
-    : (ogPng ? siteUrl('images/bottles/' + ogPng) : (pr.brandImg ? siteUrl(pr.brandImg) : siteUrl('logo.png')));
-  let ogDesc = 'Buy ' + pr.name + ' by ' + pr.brand + ' decant in India' + (pr.status === 'instock' ? ' \u2014 from ' + rupees(mm.min) + ' (3ml\u201330ml).' : ' (3ml\u201330ml).');
+    : (ogPng ? (/^https?:\/\//.test(ogPng) ? ogPng : siteUrl('images/bottles/' + ogPng)) : (pr.brandImg ? siteUrl(pr.brandImg) : siteUrl('logo.png')));
+  const listedSizes = SIZE_LIST.filter(s => pr.prices[s.key] != null).map(s => s.label).join(', ');
   const inspBit = capLine(inspiredLine(pr)) + '.';
   const shipBit = ' Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.';
-  if ((ogDesc + ' ' + inspBit + shipBit).length <= 160) ogDesc += ' ' + inspBit;
-  ogDesc += shipBit;
+  const LIMIT = 160;
+  // Long names (e.g. those carrying a bracketed full title) can push the base
+  // alone past the limit. Shorten the name - dropping any bracketed aside first,
+  // then truncating on a word - until the mandatory parts fit.
+  const shortName = String(pr.name).replace(/\s*\([^)]*\)\s*/g, ' ').trim();
+  const build = nm => 'Buy ' + nm + ' by ' + pr.brand + ' decant in India' +
+    (pr.status === 'instock' ? ' \u2014 from ' + rupees(mm.min) + ' (' + listedSizes + ').' : ' (' + listedSizes + ').') +
+    shipBit;
+  let ogDesc = build(pr.name);
+  if (ogDesc.length > LIMIT) {
+    let nm = shortName;
+    ogDesc = build(nm);
+    // still too long: trim the name word by word
+    while (ogDesc.length > LIMIT && nm.indexOf(' ') > 0) {
+      nm = nm.slice(0, nm.lastIndexOf(' ')).trim();
+      ogDesc = build(nm);
+    }
+  }
+  if ((ogDesc + ' ' + inspBit).length <= LIMIT) ogDesc = ogDesc.replace(shipBit, '') + ' ' + inspBit + shipBit;
   return pageShell({
     title: productTitle(pr),
     desc: ogDesc,
@@ -611,8 +630,10 @@ function brandPage(brand, items, allBrands) {
   const maxP = Math.max(...items.map(p => minMax(p).max));
   const genders = [...new Set(items.map(p => p.gender).filter(Boolean))];
   const families = [...new Set(items.flatMap(p => String(p.family || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean)))].slice(0, 4);
+  const availableSizes = [...new Set(items.flatMap(p => SIZE_LIST.filter(s => p.prices[s.key] != null).map(s => s.label)))];
+  const sizeSummary = availableSizes.length === 1 ? availableSizes[0] : availableSizes[0] + ' to ' + availableSizes[availableSizes.length - 1];
   const nameList = items.slice(0, 6).map(p => p.name).join(', ') + (items.length > 6 ? ' and more' : '');
-  const isDesigner = items.some(p => p.cat === 'Designer');
+  const sectionName = items[0].cat || 'Middle Eastern';
 
   const cards = items.map(pr => {
     const mm = minMax(pr);
@@ -626,7 +647,7 @@ function brandPage(brand, items, allBrands) {
     ['Which ' + brand + ' fragrances can I buy as decants?',
       'IRAM Perfume currently lists ' + items.length + ' ' + brand + ' fragrance' + (items.length === 1 ? '' : 's') + ' as decants: ' + nameList + '.'],
     ['How much does a ' + brand + ' decant cost?',
-      brand + ' decants start from ' + rupees(minP) + '. Each fragrance page lists prices for 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml.'],
+      brand + ' decants start from ' + rupees(minP) + '. Each fragrance page lists its available decant sizes and prices.'],
     ['Are ' + brand + ' decants authentic?',
       'IRAM Perfume fills decants from original ' + brand + ' bottles bought from trusted suppliers, and shares proof on request.']
   ];
@@ -635,7 +656,7 @@ function brandPage(brand, items, allBrands) {
     {
       '@context': 'https://schema.org', '@type': 'CollectionPage',
       name: brand + ' Perfume Decants', url: url,
-      description: 'Shop ' + brand + ' perfume decants in India in 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml sizes.',
+      description: 'Shop ' + brand + ' perfume decants in India in available sizes: ' + availableSizes.join(', ') + '.',
       mainEntity: {
         '@type': 'ItemList', numberOfItems: items.length,
         itemListElement: items.map((pr, i) => ({ '@type': 'ListItem', position: i + 1, name: pr.name + ' by ' + brand, url: pr.url }))
@@ -660,7 +681,7 @@ function brandPage(brand, items, allBrands) {
   const body = ''
     + '<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">' + esc(brand) + '</span></nav>'
     + '<div class="top"><div><div class="brand-chip">BRAND</div><h1>' + esc(brand) + ' Perfume Decants in India</h1></div><a href="/">\u2190 Full collection</a></div>'
-    + '<p class="lead">Shop ' + items.length + ' ' + esc(brand) + ' fragrance' + (items.length === 1 ? '' : 's') + ' as decants \u2014 from ' + rupees(minP) + ' for 3ml, with 5ml, 7.5ml, 10ml, 20ml and 30ml sizes on every product page. ' + (isDesigner ? 'Designer' : 'Middle Eastern') + ' perfumery, shipped across India with ' + FREE_SHIP_ABOVE + '.</p>'
+    + '<p class="lead">Shop ' + items.length + ' ' + esc(brand) + ' fragrance' + (items.length === 1 ? '' : 's') + ' as decants \u2014 from ' + rupees(minP) + '. Product pages list available sizes. ' + esc(sectionName) + ' perfumery, shipped across India with ' + FREE_SHIP_ABOVE + '.</p>'
     + '<div class="pills">'
     + '<span class="pill">' + items.length + ' fragrance' + (items.length === 1 ? '' : 's') + '</span>'
     + '<span class="pill">From ' + rupees(minP) + '</span>'
@@ -668,14 +689,14 @@ function brandPage(brand, items, allBrands) {
     + (genders.length ? '<span class="pill">' + esc(genders.join(' / ')) + '</span>' : '')
     + '</div>'
     + '<h2>' + esc(brand) + ' decants &amp; prices</h2><div class="grid">' + cards + '</div>'
-    + (families.length ? '<h2>What ' + esc(brand) + ' smells like</h2><div class="card"><p>' + esc(brand) + ' fragrances in this catalogue lean toward ' + esc(families.map(f => f.charAt(0).toUpperCase() + f.slice(1)).join(', ')) + ' families. Open any fragrance page for its notes, best season and occasion, and a full 3ml\u201330ml price list.</p></div>' : '')
+    + (families.length ? '<h2>What ' + esc(brand) + ' smells like</h2><div class="card"><p>' + esc(brand) + ' fragrances in this catalogue lean toward ' + esc(families.map(f => f.charAt(0).toUpperCase() + f.slice(1)).join(', ')) + ' families. Open any fragrance page for its notes, best season and occasion, and its available size prices.</p></div>' : '')
     + '<h2>Frequently Asked Questions</h2>'
     + faqs.map(([q, a]) => '<details class="qa"><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>').join('')
     + '<h2>Explore other brands</h2><div class="grid">' + others + '</div>'
     + '<div class="foot">IRAM Perfume \u00b7 ' + esc(PHONE_DISPLAY) + ' \u00b7 <a href="mailto:' + EMAIL + '">' + EMAIL + '</a> \u00b7 <a href="' + WA + '">WhatsApp Community</a> \u00b7 <a href="/articles/decant-vs-full-bottle.html">Decant guide</a> \u00b7 <a href="/articles/summer-decants-under-500.html">Summer picks</a> \u00b7 <a href="/">Back to all fragrances</a></div>';
 
-  let desc = 'Shop ' + brand + ' perfume decants in India from ' + rupees(minP) + ' \u2014 ' + items.length + ' fragrance' + (items.length === 1 ? '' : 's') + ', 3ml to 30ml. Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.';
-  if (desc.length > 160) desc = 'Shop ' + brand + ' perfume decants in India from ' + rupees(minP) + ' \u2014 3ml to 30ml. Free shipping over \u20b9' + FREE_SHIP_MIN + '.';
+  let desc = 'Shop ' + brand + ' perfume decants in India from ' + rupees(minP) + ' \u2014 ' + items.length + ' fragrance' + (items.length === 1 ? '' : 's') + ', ' + sizeSummary + '. Free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants.';
+  if (desc.length > 160) desc = 'Shop ' + brand + ' decants from ' + rupees(minP) + ' in ' + sizeSummary + '. Free shipping over \u20b9' + FREE_SHIP_MIN + '.';
 
   return pageShell({
     title: brand + ' Perfume Decants in India \u2014 Prices | IRAM Perfume',
@@ -872,7 +893,7 @@ function collectionStats() {
   let cheap = { price: Infinity, name: '', brand: '' }, exp = { price: 0, name: '', brand: '' };
   for (const pr of products) {
     brands.add(pr.brand);
-    if (pr.cat === 'Designer') designer++; else me++;
+    if (pr.cat === 'Designer') designer++; else if (pr.cat === 'Middle Eastern') me++;
     if (pr.gender === 'Men') men++;
     else if (pr.gender === 'Women') women++;
     else if (pr.gender === 'Unisex') unisex++;
@@ -891,7 +912,7 @@ function collectionStats() {
   const avg = a => { if (!a.length) return 0; return Math.round(a.reduce((x, y) => x + y, 0) / a.length); };
   const rup = n => (n === 0 || n === Infinity ? '\u2014' : '\u20b9' + n.toLocaleString('en-IN'));
   return {
-    total: products.length, brands: brands.size, designer, me, men, women, unisex, coming,
+    total: products.length, brands: brands.size, designer, me, indian: products.filter(p => p.cat === 'Indian').length, men, women, unisex, coming,
     cheapest: cheap.price === Infinity ? '\u2014' : rup(cheap.price) + ' (' + cheap.brand + ' ' + cheap.name + ')',
     expensive: exp.price === 0 ? '\u2014' : rup(exp.price) + ' (' + exp.brand + ' ' + exp.name + ')',
     avg3: rup(avg(prices['3'])), avg5: rup(avg(prices['5'])), avg75: rup(avg(prices['7.5'])),
@@ -980,6 +1001,7 @@ function statsDashHtml(st) {
     + '  ' + sc('highlight', 'statBrands', st.brands, 'Total Brands') + '\n'
     + '  ' + sc('', 'statDesigner', st.designer, 'Designer') + '\n'
     + '  ' + sc('', 'statMiddleEastern', st.me, 'Middle Eastern') + '\n'
+    + '  ' + sc('', 'statIndian', st.indian, 'Indian') + '\n'
     + '  ' + sc('', 'statMen', st.men, 'Men\u2019s') + '\n'
     + '  ' + sc('', 'statWomen', st.women, 'Women\u2019s') + '\n'
     + '  ' + sc('', 'statUnisex', st.unisex, 'Unisex') + '\n'
@@ -1194,7 +1216,7 @@ function renderTbody(cat) {
       tr += '</td>';
       SIZES6.forEach((k, idx) => {
         const st = pr.statusPerSize[k];
-        const body = st === 'struck' ? '<s class="u-price">' + rupeePlain(pr.prices[k]) + '</s>'
+        const body = pr.prices[k] == null ? '\u2014' : st === 'struck' ? '<s class="u-price">' + rupeePlain(pr.prices[k]) + '</s>'
           : st === 'coming' ? '<span class="u-price">' + rupeePlain(pr.prices[k]) + '</span>'
           : String(rupeePlain(pr.prices[k]));
         tr += '<td class="size-cell">' + (idx === 5 ? '<strong>' + body + '</strong>' : body) + '</td>';
@@ -1240,7 +1262,7 @@ function renderCards(cat) {
     return '<div class="frag-card' + (isSO ? ' pc-sold' : '') + '"' + attrs + '>'
       + '<div class="pc-media" role="button" tabindex="0" data-open>'
       + '<span class="pc-ph" aria-hidden="true"></span>'
-      + '<img class="pc-img" alt="' + cardEsc(pr.name) + '" loading="lazy"' + imgDims('images/bottles/' + pr.slug + '.png') + ' data-img-base="images/bottles/' + pr.slug + '">'
+      + '<img class="pc-img" alt="' + cardEsc(pr.name) + '" loading="lazy"' + imgDims('images/bottles/' + pr.slug + (fs.existsSync(path.join(ROOT, 'images', 'bottles', pr.slug + '.webp')) ? '.webp' : '.png')) + ' data-img-base="images/bottles/' + pr.slug + '">'
       + badges
       + '<button type="button" class="pc-wish" aria-label="Save ' + cardEsc(pr.name) + '" data-wish></button>'
       + (isSO || isCS ? '' : '<button type="button" class="pc-cmp" aria-label="Add ' + cardEsc(pr.name) + ' to compare" data-cmp aria-pressed="false"></button>')
@@ -1348,7 +1370,7 @@ function editHomepage(products, faqHtml, articlesHtml) {
   out = out.replace(/<title>[\s\S]*?<\/title>/, '<title>Perfume Decants India | IRAM Perfume</title>');
   out = out.replace(
     /<meta name="description" content="[^"]*"/,
-    '<meta name="description" content="Perfume decants in India from 3ml to 30ml, across designer and Middle Eastern brands. Prices from \u20b979; free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants."'
+    '<meta name="description" content="Perfume decants in India from 3ml to 30ml, across designer, Middle Eastern and Indian brands. Prices from \u20b979; free shipping over \u20b9' + FREE_SHIP_MIN + ' on ' + FREE_SHIP_MIN_QTY + '+ decants."'
   );
 
   // 1b) catalogue count strings. These three are static markup that nothing else
@@ -1366,7 +1388,7 @@ function editHomepage(products, faqHtml, articlesHtml) {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'IRAM Perfume Fragrance Collection',
-    description: 'Premium designer and Middle Eastern fragrance decants available in 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml sizes, plus full bottles on request.',
+    description: 'Premium designer, Middle Eastern and Indian fragrance decants in available sizes from 3ml to 30ml, plus full bottles on request.',
     url: siteUrl(),
     numberOfItems: products.length,
     itemListElement: products.map((pr, i) => ({
@@ -1391,7 +1413,7 @@ function editHomepage(products, faqHtml, articlesHtml) {
     url: siteUrl(),
     logo: { '@type': 'ImageObject', url: siteUrl('logo.png'), width: 512, height: 512 },
     image: siteUrl('og-image.jpg'),
-    description: 'Authentic designer and Middle Eastern perfume decants in 3ml to 30ml, shipped across India.',
+    description: 'Authentic designer, Middle Eastern and Indian perfume decants in 3ml to 30ml, shipped across India.',
     email: EMAIL,
     telephone: PHONE_TEL,
     areaServed: { '@type': 'Country', name: 'India' },
@@ -1425,7 +1447,7 @@ function editHomepage(products, faqHtml, articlesHtml) {
   out = replaceJsonType(out, 'WebSite', websiteSchema);
 
   // 2c) homepage H1: keep the brand but add the primary keyword (one H1 per page)
-  const h1Rich = '<h1>Perfume Decants in India <span class="h1-sub">Designer &amp; Middle Eastern, 3ml to 30ml</span></h1>';
+  const h1Rich = '<h1>Perfume Decants in India <span class="h1-sub">Designer, Middle Eastern &amp; Indian, 3ml to 30ml</span></h1>';
   out = out.replace(/<h1>[^<]*(?:<span class="h1-sub">[\s\S]*?<\/span>)?<\/h1>/, h1Rich);
 
   // 4) FAQPage schema + visible FAQ + articles strip (idempotent markers)
@@ -1491,7 +1513,7 @@ function editHomepage(products, faqHtml, articlesHtml) {
   // 7) re-render catalogue tbodies from products.json (rows keep byte-parity
   //    with the historical markup, plus static data-brand/data-price/data-pid
   //    so filters and the cart registry no longer scrape prices from the DOM)
-  const cats = ['Designer', 'Middle Eastern'];
+  const cats = ['Designer', 'Middle Eastern', 'Indian'];
   cats.forEach((cat, ri) => {
     const raw = s.slice(REGIONS[ri].start, REGIONS[ri].end);
     const rendered = renderTbody(cat);
@@ -1625,10 +1647,10 @@ function buildLlmstxt(articles) {
   const brandExists = b => fs.existsSync(path.join(ROOT, 'brands', slugify(b) + '.html'));
   const brands = [...new Set(products.map(p => p.brand))];
   let t = '# IRAM Perfume\n\n'
-    + '> IRAM Perfume sells designer and Middle Eastern fragrance decants in India in six sizes \u2014 3ml, 5ml, 7.5ml, 10ml, 20ml and 30ml \u2014 plus full bottles on request. Decants are filled from original bottles and shipped across India.\n\n'
+    + '> IRAM Perfume sells designer, Middle Eastern and Indian fragrance decants in India in available sizes from 3ml to 30ml, plus full bottles on request. Decants are filled from original bottles and shipped across India.\n\n'
     + '## Key facts\n'
     + '- Sizes: 3ml / 5ml / 7.5ml / 10ml / 20ml / 30ml; full bottles on request\n'
-    + '- Price range: cheapest decant from ' + rupees(Math.min(...products.map(p => minMax(p).min))) + '; each product page lists all six prices\n'
+    + '- Price range: cheapest decant from ' + rupees(Math.min(...products.map(p => minMax(p).min))) + '; each product page lists its available sizes and prices\n'
     + '- Free shipping on orders above \u20b9' + FREE_SHIP_MIN + ' with ' + FREE_SHIP_MIN_QTY + '+ decants; otherwise flat \u20b9100\n'
     + '- Delivery: 3\u20137 working days across India\n'
     + '- Orders and questions: WhatsApp ' + PHONE_DISPLAY + ' or email ' + EMAIL + '\n\n'

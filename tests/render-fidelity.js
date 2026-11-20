@@ -24,8 +24,11 @@ function tbodies(html) {
   return [...html.slice(catStart, catEnd).matchAll(/<tbody>[\s\S]*?<\/tbody>/g)].map((m) => m[0]);
 }
 const a = tbodies(oldHtml), b = tbodies(newHtml);
-if (a.length !== 2 || b.length !== 2) {
-  console.error('expected 2 catalogue tbodies, got ' + a.length + ' (ref) / ' + b.length + ' (worktree)');
+// The ref may have fewer catalogue sections than the working copy (sections get
+// added over time), so only require that the first two - Designer and Middle
+// Eastern - exist on both sides and that the working copy has at least as many.
+if (a.length < 2 || b.length < 2 || b.length < a.length) {
+  console.error('expected at least 2 catalogue tbodies with worktree >= ref, got ' + a.length + ' (ref) / ' + b.length + ' (worktree)');
   process.exit(1);
 }
 let bad = 0;

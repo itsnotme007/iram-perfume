@@ -3,7 +3,7 @@
 // (they document bugs 1.1, 1.2, 1.5, 1.7, 1.8, 1.9, 1.3, 1.4).
 const { test, expect } = require('@playwright/test');
 
-const TOTAL = 232;
+const TOTAL = 243;
 
 function watchErrors(page) {
   const errs = [];
@@ -16,19 +16,19 @@ async function cartCount(page) {
 }
 
 // ---------------------------------------------------------------- catalogue
-test('catalogue renders 232 cards + rows with accurate counts', async ({ page }, testInfo) => {
+test('catalogue renders 243 cards + rows with accurate counts', async ({ page }, testInfo) => {
   const errs = watchErrors(page);
   await page.goto('/');
   await expect(page).toHaveTitle(/IRAM Perfume/);
   await expect(page.locator('.frag-cell')).toHaveCount(TOTAL);
   await expect(page.locator('.frag-card')).toHaveCount(TOTAL);
-  await expect(page.locator('#filterCount')).toHaveText(/232 fragrances/);
-  await expect(page.locator('#filterCountMobile')).toHaveText(/232 fragrances/);
+  await expect(page.locator('#filterCount')).toHaveText(/243 fragrances/);
+  await expect(page.locator('#filterCountMobile')).toHaveText(/243 fragrances/);
   await expect(page.locator('#filterApply')).toHaveText(/Show all fragrances/);
   // raw (pre-JS) markup must never claim the old count
   const raw = await (await page.request.get('/')).text();
   expect(raw).not.toMatch(/147 fragrances/);
-  expect(raw).toMatch(/Show 232 fragrances/);
+  expect(raw).toMatch(/Show 243 fragrances/);
   expect(errs).toEqual([]);
 });
 
@@ -152,7 +152,8 @@ test('price sort is global across brand blocks (desktop)', async ({ page }, test
     });
     return out;
   });
-  expect(runs.length).toBe(2);
+  // one table per catalogue section (Designer / Middle Eastern / Indian)
+  expect(runs.length).toBeGreaterThanOrEqual(2);
   let total = 0;
   for (const costs of runs) {
     expect(costs.length).toBeGreaterThan(0);
@@ -383,7 +384,7 @@ test('bestsellers rail and 3ml price list render', async ({ page }) => {
   await expect(page.locator('#bestsellers .best-card[data-pid]')).toHaveCount(12);
   // 3ml list stays hidden until the hero banner CTA reveals it.
   await expect(page.locator('#threeMl')).toBeHidden();
-  await expect(page.locator('#threeMlList .three-ml-row')).toHaveCount(232);
+  await expect(page.locator('#threeMlList .three-ml-row')).toHaveCount(243);
   await page.evaluate(() => document.querySelector('.mobile-hero a[href="#threeMl"]').click());
   await expect(page.locator('#threeMl')).toBeVisible();
   await expect(page.locator('#threeMlList')).toHaveClass(/three-ml-open/);
@@ -463,7 +464,7 @@ test('bottle options page: stats render, chips switch, add to cart survives home
   await page.goto('/bottles.html');
   await expect(page).toHaveTitle(/Bottle Options/);
   await expect(page.locator('#statTotal')).toHaveText(String(TOTAL));
-  await expect(page.locator('#statBrands')).toHaveText('39');
+  await expect(page.locator('#statBrands')).toHaveText('40');
   await expect(page.locator('.bottle-card')).toHaveCount(5);
   const out = page.locator('.bottle-card[data-bottle="group"] [data-price-out]');
   await expect(out).toHaveText('\u20B915');
