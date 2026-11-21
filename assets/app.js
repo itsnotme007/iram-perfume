@@ -110,14 +110,17 @@ try{(function(){
     var isMobile=window.innerWidth<=768;
     for(var i=0;i<cats.length;i++){if(f[cats[i]]!=='all'){showAll=false;break}}
     var tbody=resultsDiv.querySelector('tbody');
+    // Never write an inline display onto .frag-table: the table/card view is
+    // driven by the body.catalogue-table class in CSS, and an inline value wins
+    // over it, so filtering used to yank the user out of table view (and back
+    // into it when cleared). Filtering only ever toggles rows/cards; the view
+    // mode stays whatever the user picked.
     if(showAll){
-      document.querySelectorAll('.table-wrap>.frag-table').forEach(function(t){t.style.display=''});
       document.querySelectorAll('.section-heading,.three-ml-section').forEach(function(s){s.style.display=''});
       resultsDiv.style.display='none';
       document.querySelectorAll('.frag-card').forEach(function(c){c.style.display=''});
+      document.querySelectorAll('.table-wrap>.frag-table tbody tr').forEach(function(tr){tr.style.display=''});
     }else{
-      document.querySelectorAll('.table-wrap>.frag-table').forEach(function(t){t.style.display='none'});
-      document.querySelectorAll('.section-heading,.three-ml-section').forEach(function(s){s.style.display='none'});
       document.querySelectorAll('.frag-card').forEach(function(card){
         var match=true;
         for(var i=0;i<cats.length;i++){
@@ -137,10 +140,15 @@ try{(function(){
         for(var i=0;i<cats.length;i++){
           var cat=cats[i];
           if(f[cat]==='all')continue;
-          if(cat==='price'){if(!priceMatch(cell.dataset.price,f.price))return;continue}
-          if(cat==='stock'){if(f.stock==='instock'&&!cell.querySelector('.cart-btn:not([disabled])'))return;continue}
-          var vals=cell.dataset[cat]?cell.dataset[cat].split(','):[];
-          if(vals.indexOf(f[cat])===-1)return
+          var hit;
+          if(cat==='price')hit=priceMatch(cell.dataset.price,f.price);
+          else if(cat==='stock')hit=!(f.stock==='instock'&&!cell.querySelector('.cart-btn:not([disabled])'));
+          else{var vals=cell.dataset[cat]?cell.dataset[cat].split(','):[];hit=vals.indexOf(f[cat])>-1}
+          if(!hit){
+            // hide the row in place so table view filters like card view does
+            row.style.display='none';
+            return;
+          }
         }
         var nr=document.createElement('tr');
         var nt=document.createElement('td');

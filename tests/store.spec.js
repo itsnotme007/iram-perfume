@@ -134,6 +134,64 @@ test('add to cart works from filtered desktop results', async ({ page }, testInf
   await expect(page.locator('#cartFloatCount')).toHaveText('1');
 });
 
+// ------------------------------------------------------- view mode vs filters
+test('filtering never switches the catalogue view mode', async ({ page }) => {
+  // Regression: applyFilter used to write an inline display onto .frag-table,
+  // which overrode the body.catalogue-table CSS, so applying or clearing a
+  // filter silently yanked the user between table and card view.
+  await page.goto('/');
+  await page.waitForTimeout(300);
+
+  const state = () => page.evaluate(() => ({
+    table: document.body.classList.contains('catalogue-table'),
+    rows: [...document.querySelectorAll('.table-wrap>.frag-table tbody tr')]
+      .filter((r) => r.style.display !== 'none' && r.querySelector('.frag-cell')).length,
+    cards: [...document.querySelectorAll('.frag-card')].filter((c) => c.style.display !== 'none').length
+  }));
+
+  const total = (await state()).cards;
+  expect(total).toBeGreaterThan(100);
+
+  const clickView = (v) => page.evaluate((view) => {
+    const btn = document.querySelector(`[data-catalogue-view="${view}"]`);
+    if (btn) btn.click();
+  }, v);
+  const clearFilters = () => page.evaluate(() => {
+    document.querySelectorAll('.filter-group .filter-btn[data-filter="all"]').forEach((b) => b.click());
+  });
+
+  // 1. in table view, filtering must keep table view
+  await clickView('table');
+  await page.waitForTimeout(250);
+  expect((await state()).table).toBe(true);
+
+  await page.evaluate(() => document.querySelector('.filter-btn[data-gender="Women"]').click());
+  await page.waitForTimeout(400);
+  let s = await state();
+  expect(s.table).toBe(true);                    // view unchanged
+  expect(s.rows).toBeLessThan(total);            // rows actually filtered
+  expect(s.rows).toBe(s.cards);                  // table and cards agree
+
+  // 2. clearing must also keep table view, and restore every row
+  await clearFilters();
+  await page.waitForTimeout(400);
+  s = await state();
+  expect(s.table).toBe(true);
+  expect(s.rows).toBe(total);
+  expect(s.cards).toBe(total);
+
+  // 3. and the same holds starting from card view
+  await clickView('grid');
+  await page.waitForTimeout(250);
+  expect((await state()).table).toBe(false);
+  await page.evaluate(() => document.querySelector('.filter-btn[data-gender="Women"]').click());
+  await page.waitForTimeout(400);
+  s = await state();
+  expect(s.table).toBe(false);
+  expect(s.cards).toBeLessThan(total);
+  expect(s.rows).toBe(s.cards);
+});
+
 // ---------------------------------------------------------------- sorting
 test('price sort is global across brand blocks (desktop)', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'table sort is desktop-only');
