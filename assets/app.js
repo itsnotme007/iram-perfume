@@ -176,6 +176,41 @@ try{(function(){
     if(window.__onFilterChange)window.__onFilterChange();
   }
   window.__applyFilter=applyFilter;
+  window.__revealSearchProduct=function(pid){
+    var cell=null;
+    document.querySelectorAll('.frag-cell[data-pid]').forEach(function(el){if(!cell&&el.getAttribute('data-pid')===pid)cell=el});
+    if(!cell)return false;
+    var clear=[];
+    cats.forEach(function(cat){
+      var value=f[cat];
+      if(!value||value==='all')return;
+      var match=true;
+      if(cat==='price')match=window.__priceMatch?window.__priceMatch(cell.dataset.price,value):true;
+      else if(cat==='stock')match=value!=='instock'||!!cell.querySelector('.cart-btn:not([disabled])');
+      else match=(cell.dataset[cat]||'').split(',').indexOf(value)>-1;
+      if(!match)clear.push(cat);
+    });
+    if(!clear.length)return true;
+    clear.forEach(function(cat){
+      f[cat]='all';
+      if(cat==='price'){
+        if(window.__setPriceRange)window.__setPriceRange('all');
+        return;
+      }
+      if(cat==='stock'){
+        var stockBtn=filterBody&&filterBody.querySelector('.filter-stock-row [data-stock="instock"]');
+        if(stockBtn){stockBtn.classList.remove('active');stockBtn.setAttribute('aria-checked','false')}
+        return;
+      }
+      var group=filterBody&&filterBody.querySelector('.filter-group[data-cat="'+cat+'"]');
+      if(!group)return;
+      group.querySelectorAll('.filter-btn').forEach(function(btn){btn.classList.remove('active');btn.setAttribute('aria-checked','false')});
+      var any=group.querySelector('.filter-btn[data-filter="all"]');
+      if(any){any.classList.add('active');any.setAttribute('aria-checked','true')}
+    });
+    applyFilter();
+    return true;
+  };
 })();}catch(e){console.warn('Filters init failed:',e)}
 
 try{(function(){
@@ -1700,9 +1735,8 @@ try{(function(){
   function productSlug(brand,name){return(brand+'-'+name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
   var cardsMap={};
   document.querySelectorAll('.frag-card').forEach(function(card){
-    var bn=card.querySelector('.card-brand-name');
-    var fn=card.querySelector('.card-frag-name');
-    if(bn&&fn)cardsMap[bn.textContent.trim().toLowerCase()+'|'+fn.textContent.trim().toLowerCase()]=card;
+    var id=card.getAttribute('data-pid');
+    if(id)cardsMap[id]=card;
   });
   document.querySelectorAll('.frag-table').forEach(function(table){
     var curBrand='';
@@ -1714,6 +1748,7 @@ try{(function(){
       var nameA=fc.querySelector('a');
       var fragName=nameA?nameA.textContent.replace(/\s+/g,' ').trim():'';
       var slug=nameA?nameA.getAttribute('href').replace(/^fragrance\//,'').replace(/\.html$/,''):productSlug(curBrand,fragName);
+      var productId=fc.getAttribute('data-pid')||'';
       var inspired=fc.parentElement?fc.parentElement.querySelector('.inspired-cell'):null;
       var inspiredText=inspired?inspired.textContent.trim():'';
       var tags=[];
@@ -1724,14 +1759,15 @@ try{(function(){
         if(v)attrs[a]=v;
       });
       row.setAttribute('data-product',slug);
-      var card=cardsMap[curBrand.toLowerCase()+'|'+fragName.toLowerCase()];
-      if(card)card.setAttribute('data-product',slug);
+      var card=cardsMap[productId];
+      if(card){card.setAttribute('data-product',slug);card.setAttribute('data-product-id',productId)}
       index.push({
         brand:curBrand,
         frag:fragName,
         inspired:inspiredText,
         tags:tags.join(' '),
         attrs:attrs,
+        productId:productId,
         el:row,
         fragEl:fc,
         product:slug
@@ -1875,7 +1911,7 @@ try{(function(){
       var item=results[i];
       var div=document.createElement('div');
       div.className='search-result-item';
-      div.setAttribute('data-product',item.product);
+      div.setAttribute('data-product-id',item.productId);
       var genderTag='';
       item.fragEl.querySelectorAll('.tag').forEach(function(t){
         if(t.classList.contains('tag-men')||t.classList.contains('tag-unisex')||t.classList.contains('tag-women')){
@@ -1905,21 +1941,71 @@ try{(function(){
     renderResults(resultsEl,results,q,inputEl);
   }
 
+  var navigationSequence=0;
   function navigateToProduct(productId){
     if(!productId)return;
-    var mobile=window.matchMedia&&window.matchMedia('(max-width:1023px)').matches;
-    var candidates=document.querySelectorAll((mobile?'.frag-card[data-product="': 'tr[data-product="')+productId+'"]');
-    if(!candidates.length)candidates=document.querySelectorAll('[data-product="'+productId+'"]');
-    var target=null;
-    for(var i=0;i<candidates.length;i++){
-      if(candidates[i].offsetHeight>0){target=candidates[i];break}
+    var sequence=++navigationSequence;
+    if(window.__revealSearchProduct)window.__revealSearchProduct(productId);
+    function findTarget(){
+      var nodes=document.querySelectorAll('.frag-card[data-product-id]'),target=null;
+      for(var i=0;i<nodes.length;i++){
+        if(nodes[i].getAttribute('data-product-id')===productId&&nodes[i].getClientRects().length){target=nodes[i];break}
+      }
+      return target;
     }
-    if(!target)return;
-    target.scrollIntoView({behavior:'smooth',block:'center',inline:'nearest'});
-    var highlightEl=target.classList.contains('frag-card')?target.querySelector('.card-body')||target:target;
-    highlightEl.style.transition='background .3s';
-    highlightEl.style.background=getComputedStyle(document.documentElement).getPropertyValue('--highlight-bg')||'#FFF5CC';
-    setTimeout(function(){highlightEl.style.background=''},2000);
+    function position(attempt){
+      if(sequence!==navigationSequence)return;
+      var target=findTarget();
+      if(!target){if(attempt<8)requestAnimationFrame(function(){position(attempt+1)});return}
+      // Cards use content-visibility:auto, so anything off-screen has only an
+      // estimated height. During a smooth scroll those estimates resolve one by
+      // one, the document grows underneath us and the target keeps moving -
+      // which made the scroll land short and the highlight fire after the card
+      // had already slid past. Pinning the target's own box before scrolling
+      // keeps its position stable for the whole animation.
+      if(attempt===0&&!target._cvPrevInline){
+        target._cvPrevInline=target.style.contentVisibility||'';
+        target.style.contentVisibility='visible';
+      }
+      var rect=target.getBoundingClientRect();
+      var maxTop=Math.max(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)-window.innerHeight);
+      var desired=Math.max(0,Math.min(maxTop,window.scrollY+rect.top-(window.innerHeight-rect.height)/2));
+      window.scrollTo({top:desired,behavior:attempt?'auto':'smooth'});
+      var frames=0,lastY=-1,stable=0;
+      function releaseCv(){
+        if(target._cvPrevInline===undefined)return;
+        target.style.contentVisibility=target._cvPrevInline;
+        delete target._cvPrevInline;
+      }
+      // Handing content-visibility back the instant the card enters view would
+      // collapse it to its estimated height and re-flow the page underneath the
+      // freshly-set highlight. Keep the pinned box through the highlight, then
+      // release once the browser has settled.
+      function releaseCvLater(){
+        clearTimeout(target._cvReleaseTimer);
+        target._cvReleaseTimer=setTimeout(releaseCv,2200);
+      }
+      function verify(){
+        if(sequence!==navigationSequence){releaseCv();return}
+        var r=target.getBoundingClientRect();
+        if(r.bottom>0&&r.top<window.innerHeight){
+          target.classList.remove('search-target-highlight');
+          void target.offsetWidth;
+          target.classList.add('search-target-highlight');
+          clearTimeout(target._searchHighlightTimer);
+          target._searchHighlightTimer=setTimeout(function(){target.classList.remove('search-target-highlight')},1800);
+          releaseCvLater();
+          return;
+        }
+        if(Math.abs(window.scrollY-lastY)<1)stable++;else stable=0;
+        lastY=window.scrollY;
+        if(frames++<120&&stable<3){requestAnimationFrame(verify);return}
+        if(attempt<2){position(attempt+1);return}
+        releaseCv();
+      }
+      requestAnimationFrame(verify);
+    }
+    requestAnimationFrame(function(){requestAnimationFrame(function(){position(0)})});
   }
 
   function setupDesktop(){
@@ -1934,11 +2020,10 @@ try{(function(){
     results.addEventListener('click',function(e){
       var item=e.target.closest('.search-result-item');
       if(!item)return;
-      var productId=item.getAttribute('data-product');
+      e.preventDefault();e.stopPropagation();
+      var productId=item.getAttribute('data-product-id');
       pushRecent(input.value);
       results.classList.remove('open');
-      input.value='';
-      clear.classList.remove('visible');
       navigateToProduct(productId);
     });
     document.addEventListener('click',function(e){
@@ -1966,13 +2051,14 @@ try{(function(){
     if(!btns.length||!overlay||!input||!results||!clear)return;
     var showRecent=wireRecent(results,input,clear);
     var lastTrigger=null;
-    function closeOverlay(){overlay.classList.remove('open');results.classList.remove('open');document.body.style.overflow='';if(lastTrigger)lastTrigger.focus()}
-    function pickResult(el){
+    function closeOverlay(restoreFocus){overlay.classList.remove('open');results.classList.remove('open');document.body.style.overflow='';if(restoreFocus&&lastTrigger){try{lastTrigger.focus({preventScroll:true})}catch(e){lastTrigger.focus()}}}
+    function pickResult(el,event){
       var item=el.closest?el.closest('.search-result-item'):null;
       if(!item)return;
-      var productId=item.getAttribute('data-product');
+      if(event){event.preventDefault();event.stopPropagation()}
+      var productId=item.getAttribute('data-product-id');
       pushRecent(input.value);
-      closeOverlay();
+      closeOverlay(false);
       navigateToProduct(productId);
     }
     btns.forEach(function(btn){btn.addEventListener('click',function(){
@@ -1988,7 +2074,7 @@ try{(function(){
     input.addEventListener('input',function(){doSearch(input,results)});
     input.addEventListener('focus',function(){if(input.value.trim())doSearch(input,results);else showRecent()});
     clear.addEventListener('click',function(){input.value='';results.classList.remove('open');clear.classList.remove('visible');input.focus();showRecent()});
-    results.addEventListener('click',function(e){pickResult(e.target)});
+    results.addEventListener('click',function(e){pickResult(e.target,e)});
   }
 
   setupDesktop();

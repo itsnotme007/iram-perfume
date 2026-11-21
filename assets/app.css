@@ -202,6 +202,7 @@ tbody td{padding:10px;vertical-align:middle;color:var(--text-body)}
 .label-8{top:50%;right:5%;transform:translateY(-50%)}
 .frag-cards{display:none}
 .frag-card{background:var(--bg-surface);border:1px solid var(--border-default);border-radius:12px;padding:14px;box-shadow:var(--card-shadow);animation:cardIn .3s ease both;content-visibility:auto;contain-intrinsic-size:auto 300px}
+.frag-card.search-target-highlight{outline:2px solid #d4af37;outline-offset:2px;background:var(--highlight-bg)}
 @keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
 .card-brand-logo{max-width:32px;max-height:24px;object-fit:contain;border-radius:4px}

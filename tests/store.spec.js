@@ -377,6 +377,117 @@ test('search returns matching results', async ({ page }, testInfo) => {
   expect(first.toLowerCase()).toContain('hawas');
 });
 
+// ------------------------------------------------- search result navigation
+// A picked search result must scroll to its own card, keyed on the stable
+// product id rather than a brand|name string, and survive:
+//  - products at either end of a 243-row catalogue,
+//  - filters that would otherwise hide the card,
+//  - rapid successive picks,
+//  - content-visibility:auto, whose estimated heights reflow the page mid-scroll.
+const searchHelpers = (page, mobile) => {
+  const input = mobile ? '#mobileSearchInput' : '#searchInput';
+  const results = mobile ? '#mobileSearchResults' : '#searchResults';
+  const openSearch = async () => {
+    if (mobile) await page.locator('[data-mobile-search]').first().click();
+  };
+  const pick = async (product) => {
+    await openSearch();
+    await page.fill(input, '');
+    await page.fill(input, product.name);
+    const item = page.locator(`${results} .search-result-item[data-product-id="${product.id}"]`);
+    await expect(item).toBeVisible();
+    await item.click();
+  };
+  // Geometric check: content-visibility:auto cards confuse Playwright's
+  // IntersectionObserver-based toBeInViewport, so assert the outcome directly.
+  const landsHighlighted = async (id) => {
+    const target = page.locator(`.frag-card[data-product-id="${id}"]`).first();
+    await expect.poll(async () => target.evaluate((el) => {
+      const r = el.getBoundingClientRect();
+      const inView = r.top < window.innerHeight && r.bottom > 0 && r.height > 0;
+      return inView && el.classList.contains('search-target-highlight');
+    }), { timeout: 10000 }).toBe(true);
+  };
+  return { pick, landsHighlighted };
+};
+
+test('search result navigates by product ID from both ends of the catalogue', async ({ page }, testInfo) => {
+  const mobile = testInfo.project.name === 'mobile';
+  const { pick, landsHighlighted } = searchHelpers(page, mobile);
+  await page.goto('/');
+  const ids = await page.locator('.frag-card').evaluateAll((cards) => {
+    const at = [0, Math.floor((cards.length - 1) / 2), cards.length - 1];
+    return at.map((i) => ({
+      id: cards[i].getAttribute('data-pid'),
+      name: cards[i].querySelector('.card-frag-name').textContent.trim()
+    }));
+  });
+  for (const product of [ids[0], ids[1], ids[2], ids[1], ids[0]]) {
+    await pick(product);
+    await landsHighlighted(product.id);
+  }
+});
+
+test('search clears only conflicting filters and navigates after sort', async ({ page }, testInfo) => {
+  const mobile = testInfo.project.name === 'mobile';
+  const { pick, landsHighlighted } = searchHelpers(page, mobile);
+  await page.goto('/');
+  const product = await page.locator('.frag-card').evaluateAll((cards) => {
+    const card = cards.find((c) => c.dataset.brand !== 'Afnan' && c.dataset.gender !== 'Women' &&
+      Number(c.dataset.price) > 55 && c.querySelector('.pc-add:not([disabled])'));
+    return card && { id: card.getAttribute('data-pid'), name: card.querySelector('.card-frag-name').textContent.trim() };
+  });
+  expect(product).toBeTruthy();
+  await page.locator('.filter-btn[data-brand="Afnan"]').evaluate((el) => el.click());
+  await page.locator('.filter-btn[data-gender="Women"]').evaluate((el) => el.click());
+  await page.locator('.filter-btn[data-stock="instock"]').evaluate((el) => el.click());
+  await page.evaluate(() => { window.__setPriceRange('50-55'); window.__applyFilter(); window.__applySort('low'); });
+  await pick(product);
+  await landsHighlighted(product.id);
+  const state = await page.evaluate(() => window.__filterState);
+  expect(state.brand).toBe('all');
+  expect(state.gender).toBe('all');
+  expect(state.price).toBe('all');
+  expect(state.stock).toBe('instock');
+});
+
+test('rapid search picks finish at the most recently selected product', async ({ page }, testInfo) => {
+  const mobile = testInfo.project.name === 'mobile';
+  const { pick, landsHighlighted } = searchHelpers(page, mobile);
+  await page.goto('/');
+  const products = await page.locator('.frag-card').evaluateAll((cards) => [
+    cards[0], cards[cards.length - 1]
+  ].map((card) => ({
+    id: card.getAttribute('data-pid'),
+    name: card.querySelector('.card-frag-name').textContent.trim()
+  })));
+  await pick(products[0]);
+  await landsHighlighted(products[0].id);   // let the first navigation settle
+  await pick(products[1]);
+  await landsHighlighted(products[1].id);
+});
+
+test('search navigation lands on the card despite content-visibility estimates', async ({ page }, testInfo) => {
+  // Off-screen cards have only ESTIMATED heights under content-visibility:auto,
+  // and those estimates resolve as the smooth scroll proceeds. The page grew
+  // ~7,000px mid-animation, so the scroll landed short and the highlight fired
+  // after the card had already slid past. Mid/end-of-catalogue picks reproduce it.
+  const mobile = testInfo.project.name === 'mobile';
+  const { pick, landsHighlighted } = searchHelpers(page, mobile);
+  await page.goto('/');
+  const picks = await page.locator('.frag-card').evaluateAll((cards) => {
+    const at = [Math.floor(cards.length * 0.35), Math.floor(cards.length * 0.6), cards.length - 1];
+    return at.map((i) => ({
+      id: cards[i].getAttribute('data-pid'),
+      name: cards[i].querySelector('.card-frag-name').textContent.trim()
+    }));
+  });
+  for (const product of picks) {
+    await pick(product);
+    await landsHighlighted(product.id);
+  }
+});
+
 // ---------------------------------------------------------------- mobile UX
 test('bestsellers rail and 3ml price list render', async ({ page }) => {
   await page.goto('/');
