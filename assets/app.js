@@ -1953,6 +1953,14 @@ try{(function(){
   function navigateToProduct(productId){
     if(!productId)return;
     var sequence=++navigationSequence;
+    var navCvPinned=null,navCvReleaseTimer=null;
+    function releaseNavCv(){
+      if(!navCvPinned)return;
+      for(var i=0;i<navCvPinned.length;i++){
+        navCvPinned[i][0].style.contentVisibility=navCvPinned[i][1];
+      }
+      navCvPinned=null;
+    }
     if(window.__revealSearchProduct)window.__revealSearchProduct(productId);
     function findTarget(){
       var nodes=document.querySelectorAll('.frag-card[data-product-id]'),target=null;
@@ -1966,35 +1974,40 @@ try{(function(){
       var target=findTarget();
       if(!target){if(attempt<8)requestAnimationFrame(function(){position(attempt+1)});return}
       // Cards use content-visibility:auto, so anything off-screen has only an
-      // estimated height. During a smooth scroll those estimates resolve one by
-      // one, the document grows underneath us and the target keeps moving -
-      // which made the scroll land short and the highlight fire after the card
-      // had already slid past. Pinning the target's own box before scrolling
-      // keeps its position stable for the whole animation.
-      if(attempt===0&&!target._cvPrevInline){
-        target._cvPrevInline=target.style.contentVisibility||'';
-        target.style.contentVisibility='visible';
+      // ESTIMATED height and is not laid out. That makes document.scrollHeight -
+      // and therefore the reachable scroll range - an underestimate, so a long
+      // jump is clamped short and lands above the card. Pin every card's box for
+      // the duration of the navigation so the whole list is laid out and the
+      // reachable range is real, then hand the optimisation back afterwards.
+      if(attempt===0&&!navCvPinned){
+        navCvPinned=[];
+        var all=document.querySelectorAll('.frag-card');
+        for(var ci=0;ci<all.length;ci++){
+          navCvPinned.push([all[ci],all[ci].style.contentVisibility]);
+          all[ci].style.contentVisibility='visible';
+        }
       }
       var rect=target.getBoundingClientRect();
-      var maxTop=Math.max(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)-window.innerHeight);
-      var desired=Math.max(0,Math.min(maxTop,window.scrollY+rect.top-(window.innerHeight-rect.height)/2));
+      // Correct from the element's ABSOLUTE position rather than scrolling by
+      // rect.top: with content-visibility:auto the document height is only an
+      // estimate until the intervening cards lay out, so scrollHeight (and thus
+      // the reachable range) grows as we travel. Clamping to it here, then
+      // re-measuring in verify(), converges instead of stopping short.
+      var curY=window.scrollY;
+      var absoluteTop=curY+rect.top;
+      var desired=Math.max(0,absoluteTop-(window.innerHeight-rect.height)/2);
       window.scrollTo({top:desired,behavior:attempt?'auto':'smooth'});
       var frames=0,lastY=-1,stable=0;
-      function releaseCv(){
-        if(target._cvPrevInline===undefined)return;
-        target.style.contentVisibility=target._cvPrevInline;
-        delete target._cvPrevInline;
-      }
       // Handing content-visibility back the instant the card enters view would
-      // collapse it to its estimated height and re-flow the page underneath the
-      // freshly-set highlight. Keep the pinned box through the highlight, then
-      // release once the browser has settled.
+      // collapse every card to its estimated height and re-flow the page
+      // underneath the freshly-set highlight. Keep the list pinned through the
+      // highlight, then release once the browser has settled.
       function releaseCvLater(){
-        clearTimeout(target._cvReleaseTimer);
-        target._cvReleaseTimer=setTimeout(releaseCv,2200);
+        clearTimeout(navCvReleaseTimer);
+        navCvReleaseTimer=setTimeout(releaseNavCv,2200);
       }
       function verify(){
-        if(sequence!==navigationSequence){releaseCv();return}
+        if(sequence!==navigationSequence){releaseNavCv();return}
         var r=target.getBoundingClientRect();
         if(r.bottom>0&&r.top<window.innerHeight){
           target.classList.remove('search-target-highlight');
@@ -2008,8 +2021,10 @@ try{(function(){
         if(Math.abs(window.scrollY-lastY)<1)stable++;else stable=0;
         lastY=window.scrollY;
         if(frames++<120&&stable<3){requestAnimationFrame(verify);return}
-        if(attempt<2){position(attempt+1);return}
-        releaseCv();
+        // The scroll settled but the card is still off-screen. Re-measure and
+        // correct rather than giving up after a fixed retry count.
+        if(attempt<8){position(attempt+1);return}
+        releaseNavCv();
       }
       requestAnimationFrame(verify);
     }

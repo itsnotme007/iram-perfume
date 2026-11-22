@@ -6165,7 +6165,7 @@
     "brandImg": "logos/lattafa.png",
     "name": "Musamam Black Intense",
     "gender": "Unisex",
-    "status": "instock",
+    "status": "soldout",
     "tags": [],
     "prices": {
       "3": 155,
@@ -6176,12 +6176,12 @@
       "7.5": 355
     },
     "statusPerSize": {
-      "3": "ok",
-      "5": "ok",
-      "10": "ok",
-      "20": "ok",
-      "30": "ok",
-      "7.5": "ok"
+      "3": "struck",
+      "5": "struck",
+      "10": "struck",
+      "20": "struck",
+      "30": "struck",
+      "7.5": "struck"
     },
     "inspired": "A*Men Fantasm by Mugler",
     "links": "<a target=\"_blank\" href=\"https://www.fragrantica.com/perfume/Lattafa-Perfumes/Musamam-Black-Intense-119987.html\">Fragrantica</a> <a target=\"_blank\" href=\"https://www.parfumo.com/Perfumes/Lattafa/musamam-black-intense\">Parfumo</a>",
@@ -6197,7 +6197,7 @@
     "added": "2026-11-01",
     "slug": "lattafa-musamam-black-intense",
     "url": "https://iramperfume.in/fragrance/lattafa-musamam-black-intense.html",
-    "availability": "https://schema.org/InStock"
+    "availability": "https://schema.org/OutOfStock"
   },
   {
     "key": "Lattafa|Asad Bourbon",

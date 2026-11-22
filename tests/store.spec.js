@@ -450,6 +450,18 @@ const searchHelpers = (page, mobile) => {
   };
   const pick = async (product) => {
     await openSearch();
+    // install the highlight probe BEFORE clicking, so the mutation that adds the
+    // class cannot be missed (it is removed again 1.8s later)
+    const target = page.locator(`.frag-card[data-product-id="${product.id}"]`).first();
+    await target.evaluate((el) => {
+      if (el._hlProbe) el._hlProbe.disconnect();
+      el._hlSeen = el.classList.contains('search-target-highlight');
+      const mo = new MutationObserver(() => {
+        if (el.classList.contains('search-target-highlight')) el._hlSeen = true;
+      });
+      mo.observe(el, { attributes: true, attributeFilter: ['class'] });
+      el._hlProbe = mo;
+    });
     await page.fill(input, '');
     await page.fill(input, product.name);
     const item = page.locator(`${results} .search-result-item[data-product-id="${product.id}"]`);
@@ -458,13 +470,19 @@ const searchHelpers = (page, mobile) => {
   };
   // Geometric check: content-visibility:auto cards confuse Playwright's
   // IntersectionObserver-based toBeInViewport, so assert the outcome directly.
+  // Record the highlight via a MutationObserver installed by pick() before the
+  // click: the class is removed 1.8s after it appears, and a slow poll can
+  // easily sample either side of it and never see in-view and highlighted at
+  // the same instant.
   const landsHighlighted = async (id) => {
     const target = page.locator(`.frag-card[data-product-id="${id}"]`).first();
+    // the card must end up on screen
     await expect.poll(async () => target.evaluate((el) => {
       const r = el.getBoundingClientRect();
-      const inView = r.top < window.innerHeight && r.bottom > 0 && r.height > 0;
-      return inView && el.classList.contains('search-target-highlight');
-    }), { timeout: 10000 }).toBe(true);
+      return r.top < window.innerHeight && r.bottom > 0 && r.height > 0;
+    }), { timeout: 15000 }).toBe(true);
+    // and it must have been highlighted at some point during navigation
+    await expect.poll(async () => target.evaluate((el) => el._hlSeen === true), { timeout: 15000 }).toBe(true);
   };
   return { pick, landsHighlighted };
 };
