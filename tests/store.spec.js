@@ -652,7 +652,7 @@ test('bottle options page: stats render, chips switch, add to cart survives home
   await expect(page).toHaveTitle(/Bottle Options/);
   await expect(page.locator('#statTotal')).toHaveText(String(TOTAL));
   await expect(page.locator('#statBrands')).toHaveText('41');
-  await expect(page.locator('.bottle-card')).toHaveCount(6);
+  await expect(page.locator('.bottle-card')).toHaveCount(7);
   const out = page.locator('.bottle-card[data-bottle="group"] [data-price-out]');
   await expect(out).toHaveText('\u20B915');
   await page.locator('.bottle-card[data-bottle="group"] .bottle-opt[data-frag="Metal Gold Atomizer Bottle"]').click();
@@ -661,7 +661,7 @@ test('bottle options page: stats render, chips switch, add to cart survives home
   await expect(page.locator('#toastRoot .toast')).toBeVisible();
   const cart = await page.evaluate(() => JSON.parse(localStorage.getItem('iram_cart') || '[]'));
   expect(cart).toHaveLength(1);
-  expect(cart[0]).toMatchObject({ key: 'Bottles|Metal Gold Atomizer Bottle|3ml', brand: 'Bottles', frag: 'Metal Gold Atomizer Bottle', size: '3ml', price: 25, qty: 1 });
+  expect(cart[0]).toMatchObject({ key: 'Bottles|Metal Gold Atomizer Bottle|5ml', brand: 'Bottles', frag: 'Metal Gold Atomizer Bottle', size: '5ml', price: 25, qty: 1 });
   await page.goto('/');
   const after = await page.evaluate(() => JSON.parse(localStorage.getItem('iram_cart') || '[]'));
   expect(after).toHaveLength(1);

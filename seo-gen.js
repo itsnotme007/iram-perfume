@@ -922,13 +922,24 @@ function collectionStats() {
 }
 
 const BOTTLE_SHOP_HTML = `<div class="bottle-shop">
+  <div class="bottle-card" data-bottle="4ml" data-size="4ml">
+    <div class="bottle-media"><img src="bottles/empty-4ml.jpg" alt="Empty 4ml glass spray bottle" width="1400" height="2081" loading="lazy" decoding="async"></div>
+    <div class="bottle-body">
+      <div class="bottle-name">4ml</div>
+      <div class="bottle-opts" role="group" aria-label="Atomizer type">
+        <button type="button" class="bottle-opt" data-frag="Plastic Atomizer Bottle" data-price="15" aria-pressed="true">Plastic &middot; &#8377;15</button>
+        <button type="button" class="bottle-opt" data-frag="Metal Black Atomizer Bottle" data-price="25" aria-pressed="false">Metal Black &middot; &#8377;25</button>
+      </div>
+      <div class="bottle-price"><span data-price-out>&#8377;15</span></div>
+      <button type="button" class="bottle-add">&#128722; Add to Cart</button>
+    </div>
+  </div>
   <div class="bottle-card" data-bottle="group">
-    <div class="bottle-media"><img src="bottles/empty-4ml.jpg" alt="Empty glass spray bottles" width="1400" height="2081" loading="lazy" decoding="async"></div>
+    <div class="bottle-media"><img src="bottles/empty-3-5-7-5ml.jpg" alt="Empty 5ml and 7.5ml spray bottles" width="1400" height="1050" loading="lazy" decoding="async"></div>
     <div class="bottle-body">
       <div class="bottle-name">5ml / 7.5ml</div>
       <div class="bottle-opts" role="group" aria-label="Bottle size">
-        <button type="button" class="bottle-opt" data-size="3ml" aria-pressed="true">3ml</button>
-        <button type="button" class="bottle-opt" data-size="5ml" aria-pressed="false">5ml</button>
+        <button type="button" class="bottle-opt" data-size="5ml" aria-pressed="true">5ml</button>
         <button type="button" class="bottle-opt" data-size="7.5ml" aria-pressed="false">7.5ml</button>
       </div>
       <div class="bottle-opts" role="group" aria-label="Atomizer type">
@@ -993,7 +1004,6 @@ const BOTTLE_SHOP_HTML = `<div class="bottle-shop">
     </div>
   </div>
   <div class="bottle-card bottle-card-info" data-bottle="50">
-    <div class="bottle-media"><img src="bottles/50ml-bottle-on-demand.jpeg" alt="50ml bottle on demand" width="1200" height="1600" loading="lazy" decoding="async"></div>
     <div class="bottle-body">
       <div class="bottle-name">50ml</div>
       <p class="bottle-note">On request &mdash; message us on WhatsApp for availability and price.</p>

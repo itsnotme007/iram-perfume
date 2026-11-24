@@ -1143,6 +1143,8 @@ try{(function(){
 })();}catch(e){console.warn('Cart data init failed:',e)}
 try{(function(){
   if(!window._products)return;
+  // 4ml is a real bottle size in the shop (not the old 3ml option), so the
+  // registry needs it in its size list or cart items are dropped as unavailable.
   var defs=[
     ['Plastic Atomizer Bottle',{0:15,1:15,2:15}],
     ['Metal Black Atomizer Bottle',{0:25,1:25,2:25,3:28}],
@@ -1153,11 +1155,13 @@ try{(function(){
     ['Square Black Bottle',{5:35}],
     ['Oval Gold Bottle',{5:35}],
     ['Oval Black Bottle',{5:35}],
-    ['Crimp Tool',{0:150,1:150,2:150,3:150,4:150,5:150}]
+    ['Crimp Tool',{0:150,1:150,2:150,3:150,4:150,5:150}],
+    ['Plastic Atomizer Bottle 4ml',{6:15}],
+    ['Metal Black Atomizer Bottle 4ml',{6:25}]
   ];
   for(var i=0;i<defs.length;i++){
     var name=defs[i][0],slots=defs[i][1];
-    var prices=[0,0,0,0,0,0],available=[false,false,false,false,false,false];
+    var prices=[0,0,0,0,0,0,0],available=[false,false,false,false,false,false,false];
     for(var k in slots){prices[k]=slots[k];available[k]=true}
     window._products['Bottles|'+name]={id:'Bottles|'+name,brand:'Bottles',frag:name,gender:'',badges:'',prices:prices,available:available,inspired:'',links:'',attrs:{},isSoldOut:false,isComingSoon:false};
   }
@@ -1177,8 +1181,15 @@ try{(function(){
       var d=productLookup(it.brand,it.frag,it.pid);
       // normalise the stored id so it survives renames of the display name
       if(d&&d.id&&it.pid!==d.id){it.pid=d.id;changed=true}
+      // Bottles are single-price products whose "size" is a label (including
+      // shop-only sizes such as 4ml that are not in the fragrance size list).
+      // Resolve availability from the registry entry rather than a slot index,
+      // otherwise a valid bottle reads as unavailable once it reaches the cart.
+      var isBottle=it.brand==='Bottles';
       var idx=sizes.indexOf(it.size);
-      var available=!!(d&&idx>=0&&d.available&&d.available[idx]);
+      var available=isBottle
+        ? !!(d&&d.available&&d.available.some(function(a){return a}))
+        : !!(d&&idx>=0&&d.available&&d.available[idx]);
       if(!available){
         if(!it.unavailable){it.unavailable=true;changed=true}
         unavailableCount++;
@@ -1252,6 +1263,8 @@ try{(function(){
   function itemAvailable(it){
     if(it.unavailable)return false;
     var d=productLookup(it.brand,it.frag,it.pid),idx=sizes.indexOf(it.size);
+    // bottles are single-price; their size label may not be a fragrance slot
+    if(it.brand==='Bottles')return !!(d&&d.available&&d.available.some(function(a){return a}));
     return !!(d&&idx>=0&&d.available&&d.available[idx]);
   }
   function totalItems(){var n=0;for(var i=0;i<cart.length;i++)if(itemAvailable(cart[i]))n+=cart[i].qty;return n}
