@@ -29,6 +29,7 @@
 - Montblanc: https://iramperfume.in/brands/montblanc.html
 - Versace: https://iramperfume.in/brands/versace.html
 - YSL: https://iramperfume.in/brands/ysl.html
+- Lalique: https://iramperfume.in/brands/lalique.html
 - Afnan: https://iramperfume.in/brands/afnan.html
 - Ahmed Al Maghribi: https://iramperfume.in/brands/ahmed-al-maghribi.html
 - Al Majed: https://iramperfume.in/brands/al-majed.html
@@ -99,6 +100,9 @@
 
 ### YSL
 - [MYSLF Eau de Parfum](https://iramperfume.in/fragrance/ysl-myself.html) (Men): 3ml ₹265 | 5ml ₹409 | 7.5ml ₹639 | 10ml ₹799 | 20ml ₹1549 | 30ml ₹2279
+
+### Lalique
+- [Encre Noire](https://iramperfume.in/fragrance/lalique-encre-noire.html) (Men): 3ml ₹119 | 5ml ₹169 | 7.5ml ₹259 | 10ml ₹319 | 20ml ₹589 | 30ml ₹839
 
 ### Afnan
 - [9 PM Night Out](https://iramperfume.in/fragrance/afnan-9-pm-night-out.html) (Men): 3ml ₹139 | 5ml ₹205 | 7.5ml ₹309 | 10ml ₹385 | 20ml ₹719 | 30ml ₹1029

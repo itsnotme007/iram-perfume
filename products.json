@@ -720,6 +720,46 @@
     "availability": "https://schema.org/InStock"
   },
   {
+    "key": "Lalique|Encre Noire",
+    "brand": "Lalique",
+    "brandImg": "logos/lalique.png",
+    "name": "Encre Noire",
+    "gender": "Men",
+    "status": "instock",
+    "tags": [],
+    "prices": {
+      "3": 119,
+      "5": 169,
+      "10": 319,
+      "20": 589,
+      "30": 839,
+      "7.5": 259
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
+    "inspired": "Original",
+    "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Lalique/Encre-Noire-1834.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/lalique/encre-noire'>Parfumo</a>",
+    "linksRaw": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Lalique/Encre-Noire-1834.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/lalique/encre-noire'>Parfumo</a>",
+    "cat": "Designer",
+    "scent": "woody,earthy,ink,mossy,smoky,musk",
+    "season": "fall,winter",
+    "occasion": "office,special-occasion,evening",
+    "time": "day,evening",
+    "weather": "cold,mild",
+    "mood": "mysterious,bold,elegant",
+    "family": "woody,earthy,musk",
+    "added": "2026-11-24",
+    "slug": "lalique-encre-noire",
+    "url": "https://iramperfume.in/fragrance/lalique-encre-noire.html",
+    "availability": "https://schema.org/InStock"
+  },
+  {
     "key": "Afnan|9 PM Night Out",
     "brand": "Afnan",
     "brandImg": "logos/afnan.png",
