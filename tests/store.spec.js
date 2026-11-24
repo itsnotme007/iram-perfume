@@ -652,7 +652,7 @@ test('bottle options page: stats render, chips switch, add to cart survives home
   await expect(page).toHaveTitle(/Bottle Options/);
   await expect(page.locator('#statTotal')).toHaveText(String(TOTAL));
   await expect(page.locator('#statBrands')).toHaveText('41');
-  await expect(page.locator('.bottle-card')).toHaveCount(5);
+  await expect(page.locator('.bottle-card')).toHaveCount(6);
   const out = page.locator('.bottle-card[data-bottle="group"] [data-price-out]');
   await expect(out).toHaveText('\u20B915');
   await page.locator('.bottle-card[data-bottle="group"] .bottle-opt[data-frag="Metal Gold Atomizer Bottle"]').click();
