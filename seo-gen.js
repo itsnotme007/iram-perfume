@@ -1037,14 +1037,14 @@ function buildBottles(mod) {
     ] }
   ];
   const body = ''
-    + '<header class="desktop-store-header" aria-label="IRAM Perfume navigation"><a class="desktop-brand" href="index.html"><img src="logo-banner.png" alt="" width="42" height="42">IRAM PERFUME</a><nav class="desktop-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#catalogue">Shop</a><a href="index.html#filterBar">Brands</a><a href="index.html#bestsellers">Bestsellers</a><a href="bottles.html" aria-current="page">Bottles</a><a href="contact.html">Contact</a></nav><div class="desktop-actions"><a class="desktop-cart" href="index.html#catalogue" aria-label="Open cart on the shop page">&#128722;</a><button type="button" class="desktop-theme" data-theme-toggle aria-label="Toggle dark mode"><span class="theme-ico theme-ico-moon">&#9789;</span><span class="theme-ico theme-ico-sun">&#9788;</span></button></div></header>\n'
+    + '<header class="desktop-store-header" aria-label="IRAM Perfume navigation"><a class="desktop-brand" href="index.html"><img src="logo-banner.png" alt="" width="42" height="42">IRAM PERFUME</a><nav class="desktop-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#catalogue">Shop</a><a href="index.html#filterBar">Brands</a><a href="index.html#bestsellers">Bestsellers</a><a href="bottles.html" aria-current="page">Bottles</a><a href="vials.html">Vials</a><a href="contact.html">Contact</a></nav><div class="desktop-actions"><a class="desktop-cart" href="index.html#catalogue" aria-label="Open cart on the shop page">&#128722;</a><button type="button" class="desktop-theme" data-theme-toggle aria-label="Toggle dark mode"><span class="theme-ico theme-ico-moon">&#9789;</span><span class="theme-ico theme-ico-sun">&#9788;</span></button></div></header>\n'
     + '<div class="btl-header" aria-label="IRAM Perfume"><a href="index.html" aria-label="Back to home">&#8592;</a><a class="btl-brand" href="index.html">IRAM PERFUME</a><a href="tel:' + PHONE_TEL + '" aria-label="Call us">&#9742;</a><button type="button" data-theme-toggle aria-label="Toggle dark mode"><span class="theme-ico theme-ico-moon">&#9789;</span><span class="theme-ico theme-ico-sun">&#9788;</span></button><a href="index.html#catalogue" aria-label="Open cart on the shop page">&#128722;</a></div>\n'
     + '<main class="btl-main" id="top">\n'
     + '<div class="btl-hero"><div><a class="btl-back" href="index.html">&#8592; Full collection</a><h1>Bottle Options</h1><p class="btl-lead">Empty spray bottles for decants and travel \u2014 pick a size and atomiser, add it to your cart, and we ship it along with your order.</p></div></div>\n'
     + '<div id="bottles">\n' + BOTTLE_SHOP_HTML + '\n</div>\n'
     + statsDashHtml(st) + '\n'
     + '</main>\n'
-    + '<footer class="site-footer"><div><h2>IRAM Perfume</h2><p>Authentic designer and Middle Eastern decants, filled with care in India.</p><p>Free shipping on orders over \u20b9999 (min 2 decants).</p></div><div><h2>Shop</h2><a href="index.html#catalogue">All fragrances</a><a href="index.html#bestsellers">Bestsellers</a><a href="bottles.html" aria-current="page">Bottle options</a></div><div><h2>Contact</h2><a href="contact.html">Contact &amp; FAQs</a><a href="tel:' + PHONE_TEL + '">' + PHONE_DISPLAY + '</a><a href="mailto:' + EMAIL + '">' + EMAIL + '</a></div><div><h2>Follow</h2><a href="' + IG + '" target="_blank" rel="noopener">Instagram</a><a href="' + WA + '" target="_blank" rel="noopener">WhatsApp community</a><p>Secure packing \u00b7 India-wide delivery</p></div></footer>\n'
+    + '<footer class="site-footer"><div><h2>IRAM Perfume</h2><p>Authentic designer and Middle Eastern decants, filled with care in India.</p><p>Free shipping on orders over \u20b9999 (min 2 decants).</p></div><div><h2>Shop</h2><a href="index.html#catalogue">All fragrances</a><a href="index.html#bestsellers">Bestsellers</a><a href="bottles.html" aria-current="page">Bottle options</a><a href="vials.html">Sample vials</a></div><div><h2>Contact</h2><a href="contact.html">Contact &amp; FAQs</a><a href="tel:' + PHONE_TEL + '">' + PHONE_DISPLAY + '</a><a href="mailto:' + EMAIL + '">' + EMAIL + '</a></div><div><h2>Follow</h2><a href="' + IG + '" target="_blank" rel="noopener">Instagram</a><a href="' + WA + '" target="_blank" rel="noopener">WhatsApp community</a><p>Secure packing \u00b7 India-wide delivery</p></div></footer>\n'
     + '<div id="toastRoot"></div>\n'
     + '<script>(function(){var root=document.documentElement,s=null;try{s=localStorage.getItem(\'theme\')}catch(e){}if(s===\'dark\'||(!s&&window.matchMedia&&window.matchMedia(\'(prefers-color-scheme:dark)\').matches))root.setAttribute(\'data-theme\',\'dark\');document.querySelectorAll(\'[data-theme-toggle]\').forEach(function(t){t.addEventListener(\'click\',function(){var dark=root.getAttribute(\'data-theme\')===\'dark\';if(dark){root.removeAttribute(\'data-theme\');try{localStorage.setItem(\'theme\',\'light\')}catch(e){}}else{root.setAttribute(\'data-theme\',\'dark\');try{localStorage.setItem(\'theme\',\'dark\')}catch(e){}}})})})();</' + 'script>\n'
     + '<' + 'script>\n'
@@ -1158,6 +1158,162 @@ function bottlesPage() {
   const sig = contentSig(buildBottles(DATE_MASK));
   const mod = dateFor('bottles', sig);
   return buildBottles(mod);
+}
+
+// ------------------------------------------------------------- vials.html
+// Curated sample vials: a small, flat-priced set kept in vials.json and rendered
+// to its own page. Deliberately separate from products.json so the 250+ product
+// catalogue and its size ladder are untouched.
+function loadVials() {
+  const f = path.join(ROOT, 'vials.json');
+  if (!fs.existsSync(f)) return [];
+  try { return JSON.parse(fs.readFileSync(f, 'utf8')).vials || []; } catch (e) { return []; }
+}
+
+function vialCardHtml(v) {
+  const rupees = n => '\u20b9' + Number(n).toLocaleString('en-IN');
+  const chips = (label, val) => {
+    const parts = String(val || '').split(',').map(s => s.trim()).filter(Boolean);
+    if (!parts.length) return '';
+    return '<div class="vial-attr"><small>' + label + '</small><span>' + parts.map(p => '<em>' + p + '</em>').join('') + '</span></div>';
+  };
+  const genderClass = v.gender === 'Women' ? 'vial-g-w' : v.gender === 'Unisex' ? 'vial-g-u' : 'vial-g-m';
+  return '<article class="vial-card" id="' + v.id + '">'
+    + '<div class="vial-media"><picture>'
+      + (v.imgWebp ? '<source srcset="' + v.imgWebp + '" type="image/webp">' : '')
+      + '<img src="' + v.img + '" alt="' + esc(v.brand + ' ' + v.displayName + ' ' + v.size + ' vial') + '" loading="lazy" decoding="async"></picture></div>'
+    + '<div class="vial-body">'
+    + '<div class="vial-top"><img class="vial-logo" src="' + imgWebp(v.brandImg) + '" alt="" width="32" height="24" loading="lazy"><span class="vial-brand">' + esc(v.brand) + '</span></div>'
+    + '<h3 class="vial-name">' + esc(v.displayName) + '</h3>'
+    + '<div class="vial-meta"><span class="vial-size">' + esc(v.size) + '</span><span class="vial-gender ' + genderClass + '">' + esc(v.gender) + '</span></div>'
+    + '<div class="vial-price">' + rupees(v.price) + '</div>'
+    + '<div class="vial-attrs">'
+    + chips('Scent', v.scent) + chips('Season', v.season) + chips('When', v.time)
+    + chips('Occasion', v.occasion) + chips('Mood', v.mood)
+    + '</div>'
+    + '<div class="vial-links">' + (v.links || '') + '</div>'
+    + '</div></article>';
+}
+
+function buildVials(mod) {
+  const vials = loadVials();
+  const cssV = crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, 'assets/app.css'))).digest('hex').slice(0, 12);
+  const canonical = siteUrl('vials.html');
+  const title = 'Sample Vials & Discovery Decants | IRAM Perfume';
+  const cheapest = Math.min.apply(null, vials.map(v => v.price));
+  const desc = 'Curated 1ml and 1.5ml designer sample vials from ' + cheapest +
+    ' \u2014 Bvlgari, Burberry, Chopard and Guerlain. Try a fragrance before committing to a full decant.';
+  const schema = [
+    {
+      '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description: desc,
+      url: canonical, dateModified: mod,
+      isPartOf: { '@type': 'WebSite', name: 'IRAM Perfume', url: siteUrl() }
+    },
+    {
+      '@context': 'https://schema.org', '@type': 'ItemList', name: 'Sample Vials',
+      numberOfItems: vials.length,
+      itemListElement: vials.map((v, i) => ({
+        '@type': 'ListItem', position: i + 1,
+        item: {
+          '@type': 'Product', name: v.brand + ' ' + v.displayName,
+          image: siteUrl(v.img.replace(/^\//, '')),
+          description: v.size + ' sample vial of ' + v.brand + ' ' + v.displayName,
+          brand: { '@type': 'Brand', name: v.brand },
+          offers: {
+            '@type': 'Offer', price: String(v.price), priceCurrency: 'INR',
+            availability: v.availability, url: canonical + '#' + v.id,
+            itemCondition: 'https://schema.org/NewCondition',
+            seller: { '@type': 'Organization', name: 'IRAM Perfume' }
+          }
+        }
+      }))
+    },
+    {
+      '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'IRAM Perfume', item: siteUrl() },
+        { '@type': 'ListItem', position: 2, name: 'Sample Vials', item: canonical }
+      ]
+    }
+  ];
+
+  const body = ''
+    + '<header class="desktop-store-header" aria-label="IRAM Perfume navigation"><a class="desktop-brand" href="index.html"><img src="logo-banner.png" alt="" width="42" height="42">IRAM PERFUME</a><nav class="desktop-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#catalogue">Shop</a><a href="index.html#filterBar">Brands</a><a href="bottles.html">Bottles</a><a href="vials.html" aria-current="page">Vials</a><a href="contact.html">Contact</a></nav><div class="desktop-actions"><a class="desktop-cart" href="index.html#catalogue" aria-label="Open cart on the shop page">&#128722;</a><button type="button" class="desktop-theme" data-theme-toggle aria-label="Toggle dark mode"><span class="theme-ico theme-ico-moon">&#9789;</span><span class="theme-ico theme-ico-sun">&#9788;</span></button></div></header>\n'
+    + '<div class="btl-header" aria-label="IRAM Perfume"><a href="index.html" aria-label="Back to home">&#8592;</a><a class="btl-brand" href="index.html">IRAM PERFUME</a><a href="tel:' + PHONE_TEL + '" aria-label="Call us">&#9742;</a><button type="button" data-theme-toggle aria-label="Toggle dark mode"><span class="theme-ico theme-ico-moon">&#9789;</span><span class="theme-ico theme-ico-sun">&#9788;</span></button><a href="index.html#catalogue" aria-label="Open cart on the shop page">&#128722;</a></div>\n'
+    + '<main class="btl-main" id="top">\n'
+    + '<div class="btl-hero"><div><a class="btl-back" href="index.html">&#8592; Full collection</a><h1>Sample Vials</h1><p class="btl-lead">Original sample vials in presentation sleeves \u2014 a low-cost way to try a fragrance before committing to a decant.</p></div></div>\n'
+    + '<section class="vial-grid" aria-label="Sample vials">\n'
+    + vials.map(vialCardHtml).join('\n')
+    + '\n</section>\n'
+    + '<div class="cta"><h3>Want a bigger pour?</h3><p>These fragrances are also available as regular 3ml\u201330ml decants, or browse the full catalogue.</p><a class="btn" href="index.html#catalogue">View All Fragrances</a><a class="btn ghost" href="' + WA + '">WhatsApp Us</a></div>\n'
+    + '</main>\n'
+    + '<footer class="site-footer"><div><h2>IRAM Perfume</h2><p>Authentic designer and Middle Eastern decants, filled with care in India.</p><p>Free shipping on orders over \u20b9999 (min 2 decants).</p></div><div><h2>Shop</h2><a href="index.html#catalogue">All fragrances</a><a href="bottles.html">Bottle options</a><a href="vials.html" aria-current="page">Sample vials</a></div><div><h2>Contact</h2><a href="contact.html">Contact &amp; FAQs</a><a href="tel:' + PHONE_TEL + '">' + PHONE_DISPLAY + '</a><a href="mailto:' + EMAIL + '">' + EMAIL + '</a></div><div><h2>Follow</h2><a href="' + IG + '" target="_blank" rel="noopener">Instagram</a><a href="' + WA + '" target="_blank" rel="noopener">WhatsApp community</a><p>Secure packing \u00b7 India-wide delivery</p></div></footer>\n'
+    + '<script>(function(){var root=document.documentElement,s=null;try{s=localStorage.getItem(\'theme\')}catch(e){}if(s===\'dark\'||(!s&&window.matchMedia&&window.matchMedia(\'(prefers-color-scheme:dark)\').matches))root.setAttribute(\'data-theme\',\'dark\');document.querySelectorAll(\'[data-theme-toggle]\').forEach(function(t){t.addEventListener(\'click\',function(){var dark=root.getAttribute(\'data-theme\')===\'dark\';if(dark){root.removeAttribute(\'data-theme\');try{localStorage.setItem(\'theme\',\'light\')}catch(e){}}else{root.setAttribute(\'data-theme\',\'dark\');try{localStorage.setItem(\'theme\',\'dark\')}catch(e){}}})})})();</' + 'script>\n';
+
+  // Self-contained document, mirroring buildBottles: bottles.html and this page
+  // are standalone and must not go through pageShell (that is the article shell,
+  // which wraps content in .wrap and links ../assets/...).
+  return '<!DOCTYPE html>\n<html lang="en-IN">\n<head>\n'
+    + '<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
+    + '<title>' + esc(title) + '</title>\n<meta name="description" content="' + esc(desc) + '">\n'
+    + '<meta name="robots" content="index, follow">\n<link rel="canonical" href="' + canonical + '">\n'
+    + '<link rel="icon" type="image/png" href="favicon.png">\n'
+    + '<meta property="og:type" content="website">\n<meta property="og:title" content="' + esc(title) + '">\n'
+    + '<meta property="og:description" content="' + esc(desc) + '">\n'
+    + '<meta property="og:url" content="' + canonical + '">\n'
+    + '<meta property="og:image" content="' + siteUrl('og-image.jpg') + '">\n'
+    + '<meta property="og:site_name" content="IRAM Perfume">\n'
+    + '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="' + esc(title) + '">\n'
+    + '<meta name="twitter:description" content="' + esc(desc) + '">\n'
+    + '<meta name="twitter:image" content="' + siteUrl('og-image.jpg') + '">\n'
+    + schema.map(x => '<script type="application/ld+json">\n' + JSON.stringify(x, null, 2) + '\n</script>\n').join('')
+    + '<link rel="stylesheet" href="assets/app.css?v=' + cssV + '">\n'
+    + '<link rel="stylesheet" href="assets/desktop.css">\n'
+    + '<style>.btl-header{display:none}'
+    + '.btl-main{max-width:1200px;margin:0 auto;padding:34px 32px 60px}'
+    + '.btl-hero{margin-bottom:4px}'
+    + '.btl-back{font-size:13.5px;font-weight:700;color:var(--accent-link);text-decoration:none}'
+    + '.btl-main h1{font:700 clamp(30px,4vw,44px)/1.1 var(--font-display);color:var(--text-heading);margin:8px 0 8px}'
+    + '.btl-lead{color:var(--text-muted);font-size:15px;max-width:660px;margin-bottom:10px}'
+    + '.vial-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;margin:26px 0 40px}'
+    + '.vial-card{display:flex;flex-direction:column;background:var(--bg-surface);border:1px solid var(--border-default);border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);scroll-margin-top:80px}'
+    + '.vial-media{background:#f4f2ee;display:flex;align-items:center;justify-content:center;aspect-ratio:4/3;overflow:hidden}'
+    + '.vial-media img{width:100%;height:100%;object-fit:cover;display:block}'
+    + '.vial-body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:8px}'
+    + '.vial-top{display:flex;align-items:center;gap:8px}'
+    + '.vial-logo{max-width:32px;max-height:24px;object-fit:contain;border-radius:4px}'
+    + '.vial-brand{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}'
+    + '.vial-name{margin:0;font-size:17px;color:var(--text-heading)}'
+    + '.vial-meta{display:flex;gap:8px;align-items:center}'
+    + '.vial-size{font-size:12px;color:var(--text-muted);border:1px solid var(--border-default);border-radius:999px;padding:2px 9px}'
+    + '.vial-gender{font-size:11px;font-weight:600;border-radius:999px;padding:2px 9px;color:#fff}'
+    + '.vial-g-m{background:#1a1a2e}.vial-g-u{background:#5b3a8e}.vial-g-w{background:#a8326a}'
+    + '.vial-price{font-size:20px;font-weight:700;color:var(--text-heading)}'
+    + '.vial-attrs{display:flex;flex-direction:column;gap:4px}'
+    + '.vial-attr{display:flex;gap:8px;font-size:11px;align-items:baseline}'
+    + '.vial-attr small{color:var(--text-muted);min-width:62px;text-transform:uppercase;letter-spacing:.06em}'
+    + '.vial-attr em{font-style:normal;color:var(--text-body)}'
+    + '.vial-attr em+em:before{content:" \\00b7 ";color:var(--text-muted)}'
+    + '.vial-links{margin-top:auto;display:flex;gap:12px;font-size:12px}'
+    + '.vial-links a{color:var(--accent-primary);text-decoration:none;border-bottom:1px solid transparent}'
+    + '.vial-links a:hover{border-bottom-color:currentColor}'
+    + '@media(max-width:768px){.btl-page{padding-top:58px}'
+    + '.btl-header{display:grid;position:fixed;top:0;left:0;right:0;height:58px;grid-template-columns:44px 1fr 44px 44px 44px;align-items:center;padding:0 8px;background:rgba(9,12,13,.96);border-bottom:1px solid rgba(212,175,55,.26);z-index:900}'
+    + '.btl-header>a,.btl-header>button{display:grid;place-items:center;min-height:44px;min-width:44px;color:#f8f1e6;background:transparent;border:0;font-size:19px;cursor:pointer;text-decoration:none;padding:0}'
+    + '.btl-header .btl-brand{font:700 18px/1 Georgia,serif;letter-spacing:1.4px;justify-self:start}'
+    + '.btl-main{padding:26px 14px 60px}'
+    + '.vial-grid{grid-template-columns:1fr;gap:18px}'
+    + 'footer.site-footer{display:block!important;margin-left:0!important;padding:30px 22px}'
+    + 'footer.site-footer>div{margin-bottom:20px}'
+    + 'footer.site-footer h2{font-size:18px}}'
+    + '</style>\n'
+    + '</head>\n<body class="btl-page">\n'
+    + body
+    + '</body>\n</html>\n';
+}
+function vialsPage() {
+  const sig = contentSig(buildVials(DATE_MASK));
+  const mod = dateFor('vials', sig);
+  return buildVials(mod);
 }
 
 // ---------------------------------------------------- homepage table rendering
@@ -1630,6 +1786,7 @@ function buildSitemap(products, articles, lm, brands, collections) {
     { l: siteUrl(), lastmod: lm.home || TODAY },
     { l: siteUrl('contact.html'), lastmod: lm.contact || TODAY },
     { l: siteUrl('bottles.html'), lastmod: lm.bottles || TODAY },
+    ...(loadVials().length ? [{ l: siteUrl('vials.html'), lastmod: lm.vials || TODAY }] : []),
     ...brands.map(b => ({ l: siteUrl('brands/' + b.slug + '.html'), lastmod: lm['brand:' + b.slug] || TODAY })),
     ...(collections || []).map(c => ({ l: siteUrl('collections/' + c.slug + '.html'), lastmod: lm['collection:' + c.slug] || TODAY })),
     ...articles.map(a => ({ l: a.url, lastmod: lm['article:' + a.slug] || TODAY })),
@@ -1657,6 +1814,7 @@ function buildLlmstxt(articles) {
     + '## Key pages\n'
     + '- Homepage & catalogue: ' + siteUrl() + '\n'
     + '- Empty bottles: ' + siteUrl('bottles.html') + '\n'
+    + (loadVials().length ? '- Sample vials (1ml / 1.5ml designer samples): ' + siteUrl('vials.html') + '\n' : '')
     + '- Contact: ' + siteUrl('contact.html') + '\n';
   for (const a of articles) t += '- Guide: ' + a.title + ' \u2014 ' + a.url + '\n';
   const liveBrands = brands.filter(brandExists);
@@ -1779,6 +1937,15 @@ function main() {
   writeFileSafe(path.join(ROOT, 'bottles.html'), btlHtml);
   const btlStats = collectionStats();
   console.log('wrote bottles.html; stats:', btlStats.total, 'fragrances /', btlStats.brands, 'brands / cheapest', btlStats.cheapest);
+
+  // 2c. sample vials page (own data file, own page)
+  const vialsArr = loadVials();
+  if (vialsArr.length) {
+    const vialsHtml = vialsPage();
+    lastmods.vials = (DATES['vials'] || {}).mod || TODAY;
+    writeFileSafe(path.join(ROOT, 'vials.html'), vialsHtml);
+    console.log('wrote vials.html;', vialsArr.length, 'vials');
+  }
 
   // 3. homepage edits
   const faqHtml = '', artsHtml = '';

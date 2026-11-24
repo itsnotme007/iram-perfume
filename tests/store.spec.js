@@ -670,6 +670,46 @@ test('bottle options page: stats render, chips switch, add to cart survives home
   expect(errs).toEqual([]);
 });
 
+// ------------------------------------------------------------------ vials page
+test('sample vials page renders every vial with tags, price and links', async ({ page }) => {
+  const errs = watchErrors(page);
+  await page.goto('/vials.html');
+  await expect(page).toHaveTitle(/Sample Vials/);
+  await expect(page.locator('h1')).toHaveText('Sample Vials');
+
+  // one card per vial in vials.json
+  const vials = require('../vials.json').vials;
+  await expect(page.locator('.vial-card')).toHaveCount(vials.length);
+
+  for (const v of vials) {
+    const card = page.locator('#' + v.id);
+    await expect(card).toHaveCount(1);
+    // exactly the right price, formatted for India
+    await expect(card.locator('.vial-price')).toHaveText('\u20B9' + v.price.toLocaleString('en-IN'));
+    await expect(card.locator('.vial-name')).toContainText(v.name);
+    await expect(card.locator('.vial-size')).toHaveText(v.size);
+    // both reference links present
+    await expect(card.locator('.vial-links a')).toHaveCount(2);
+    const hrefs = await card.locator('.vial-links a').evaluateAll(as => as.map(a => a.href));
+    expect(hrefs.some(h => h.includes('fragrantica.com'))).toBe(true);
+    expect(hrefs.some(h => h.includes('parfumo.com'))).toBe(true);
+    // the five tag groups we promise for fragrances
+    await expect(card.locator('.vial-attr')).toHaveCount(5);
+  }
+
+  // the 5-or-9 rule holds for every vial price
+  for (const v of vials) expect([5, 9]).toContain(v.price % 10);
+
+  // schema + sitemap presence
+  const ld = await page.locator('script[type="application/ld+json"]').count();
+  expect(ld).toBeGreaterThanOrEqual(2);
+
+  // linked from the homepage nav so it is reachable
+  await page.goto('/');
+  await expect(page.locator('.desktop-nav a[href="vials.html"]')).toHaveCount(1);
+  expect(errs).toEqual([]);
+});
+
 // ---------------------------------------------------------------- brand pages
 test('brand landing page: products, FAQ, schema and working breadcrumb', async ({ page }) => {
   const errs = watchErrors(page);

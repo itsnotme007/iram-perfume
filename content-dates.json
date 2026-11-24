@@ -620,7 +620,7 @@
     "mod": "2026-11-16"
   },
   "home": {
-    "sig": "d367cff8fa21116d303ed88c",
+    "sig": "c7031217ba6b5ef38959ee23",
     "mod": "2026-11-24"
   },
   "frag:albait-aldimashqi-special-ombre-leather": {
@@ -780,7 +780,7 @@
     "mod": "2026-10-23"
   },
   "bottles": {
-    "sig": "602b4221ee7ec67b364cec95",
+    "sig": "1b25167d153cd6f397ab9d9d",
     "mod": "2026-11-24"
   },
   "brand:afnan": {
@@ -1225,6 +1225,10 @@
   },
   "brand:lalique": {
     "sig": "e0e681b900d36d3d9288e2b1",
+    "mod": "2026-11-24"
+  },
+  "vials": {
+    "sig": "85a5b37de260bd3994edfc0d",
     "mod": "2026-11-24"
   }
 }
