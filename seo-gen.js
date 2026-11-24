@@ -923,7 +923,7 @@ function collectionStats() {
 
 const BOTTLE_SHOP_HTML = `<div class="bottle-shop">
   <div class="bottle-card" data-bottle="4ml" data-size="4ml">
-    <div class="bottle-media"><img src="bottles/empty-4ml.jpg" alt="Empty 4ml glass spray bottle" width="1400" height="2081" loading="lazy" decoding="async"></div>
+    <div class="bottle-media"><img src="bottles/empty-4ml.jpg" alt="Empty 4ml glass spray bottles with atomisers" width="1400" height="1050" loading="lazy" decoding="async"></div>
     <div class="bottle-body">
       <div class="bottle-name">4ml</div>
       <div class="bottle-opts" role="group" aria-label="Atomizer type">
@@ -992,7 +992,7 @@ const BOTTLE_SHOP_HTML = `<div class="bottle-shop">
     </div>
   </div>
   <div class="bottle-card" data-bottle="crimp" data-size="crimp">
-    <div class="bottle-media"><img src="bottles/crimp-tool.jpg" alt="Crimp tool for attaching pumps to crimp-neck bottles" width="1400" height="1741" loading="lazy" decoding="async"></div>
+    <div class="bottle-media"><img src="bottles/crimp-tool.jpg" alt="Crimp tool for attaching pumps to crimp-neck bottles" width="1400" height="1050" loading="lazy" decoding="async"></div>
     <div class="bottle-body">
       <div class="bottle-name">Crimp Tool</div>
       <div class="bottle-note">Attaches pumps to crimp-neck bottles</div>
@@ -1004,6 +1004,7 @@ const BOTTLE_SHOP_HTML = `<div class="bottle-shop">
     </div>
   </div>
   <div class="bottle-card bottle-card-info" data-bottle="50">
+    <div class="bottle-media"><img src="bottles/50ml-bottle-on-demand.jpeg" alt="50ml perfume bottle on request" width="1400" height="1050" loading="lazy" decoding="async"></div>
     <div class="bottle-body">
       <div class="bottle-name">50ml</div>
       <p class="bottle-note">On request &mdash; message us on WhatsApp for availability and price.</p>
