@@ -28,7 +28,7 @@
     "mod": "2026-11-25"
   },
   "frag:mancera-gold-intensive-aoud": {
-    "sig": "346ababe8f6e993d5723c092",
+    "sig": "b94a8bdb24082268537d8faf",
     "mod": "2026-11-25"
   },
   "frag:versace-the-dreamer": {
@@ -108,7 +108,7 @@
     "mod": "2026-11-25"
   },
   "frag:ahmed-al-maghribi-kaaf-noir": {
-    "sig": "5fac785cbb25d8f4049879e4",
+    "sig": "9643191d1368c3c2cd3377bf",
     "mod": "2026-11-25"
   },
   "frag:ahmed-al-maghribi-leather": {
@@ -136,11 +136,11 @@
     "mod": "2026-11-25"
   },
   "frag:ahmed-al-maghribi-ignite-oud": {
-    "sig": "c43934491979f02df65e3ca1",
+    "sig": "12fe5cd4d7709a1b98ba154b",
     "mod": "2026-11-25"
   },
   "frag:ahmed-al-maghribi-ghaf": {
-    "sig": "67946ab696c58b00b01d029f",
+    "sig": "21f2759a5457b7827dde397c",
     "mod": "2026-11-25"
   },
   "frag:al-majed-oud-boisee": {
@@ -168,7 +168,7 @@
     "mod": "2026-11-25"
   },
   "frag:arabiyat-prestige-oud-al-layal": {
-    "sig": "52c0dcbee53a7bc766bdb008",
+    "sig": "855a50318313d27ccbe0825f",
     "mod": "2026-11-25"
   },
   "frag:arabiyat-prestige-oud-al-layal-aswad": {
@@ -196,7 +196,7 @@
     "mod": "2026-11-25"
   },
   "frag:arabiyat-prestige-kohl-opulence": {
-    "sig": "480c00b94263bbd46d242cd3",
+    "sig": "12bf44216ee6d944f1fcae2b",
     "mod": "2026-11-25"
   },
   "frag:arabiyat-prestige-la-di-da-for-him": {
@@ -264,7 +264,7 @@
     "mod": "2026-11-25"
   },
   "frag:french-avenue-zenith-santal": {
-    "sig": "a345a095ef9aa4e099f2424a",
+    "sig": "94896a0537041233bdb6ba4f",
     "mod": "2026-11-25"
   },
   "frag:french-avenue-ravine-ice": {
@@ -352,7 +352,7 @@
     "mod": "2026-11-25"
   },
   "frag:lattafa-maahir-gold": {
-    "sig": "a1f65cc1566b70c1255421f4",
+    "sig": "0fab2a9ca048c8e7498d945a",
     "mod": "2026-11-25"
   },
   "frag:lattafa-maahir-legacy": {
@@ -396,7 +396,7 @@
     "mod": "2026-11-25"
   },
   "frag:lattafa-badee-al-oud-amethyst": {
-    "sig": "6a3e43be51ee3656012ea3d3",
+    "sig": "618d14a51f263318c1cb5716",
     "mod": "2026-11-25"
   },
   "frag:lattafa-badee-al-oud-amethyst-fusion": {
@@ -440,7 +440,7 @@
     "mod": "2026-11-25"
   },
   "frag:paris-corner-confidential": {
-    "sig": "7980e13c24fc8de824af0016",
+    "sig": "a7b569ad70dea83b969fa572",
     "mod": "2026-11-25"
   },
   "frag:pendora-scents-vanilla-tobacco": {
@@ -608,8 +608,8 @@
     "mod": "2026-11-14"
   },
   "article:winter-date-night-decants-under-500": {
-    "sig": "1fbcde2ca6265c0cc4605a86",
-    "mod": "2026-11-14"
+    "sig": "70bf6d324f7f0acd14f211a2",
+    "mod": "2026-11-25"
   },
   "article:decant-vs-full-bottle": {
     "sig": "e83244b3fed1c54a3e70ce86",
@@ -620,7 +620,7 @@
     "mod": "2026-11-16"
   },
   "home": {
-    "sig": "ec0aea15dd16ac83901b4a2c",
+    "sig": "8a0ecde34ee844979be4a378",
     "mod": "2026-11-25"
   },
   "frag:albait-aldimashqi-special-ombre-leather": {
@@ -772,7 +772,7 @@
     "mod": "2026-11-25"
   },
   "frag:swiss-arabian-opulence-of-dubai": {
-    "sig": "423e8457a080edb8026eb2f1",
+    "sig": "6c688c8294a185ef6b631998",
     "mod": "2026-11-25"
   },
   "contact": {
@@ -780,36 +780,36 @@
     "mod": "2026-10-23"
   },
   "bottles": {
-    "sig": "67e6fc6de9bd1893a5d02e1a",
+    "sig": "6b80a32690f6ccba3b89fb65",
     "mod": "2026-11-25"
   },
   "brand:afnan": {
-    "sig": "c57539be2aa6f18e41f68b83",
-    "mod": "2026-11-22"
+    "sig": "a90521571059f78f6f904d4f",
+    "mod": "2026-11-25"
   },
   "brand:ahmed-al-maghribi": {
-    "sig": "068c8c6f4285d79c48f533bb",
-    "mod": "2026-11-20"
+    "sig": "29f067f04f89941a67bebb6d",
+    "mod": "2026-11-25"
   },
   "brand:ajmal": {
-    "sig": "3e63d92edbbf9d8dabcdcd8b",
-    "mod": "2026-11-20"
+    "sig": "18f7a4b2527a431dd8a0dba0",
+    "mod": "2026-11-25"
   },
   "brand:al-majed": {
-    "sig": "aa4d06566ab620c27eb106af",
-    "mod": "2026-11-20"
+    "sig": "96d0893525a8d414529e9e66",
+    "mod": "2026-11-25"
   },
   "brand:al-wataniah": {
-    "sig": "fb02ce75bd58883c9cfd5c4e",
-    "mod": "2026-11-20"
+    "sig": "ef55903f0e8f42417cc4bac1",
+    "mod": "2026-11-25"
   },
   "brand:albait-aldimashqi": {
-    "sig": "d1e3c05221904d98e78e7829",
-    "mod": "2026-11-20"
+    "sig": "09a4bf9632736f3aaae123f8",
+    "mod": "2026-11-25"
   },
   "brand:arabiyat-prestige": {
-    "sig": "56a7460345950daaf9756213",
-    "mod": "2026-11-22"
+    "sig": "e0e9ba6a157603a84c8dccce",
+    "mod": "2026-11-25"
   },
   "brand:armaf": {
     "sig": "2d0e3c814464681eae0b06e5",
@@ -932,11 +932,11 @@
     "mod": "2026-11-20"
   },
   "collection:decants-under-200": {
-    "sig": "5ad522940f13000866e9ec26",
+    "sig": "08634d0f7613703b911432d5",
     "mod": "2026-11-25"
   },
   "collection:3ml-decants": {
-    "sig": "6f05436cb2225864173642eb",
+    "sig": "3fa3bb3bdc5772af40d39dc4",
     "mod": "2026-11-25"
   },
   "collection:men": {
@@ -944,7 +944,7 @@
     "mod": "2026-11-24"
   },
   "collection:unisex": {
-    "sig": "8ea9709887e99b94b86abbb2",
+    "sig": "a50c1b40c12df2b98aa31423",
     "mod": "2026-11-25"
   },
   "collection:women": {
@@ -952,7 +952,7 @@
     "mod": "2026-11-20"
   },
   "collection:new-arrivals": {
-    "sig": "35b7d5c7a602ac39d5c15ab3",
+    "sig": "17ac5cbc059878f97c3c438a",
     "mod": "2026-11-25"
   },
   "frag:assaf-wild-colt": {
@@ -1032,8 +1032,8 @@
     "mod": "2026-11-25"
   },
   "brand:anfar-london": {
-    "sig": "7e19a16d72c12bc2bd4f617d",
-    "mod": "2026-11-20"
+    "sig": "4323f719f979414531a00c78",
+    "mod": "2026-11-25"
   },
   "frag:albait-aldimashqi-ombre-leather-16": {
     "sig": "17aeaba9e5f4118ca5b32ccc",
@@ -1052,7 +1052,7 @@
     "mod": "2026-11-25"
   },
   "frag:ahmed-al-maghribi-bin-shaikh": {
-    "sig": "fe0b11b28e278091b28bd11f",
+    "sig": "84ab1293dc5de257463b85db",
     "mod": "2026-11-25"
   },
   "frag:swiss-arabian-musk-07": {
@@ -1060,7 +1060,7 @@
     "mod": "2026-11-25"
   },
   "frag:ahmed-al-maghribi-bombay-oud": {
-    "sig": "4d9e822901d30ee0d629dd68",
+    "sig": "9ba9272945ebc7689e8fd3ab",
     "mod": "2026-11-25"
   },
   "frag:khadlaj-island-dreams": {
@@ -1220,7 +1220,7 @@
     "mod": "2026-11-25"
   },
   "frag:lalique-encre-noire": {
-    "sig": "c02513a25875b53bc70423e5",
+    "sig": "d401ab9f832ab2ea0f57deba",
     "mod": "2026-11-25"
   },
   "brand:lalique": {
@@ -1230,5 +1230,17 @@
   "vials": {
     "sig": "96effc0bce24c6e3524a3fcc",
     "mod": "2026-11-24"
+  },
+  "frag:ahmed-al-maghribi-oud-roses": {
+    "sig": "760d0176d7849a700e3ab52b",
+    "mod": "2026-11-25"
+  },
+  "frag:ard-al-zaafaran-dirham-oud": {
+    "sig": "5578117a567b0efdba68c7ba",
+    "mod": "2026-11-25"
+  },
+  "brand:ard-al-zaafaran": {
+    "sig": "72a7ee44df82bc47bc9f3733",
+    "mod": "2026-11-25"
   }
 }

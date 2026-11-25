@@ -2160,6 +2160,46 @@
     "availability": "https://schema.org/InStock"
   },
   {
+    "key": "Ahmed Al Maghribi|Oud & Roses",
+    "brand": "Ahmed Al Maghribi",
+    "brandImg": "logos/ahmed-al-maghribi.png",
+    "name": "Oud & Roses",
+    "gender": "Unisex",
+    "status": "instock",
+    "tags": [],
+    "prices": {
+      "3": 219,
+      "5": 339,
+      "10": 659,
+      "20": 1265,
+      "30": 1849,
+      "7.5": 529
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
+    "inspired": "Original",
+    "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Oud-Roses-66616.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/ahmed_al_maghribi/oud-roses'>Parfumo</a>",
+    "linksRaw": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Oud-Roses-66616.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/ahmed_al_maghribi/oud-roses'>Parfumo</a>",
+    "cat": "Middle Eastern",
+    "scent": "rose,oud,amber,woody,spicy,musk",
+    "season": "fall,winter",
+    "occasion": "special-occasion,evening,date-night",
+    "time": "evening,night",
+    "weather": "cold,mild",
+    "mood": "elegant,rich,romantic",
+    "family": "oriental,woody",
+    "added": "2026-11-25",
+    "slug": "ahmed-al-maghribi-oud-roses",
+    "url": "https://iramperfume.in/fragrance/ahmed-al-maghribi-oud-roses.html",
+    "availability": "https://schema.org/InStock"
+  },
+  {
     "key": "Al Majed|Oud Boisee",
     "brand": "Al Majed",
     "brandImg": "logos/al-majed.png",
@@ -9797,6 +9837,46 @@
     "added": "2026-11-01",
     "slug": "anfar-london-midnight-frost-intense",
     "url": "https://iramperfume.in/fragrance/anfar-london-midnight-frost-intense.html",
+    "availability": "https://schema.org/InStock"
+  },
+  {
+    "key": "Ard Al Zaafaran|Dirham Oud",
+    "brand": "Ard Al Zaafaran",
+    "brandImg": "",
+    "name": "Dirham Oud",
+    "gender": "Unisex",
+    "status": "instock",
+    "tags": [],
+    "prices": {
+      "3": 85,
+      "5": 115,
+      "10": 209,
+      "20": 365,
+      "30": 499,
+      "7.5": 169
+    },
+    "statusPerSize": {
+      "3": "ok",
+      "5": "ok",
+      "10": "ok",
+      "20": "ok",
+      "30": "ok",
+      "7.5": "ok"
+    },
+    "inspired": "Original",
+    "links": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Ard-Al-Zaafaran/Dirham-Oud-92563.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/ard_al_zaafaran/dirham-oud'>Parfumo</a>",
+    "linksRaw": "<a target=\"_blank\" href='https://www.fragrantica.com/perfume/Ard-Al-Zaafaran/Dirham-Oud-92563.html'>Fragrantica</a> <a target=\"_blank\" href='https://www.parfumo.com/Perfumes/ard_al_zaafaran/dirham-oud'>Parfumo</a>",
+    "cat": "Middle Eastern",
+    "scent": "oud,woody,sandalwood,musk,amber,spicy",
+    "season": "fall,winter",
+    "occasion": "daily,office,evening",
+    "time": "evening,day",
+    "weather": "cold,mild",
+    "mood": "rich,bold,confident",
+    "family": "oriental,woody",
+    "added": "2026-11-25",
+    "slug": "ard-al-zaafaran-dirham-oud",
+    "url": "https://iramperfume.in/fragrance/ard-al-zaafaran-dirham-oud.html",
     "availability": "https://schema.org/InStock"
   },
   {
