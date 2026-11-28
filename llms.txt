@@ -23,6 +23,7 @@
 - Azzaro: https://iramperfume.in/brands/azzaro.html
 - Bvlgari: https://iramperfume.in/brands/bvlgari.html
 - Calvin Klein: https://iramperfume.in/brands/calvin-klein.html
+- Carolina Herrera: https://iramperfume.in/brands/carolina-herrera.html
 - Davidoff: https://iramperfume.in/brands/davidoff.html
 - Dolce & Gabbana: https://iramperfume.in/brands/dolce-and-gabbana.html
 - Jaguar: https://iramperfume.in/brands/jaguar.html
@@ -76,6 +77,9 @@
 ### Calvin Klein
 - [One (CK One)](https://iramperfume.in/fragrance/calvin-klein-one.html) (Unisex): 3ml ₹95 | 5ml ₹129 | 7.5ml ₹195 | 10ml ₹239 | 20ml ₹429 | 30ml ₹599
 
+### Carolina Herrera
+- [212 Men Eau de Toilette](https://iramperfume.in/fragrance/carolina-herrera-212-men.html) (Men): 3ml ₹155 | 5ml ₹229 | 7.5ml ₹355 | 10ml ₹439 | 20ml ₹829 | 30ml ₹1199
+
 ### Davidoff
 - [Cool Water EDT (Cool Water)](https://iramperfume.in/fragrance/davidoff-cool-water-edt.html) (Men): 3ml ₹99 | 5ml ₹139 | 7.5ml ₹209 | 10ml ₹259 | 20ml ₹465 | 30ml ₹649
 
@@ -99,6 +103,7 @@
 ### Versace
 - [The Dreamer](https://iramperfume.in/fragrance/versace-the-dreamer.html) (Men): 3ml ₹125 | 5ml ₹179 | 7.5ml ₹275 | 10ml ₹339 | 20ml ₹629 | 30ml ₹899
 - [Eros](https://iramperfume.in/fragrance/versace-eros.html) (Men): 3ml ₹155 | 5ml ₹229 | 7.5ml ₹355 | 10ml ₹439 | 20ml ₹829 | 30ml ₹1199
+- [Pour Homme Dylan Blue](https://iramperfume.in/fragrance/versace-pour-homme-dylan-blue.html) (Men): 3ml ₹225 | 5ml ₹349 | 7.5ml ₹539 | 10ml ₹675 | 20ml ₹1299 | 30ml ₹1899
 
 ### YSL
 - [MYSLF Eau de Parfum](https://iramperfume.in/fragrance/ysl-myself.html) (Men): 3ml ₹265 | 5ml ₹409 | 7.5ml ₹639 | 10ml ₹799 | 20ml ₹1549 | 30ml ₹2279
@@ -229,6 +234,9 @@
 - [Flora by Flora](https://iramperfume.in/fragrance/fragrance-world-flora-by-flora.html) (Women): 3ml ₹75 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹299 | 30ml ₹399
 - [Aventos Blue for Him](https://iramperfume.in/fragrance/fragrance-world-aventos-blue-for-him.html) (Men): 3ml ₹75 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹299 | 30ml ₹399
 - [Elysia Lychee Fizz](https://iramperfume.in/fragrance/fragrance-world-elysia-lychee-fizz.html) (Women): 3ml ₹75 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹299 | 30ml ₹399
+- [Hartnell](https://iramperfume.in/fragrance/fragrance-world-hartnell.html) (Men): 3ml ₹75 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹299 | 30ml ₹399
+- [Aqua Pura](https://iramperfume.in/fragrance/fragrance-world-aqua-pura.html) (Men): 3ml ₹75 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹299 | 30ml ₹399
+- [Star Men Nebula](https://iramperfume.in/fragrance/fragrance-world-star-men-nebula.html) (Men): 3ml ₹75 | 5ml ₹99 | 7.5ml ₹139 | 10ml ₹175 | 20ml ₹299 | 30ml ₹399
 
 ### Ibraq
 - [Black Diamond Incense](https://iramperfume.in/fragrance/ibraq-black-diamond-incense.html) (Unisex): 3ml ₹115 | 5ml ₹165 | 7.5ml ₹249 | 10ml ₹309 | 20ml ₹565 | 30ml ₹799
@@ -281,12 +289,15 @@
 - [Fahad](https://iramperfume.in/fragrance/lattafa-fahad.html) (Men): 3ml ₹145 | 5ml ₹215 | 7.5ml ₹329 | 10ml ₹409 | 20ml ₹765 | 30ml ₹1099
 - [Musamam Black Intense](https://iramperfume.in/fragrance/lattafa-musamam-black-intense.html) (Unisex, soldout): 3ml ₹155 | 5ml ₹229 | 7.5ml ₹355 | 10ml ₹439 | 20ml ₹829 | 30ml ₹1199
 - [Asad Bourbon](https://iramperfume.in/fragrance/lattafa-asad-bourbon.html) (Men): 3ml ₹115 | 5ml ₹165 | 7.5ml ₹245 | 10ml ₹305 | 20ml ₹555 | 30ml ₹785
+- [Ramz Lattafa Silver](https://iramperfume.in/fragrance/lattafa-ramz-lattafa-silver.html) (Unisex): 3ml ₹99 | 5ml ₹139 | 7.5ml ₹209 | 10ml ₹259 | 20ml ₹469 | 30ml ₹659
 
 ### Laverne
 - [Blue Laverne Sport](https://iramperfume.in/fragrance/laverne-blue-laverne-sport.html) (Unisex): 3ml ₹135 | 5ml ₹199 | 7.5ml ₹299 | 10ml ₹375 | 20ml ₹699 | 30ml ₹999
 - [Fearless](https://iramperfume.in/fragrance/laverne-fearless.html) (Unisex): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
 - [King Tobacco](https://iramperfume.in/fragrance/laverne-king-tobacco.html) (Unisex): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
 - [La'dor Bakhur Classic](https://iramperfume.in/fragrance/laverne-la-dor-bakhur.html) (Unisex): 3ml ₹115 | 5ml ₹159 | 7.5ml ₹239 | 10ml ₹299 | 20ml ₹549 | 30ml ₹779
+- [Player](https://iramperfume.in/fragrance/laverne-player.html) (Men): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
+- [Champion](https://iramperfume.in/fragrance/laverne-champion.html) (Unisex): 3ml ₹109 | 5ml ₹155 | 7.5ml ₹229 | 10ml ₹289 | 20ml ₹525 | 30ml ₹739
 
 ### Maison Alhambra
 - [Jean Lowe Immortal](https://iramperfume.in/fragrance/maison-alhambra-jean-lowe-immortal.html) (Men): 3ml ₹119 | 5ml ₹169 | 7.5ml ₹255 | 10ml ₹315 | 20ml ₹579 | 30ml ₹825
@@ -314,6 +325,7 @@
 
 ### Pendora Scents
 - [Vanilla Tobacco](https://iramperfume.in/fragrance/pendora-scents-vanilla-tobacco.html) (Unisex, soldout): 3ml ₹85 | 5ml ₹115 | 7.5ml ₹169 | 10ml ₹209 | 20ml ₹365 | 30ml ₹499
+- [Allusion Eau de Sport Extreme](https://iramperfume.in/fragrance/pendora-scents-allusion-eau-de-sport-extreme.html) (Men): 3ml ₹75 | 5ml ₹95 | 7.5ml ₹139 | 10ml ₹169 | 20ml ₹289 | 30ml ₹389
 
 ### Rasasi
 - [Daarej Pour Homme](https://iramperfume.in/fragrance/rasasi-daarej-pour-homme.html) (Men): 3ml ₹95 | 5ml ₹129 | 7.5ml ₹195 | 10ml ₹239 | 20ml ₹429 | 30ml ₹599

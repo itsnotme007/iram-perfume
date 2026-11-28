@@ -134,3 +134,10 @@ Rows are `6 × <td class="size-cell">`; index-based lookups use `cells[5]`/`pric
 - Detail pages render the bottle via `bottleImg` = `../images/bottles/<slug>.webp` (falls back to `.png` when the sibling is absent), with `width`/`height` from `imgDims`, `fetchpriority="high"`; `og:image` always keeps the **PNG** URL (`ogPng`).
 - node seo-gen.js prefers .webp → .png → .jpg for the body image (checks images/bottles/ **at build time**) — so **add the images and run `node tests/optimize-images.js` before running it**. A page generated while the image is absent omits the hero `<img>` and stays broken until you regenerate (`Select-String -Path 'fragrance\*.html' -Pattern 'images/bottles/'` must return 172 lines — all cutouts have landed).
 - Cutout rules: bottle only (no box/packaging), tight crop, longest side 1024px, feathered alpha, no white fringe
+
+## Vial Image Standard
+- Every vial image must show the actual full bottle, centered and fully visible with comfortable transparent padding; never crop off any part of the bottle.
+- Use a clean transparent-background cutout (RGBA), removing only the background while preserving the original bottle, label, cap, shape, and color. Do not use white-background JPEGs as the card image.
+- Keep the PNG cutout as the source asset and provide a matching alpha-preserving WebP for cards. Confirm both retain transparency before updating ials.json.
+- Vial cards must match homepage product imagery: centered, contained bottle cutouts on the same surface treatment, with consistent image area and no clipping.
+
