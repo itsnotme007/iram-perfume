@@ -1201,15 +1201,18 @@ function vialCardHtml(v) {
     return '<div class="vial-attr"><small>' + label + '</small><span>' + parts.map(p => '<em>' + p + '</em>').join('') + '</span></div>';
   };
   const genderClass = v.gender === 'Women' ? 'vial-g-w' : v.gender === 'Unisex' ? 'vial-g-u' : 'vial-g-m';
-  return '<article class="vial-card" id="' + v.id + '">'
+  const soldOut = v.status === 'soldout';
+  return '<article class="vial-card' + (soldOut ? ' vial-card-sold' : '') + '" id="' + v.id + '">'
     + '<div class="vial-media"><picture>'
       + (v.imgWebp ? '<source srcset="' + v.imgWebp + '" type="image/webp">' : '')
-      + '<img src="' + v.img + '" alt="' + esc(v.brand + ' ' + v.displayName + ' ' + v.size + ' vial') + '" loading="lazy" decoding="async"></picture></div>'
+      + '<img src="' + v.img + '" alt="' + esc(v.brand + ' ' + v.displayName + ' ' + v.size + ' vial') + '" loading="lazy" decoding="async"></picture>'
+      + (soldOut ? '<span class="vial-sold-badge">SOLD OUT</span>' : '')
+      + '</div>'
     + '<div class="vial-body">'
     + '<div class="vial-top"><img class="vial-logo" src="' + imgWebp(v.brandImg) + '" alt="" width="32" height="24" loading="lazy"><span class="vial-brand">' + esc(v.brand) + '</span></div>'
     + '<h3 class="vial-name">' + esc(v.displayName) + '</h3>'
     + '<div class="vial-meta"><span class="vial-size">' + esc(v.size) + '</span><span class="vial-gender ' + genderClass + '">' + esc(v.gender) + '</span></div>'
-    + '<div class="vial-price">' + rupees(v.price) + '</div>'
+    + '<div class="vial-price' + (soldOut ? ' vial-price-sold' : '') + '">' + rupees(v.price) + '</div>'
     + '<div class="vial-attrs">'
     + chips('Scent', v.scent) + chips('Season', v.season) + chips('When', v.time)
     + chips('Occasion', v.occasion) + chips('Mood', v.mood)
@@ -1298,9 +1301,9 @@ function buildVials(mod) {
     + '.btl-lead{color:var(--text-muted);font-size:15px;max-width:660px;margin-bottom:10px}'
     + '.vial-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;margin:26px 0 40px}'
     + '.vial-card{display:flex;flex-direction:column;background:var(--bg-surface);border:1px solid var(--border-default);border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);scroll-margin-top:80px}'
-    + '.vial-media{background:linear-gradient(135deg,#efe9df,#e6ddd0);display:flex;align-items:center;justify-content:center;aspect-ratio:4/3;overflow:hidden}'
-    + '[data-theme="dark"] .vial-media{background:linear-gradient(135deg,#262c33,#181d24)}'
-    + '.vial-media img{width:100%;height:100%;object-fit:cover;display:block}'
+    + '.vial-media{background:var(--bg-surface);display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;overflow:hidden}'
+    + '[data-theme="dark"] .vial-media{background:var(--bg-surface)}'
+    + '.vial-media img{width:100%;height:100%;object-fit:contain;padding:14px;box-sizing:border-box;display:block}'
     + '.vial-body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:8px}'
     + '.vial-top{display:flex;align-items:center;gap:8px}'
     + '.vial-logo{max-width:32px;max-height:24px;object-fit:contain;border-radius:4px}'
@@ -1311,6 +1314,10 @@ function buildVials(mod) {
     + '.vial-gender{font-size:11px;font-weight:600;border-radius:999px;padding:2px 9px;color:#fff}'
     + '.vial-g-m{background:#1a1a2e}.vial-g-u{background:#5b3a8e}.vial-g-w{background:#a8326a}'
     + '.vial-price{font-size:20px;font-weight:700;color:var(--text-heading)}'
+    + '.vial-price-sold{color:#e94560;text-decoration:line-through}'
+    + '.vial-card-sold .vial-media img{opacity:.55}'
+    + '.vial-sold-badge{position:absolute;top:10px;left:10px;background:#e94560;color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;padding:4px 9px;border-radius:999px}'
+    + '.vial-media{position:relative}'
     + '.vial-attrs{display:flex;flex-direction:column;gap:4px}'
     + '.vial-attr{display:flex;gap:8px;font-size:11px;align-items:baseline}'
     + '.vial-attr small{color:var(--text-muted);min-width:62px;text-transform:uppercase;letter-spacing:.06em}'
