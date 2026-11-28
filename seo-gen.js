@@ -469,6 +469,9 @@ const PAGE_CSS = [
   '.crumbs{font-size:12.5px;color:var(--muted);margin-bottom:10px}.crumbs a{color:#0f3460;text-decoration:underline;text-underline-offset:2px}.crumbs a:hover{color:#0a2448}.crumbs span[aria-hidden]{margin:0 4px}'
 ].join('\n');
 let PAGE_CSS_VER = 'dev';
+// desktop.css had no cache-busting hash, so a CSS fix could sit invisible behind
+// a browser-cached stylesheet. Version it the same way as app.css / page.css.
+let DESKTOP_CSS_VER = 'dev';
 function favicon184() { return '<link rel="icon" type="image/png" href="../logo.png">'; }
 function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en-IN') {
   const ogType = (og && og.type) || 'website';
@@ -491,7 +494,7 @@ function pageShell({ title, desc, body, schema, canonical, og }, lang = 'en-IN')
     + '<meta name="twitter:description" content="' + esc(desc) + '">\n'
     + '<meta name="twitter:image" content="' + esc(ogImage) + '">\n'
     + (schema && schema.length ? schema.map(x => '<script type="application/ld+json">\n' + JSON.stringify(x, null, 2) + '\n</script>\n').join('') : '')
-    + '<link rel="stylesheet" href="../assets/desktop.css">\n'
+    + '<link rel="stylesheet" href="../assets/desktop.css?v=' + DESKTOP_CSS_VER + '">\n'
     + '<link rel="stylesheet" href="../assets/page.css?v=' + PAGE_CSS_VER + '">\n'
     + '<script>(function(){var root=document.documentElement,s=null;try{s=localStorage.getItem(\'theme\')}catch(e){}if(s===\'dark\'||(!s&&window.matchMedia&&window.matchMedia(\'(prefers-color-scheme:dark)\').matches))root.setAttribute(\'data-theme\',\'dark\');})();</script>\n'
     + '</head>\n<body>\n<button type="button" class="page-theme" data-theme-toggle aria-label="Toggle dark mode"><span class="theme-ico theme-ico-moon">☾</span><span class="theme-ico theme-ico-sun">☀</span></button>\n<div class="wrap">\n'
@@ -1154,7 +1157,7 @@ function buildBottles(mod) {
     + '<meta name="twitter:image" content="' + siteUrl('og-image.jpg') + '">\n'
     + schema.map(x => '<script type="application/ld+json">\n' + JSON.stringify(x, null, 2) + '\n</script>\n').join('')
     + '<link rel="stylesheet" href="assets/app.css?v=' + cssV + '">\n'
-    + '<link rel="stylesheet" href="assets/desktop.css">\n'
+    + '<link rel="stylesheet" href="assets/desktop.css?v=' + cssV + '">\n'
     + '<style>.btl-header{display:none}'
     + '.btl-main{max-width:1200px;margin:0 auto;padding:34px 32px 60px}'
     + '.btl-hero{margin-bottom:4px}'
@@ -1292,7 +1295,7 @@ function buildVials(mod) {
     + '<meta name="twitter:image" content="' + siteUrl('og-image.jpg') + '">\n'
     + schema.map(x => '<script type="application/ld+json">\n' + JSON.stringify(x, null, 2) + '\n</script>\n').join('')
     + '<link rel="stylesheet" href="assets/app.css?v=' + cssV + '">\n'
-    + '<link rel="stylesheet" href="assets/desktop.css">\n'
+    + '<link rel="stylesheet" href="assets/desktop.css?v=' + cssV + '">\n'
     + '<style>.btl-header{display:none}'
     + '.btl-main{max-width:1200px;margin:0 auto;padding:34px 32px 60px}'
     + '.btl-hero{margin-bottom:4px}'
@@ -1768,7 +1771,11 @@ function editHomepage(products, faqHtml, articlesHtml) {
     if (!appTag.test(out)) throw new Error('app.js tag missing (re-run extraction?)');
     out = out.replace(appTag, '<script src="config.js?v=' + hashOf('config.js') + '"></script>\n$&');
   }
-  for (const file of ['config.js', 'assets/app.css', 'assets/app.js']) {
+  // desktop.css needs its version tag added once (it shipped unversioned), then
+  // it is re-hashed with the rest so a CSS fix is never masked by a cached copy.
+  const dcssTag = /<link rel="stylesheet" href="assets\/desktop\.css(?!\?v=)">/;
+  if (dcssTag.test(out)) out = out.replace(dcssTag, '<link rel="stylesheet" href="assets/desktop.css?v=dev">');
+  for (const file of ['config.js', 'assets/app.css', 'assets/desktop.css', 'assets/app.js']) {
     const v = hashOf(file);
     const re = new RegExp('((?:href|src)="' + file.replace(/\//g, '\\/') + '\\?v=)[0-9a-z]+(")');
     if (!re.test(out)) throw new Error('asset reference missing for ' + file + ' (re-run extraction?)');
@@ -1906,6 +1913,7 @@ function main() {
   const pageCssPath = path.join(ROOT, 'assets', 'page.css');
   writeFileSafe(pageCssPath, PAGE_CSS + '\n');
   PAGE_CSS_VER = crypto.createHash('sha256').update(fs.readFileSync(pageCssPath)).digest('hex').slice(0, 12);
+  DESKTOP_CSS_VER = crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, 'assets', 'desktop.css'))).digest('hex').slice(0, 12);
 
   // 1. fragrance pages
   const fragDir = path.join(ROOT, 'fragrance');
